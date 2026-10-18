@@ -1,5 +1,5 @@
-// "Routing": a small card opens to full screen, then the Ductline job's questions
-// arrive one at a time. This explains the architecture using the reviewed fixture;
+// Three questions arrive in their lanes in a short entrance, without scroll pinning.
+// This explains the architecture using the reviewed fixture;
 // it is not a live provider trace or a benchmark of per-question prices.
 
 import { createTimeline, type ScrollObserver } from "animejs";
@@ -10,30 +10,25 @@ const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 type Lane = "llm" | "jev" | "code";
 
 const LANES: { id: Lane; name: string; job: string; cost: string }[] = [
-  { id: "llm", name: "Language model", job: "Proposes structured terms", cost: "Source validation + owner review" },
-  { id: "jev", name: "Jev", job: "Judges narrow evidence questions", cost: "MET / NOT_MET / UNKNOWN / CONFLICTING" },
-  { id: "code", name: "Fixed code", job: "Calculates cash and dates", cost: "Integer cents · no model call" },
+  { id: "llm", name: "Read the terms", job: "Language model → proposed structure", cost: "Source checks + owner review" },
+  { id: "jev", name: "Check the evidence", job: "Jev → narrow factual judgments", cost: "Missing evidence stays unknown" },
+  { id: "code", name: "Calculate the cash", job: "Fixed code → dates and cash paths", cost: "Exact cents · no model arithmetic" },
 ];
 
-// Arrival order interleaves the lanes so the sorting is visible.
+// One representative question per role keeps the architecture easy to scan.
 const QUESTIONS: { lane: Lane; q: string; a: string }[] = [
   { lane: "llm", q: "What makes the $30,000 phase invoice eligible?", a: "Inspection passed AND certificate received" },
   { lane: "jev", q: "Has the planned inspection already passed?", a: "UNKNOWN · expected Oct 20, not observed" },
   { lane: "code", q: "Lowest cash if the phase payment lands Nov 20?", a: "−$13,000 on Nov 4" },
-  { lane: "llm", q: "Which costs belong to this job?", a: "4 supplier and crew payments" },
-  { lane: "jev", q: "Has the phase payment reached the bank?", a: "UNKNOWN" },
-  { lane: "code", q: "How much more deposit keeps the $10,000 reserve?", a: "$23,000" },
-  { lane: "code", q: "Does the contract total stay $120,000?", a: "Yes" },
 ];
 
-const OPEN = 220; // timeline units spent opening the card
-const STEP = 100; // per question
+const OPEN = 320; // milliseconds spent opening the stage
+const STEP = 420; // milliseconds per question
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const inOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
-// Every card is a pure function of one progress value, so a fast scroll that skips
-// frames still lands each card exactly where it belongs (no half-finished tweens).
+// Every card is a pure function of progress, including skipped animation frames.
 function renderCards(cards: { el: HTMLElement; answer: HTMLElement; dx: number; dy: number }[], q: number) {
   cards.forEach(({ el, answer, dx, dy }, i) => {
     const t = q - i; // 0..1 is this card's turn
@@ -80,17 +75,17 @@ export function routeTimeline(root: Element, autoplay: ScrollObserver) {
 
 export function RouteSection() {
   return (
-    <section className="lp-route">
+    <section className="lp-route" id="how-it-works">
       <div className="lp-sticky">
         <div className="lp-route-clip">
-          <Gradient colors={["#5b48c9", "#0b8a63", "#f6c57a"]} />
+          <Gradient colors={["#5963a0", "#356e78", "#171a2c"]} />
           <div className="lp-route-shade" />
         </div>
         <p className="lp-route-caption">Where does each question go?</p>
 
         <div className="lp-route-ui">
           <header>
-            <p className="lp-eyebrow">Illustrated architecture · reviewed demo fixture</p>
+            <p className="lp-eyebrow">02 · How it works</p>
             <h2>Models interpret evidence. Code calculates the cash.</h2>
           </header>
           <div className="lp-route-slot" aria-hidden="true">Incoming question</div>
@@ -111,7 +106,7 @@ export function RouteSection() {
               </div>
             ))}
           </div>
-          <p className="lp-route-foot">Models propose; source checks and owner review come first. The cash engine uses reviewed inputs.</p>
+          <p className="lp-route-foot">Illustrated with the demo contract. Models propose; reviewed inputs drive the cash engine.</p>
         </div>
       </div>
     </section>

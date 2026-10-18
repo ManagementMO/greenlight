@@ -19,12 +19,11 @@ export function HeroRace({ evidence }: { evidence: LandingEvidence }) {
     const q = <T extends HTMLElement>(s: string) => el.querySelector<T>(s)!;
     const state = { a: 0, b: 0 };
     const render = () => {
-      q(".is-direct .lp-race-fill").style.width = `${state.a * 100}%`;
+      q(".is-direct .lp-race-fill").style.transform = `scaleX(${state.a})`;
       q(".is-direct .lp-race-time").textContent = requests(state.a * baseline.requests);
       q(".is-direct .lp-race-cost").textContent = `${tokens(state.a * baseline.inputTokens)} tokens`;
-      const lane = (candidate.requests / baseline.requests) * 100;
-      q(".is-routed .lp-race-read").style.width = `${state.b * lane}%`;
-      q(".is-routed .lp-race-engine").classList.toggle("is-on", state.b >= 0.995);
+      const lane = candidate.requests / baseline.requests;
+      q(".is-routed .lp-race-read").style.transform = `scaleX(${state.b * lane})`;
       q(".is-routed .lp-race-time").textContent = requests(state.b * candidate.requests);
       q(".is-routed .lp-race-cost").textContent = `${tokens(state.b * candidate.inputTokens)} tokens`;
     };
@@ -36,39 +35,38 @@ export function HeroRace({ evidence }: { evidence: LandingEvidence }) {
       return;
     }
 
-    const directMs = 3200;
+    const directMs = 1250;
     const routedMs = directMs * candidate.requests / baseline.requests;
     // Results start hidden; each lane's result is its only tween (two tweens on one element clash).
     el.querySelectorAll<HTMLElement>(".lp-race-result").forEach((r) => (r.style.opacity = "0"));
     render();
     tl.current = createTimeline({ autoplay: false, onUpdate: render })
-      .add(state, { b: [0, 1], duration: routedMs, ease: "linear" }, 0)
-      .add(state, { a: [0, 1], duration: directMs, ease: "linear" }, 0)
-      .add(q(".is-routed .lp-race-result"), { opacity: [0, 1], y: [8, 0], duration: 500, ease: "outExpo" }, routedMs)
-      .add(q(".is-direct .lp-race-result"), { opacity: [0, 1], y: [8, 0], duration: 500, ease: "outExpo" }, directMs);
-    // Start after the headline has flipped in.
-    const start = window.setTimeout(() => tl.current?.play(), 1400);
+      .add(state, { b: [0, 1], duration: routedMs, ease: "outCubic" }, 0)
+      .add(state, { a: [0, 1], duration: directMs, ease: "outCubic" }, 0)
+      .add(q(".is-routed .lp-race-result"), { opacity: [0, 1], y: [5, 0], duration: 220, ease: "outCubic" }, routedMs)
+      .add(q(".is-direct .lp-race-result"), { opacity: [0, 1], y: [5, 0], duration: 220, ease: "outCubic" }, directMs);
+    // Begin with the hero reveal; the full illustrated replay settles in 1.77s.
+    const start = window.setTimeout(() => tl.current?.play(), 300);
     return () => { window.clearTimeout(start); tl.current?.revert(); };
   }, [evidence]);
 
   return (
     <div className="lp-race" ref={root} data-hero-fade>
       <div className="lp-race-head">
-        <span>Recorded Jev workflow · request counts</span>
+        <span>Measured AI workflow · recorded run</span>
         <button type="button" onClick={() => tl.current?.restart()}>Replay</button>
       </div>
 
       <div className="lp-race-lane is-direct">
-        <div className="lp-race-top"><b>Full-job evidence recheck</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
-        <div className="lp-race-track"><i className="lp-race-fill" style={{ width: '100%' }} /></div>
+        <div className="lp-race-top"><b>Recheck the whole job</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
+        <div className="lp-race-track" aria-hidden="true"><i className="lp-race-fill" /></div>
         <div className="lp-race-result">Correct judgments <b>{evidence.baseline.correct}/{evidence.baseline.total}</b></div>
       </div>
 
       <div className="lp-race-lane is-routed">
-        <div className="lp-race-top"><b>Scoped, batched evidence checks</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
-        <div className="lp-race-track">
-          <i className="lp-race-read" style={{ width: `${evidence.candidate.requests / evidence.baseline.requests * 100}%` }} />
-          <i className="lp-race-engine" />
+        <div className="lp-race-top"><b>Check only what changed, together</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
+        <div className="lp-race-track" aria-hidden="true">
+          <i className="lp-race-read" style={{ transform: `scaleX(${evidence.candidate.requests / evidence.baseline.requests})` }} />
         </div>
         <div className="lp-race-result">Correct judgments <b>{evidence.candidate.correct}/{evidence.candidate.total}</b></div>
       </div>
