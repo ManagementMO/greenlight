@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "origin": "recorded",
   "dataClassification": "PUBLIC_SYNTHETIC",
-  "publishedAt": "2026-10-18T04:48:33.235Z",
+  "publishedAt": "2026-10-18T05:31:15.862Z",
   "status": "completed",
   "dataVersion": "greenlight-clauses-v5-reference-contract",
   "promptProfile": "reference-contract-v5",
@@ -33,7 +33,7 @@
   "remoteEffectiveLossMaskAttested": false,
   "servingVerified": true,
   "developmentPublished": true,
-  "finalPublished": false,
+  "finalPublished": true,
   "promoted": false,
   "servingBoundary": "Recorded evaluation only. Public decisions use fixed code and saved evidence; every proposed term requires owner review.",
   "postTrainingExport": {

@@ -80,7 +80,16 @@ flowchart LR
 
 Both workflows already cache. The candidate tracks which source dependency changed, scopes the relevant evidence and batches work. It passed the fixed gate on **seven synthetic evidence updates**. The remaining `CONFLICTING` → `UNKNOWN` error is preserved. This is one localized workload, not a general production benchmark. [Inspect the manifests, predictions and gate →](data/artifacts/harness-experiment.json)
 
-The extractor has a separate quality gate. **V4 trained and served successfully but failed its final evaluation:** 0/24 correct supported rules, three incorrect validated proposals, and no promotion. All 80 base/tuned responses remain public. A new **v5** corpus addresses the observed nested-logic, status and reference-copying failures; its result will be reported only after actual training and fresh evaluation. [V4 results](docs/extractor-v4-results.md) · [V5 experiment protocol](docs/extractor-v5-protocol.md)
+The extractor has a separate quality gate. **V5 completed 300 training steps on 336 synthetic examples and more than doubled material-exact outputs on its untouched final test.** Its first export regressed; rematerializing the same saved adapter on the pinned BF16 base improved development from 9/24 to 15/24. We froze that candidate before final inference:
+
+| V5 final evaluation · 48 synthetic cases | Base | Repaired tuned export |
+| --- | ---: | ---: |
+| Material-exact outputs | 13 / 48 | **28 / 48** |
+| Fully valid outputs | 41 / 48 | **45 / 48** |
+| Correct supported proposals | 9 / 32 | **19 / 32** |
+| Incorrect validated proposals · lower is better | 21 | **14** |
+
+**Measured improvement; not promoted.** The tuned export still fails the predeclared absolute gate: 14 incorrect validated proposals remain, supported coverage is below 26/32, and both uncertainty classes miss 7/8 status accuracy. Ambiguous-status accuracy declines from 7/8 to 6/8. The cash demo continues to use reviewed inputs. [All 96 final predictions](data/artifacts/extraction-v5-evaluation.json) · [Results and export diagnosis](docs/extractor-v5-results.md) · [Frozen selection](data/artifacts/v5-final-selection.json) · [Protocol](docs/extractor-v5-protocol.md). The rejected [V4 experiment](docs/extractor-v4-results.md) and [initial V5 regression](data/artifacts/extraction-v5-initial-development.json) remain public.
 
 Sentry led to a concrete fix: a small input expanded into an **83,662,869-byte response**. The repaired endpoint returned **428,167 bytes** in the production regression while preserving all 256 scenario summaries and the worst-case timeline. These are separate-environment measurements, not a latency comparison. [Captured issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2) · [Trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697)
 
@@ -157,7 +166,7 @@ Headroom supports a bounded USD contractor workflow. It does not discover every 
 | --- | --- |
 | [Presentation guide](docs/demo-guide.md) | Operator cues, exact spoken lines and answers to technical questions |
 | [Submission narrative](docs/submission.md) | Problem, implementation, sponsor demonstrations and scope |
-| [Devpost draft](docs/devpost.md) | Ready-to-adapt pitch, story, technical explanation, and submission links |
+| [Devpost copy](docs/devpost.md) | Pitch, story, technical explanation and the submitted project link |
 | [Headroom brand pack](docs/brand/README.md) | Hero banner, transparent logo, scene, palette and prompts |
 | [Team handoff](docs/TEAM-HANDOFF.md) | Setup, ownership and independent work areas |
 | [Design system and launch storyboard](docs/design/README.md) | Paper exports, tokens, motion notes and real chart geometry |

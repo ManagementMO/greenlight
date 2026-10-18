@@ -2,6 +2,8 @@
 
 **Brand update:** the current public repository is [ManagementMO/headroom](https://github.com/ManagementMO/headroom). The local folder and provider identifiers below retain their original Greenlight names. See the [rename notes](brand/rename-notes.md).
 
+**Current model evidence:** use [V5 results](extractor-v5-results.md), the [team handoff](TEAM-HANDOFF.md), and `npx tsx scripts/ml/reconcile.ts` for the latest experiment and spending state. The V4 and credential checks below are preserved setup history, not current account balances.
+
 Project folder: `/Users/mo/Downloads/greenlight`
 
 Fill the private `.env` in this folder. It is ignored by Git and has owner-only permissions. `.env.example` contains blank shareable fields. Never put credentials in chat or commit them.

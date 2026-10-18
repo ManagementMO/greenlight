@@ -4,7 +4,7 @@ This is a short operator run-of-show for the implemented application. Open [Head
 
 ## Before presenting
 
-Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. The current lab records completed v4 training and inference with a rejected tuned candidate; use the actual result below. The separate MetaHarness experiment passed its own fixed gate.
+Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. Use the current V5 comparison and verdict in the lab, keeping development and final results separate. The rejected V4 experiment remains archived. The MetaHarness experiment passed its own separate fixed gate.
 
 Run `npm run demo:check -- https://headroom-lahacks.vercel.app` before taking the stage. It checks the three live scenarios, exact conserved proposal and recorded gate against the checked-out implementation, without model keys or paid inference. Use `http://localhost:3000` for an offline/local fallback after starting the app.
 
@@ -76,17 +76,17 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 
 **Say:** “The trained model has a different job from Jev. We fine-tune Qwen to turn clauses into proposed typed obligations. Jev handles repeated atomic evidence judgments; ordinary code handles money.”
 
-**Say:** “We trained Qwen on 276 synthetic clause examples through Veri, committed all 138 steps, exported merged weights and actually served both models on the same 40 frozen clauses.”
+**Say:** “We trained Qwen on 336 synthetic clauses through Veri and verified all 300 steps. The first export regressed. Rebuilding the same trained adapter on the pinned BF16 base improved development, so we froze it before final testing. On the same forty-eight untouched final cases, fully correct outputs increased from thirteen to twenty-eight.”
 
-**Say:** “The tuned model improved JSON formatting, but it got zero of 24 supported payment rules exactly right and introduced three incorrect validated proposals. Our gate rejected it. The cash decision still uses reviewed structured inputs.”
+**Say:** “Correct supported clauses increased from nine to nineteen out of thirty-two, but fourteen validated proposals still have material errors, and ambiguity classification regressed by one case. The stricter gate rejects promotion. We measured learning without giving the model financial authority.”
 
-**Operator:** Point at **Base extractor retained** and the comparison's fully validated / material-match / correct-supported / incorrect-proposal counts. Full validation includes reference identity and completeness, not merely parseable JSON. Both models have zero correct supported proposals; retaining the base is not an endorsement for unattended extraction.
+**Operator:** Show the latest V5 comparison and its stated verdict, followed by the archived V4 result only if asked. Full validation includes reference identity and completeness, not merely parseable JSON. A relative improvement and a passing release gate are separate claims.
 
-**If asked about the source illustration:** “Both models invented subject IDs outside the visible references, so the generated C120 invoice-clock preview is withheld. The reviewed date resolver itself is implemented and tested: eligibility October 20 and issuance October 22 would produce November 5 under a fourteen-calendar-day term. A due date still is not a bank receipt.”
+**If asked about the source illustration:** “The final gate retains the baseline for this separate example. Its actual recorded output correctly matches the exact visible clause; the preview requires that match and owner review. The date resolver gives November 5 when eligibility is October 20, issuance is October 22, and the term is fourteen calendar days. This example is excluded from the final score. A due date still is not a bank receipt.”
 
-**If asked for the full extraction result:** “Base and tuned produced two and four fully validated outputs out of forty, with zero and one material matches. The one tuned match is an unsupported clause. All eighty actual responses are published; errors stay in the denominator. This compares the base and trained/exported pipelines, including their precision differences.”
+**If asked for the full extraction result:** “Base and tuned have thirteen and twenty-eight material matches, forty-one and forty-five fully valid outputs, nine and nineteen correct supported proposals, and twenty-one and fourteen incorrect validated proposals. Ambiguous-status accuracy is seven versus six out of eight; unsupported is two versus five out of eight. All ninety-six actual final outputs are public. Training canaries and the source illustration are excluded. This compares the base and trained/exported pipelines; it does not isolate the effect of LoRA from materialization.”
 
-**If asked about the next ML step:** “Use separate development cases to improve status consistency, supplied-ID copying and Boolean conditions. This final set is exposed now, so the next release needs a fresh protected test. We will not loosen this gate to turn a failure into a win.”
+**If asked about the next ML step:** “Any future candidate needs development-guided changes and a new untouched final test. The exposed V5 final becomes historical evidence after this evaluation. We keep the gate and review boundary intact.”
 
 **Operator:** Open the [actual oversized-response issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2) and its [recorded trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697) with project access. The manifest also links a [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd) and [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b).
 

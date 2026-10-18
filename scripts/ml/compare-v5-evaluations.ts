@@ -17,6 +17,7 @@ export function compareV5Evaluations(base: V5Run, tuned: V5Run) {
   const noIncorrectProposal=s.unsafeProposed===V5_GATE.maximumIncorrectValidatedProposals;
   const absoluteGatePassed=usefulness&&uncertainty&&noIncorrectProposal;
   return {...result, gateVersion:V5_GATE.version,thresholds:V5_GATE,relativeComparisonStatus:result.status,
+    methodology:"Matched frozen cases, prompts, schema, decoding and launch configuration compare the base artifact with the trained, materialized export. This measures the exported-model pipeline and does not isolate LoRA from materialization or effective runtime precision. Repository configuration and revisions are observed; loaded weight bytes and runtime precision are not attested.",
     absoluteGatePassed, promoted:result.promoted&&absoluteGatePassed,
     qualityImprovementMeasured:result.qualityImprovementMeasured,
     status:!absoluteGatePassed?"rejected-usefulness-or-safety":result.status,

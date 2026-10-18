@@ -1,6 +1,6 @@
 # Headroom extractor V5: training and evaluation
 
-**Status: the repaired V5 export improves the completed matched development comparison. The candidate is frozen and final evaluation is running; V5 has not earned promotion.** On 24 development cases, material-exact outputs rose from 9 to 15 and fully valid outputs from 22 to 24. Eight incorrect validated proposals remain. A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
+**Status: final evaluation is complete. The repaired V5 export improves material exactness from 13/48 to 28/48, but fails the predeclared usefulness and safety gate and is not promoted.** Correct supported proposals rise from 9/32 to 19/32; 14 incorrect validated proposals remain. Ambiguous-status accuracy declines from 7/8 to 6/8. The financial demo retains reviewed inputs. A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
 
 ## What the model learns
 
@@ -49,14 +49,22 @@ The labels are developer-reviewed synthetic examples, not customer-adjudicated c
 | Repaired development correct ambiguous status / 4 | 4 | 4 |
 | Repaired development correct unsupported status / 4 | 3 | 3 |
 | Repaired development incorrect fully validated proposals | 10 | 8 |
-| Final material-exact outputs / 48 | Pending | Pending |
-| Final fully valid outputs / 48 | Pending | Pending |
-| Final correct supported proposals / 32 | Pending | Pending |
-| Final correct ambiguous status / 8 | Pending | Pending |
-| Final correct unsupported status / 8 | Pending | Pending |
-| Final incorrect fully validated proposals | Pending | Pending |
+| Final material-exact outputs / 48 | 13 | 28 |
+| Final fully valid outputs / 48 | 41 | 45 |
+| Final correct supported proposals / 32 | 9 | 19 |
+| Final correct ambiguous status / 8 | 7 | 6 |
+| Final correct unsupported status / 8 | 2 | 5 |
+| Final incorrect fully validated proposals | 21 | 14 |
 
-**Development verdict: the original export regressed; the repaired export improved relative to the same base. Final verdict pending; not promoted.** The [initial 48 responses](../data/artifacts/extraction-v5-initial-development.json) and [repaired matched 48 responses](../data/artifacts/extraction-v5-development.json) remain public. The base run is reused because its prompt, model identity and settings are unchanged. All completed development deployments were permanently stopped and charges settled. Training loss is not a substitute for any result in this table.
+**Final verdict: relative quality improvement measured; absolute usefulness and safety gate failed; not promoted.** Material exactness rises from 27.1% to 58.3%, a 31.25 percentage-point gain on this fixed synthetic test. Full validity passes the 44/48 floor, but supported coverage is below 26/32, both uncertainty classes miss 7/8, and incorrect validated proposals exceed zero. Ambiguous-status accuracy regresses by one case even though aggregate exactness improves. This is not uniform improvement or approval for unattended use.
+
+The [initial 48 development responses](../data/artifacts/extraction-v5-initial-development.json), [repaired matched 48 development responses](../data/artifacts/extraction-v5-development.json), and [all 96 final responses](../data/artifacts/extraction-v5-evaluation.json) remain public. The development base run is reused because its prompt, model identity and settings are unchanged. Final uses two fresh sequential deployments. All completed deployments were permanently stopped and charges settled. Training loss is not a substitute for any result in this table.
+
+The final gate selects the base for the separate [source-bound C120 illustration](../data/artifacts/extraction-v5-demo.json). Its actual output is material-exact and may show the reviewed invoice-date preview. It is excluded from final metrics and cannot override the rejection. Retaining the baseline does not authorize unattended extraction; financial decisions still use reviewed fixtures.
+
+### Remaining errors
+
+Three tuned outputs are invalid: two malformed JSON responses and one unsupported condition in a nested rule. Among the 17 valid but nonexact outputs, overlapping mismatches affect 13 trigger fields, five statuses, two amount references and two due rules. Eleven trigger mismatches where both trees are present are Boolean-inequivalent under a bounded truth-table diagnostic; none is merely reordered or factored equivalently. This diagnostic explains errors and does not change the frozen scorer or result.
 
 ### Export diagnostic prompted by development
 
@@ -65,6 +73,10 @@ Each model matched three of six V5 training canaries. These are diagnostic examp
 A BF16 materialization reuses the exact saved adapter and pinned base revision, using PEFT's safe merge. It changes no training labels, prompt, scorer or gate and purchases no new training run. The six training canaries rose from 3/6 exact to 6/6 exact locally and in the repaired Veri run; they remain excluded from held-out metrics. The repaired provider development run produced the 15/24 result above. This is an exported-pipeline comparison, not proof that rounding caused every earlier error. [Adapter and export lineage](../data/artifacts/v5-export-lineage.json) and [actual canary outputs](../data/artifacts/v5-export-diagnostic.json) are public.
 
 The [candidate selection](../data/artifacts/v5-final-selection.json) was written at `2026-10-18T04:47:16.336Z`, before final model queries. It binds the base and repaired export revisions, prompt, decoding, development evidence and final corpus hash. No new candidate will be selected from final results.
+
+### Cost and lifecycle
+
+The final base and tuned serving runs cost $0.30 and $0.31 in their recorded provider results. The reconciled project ledger totals **$5.24 of the $20 cap**, with **$0 reserved and all 45 entries settled** at publication. Charges are conservatively rounded per entry. Both final deployments are permanently stopped; no public click starts paid inference. [Published training evidence](../data/artifacts/training-v5.json) records the reconciled training charge separately.
 
 ## What earns promotion
 
@@ -84,7 +96,7 @@ An improvement may be measurable while the release gate still rejects the model.
 
 - **Training-template confound:** the generator chooses explicit invoice-ID versus work-ID anchoring using `index % 2`, while each repeat contains 20 composition families. Each family therefore always receives the same invoice-binding style. This is a plausible shortcut, not a demonstrated failure. If development exposes this issue, a new training version should independently cross composition, invoice identity, clock, and wording. Frozen V5 data and evaluation labels must remain unchanged.
 - **Synthetic scope:** separately authored evaluation prose tests generalization beyond the training wording, but uses a small, declared domain vocabulary. It does not establish accuracy on arbitrary contracts, unseen industries, or customer documents.
-- **Combined pipeline comparison:** the base artifact and trained export can differ in quantization and serving precision. Matched results measure the entire exported-model pipeline; they do not isolate the causal effect of LoRA alone. Observed repository revisions and response model identities are recorded; exact loaded commit SHA and effective runtime precision are not directly attested.
+- **Combined pipeline comparison:** both selected repository configurations declare BF16 without a quantization configuration. Effective serving precision and loaded weight bytes are not directly attested. Matched results measure the entire trained and materialized export pipeline; they do not isolate the causal effect of LoRA alone. Observed repository revisions and response deployment identities are recorded. The original quantized export remains a separate archived diagnostic.
 - **No safety guarantee from zero observed mistakes:** zero incorrect proposals on 48 synthetic cases is a release requirement, not proof that future mistakes are impossible. Source inspection, validation, explicit uncertainty, and owner review remain necessary.
 
 For judging, distinguish **training completed**, **quality improved**, and **release gate passed**. They are separate claims, each requiring its own evidence.
