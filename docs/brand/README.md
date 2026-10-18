@@ -34,4 +34,4 @@ Use Manrope for display and IBM Plex for operational details, consistent with th
 
 The next phase is a collaborative frontend, deck and motion pass. This change supplies the identity and assets; it does not claim the motion film has been rendered. Earlier Paper frames retain the Greenlight working name and should be relabeled when that phase begins. Keep engine-derived amounts and cash-path geometry when replacing illustrative artwork with product data.
 
-Public repository: [ManagementMO/headroom](https://github.com/ManagementMO/headroom). Existing model, dataset and Sentry identifiers remain valid provenance under their original Greenlight names.
+Public repository: [ManagementMO/headroom](https://github.com/ManagementMO/headroom). Live demo: [headroom-lahacks.vercel.app](https://headroom-lahacks.vercel.app). Existing model, dataset and Sentry identifiers remain valid provenance under their original Greenlight names.

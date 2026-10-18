@@ -2,7 +2,7 @@
 
 **Take the next job. Keep room for payday.**
 
-[Open the working demo](https://greenlight-two-psi.vercel.app) · [Source and reproducible tooling](https://github.com/ManagementMO/headroom) · [Devpost draft](devpost.md) · [Presentation guide](demo-guide.md)
+[Open the working demo](https://headroom-lahacks.vercel.app) · [Source and reproducible tooling](https://github.com/ManagementMO/headroom) · [Devpost draft](devpost.md) · [Presentation guide](demo-guide.md)
 
 ## The problem
 

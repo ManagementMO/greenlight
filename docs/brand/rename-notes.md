@@ -11,4 +11,6 @@ git fetch origin
 
 The existing local directory `/Users/mo/Downloads/greenlight` continues to work, including its ignored credentials and active training process. Public app names, new reports, repo metadata and presentation copy use Headroom.
 
-Original identifiers in frozen datasets, completed model exports, Sentry issue URLs, recorded outputs and earlier Paper images remain provenance. Do not mechanically replace those strings: doing so would break hashes, remote references and experiment reproducibility. The current Vercel URL also remains valid and is linked from the repository. Use the new [brand pack](README.md) for all future public assets.
+The public demo is [headroom-lahacks.vercel.app](https://headroom-lahacks.vercel.app), attached to the existing deployment project, now named Headroom. The earlier Greenlight URL remains available as a compatibility alias.
+
+Original identifiers in frozen datasets, completed model exports, Sentry issue URLs, recorded outputs and earlier Paper images remain provenance. Do not mechanically replace those strings: doing so would break hashes, remote references and experiment reproducibility. Use the new [brand pack](README.md) for all future public assets.

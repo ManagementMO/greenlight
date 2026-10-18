@@ -1,12 +1,12 @@
 # Headroom demonstration guide
 
-This is a short operator run-of-show for the implemented application. Open [Headroom](https://greenlight-two-psi.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
+This is a short operator run-of-show for the implemented application. Open [Headroom](https://headroom-lahacks.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
 
 ## Before presenting
 
 Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. The current lab records completed v4 training and inference with a rejected tuned candidate; use the actual result below. The separate MetaHarness experiment passed its own fixed gate.
 
-Run `npm run demo:check -- https://greenlight-two-psi.vercel.app` before taking the stage. It checks the three live scenarios, exact conserved proposal and recorded gate against the checked-out implementation, without model keys or paid inference. Use `http://localhost:3000` for an offline/local fallback after starting the app.
+Run `npm run demo:check -- https://headroom-lahacks.vercel.app` before taking the stage. It checks the three live scenarios, exact conserved proposal and recorded gate against the checked-out implementation, without model keys or paid inference. Use `http://localhost:3000` for an offline/local fallback after starting the app.
 
 The public lab's Replay action rechecks the gates against a recorded genuine model experiment. It never starts new inference or training. Live paid runs belong to the private owner CLI described in the [README](../README.md#owner-cli-and-spending-boundary) and [ML runbook](../scripts/ml/README.md).
 

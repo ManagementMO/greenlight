@@ -7,7 +7,7 @@ const body = IBM_Plex_Sans({ subsets: ['latin'], weight: 'variable', variable: '
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://greenlight-two-psi.vercel.app'),
+  metadataBase: new URL('https://headroom-lahacks.vercel.app'),
   title: 'Headroom — Take the next job. Keep room for payday.',
   description: 'Can you take the next big job without borrowing or missing payroll? Headroom connects cash, contract evidence, and payment terms to show a supported path forward.',
   applicationName: 'Headroom',

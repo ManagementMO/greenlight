@@ -6,7 +6,7 @@
 
 **Evidence-backed decisions for the small business owner's next big opportunity.**
 
-[Live demo](https://greenlight-two-psi.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
+[Live demo](https://headroom-lahacks.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
 
 [![CI](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml/badge.svg)](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml)
 ![Built for LA Hacks](https://img.shields.io/badge/Built_for-LA_Hacks-176644)
@@ -35,7 +35,7 @@ The proposal advances **$23,000** from the final payment into the deposit. The e
 
 ## Try it in 90 seconds
 
-1. **Open [the demo](https://greenlight-two-psi.vercel.app).** See the $120k decision and the −$13k worst cash point.
+1. **Open [the demo](https://headroom-lahacks.vercel.app).** See the $120k decision and the −$13k worst cash point.
 2. **Compare proposed terms.** Watch the cash bridge move to the $10k reserve while total revenue stays $120k. Open the draft payment request to see what needs agreement.
 3. **Inspect Evidence.** Trace the Intuit bank snapshot and the clearly labeled constructed contract, commitments and collection assumptions.
 4. **Switch to “two small risks.”** Two $4k surcharges are safe individually; together they leave $9k. Joint scenarios expose the gap.
@@ -120,7 +120,7 @@ npm start
 Before presenting, rehearse the deployed app or your local server without provider keys:
 
 ```sh
-npm run demo:check -- https://greenlight-two-psi.vercel.app
+npm run demo:check -- https://headroom-lahacks.vercel.app
 # Optionally append the expected Git commit SHA after the URL.
 ```
 
