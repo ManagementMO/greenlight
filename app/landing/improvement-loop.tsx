@@ -18,6 +18,7 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
   useEffect(() => {
     const el = root.current;
     if (!el) return;
+    const palette = getComputedStyle(el);
     const state = Object.fromEntries(rows.map((r) => [r.key, r.before])) as Record<string, number>;
     const paint = () =>
       rows.forEach((r) => {
@@ -35,7 +36,7 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
       createTimeline({ autoplay: onScroll({ target: el, enter: "bottom-=180 top" }), onUpdate: paint })
         .add(".lp-save-dot.is-cut", { opacity: [1, 0.12], scale: [1, 0.55], duration: 700, delay: stagger(45), ease: "outExpo" }, 200)
         .add(state, { ...Object.fromEntries(rows.map((r) => [r.key, r.after])), duration: 1400, ease: "outExpo" }, 500)
-        .add(".lp-save-after", { color: ["#ffffff", "#32d17b"], duration: 600 }, 900);
+        .add(".lp-save-after", { color: [palette.getPropertyValue("--fg").trim(), palette.getPropertyValue("--accent").trim()], duration: 300 }, 900);
     });
     return () => scope.revert();
   }, []);

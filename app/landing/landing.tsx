@@ -83,8 +83,8 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
       // Progress pill.
       animate(".lp-progress i", { scaleX: [0.08, 1], ease: "linear", autoplay: onScroll({ target: el, enter: "top top", leave: "bottom bottom", sync: true }) });
 
-      // Hero: copy and dock rise in after the title.
-      animate("[data-hero-fade]", { opacity: [0, 1], y: [24, 0], duration: 1000, delay: stagger(120, { start: 900 }), ease: "outExpo" });
+      // Hero: a short, overlapping reveal keeps the demo immediately within reach.
+      animate("[data-hero-fade]", { opacity: [0, 1], y: [12, 0], duration: 460, delay: stagger(50, { start: 140 }), ease: "outCubic" });
 
       // Feature headlines: letters fill in as you scroll.
       el.querySelectorAll<HTMLElement>(".lp-feature").forEach((row) => {
@@ -161,13 +161,12 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
     if (!chars?.length || reduced.current) return;
     const a = animate(chars, {
       opacity: [0, 1],
-      rotateY: [-95, 0],
-      rotateX: [40, 0],
-      z: [-200, 0],
-      filter: ["blur(14px)", "blur(0px)"],
-      letterSpacing: ["0.3em", "0em"],
-      duration: 1400,
-      delay: stagger(45),
+      rotateY: [-55, 0],
+      rotateX: [16, 0],
+      z: [-60, 0],
+      filter: ["blur(6px)", "blur(0px)"],
+      duration: 640,
+      delay: stagger(15),
       ease: "outExpo",
     });
     return () => { a.revert(); };
@@ -180,7 +179,7 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
       {/* Hero */}
       <section className="lp-hero" id="top">
-        <Gradient colors={["#0b8a63", "#5b48c9", "#101412"]} />
+        <Gradient colors={["#527c65", "#294c3f", "#101b17"]} />
         <div className="lp-hero-inner">
           <div className="lp-hero-copy">
             <p className="lp-eyebrow" data-hero-fade>Headroom · room for the next job</p>
@@ -246,7 +245,7 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
       {/* Finale */}
       <section className="lp-finale">
-        <Gradient colors={["#0b8a63", "#f6c57a", "#b9a7ff"]} wave />
+        <Gradient colors={["#527c65", "#8fae96", "#182d24"]} wave />
         <div className="lp-finale-inner">
           <h2 aria-label="Take the next job"><Chars text="Take the next job" /></h2>
           <p>Keep room for payday.</p>

@@ -52,14 +52,14 @@ function AnimatedGradient({ colors, type = "plane", wave = false }: GradientLook
         type={wave ? "waterPlane" : type}
         animate="on"
         uTime={0}
-        uSpeed={0.3}
+        uSpeed={0.2}
         uAmplitude={1}
         color1={colors[0]}
         color2={colors[1]}
         color3={colors[2]}
-        grain="on"
+        grain="off"
         lightType="3d"
-        brightness={1.2}
+        brightness={0.85}
         reflection={0.1}
         cameraZoom={1}
         positionY={0}

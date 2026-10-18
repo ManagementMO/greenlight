@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import Landing from "./landing";
 import { getLandingEvidence } from "@/lib/landing-evidence";
 import "./landing.css";
 
-const serif = Lora({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
-const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" });
+const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Headroom — Take the next job. Keep room for payday.",

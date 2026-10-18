@@ -83,7 +83,7 @@ export function RouteSection() {
     <section className="lp-route">
       <div className="lp-sticky">
         <div className="lp-route-clip">
-          <Gradient colors={["#5b48c9", "#0b8a63", "#f6c57a"]} />
+          <Gradient colors={["#294c3f", "#527c65", "#101b17"]} />
           <div className="lp-route-shade" />
         </div>
         <p className="lp-route-caption">Where does each question go?</p>
