@@ -1,20 +1,20 @@
 <div align="center">
 
-# Greenlight
+# Headroom
 
-### Take the job. Protect payroll.
+### Take the next job. Keep room for payday.
 
-**An evidence-grounded cash decision for the small business owner's next big opportunity.**
+**Evidence-backed decisions for the small business owner's next big opportunity.**
 
 [Live demo](https://greenlight-two-psi.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
 
-[![CI](https://github.com/ManagementMO/greenlight/actions/workflows/ci.yml/badge.svg)](https://github.com/ManagementMO/greenlight/actions/workflows/ci.yml)
+[![CI](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml/badge.svg)](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml)
 ![Built for LA Hacks](https://img.shields.io/badge/Built_for-LA_Hacks-176644)
 ![TypeScript](https://img.shields.io/badge/TypeScript-integer_cent_cash_engine-3178C6)
 
 </div>
 
-![The implemented Greenlight workspace: a $120,000 job, its cash bridge, a $23,000 reserve shortfall, and a conserved payment proposal.](docs/assets/decision-workspace.png)
+![Headroom. Take the next job. Keep room for payday. A mint cash path clears a coral threshold and passes into an open green doorway.](public/brand/headroom-banner.png)
 
 ## A profitable job can still miss payroll
 
@@ -22,7 +22,7 @@
 
 The bank balance cannot answer that alone. Materials are paid before installation. Payroll arrives before the customer pays. Passing inspection may permit an invoice, but the invoice may be issued later—and its due date still is not cash in the bank.
 
-Greenlight combines the company's existing commitments with a new job, tests the declared collection paths, and shows **what breaks, which evidence matters, and the smallest supported change that makes the plan work**.
+Headroom combines the company's existing commitments with a new job, tests the declared collection paths, and shows **what breaks, which evidence matters, and the smallest supported change that makes the plan work**.
 
 | The default opportunity | Current terms | Proposed terms |
 | --- | ---: | ---: |
@@ -86,7 +86,7 @@ Sentry led to a concrete fix: a small input expanded into an **83,662,869-byte r
 
 ## Built with the sponsors
 
-| Integration | Its job in Greenlight | Inspect it |
+| Integration | Its job in Headroom | Inspect it |
 | --- | --- | --- |
 | **Intuit data** | Reconstruct 2,419 synthetic ledger rows to **$74,882.38**; anchor a small-business decision in source records. | [Pinned provenance](data/scenarios/intuit-source.json) |
 | **Veri** | Actual QLoRA training, merged model export, real serving, budgeted evaluation and verified GPU cleanup. | [ML runbook](scripts/ml/README.md) |
@@ -94,15 +94,15 @@ Sentry led to a concrete fix: a small input expanded into an **83,662,869-byte r
 | **Sentry** | Source-mapped errors, traces, structured logs, AI spans and masked Session Replay; a real defect diagnosed and repaired. | [Evidence tour](docs/demo-guide.md) |
 | **Paper** | Eleven product and storyboard artboards, design tokens, JSX exports and engine-derived chart points. | [Editable design](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) · [Handoff](docs/design/README.md) |
 
-Paper's six launch frames are a storyboard, not a rendered film. The live application screenshot above shows the implemented UI.
+Paper's six launch frames are a storyboard for the team's next design phase. The [brand pack](docs/brand/README.md) contains the new Headroom banner, transparent mark, reusable text-free scene, and exact generation prompts. The [workspace screenshot from before the rename](docs/assets/decision-workspace.png) records the implemented UI separately from the metaphorical hero artwork.
 
 ## Run locally
 
 Use **Node.js 22**. The decision workspace and recorded experiment replay work without provider keys.
 
 ```sh
-git clone https://github.com/ManagementMO/greenlight.git
-cd greenlight
+git clone https://github.com/ManagementMO/headroom.git
+cd headroom
 npm ci --legacy-peer-deps
 cp -n .env.example .env
 npm run dev
@@ -116,6 +116,15 @@ npm run typecheck
 npm run build
 npm start
 ```
+
+Before presenting, rehearse the deployed app or your local server without provider keys:
+
+```sh
+npm run demo:check -- https://greenlight-two-psi.vercel.app
+# Optionally append the expected Git commit SHA after the URL.
+```
+
+This checks all three decisions against the local engine, the conserved $23k proposal and the recorded experiment gate. A failed check exits nonzero.
 
 ```sh
 curl -s http://localhost:3000/api/health
@@ -140,7 +149,7 @@ Use the [owner runbook](scripts/ml/README.md) for training, serving and reproduc
 
 The books come from **Intuit's synthetic release**, not a live QuickBooks connection. Company-047's reconstructed bank balance is dated October 6, 2026. Treating all of it as available cash is an explicit zero-restricted-funds assumption. The future commitments, clinic job, contracts, communications and uncertainty bounds are constructed additions. [Full provenance →](data/scenarios/README.md)
 
-Greenlight supports a bounded USD contractor workflow. It does not discover every omitted obligation, authenticate documents, resolve arbitrary legal terms or guarantee settlement. Payment proposals remain drafts requiring agreement and collection.
+Headroom supports a bounded USD contractor workflow. It does not discover every omitted obligation, authenticate documents, resolve arbitrary legal terms or guarantee settlement. Payment proposals remain drafts requiring agreement and collection.
 
 ## For teammates and judges
 
@@ -148,12 +157,16 @@ Greenlight supports a bounded USD contractor workflow. It does not discover ever
 | --- | --- |
 | [Presentation guide](docs/demo-guide.md) | Operator cues, exact spoken lines and answers to technical questions |
 | [Submission narrative](docs/submission.md) | Problem, implementation, sponsor demonstrations and scope |
+| [Devpost draft](docs/devpost.md) | Ready-to-adapt pitch, story, technical explanation, and submission links |
+| [Headroom brand pack](docs/brand/README.md) | Hero banner, transparent logo, scene, palette and prompts |
 | [Team handoff](docs/TEAM-HANDOFF.md) | Setup, ownership and independent work areas |
 | [Design system and launch storyboard](docs/design/README.md) | Paper exports, tokens, motion notes and real chart geometry |
 | [California source pack](research/california/README.md) | 33 official-source records and six dataset-backed task ideas; retrieval is not yet integrated |
 | [Model improvement handoff](docs/model-improvement-handoff.md) | Failure analysis and the path to useful extraction |
 
 The California pack requires a jurisdiction check: the selected sponsor company is in New York. Next product work is cited obligation discovery and invoice-to-bank evidence, alongside the frontend team's Paper implementation. The current source corpus is preparation, not a claimed live RAG system.
+
+Headroom was developed under the working name **Greenlight**. Frozen datasets, model repositories, recorded Sentry events and earlier Paper exports retain their original identifiers for reproducibility. The GitHub repository is now `ManagementMO/headroom`; existing local checkouts can update with `git remote set-url origin https://github.com/ManagementMO/headroom.git`.
 
 <details>
 <summary>Repository map</summary>

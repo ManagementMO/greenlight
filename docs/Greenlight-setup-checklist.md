@@ -1,4 +1,6 @@
-# Greenlight setup
+# Headroom setup
+
+**Brand update:** the current public repository is [ManagementMO/headroom](https://github.com/ManagementMO/headroom). The local folder and provider identifiers below retain their original Greenlight names. See the [rename notes](brand/rename-notes.md).
 
 Project folder: `/Users/mo/Downloads/greenlight`
 

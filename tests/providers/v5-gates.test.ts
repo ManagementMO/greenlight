@@ -1,5 +1,5 @@
 import { describe,it,expect } from "vitest";
-import { assertReviewedV5Evaluation, v5PromptHash } from "../../lib/providers/evaluation-v5";
+import { assertReviewedV5Evaluation, assertV5RunIdentity, v5PromptHash } from "../../lib/providers/evaluation-v5";
 import { summarizeExtraction, type ExtractionScore } from "../../lib/providers/evaluation";
 import { compareV5Evaluations } from "../../scripts/ml/compare-v5-evaluations";
 
@@ -59,5 +59,20 @@ describe("v5 pre-query manifest binding",()=>{
     expect(()=>assertReviewedV5Evaluation(good(),"final-evaluation")).toThrow();
     for(const change of [{frozen:false},{reviewStatus:"pending-review"},{promptContractSha256:"stale"},{hashes:undefined,independentAudit:undefined},{hashes:{"evaluation.frozen.jsonl":"bad"}},{independentAudit:{evaluationSha256:"b".repeat(64)}}])
       expect(()=>assertReviewedV5Evaluation({...good(),...change},"development-only")).toThrow();
+  });
+});
+
+describe("v5 publication identity",()=>{
+  const expected={label:"v5-tuned-dev",dataVersion:"greenlight-v5-development",count:24,corpusPurpose:"development-only" as const,
+    artifact:{repo:"owner/reviewed-v5",revision:"a".repeat(40)}};
+  const good=()=>({...expected,mode:"real-veri-serving",purpose:"development-evaluation",frozenCaseCount:24,exampleCount:24});
+  it("rejects a stale filename alias, different model/revision, split or partial run",()=>{
+    expect(()=>assertV5RunIdentity(good(),expected)).not.toThrow();
+    for(const change of [
+      {label:"v5-base-dev"},{mode:"mock"},{dataVersion:"old"},{purpose:"frozen-heldout-evaluation"},
+      {corpusPurpose:"final-evaluation"},{exampleCount:23},{frozenCaseCount:23},
+      {artifact:{repo:"owner/different",revision:"a".repeat(40)}},
+      {artifact:{repo:"owner/reviewed-v5",revision:"b".repeat(40)}},
+    ])expect(()=>assertV5RunIdentity({...good(),...change},expected)).toThrow("identity");
   });
 });

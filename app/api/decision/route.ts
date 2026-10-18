@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const serialized = JSON.stringify(compactDecisionResult(result));
     const outputBytes = Buffer.byteLength(serialized);
     if (outputBytes > MAX_RESPONSE_BYTES) {
-      Sentry.captureException(new Error('Greenlight decision response exceeded 2 MiB'), { tags: { component: 'decision-capacity', snapshot: result.inputId }, extra: { inputBytes: Buffer.byteLength(body), outputBytes, scenarioCount: result.scenarioCount } });
+      Sentry.captureException(new Error('Headroom decision response exceeded 2 MiB'), { tags: { component: 'decision-capacity', snapshot: result.inputId }, extra: { inputBytes: Buffer.byteLength(body), outputBytes, scenarioCount: result.scenarioCount } });
       await Sentry.flush(2000);
       return Response.json({ error: 'This snapshot exceeds the public response capacity.', code: 'RESPONSE_CAPACITY' }, { status: 422 });
     }

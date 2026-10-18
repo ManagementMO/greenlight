@@ -27,6 +27,7 @@ async function main() {
   for (const root of [
     "data/training",
     "data/training/v4-schema-contract",
+    "data/training/v5-reference-contract",
     "data/training/v1-technical-proof",
     "data/training/v2-invoice-clock-archive",
   ]) {
@@ -70,15 +71,15 @@ license: apache-2.0
 base_model: ${run.baseModel}
 pipeline_tag: text-generation
 tags:
-  - greenlight
+  - headroom
   - sft
   - qlora
   - synthetic-data
 ---
 
-# Greenlight payment-clause extractor
+# Headroom payment-clause extractor
 
-This is a merged QLoRA derivative of [${run.baseModel}](https://huggingface.co/${run.baseModel}), published for the [Greenlight project](https://github.com/ManagementMO/greenlight).
+This is a merged QLoRA derivative of [${run.baseModel}](https://huggingface.co/${run.baseModel}), published for [Headroom](https://github.com/ManagementMO/headroom), developed under the working name Greenlight. The original model identifier is retained for reproducibility.
 
 Training used **${run.rows} synthetic examples and ${run.maxSteps} configured optimizer steps** through Veri. Dataset SHA-256: \`${run.datasetSha256}\`. Training job: \`${run.jobId}\`. Rank 8, 4-bit loading, learning rate 0.0001, sequence limit ${run.maxSeqLength ?? 1536}, micro-batch 1, gradient accumulation 2. Prompt profile: \`${run.promptProfile ?? "legacy-v3"}\`.
 
@@ -86,9 +87,9 @@ ${run.maxSteps <= 4 ? "**Technical integration proof only.** Four steps demonstr
 
 The corpus contains generated clause text and developer-reviewed labels. No credentials or private customer records were used. Final labels are not uploaded to the trainer. Local tokenization validates the intended completion-only objective; remote effective label tensors were not directly inspected.
 
-Outputs need source validation and owner review. Invoice eligibility, invoice issuance, contractual due date and actual bank settlement are distinct. Financial calculations remain in Greenlight’s deterministic cents engine. This model does not establish cash availability, authenticate documents or authorize payments.
+Outputs need source validation and owner review. Invoice eligibility, invoice issuance, contractual due date and actual bank settlement are distinct. Financial calculations remain in Headroom’s deterministic cents engine. This model does not establish cash availability, authenticate documents or authorize payments.
 
-The base model is licensed Apache 2.0. Greenlight’s modifications are the QLoRA fine-tune described above. Quantized merge can change generations; merged weights require their own serving and quality verification. See the source repository for corpus hashes, evaluation boundaries and reproducible owner tooling.
+The base model is licensed Apache 2.0. Headroom’s modifications are the QLoRA fine-tune described above. Quantized merge can change generations; merged weights require their own serving and quality verification. See the source repository for corpus hashes, evaluation boundaries and reproducible owner tooling.
 `;
   const license = await fetch(
     "https://www.apache.org/licenses/LICENSE-2.0.txt",
@@ -117,7 +118,7 @@ The base model is licensed Apache 2.0. Greenlight’s modifications are the QLoR
         key: "header",
         value: {
           summary:
-            "Document Greenlight synthetic training provenance and limitations",
+            "Document Headroom synthetic training provenance and limitations",
           parentCommit: metadata.sha,
         },
       },

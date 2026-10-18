@@ -124,7 +124,7 @@ export function Icon({
   );
 }
 
-export function GreenlightMark({ size = 32 }: { size?: number }) {
+export function HeadroomMark({ size = 32 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -134,18 +134,7 @@ export function GreenlightMark({ size = 32 }: { size?: number }) {
       aria-hidden="true"
     >
       <rect width="40" height="40" rx="12" fill="currentColor" />
-      <path d="M10 20.8c0-6 4.1-10.3 10-10.3v10.3H10Z" fill="white" />
-      <path
-        d="M20 20.8V10.5c6 0 10 4.3 10 10.3H20Z"
-        fill="white"
-        fillOpacity=".5"
-      />
-      <path
-        d="M20 29.8c-5.9 0-10-4.1-10-9h10v9Z"
-        fill="white"
-        fillOpacity=".5"
-      />
-      <path d="M20 29.8v-9h10c0 4.9-4 9-10 9Z" fill="white" />
+      <path d="M10 9h7v10c2-2 4-3 7-3h2c4 0 6 3 6 7v8h-7V21h-4v5h-4v5h-7V9Z" fill="white" />
     </svg>
   );
 }

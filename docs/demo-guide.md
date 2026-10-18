@@ -1,10 +1,12 @@
-# Greenlight demonstration guide
+# Headroom demonstration guide
 
-This is a short operator run-of-show for the implemented application. Open [Greenlight](https://greenlight-two-psi.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
+This is a short operator run-of-show for the implemented application. Open [Headroom](https://greenlight-two-psi.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
 
 ## Before presenting
 
 Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. The current lab records completed v4 training and inference with a rejected tuned candidate; use the actual result below. The separate MetaHarness experiment passed its own fixed gate.
+
+Run `npm run demo:check -- https://greenlight-two-psi.vercel.app` before taking the stage. It checks the three live scenarios, exact conserved proposal and recorded gate against the checked-out implementation, without model keys or paid inference. Use `http://localhost:3000` for an offline/local fallback after starting the app.
 
 The public lab's Replay action rechecks the gates against a recorded genuine model experiment. It never starts new inference or training. Live paid runs belong to the private owner CLI described in the [README](../README.md#owner-cli-and-spending-boundary) and [ML runbook](../scripts/ml/README.md).
 
@@ -32,7 +34,7 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 
 **Operator:** Point to the proposed $65,000 deposit and the $25,000 final installment. Click **Compare proposed terms**.
 
-**Say:** “Greenlight searches for the smallest integer-cent adjustment in the allowed payment family and rechecks every scenario. Moving $23,000 from the final payment into the deposit restores a $10,000 worst-case minimum.”
+**Say:** “Headroom searches for the smallest integer-cent adjustment in the allowed payment family and rechecks every scenario. Moving $23,000 from the final payment into the deposit restores a $10,000 worst-case minimum.”
 
 **Say:** “The customer still pays $120,000: $65,000 upfront, $30,000 at phase one, and $25,000 at the end. We have changed timing, not invented revenue. One cent less would miss the modeled reserve.”
 
@@ -94,7 +96,7 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 
 **Operator:** Return to the default Decision and its proposed cash bridge.
 
-**Say:** “Greenlight gives an owner a decision they can examine: what breaks, which evidence matters, and the smallest supported payment change. The learning loop earns its place through measured workflow improvements, while the cash rules stay accountable.”
+**Say:** “Headroom gives an owner a decision they can examine: what breaks, which evidence matters, and the smallest supported payment change. The learning loop earns its place through measured workflow improvements, while the cash rules stay accountable.”
 
 ## Questions to answer precisely
 

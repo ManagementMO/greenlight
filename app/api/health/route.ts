@@ -2,9 +2,10 @@ export async function GET() {
   return Response.json(
     {
       status: "ok",
-      application: "greenlight",
+      application: "headroom",
       version: "0.1.0",
       sourceRevision:
+        process.env.HEADROOM_SOURCE_SHA ||
         process.env.GREENLIGHT_SOURCE_SHA ||
         process.env.VERCEL_GIT_COMMIT_SHA ||
         null,

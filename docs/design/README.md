@@ -1,4 +1,6 @@
-# Greenlight design and launch storyboard
+# Headroom design and launch storyboard
+
+**Brand update:** the project is now Headroom. These preserved Paper exports use the earlier Greenlight working name. Use the [Headroom brand pack](../brand/README.md) for the next frontend, presentation and motion pass; the numerical source data and interaction principles here still apply.
 
 [Open the editable Paper file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) · [Complete design/motion handoff](HANDOFF.md) · [Offline gallery](index.html) · [Exact tokens](tokens.css)
 

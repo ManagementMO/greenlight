@@ -1,4 +1,4 @@
-name: Verify Greenlight
+name: Verify Headroom
 on:
   push:
   pull_request:

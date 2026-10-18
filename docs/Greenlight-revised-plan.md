@@ -1,4 +1,6 @@
-# Greenlight: revised system and adversarial feasibility audit
+# Headroom: revised system and adversarial feasibility audit
+
+**Brand update:** the public project is now Headroom and the repository is [ManagementMO/headroom](https://github.com/ManagementMO/headroom). The original plan below retains its historical setup identifiers. Use the [current brand pack](brand/README.md) and [team handoff](TEAM-HANDOFF.md).
 
 **Execution settings confirmed:** product name Greenlight, local project `/Users/mo/Downloads/greenlight`, Anthropic for the general model, and one Sentry organization with a project named `greenlight-full`. The public GitHub repository is [ManagementMO/greenlight](https://github.com/ManagementMO/greenlight), and the public application is [greenlight-two-psi.vercel.app](https://greenlight-two-psi.vercel.app). The project has a $20 total authorized spending cap across services. Credentials live in the ignored `.env`; an existing provider balance is not additional authorization. Paid experiments run through the local owner CLI; no hosted sandbox service or key is required. See the [setup checklist](./Greenlight-setup-checklist.md) for the implemented account and runtime boundaries.
 
