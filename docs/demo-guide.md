@@ -4,7 +4,7 @@ This is a short operator run-of-show for the implemented application. Open [Gree
 
 ## Before presenting
 
-Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. Open the lab once beforehand to see which training/evaluation artifacts have actually been published; a pending stage is part of the report, not a reason to invent a result.
+Run `npm ci --legacy-peer-deps` on Node 22, preserve any existing `.env`, and start `npm run dev`. Confirm the Decision, Evidence and Improvement lab views load. The scenario clock is October 6, 2026. The current lab records completed v4 training and inference with a rejected tuned candidate; use the actual result below. The separate MetaHarness experiment passed its own fixed gate.
 
 The public lab's Replay action rechecks the gates against a recorded genuine model experiment. It never starts new inference or training. Live paid runs belong to the private owner CLI described in the [README](../README.md#owner-cli-and-spending-boundary) and [ML runbook](../scripts/ml/README.md).
 
@@ -74,17 +74,17 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 
 **Say:** “The trained model has a different job from Jev. We fine-tune Qwen to turn clauses into proposed typed obligations. Jev handles repeated atomic evidence judgments; ordinary code handles money.”
 
-**Say:** “A real four-step proof trained on sixteen examples, exported public synthetic merged weights, and served a real canary. That canary failed our schema, so this proves the technical path, not extraction quality. We keep the failure visible.”
+**Say:** “We trained Qwen on 276 synthetic clause examples through Veri, committed all 138 steps, exported merged weights and actually served both models on the same 40 frozen clauses.”
 
-**Say:** “The substantive v3 run uses 276 training examples and 138 optimizer steps. Its 40 final cases have not yet been queried at this checkpoint. They check the important details: who received a certificate, when an invoice was actually issued, and whether the model should withhold a proposal.”
+**Say:** “The tuned model improved JSON formatting, but it got zero of 24 supported payment rules exactly right and introduced three incorrect validated proposals. Our gate rejected it. The cash decision still uses reviewed structured inputs.”
 
-**Optional operator cue — only when a genuine, validated invoice-clock showcase is present:** Expand **Test the invoice clock**. Keep hypothetical eligibility on October 20 and hypothetical issuance on October 22. With a fourteen-day invoice clock, show November 5. Clear issuance to show that the due date is withheld. This preview does not mutate the cash forecast or activate extracted terms.
+**Operator:** Point at **Base extractor retained** and the comparison's fully validated / material-match / correct-supported / incorrect-proposal counts. Full validation includes reference identity and completeness, not merely parseable JSON. Both models have zero correct supported proposals; retaining the base is not an endorsement for unattended extraction.
 
-**Optional say:** “Even when billing becomes eligible on October 20, this clock waits for the invoice to be issued. A supplier receiving a certificate also does not prove the customer received it. We keep those parties and stages separate.”
+**If asked about the source illustration:** “Both models invented subject IDs outside the visible references, so the generated C120 invoice-clock preview is withheld. The reviewed date resolver itself is implemented and tested: eligibility October 20 and issuance October 22 would produce November 5 under a fourteen-calendar-day term. A due date still is not a bank receipt.”
 
-**Conditional cue — only when final published evidence exists:** Read the actual 40-case result, model revision, schema version, `extractor-gates-v2` verdict and serving result shown in the lab. Correct supported-proposal coverage measures correct proposed interpretations on supported expected cases. Raw proposal count is review burden, not automatic approval. If the result ties or regresses, say so and explain that the release gate retains the base model.
+**If asked for the full extraction result:** “Base and tuned produced two and four fully validated outputs out of forty, with zero and one material matches. The one tuned match is an unsupported clause. All eighty actual responses are published; errors stay in the denominator. This compares the base and trained/exported pipelines, including their precision differences.”
 
-**If final evaluation is still pending:** “The train-export-serve proof completed with a schema-invalid canary. The substantive model is still being tested. We have no final quality result to claim yet.”
+**If asked about the next ML step:** “Use separate development cases to improve status consistency, supplied-ID copying and Boolean conditions. This final set is exposed now, so the next release needs a fresh protected test. We will not loosen this gate to turn a failure into a win.”
 
 **Operator:** Open the [actual oversized-response issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2) and its [recorded trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697) with project access. The manifest also links a [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd) and [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b).
 

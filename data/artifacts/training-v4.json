@@ -39,5 +39,16 @@
   "bookedCostUsd": 0.5,
   "costBoundary": "Conservative integer-cent ledger cost, reconciled only after positive terminal provider charge; not a claim of exact invoice precision.",
   "completedAt": "2026-10-18T01:43:20.498Z",
-  "boundary": "Genuine training and standalone merged export. Quality requires the separate matched frozen inference comparison. Local completion-only intent is verified; remote effective token-level loss tensors and loaded serving precision are not directly attested."
+  "boundary": "Genuine training and standalone merged export. Quality requires the separate matched frozen inference comparison. Local completion-only intent is verified; remote effective token-level loss tensors and loaded serving precision are not directly attested.",
+  "exportTokenizer": {
+    "templateLocation": "chat_template.jinja",
+    "chatTemplateSha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+    "matchesBaseTemplate": true,
+    "eosMatchesBase": true,
+    "tokenizerClass": "Qwen2Tokenizer",
+    "verifiedAt": "2026-10-18T01:48:45.325Z",
+    "tokenizerJsonSha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "matchesBaseTokenizerJson": true,
+    "tokenizerJsonVerifiedAt": "2026-10-18T02:17:11.796576+00:00"
+  }
 }

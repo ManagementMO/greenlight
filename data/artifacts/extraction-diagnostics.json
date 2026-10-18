@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "origin": "recorded",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "checkedAt": "2026-10-18T02:22:09.829Z",
+  "purpose": "Post-run diagnostic only. Does not change frozen scores, gate thresholds, model selection or final-set labels. Boolean checks enumerate all independent atom assignments up to 12 atoms; they do not establish source authenticity or real-world causal independence.",
+  "metricBoundary": "The frozen valid flag requires JSON syntax, structural schema, supplied references and business completeness. The proposed/unsafeProposed flags count only fully validated outputs. Declared PROPOSED statuses in other parseable outputs are reported separately here; their validation failures remain in the full 40-case denominator.",
+  "publishedPredictionsSha256": "1b76a04aabafbeea218624851f300ff8b11f1dac86d7a374888a80b94f7e1a75",
+  "frozenGateStatus": "rejected-regression",
+  "promoted": false,
+  "evaluationSha256": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a",
+  "runs": [
+    {
+      "label": "base",
+      "recordSha256": "5642115ce5690d23f792cd6ff04c9f0194cda68b920e2f8fd513183b5bb88bf4",
+      "summary": {
+        "count": 40,
+        "valid": 2,
+        "materialExact": 0,
+        "statusCorrect": 2,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0.05,
+        "materialExactRate": 0,
+        "rawProposalRate": 0,
+        "correctSupportedProposalRate": 0,
+        "proposedPrecision": null,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 24,
+            "valid": 0,
+            "statusCorrect": 0,
+            "materialExact": 0,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0,
+            "materialExactRate": 0
+          },
+          "AMBIGUOUS": {
+            "count": 8,
+            "valid": 1,
+            "statusCorrect": 1,
+            "materialExact": 0,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.125,
+            "materialExactRate": 0
+          },
+          "UNSUPPORTED": {
+            "count": 8,
+            "valid": 1,
+            "statusCorrect": 1,
+            "materialExact": 0,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.125,
+            "materialExactRate": 0
+          }
+        }
+      },
+      "jsonSyntaxValid": 20,
+      "structuralSchemaValid": 20,
+      "fullValidationValid": 2,
+      "declaredStatuses": {
+        "PROPOSED": 16,
+        "AMBIGUOUS": 3,
+        "UNSUPPORTED": 1
+      },
+      "rejectionReasons": {
+        "Malformed JSON": 20,
+        "Unknown subject reference": 7,
+        "Proposed clause is incomplete": 11
+      },
+      "incompleteFields": {
+        "nonemptyIssues": 11,
+        "amountRefMissing": 0,
+        "triggerMissing": 0,
+        "dueMissing": 1
+      },
+      "categories": {
+        "malformed JSON": 20,
+        "unknown supplied reference": 7,
+        "valid material mismatch": 2,
+        "schema or reference validation": 11
+      },
+      "mismatches": [
+        {
+          "id": "v4final-case-29",
+          "expectedStatus": "AMBIGUOUS",
+          "actualStatus": "AMBIGUOUS",
+          "differing": [
+            "due",
+            "trigger"
+          ],
+          "structuredTriggerMatch": false,
+          "truthTableEquivalent": false,
+          "unexpectedTrueAssignments": null,
+          "missedTrueAssignments": null,
+          "onlyEquivalentTriggerShape": false,
+          "gateUnsafeProposed": false
+        },
+        {
+          "id": "v4final-case-39",
+          "expectedStatus": "UNSUPPORTED",
+          "actualStatus": "UNSUPPORTED",
+          "differing": [
+            "trigger"
+          ],
+          "structuredTriggerMatch": false,
+          "truthTableEquivalent": false,
+          "unexpectedTrueAssignments": null,
+          "missedTrueAssignments": null,
+          "onlyEquivalentTriggerShape": false,
+          "gateUnsafeProposed": false
+        }
+      ],
+      "canary": {
+        "valid": true,
+        "materialExact": true
+      },
+      "showcase": {
+        "valid": false,
+        "materialExact": false,
+        "error": "Unknown subject reference"
+      }
+    },
+    {
+      "label": "tuned",
+      "recordSha256": "65015a85ced9f8262b6980b325da45f3fb2633648988ba73c23e46a5a7e4b250",
+      "summary": {
+        "count": 40,
+        "valid": 4,
+        "materialExact": 1,
+        "statusCorrect": 4,
+        "proposed": 3,
+        "unsafeProposed": 3,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0.1,
+        "materialExactRate": 0.025,
+        "rawProposalRate": 0.075,
+        "correctSupportedProposalRate": 0,
+        "proposedPrecision": 0,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 24,
+            "valid": 3,
+            "statusCorrect": 3,
+            "materialExact": 0,
+            "proposed": 3,
+            "unsafeProposed": 3,
+            "statusAccuracy": 0.125,
+            "materialExactRate": 0
+          },
+          "AMBIGUOUS": {
+            "count": 8,
+            "valid": 0,
+            "statusCorrect": 0,
+            "materialExact": 0,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0,
+            "materialExactRate": 0
+          },
+          "UNSUPPORTED": {
+            "count": 8,
+            "valid": 1,
+            "statusCorrect": 1,
+            "materialExact": 1,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.125,
+            "materialExactRate": 0.125
+          }
+        }
+      },
+      "jsonSyntaxValid": 40,
+      "structuralSchemaValid": 39,
+      "fullValidationValid": 4,
+      "declaredStatuses": {
+        "PROPOSED": 38,
+        "AMBIGUOUS": 1,
+        "UNSUPPORTED": 1
+      },
+      "rejectionReasons": {
+        "Proposed clause is incomplete": 28,
+        "Unknown subject reference": 7,
+        "Structural schema validation": 1
+      },
+      "incompleteFields": {
+        "nonemptyIssues": 28,
+        "amountRefMissing": 1,
+        "triggerMissing": 0,
+        "dueMissing": 4
+      },
+      "categories": {
+        "schema or reference validation": 29,
+        "unknown supplied reference": 7,
+        "valid material mismatch": 3,
+        "strict material match": 1
+      },
+      "mismatches": [
+        {
+          "id": "v4final-case-10",
+          "expectedStatus": "PROPOSED",
+          "actualStatus": "PROPOSED",
+          "differing": [
+            "trigger"
+          ],
+          "structuredTriggerMatch": false,
+          "truthTableEquivalent": false,
+          "unexpectedTrueAssignments": 0,
+          "missedTrueAssignments": 12,
+          "onlyEquivalentTriggerShape": false,
+          "gateUnsafeProposed": true
+        },
+        {
+          "id": "v4final-case-22",
+          "expectedStatus": "PROPOSED",
+          "actualStatus": "PROPOSED",
+          "differing": [
+            "trigger"
+          ],
+          "structuredTriggerMatch": false,
+          "truthTableEquivalent": false,
+          "unexpectedTrueAssignments": 0,
+          "missedTrueAssignments": 7,
+          "onlyEquivalentTriggerShape": false,
+          "gateUnsafeProposed": true
+        },
+        {
+          "id": "v4final-case-11",
+          "expectedStatus": "PROPOSED",
+          "actualStatus": "PROPOSED",
+          "differing": [
+            "trigger"
+          ],
+          "structuredTriggerMatch": false,
+          "truthTableEquivalent": false,
+          "unexpectedTrueAssignments": 0,
+          "missedTrueAssignments": 7,
+          "onlyEquivalentTriggerShape": false,
+          "gateUnsafeProposed": true
+        }
+      ],
+      "canary": {
+        "valid": true,
+        "materialExact": true
+      },
+      "showcase": {
+        "valid": false,
+        "materialExact": false,
+        "error": "Unknown subject reference"
+      }
+    }
+  ]
+}

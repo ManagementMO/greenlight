@@ -1,0 +1,27 @@
+:root {
+  --color-ink: #10251C;
+  --color-paper: #FFFFFF;
+  --color-fog: #EEF3EF;
+  --color-rule: #D5DFD8;
+  --color-muted: #4A6053;
+  --color-green: #176644;
+  --color-signal: #32D17B;
+  --color-risk: #A53B43;
+  --font-sans: Manrope;
+  --font-mono: IBM Plex Mono;
+  --text-caption: 13px;
+  --text-body: 16px;
+  --text-title: 36px;
+  --text-display: 88px;
+  --font-weight-label: 500;
+  --font-weight-display: 700;
+  --tracking-display: -0.06em;
+  --leading-body: 26px;
+  --opacity-secondary: 70%;
+  --breakpoint-mobile: 768px;
+  --container-desktop: 1312px;
+  --spacing-unit: 8px;
+  --spacing-section: 64px;
+  --radius-control: 999px;
+  --radius-panel: 24px;
+}

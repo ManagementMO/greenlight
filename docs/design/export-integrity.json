@@ -1,0 +1,79 @@
+[
+  {
+    "name": "01-brand-hero.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 158583,
+    "sha256": "10e8730d25015f96d274a2e2215701340458922674da0a07e7a90a611ffab5bb"
+  },
+  {
+    "name": "02-decision-workspace.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 182656,
+    "sha256": "30467944859298b5ac7cb865b9ace733117c16ef449641a545593a260a020a88"
+  },
+  {
+    "name": "03-evidence-learning.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 189214,
+    "sha256": "3a45a7b0f60f3790565d7aa80e2dc42c1c0a51604ef4bcee51e54cc3f98c7a0f"
+  },
+  {
+    "name": "04-mobile-decision.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 70931,
+    "sha256": "c994f2efb19a1cc935643470823c271a6a6980a5caecd72b2b82653ff1b1236b"
+  },
+  {
+    "name": "design-motion-handoff.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 222103,
+    "sha256": "ebd46222cda9e1230aa40f5d6567bbd20953b23666bd407b57fbcc8093c284f7"
+  },
+  {
+    "name": "film-01-opportunity.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 98842,
+    "sha256": "c4451e227b3b6d2c47d77ef367e2f9cad00127af58644f2d83539322e3748e41"
+  },
+  {
+    "name": "film-02-hidden-gap.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 98545,
+    "sha256": "e8863bf24a7648f37d90ee51de94cea30afb58825dde714b3a4b0021204c4ed6"
+  },
+  {
+    "name": "film-03-evidence-clock.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 113330,
+    "sha256": "c2422eea69539f8395185d9aad26921d6736c51d0953bd468a2c297cf2f65083"
+  },
+  {
+    "name": "film-04-conserved-change.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 108650,
+    "sha256": "93a6c60ce25c00d69b915f0f7c2ab0a60e5b436261c4e890b8c14464479dafcb"
+  },
+  {
+    "name": "film-05-learning-gates.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 128272,
+    "sha256": "90e538a7397c76428df1b9910a68eb32112fa5f12583191196f5bd3a6b17810d"
+  },
+  {
+    "name": "film-06-path-to-yes.png",
+    "width": 1440,
+    "height": 810,
+    "bytes": 93348,
+    "sha256": "51021b959ec14a1b894b73b5e87d1aafdf88b4e56d8cc478af3ac05f8ca8d464"
+  }
+]

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "fileId": "01M56AKCMG8WN1327280QA4TJK",
+  "fileUrl": "https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK",
+  "createdAt": "2026-10-18T01:50:24.212Z",
+  "tokenHash": "b070f41a",
+  "pages": [
+    {
+      "pageId": "p-1-0",
+      "name": "01 \u2014 Signal system & product",
+      "url": "https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK/p-1-0",
+      "artboards": [
+        {
+          "id": "1-0",
+          "name": "01 / Take the job \u2014 Brand hero",
+          "childCount": 3,
+          "width": 1440,
+          "height": 900,
+          "worldX": -720,
+          "worldY": -450,
+          "export": "01-brand-hero.png"
+        },
+        {
+          "id": "2F-0",
+          "name": "02 / Decision workspace \u2014 owner review",
+          "childCount": 3,
+          "width": 1440,
+          "height": 900,
+          "worldX": 800,
+          "worldY": -450,
+          "export": "02-decision-workspace.png"
+        },
+        {
+          "id": "5R-0",
+          "name": "03 / Evidence to a safer habit",
+          "childCount": 3,
+          "width": 1440,
+          "height": 900,
+          "worldX": 2320,
+          "worldY": -450,
+          "export": "03-evidence-learning.png"
+        },
+        {
+          "id": "7V-0",
+          "name": "04 / Mobile \u2014 decision in one hand",
+          "childCount": 3,
+          "width": 390,
+          "height": 844,
+          "worldX": 3840,
+          "worldY": -450,
+          "export": "04-mobile-decision.png"
+        }
+      ]
+    },
+    {
+      "pageId": "p-2-0",
+      "name": "02 \u2014 Launch film / 36 seconds",
+      "url": "https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK/p-2-0",
+      "artboards": [
+        {
+          "id": "9M-0",
+          "name": "01 / 00\u201305s \u2014 The opportunity",
+          "childCount": 3,
+          "width": 1440,
+          "height": 810,
+          "worldX": 0,
+          "worldY": 0,
+          "export": "film-01-opportunity.png"
+        },
+        {
+          "id": "9N-0",
+          "name": "02 / 05\u201311s \u2014 The hidden gap",
+          "childCount": 3,
+          "width": 1440,
+          "height": 810,
+          "worldX": 1520,
+          "worldY": 0,
+          "export": "film-02-hidden-gap.png"
+        },
+        {
+          "id": "9O-0",
+          "name": "03 / 11\u201317s \u2014 The evidence clock",
+          "childCount": 5,
+          "width": 1440,
+          "height": 810,
+          "worldX": 3040,
+          "worldY": 0,
+          "export": "film-03-evidence-clock.png"
+        },
+        {
+          "id": "9P-0",
+          "name": "04 / 17\u201324s \u2014 The conserved change",
+          "childCount": 6,
+          "width": 1440,
+          "height": 810,
+          "worldX": 4560,
+          "worldY": 0,
+          "export": "film-04-conserved-change.png"
+        },
+        {
+          "id": "9Q-0",
+          "name": "05 / 24\u201330s \u2014 Learn behind gates",
+          "childCount": 4,
+          "width": 1440,
+          "height": 810,
+          "worldX": 6080,
+          "worldY": 0,
+          "export": "film-05-learning-gates.png"
+        },
+        {
+          "id": "9R-0",
+          "name": "06 / 30\u201336s \u2014 A path to yes",
+          "childCount": 3,
+          "width": 1440,
+          "height": 810,
+          "worldX": 7600,
+          "worldY": 0,
+          "export": "film-06-path-to-yes.png"
+        }
+      ]
+    },
+    {
+      "pageId": "p-3-0",
+      "name": "03 \u2014 Design & motion handoff",
+      "url": "https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK/p-3-0",
+      "artboards": [
+        {
+          "id": "FK-0",
+          "name": "Design system & 36-second motion brief",
+          "childCount": 3,
+          "width": 1440,
+          "height": 900,
+          "worldX": 0,
+          "worldY": 0,
+          "export": "design-motion-handoff.png"
+        }
+      ]
+    }
+  ],
+  "exports": {
+    "imageFormat": "png",
+    "scale": "1x",
+    "pdfStatus": "Native Paper combined and single-board PDF export both returned assembly errors. PNG and clean JSX exports succeeded."
+  },
+  "evidence": {
+    "cashPathSource": "Actual getScenario/evaluateDecision/applyProposal results in verified-cash-states.json",
+    "cashInputHash": "snapshot-95382de9",
+    "modelQuality": "v4 SFT training complete per root; base/tuned quality comparison pending at design freeze. No quality uplift claimed.",
+    "jurisdiction": "Ductline source company is Albany NY; California knowledge would require explicit job jurisdiction/nexus selection."
+  },
+  "cashSourceFiles": {
+    "lib/domain/engine.ts": "35ee1cf690b410031692672b3f35beaff3705896383a922cf0a1f78009a0d209",
+    "lib/domain/fixtures.ts": "2423b633edeaf8e99652ca0e113d438a420ac9ea0c3a3110a2b7da6402bbe97d",
+    "work/design-paper/verified-cash-states.json": "2ad38fc0ec9f10a4f6046b5e8ce4624a8a1d28666d08c091b8aef014e68eabc1"
+  }
+}
