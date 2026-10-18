@@ -933,7 +933,17 @@
   background: currentColor;
   border-radius: 50%;
 }
-.j-chart > svg {
+.j-chart-plot {
+  overflow-x: auto;
+  scrollbar-color: #717a91 #1c1e29;
+  scrollbar-width: thin;
+}
+.j-chart-plot:focus-visible {
+  outline: 2px solid var(--j-mint);
+  outline-offset: 2px;
+}
+.j-chart-scroll-hint { display: none; }
+.j-chart-plot > svg {
   display: block;
   width: 100%;
   overflow: visible;
@@ -2436,7 +2446,7 @@
   .j-chart-bottom strong span {
     font-size: 8px;
   }
-  .j-chart > svg {
+  .j-chart-plot > svg {
     min-height: 140px;
   }
   .j-event-strip strong {
@@ -2682,6 +2692,110 @@
   .j-learning-result strong {
     font-size: 18px;
   }
+}
+/* Explanations must stay readable on a laptop or phone, not shrink like decoration. */
+.journey .j-subtitle,
+.journey .j-opening-copy p,
+.journey .j-cash-narrator > p,
+.journey .j-proposal-narrator > p,
+.journey .j-stress-card > p,
+.journey .j-finetune-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #c3c6d2;
+}
+.journey .j-soft-note,
+.journey .j-scene-ribbon,
+.journey .j-clause-note,
+.journey .j-clause-dates small,
+.journey .j-predicate div > span,
+.journey .j-date-chain small,
+.journey .j-verdict small,
+.journey .j-chart-caption,
+.journey .j-chart-top,
+.journey .j-chart-top > span:last-child,
+.journey .j-chart-bottom > span,
+.journey .j-event-strip span,
+.journey .j-learning-result > div > small,
+.journey .j-learning-result > div > span,
+.journey .j-gate-result,
+.journey .j-tune-score > small,
+.journey .j-risk-matrix small,
+.journey .j-unknown-outcome p,
+.journey .j-sentry-note p,
+.journey .j-control-left > div > span {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #b5bccd;
+}
+.journey .j-eyebrow,
+.journey .j-finetune-card .j-eyebrow,
+.journey .j-card-label,
+.journey .j-small-pill,
+.journey .j-hold-badge,
+.journey .j-stage-status,
+.journey .j-status-context,
+.journey .j-motion-note {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.journey .j-eyebrow { flex-wrap: wrap; }
+.journey .j-chapter > span:last-child,
+.journey .j-source-card strong,
+.journey .j-snapshot-card > div,
+.journey .j-receipt-row,
+.journey .j-segment button,
+.journey .j-event-strip strong,
+.journey .j-text-button,
+.journey .j-finetune-card .j-text-button,
+.journey .j-scene-ribbon button {
+  font-size: 13px;
+}
+.journey .j-source-card small,
+.journey .j-source-card > span > span,
+.journey .j-contract-metrics span,
+.journey .j-contract-foot,
+.journey .j-floating-label > span:not(.j-gem):not(.j-small-pill),
+.journey .j-micro,
+.journey .j-flow-node > span:last-child {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.journey .j-flow-node > span:last-child { max-width: 110px; }
+.journey .j-contract-foot { max-width: 28ch; }
+.journey .j-receipt-row { align-items: start; }
+.journey .j-receipt-row strong { max-width: 60%; text-align: right; }
+.journey .j-stage-status { flex-wrap: wrap; }
+.journey .j-axis, .journey .j-reserve-label { font-size: 13px; }
+@media (min-width: 801px) and (max-height: 900px) {
+  .journey .j-learning-layout { padding-block: 18px; }
+  .journey .j-learning-flow { margin-block: 20px 18px; }
+  .journey .j-finetune-card { padding: 18px; }
+  .journey .j-finetune-card > .j-gem { width: 36px; height: 36px; }
+  .journey .j-finetune-card .j-eyebrow { margin-top: 9px; }
+  .journey .j-finetune-card .j-text-button { margin-top: 10px; }
+  .journey .j-finetune-card .j-hold-badge { margin-top: 8px; }
+  .journey .j-tune-score { margin-block: 12px 7px; }
+}
+@media (max-width: 800px) {
+  .j-chart-plot > svg { min-width: 600px; }
+  .j-chart-scroll-hint { display: block; margin-top: 8px; color: var(--j-muted); font-size: 12px; }
+  .journey .j-chart-bottom > span { max-width: 25ch; }
+  .journey .j-chart-bottom { flex-wrap: wrap; gap: 8px; }
+  .journey .j-chart-top { flex-wrap: wrap; }
+}
+@media (max-width: 600px) {
+  .journey .j-learning-result { grid-template-columns: 1fr; gap: 14px; }
+  .journey .j-learning-result > div { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; }
+  .journey .j-learning-result strong { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 23px; }
+  .journey .j-learning-result > div > small { grid-column: 1; }
+  .journey .j-learning-flow { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .journey .j-learning-flow .j-connector { display: none; }
+  .journey .j-scene-ribbon { flex-wrap: wrap; }
+  .journey .j-scene-ribbon p { min-width: 0; flex-basis: calc(100% - 32px); }
+  .journey .j-scene-ribbon button { margin-left: 28px; }
+  .journey .j-snapshot-card { min-width: 0; }
+  .journey .j-source-card { gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .journey *,

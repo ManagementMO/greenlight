@@ -52,46 +52,46 @@ import { JourneyChart } from "./journey-chart";
 
 const chapters = [
   {
-    label: "Opportunity",
+    label: "The problem",
     icon: Wallet,
-    title: "A good job. A harder cash question.",
-    note: "Headroom helps a small business decide which work it can afford to take.",
+    title: "More work doesn’t always mean enough cash.",
+    note: "Headroom checks whether a business can take a new job and still pay its people and bills.",
   },
   {
-    label: "Evidence",
+    label: "The inputs",
     icon: Layers3,
-    title: "Every decision starts with a source.",
-    note: "The books show today. Contracts and commitments explain what happens next.",
+    title: "Start with the money, the job, and the bills.",
+    note: "Bring the bank balance, customer agreement, and upcoming expenses into one calculation.",
   },
   {
-    label: "Conditions",
+    label: "The checks",
     icon: ScanLine,
     title: "Approved to bill ≠ money in the bank.",
-    note: "Turn a contract clause into separate, reviewable conditions and dates.",
+    note: "AI reads the payment rules and checks the proof. A person reviews the results.",
   },
   {
-    label: "Cash path",
+    label: "The shortfall",
     icon: GitBranch,
     title: "Profitable on paper. Short on payday.",
-    note: "Code evaluates every declared scenario, keeping each cash movement in order.",
+    note: "Test two possible payment dates. Add each payment and subtract each bill in date order.",
   },
   {
-    label: "Better terms",
+    label: "The fix",
     icon: ReceiptText,
-    title: "Change the timing. Keep the opportunity.",
-    note: "Test an earlier deposit against the same obligations and the same total revenue.",
+    title: "Same price. More of it paid upfront.",
+    note: "Test whether receiving part of the final payment earlier would cover the cash shortfall.",
   },
   {
-    label: "Learning",
+    label: "The learning",
     icon: FlaskConical,
-    title: "Improve the workflow. Make it prove itself.",
-    note: "A meta-harness proposes a change, replays the workload, then applies a fixed gate.",
+    title: "Less repeated AI work. Measured results.",
+    note: "Our improvement loop tests which checks to rerun and which answers can be reused.",
   },
   {
-    label: "Trust",
+    label: "The limits",
     icon: ShieldCheck,
-    title: "A useful answer knows its limits.",
-    note: "Combine risks. Keep unknowns unknown. Make the calculation inspectable.",
+    title: "What if two things go wrong?",
+    note: "Test higher costs together, or remove a key number to see when Headroom needs more information.",
   },
 ] as const;
 
@@ -286,6 +286,11 @@ export function GuidedDemo({
         )
       )
         return;
+      // Let a focused chart scroll horizontally without changing the chapter.
+      if (
+        (event.key === "ArrowRight" || event.key === "ArrowLeft") &&
+        target.closest(".j-chart-plot")
+      ) return;
       if (event.key === "Escape") {
         setPresenting(false);
         setPlaying(false);
@@ -359,7 +364,7 @@ export function GuidedDemo({
           <div className="j-header-label">
             <span className="j-live-dot" />
             Interactive walkthrough<span className="j-divider">/</span>
-            <span>Synthetic case</span>
+            <span>Sample business</span>
           </div>
           <div className="j-header-actions">
             <button
@@ -420,13 +425,13 @@ export function GuidedDemo({
           <div className="j-scene-heading" key={`heading-${chapter}`}>
             <div>
               <p className="j-eyebrow">
-                <span>SYNTHETIC CASE / HEADROOM</span>
+                <span>SAMPLE BUSINESS / HEADROOM</span>
                 <i />
                 {chapter === 5
                   ? "Recorded experiment"
                   : chapter === 2
-                    ? "Reviewed extraction flow"
-                    : "Live deterministic calculation"}
+                    ? "How the AI checks work"
+                    : "Cash recalculated live"}
               </p>
               <h1>{chapters[chapter].title}</h1>
               <p className="j-subtitle">{chapters[chapter].note}</p>
@@ -453,17 +458,17 @@ export function GuidedDemo({
                     <br />
                     <em>{money(input.job.priceCents)} job</em>
                     <br />
-                    and still make payroll?”
+                    and still pay our team?”
                   </h2>
                   <p>
-                    A contractor’s next big opportunity. One late customer
-                    payment could put the rest of the business at risk.
+                    A heating and cooling company is offered work at a clinic.
+                    Workers and materials need paying before the customer pays.
                   </p>
                   <button className="j-primary" onClick={next}>
                     Follow the decision <ArrowRight size={17} />
                   </button>
                   <span className="j-micro">
-                    Seven scenes. Every number has a trail.
+                    Seven steps, from the documents to a payment plan.
                   </span>
                 </div>
                 <div className="j-opportunity-art">
@@ -476,7 +481,7 @@ export function GuidedDemo({
                     <span>
                       New opportunity<strong>Northstar Clinic</strong>
                     </span>
-                    <span className="j-small-pill">HVAC retrofit</span>
+                    <span className="j-small-pill">Heating & cooling</span>
                   </div>
                   <div className="j-contract-card">
                     <div className="j-contract-top">
@@ -490,17 +495,17 @@ export function GuidedDemo({
                     <div className="j-contract-rule" />
                     <div className="j-contract-metrics">
                       <div>
-                        <span>Modeled job costs</span>
+                        <span>Planned job costs</span>
                         <strong>{money(reference.jobCostsCents)}</strong>
                       </div>
                       <div>
-                        <span>Modeled job surplus</span>
+                        <span>Price minus job costs</span>
                         <strong>{money(jobSurplus)}</strong>
                       </div>
                     </div>
                     <div className="j-contract-foot">
                       <CheckCheck size={17} />
-                      The margin looks good. The timing needs a check.
+                      The job earns more than it costs. But when is it paid?
                     </div>
                   </div>
                   <div className="j-floating-label j-float-bottom">
@@ -508,7 +513,7 @@ export function GuidedDemo({
                       <CalendarDays size={18} />
                     </Gem>
                     <span>
-                      Payroll can’t wait
+                      Wages are due on time
                       <strong>Does the cash arrive in time?</strong>
                     </span>
                     <ArrowRight size={19} />
@@ -525,26 +530,26 @@ export function GuidedDemo({
                       {
                         id: "intuit-bank",
                         icon: BookOpen,
-                        title: "The books",
+                        title: "Money in the bank",
                         detail: `${money(input.openingCashCents!)} bank balance`,
                         tone: "mint",
-                        badge: "Intuit dataset",
+                        badge: "Intuit sample data",
                       },
                       {
                         id: "signed-contract",
                         icon: FileText,
-                        title: "The agreement",
-                        detail: "Milestones, conditions & payment terms",
+                        title: "The customer’s contract",
+                        detail: "How much they owe and when they pay",
                         tone: "lavender",
-                        badge: "Scenario addition",
+                        badge: "Added for this demo",
                       },
                       {
                         id: "forward-calendar",
                         icon: CalendarDays,
-                        title: "The commitments",
-                        detail: "Payroll, suppliers & the forward calendar",
+                        title: "Upcoming bills",
+                        detail: "Employee wages, materials & running costs",
                         tone: "amber",
-                        badge: "Scenario addition",
+                        badge: "Added for this demo",
                       },
                     ].map((item, index) => (
                       <button
@@ -595,35 +600,35 @@ export function GuidedDemo({
                     <Gem size="large">
                       <Layers3 size={30} />
                     </Gem>
-                    <span className="j-eyebrow">REVIEWED SNAPSHOT</span>
+                    <span className="j-eyebrow">INPUTS REVIEWED BY A PERSON</span>
                     <h2>
                       One decision.
                       <br />
-                      {input.evidence.length} source records.
+                      {input.evidence.length} source documents.
                     </h2>
                     <div>
                       <span>As of</span>
                       <strong>06 Oct 2026</strong>
                     </div>
                     <div>
-                      <span>Forward calendar</span>
+                      <span>Payments planned</span>
                       <strong>Through 25 Nov</strong>
                     </div>
                     <div>
-                      <span>Reserve policy</span>
+                      <span>Cash to keep aside</span>
                       <strong>{money(input.reserveCents!)}</strong>
                     </div>
                     <span className="j-soft-note">
-                      Sources + assumptions travel with the calculation.
+                      This cash buffer is money kept aside for ongoing bills.
                     </span>
                   </div>
                 </div>
                 <div className="j-scene-ribbon">
                   <CircleHelp size={17} />
                   <p>
-                    Intuit supplies the synthetic company and opening ledger.
-                    Future commitments, unrestricted-cash assumptions and
-                    contract documents are disclosed demo additions.
+                    Intuit’s synthetic dataset supplies the company and bank balance.
+                    We added the example job, future bills, and payment dates,
+                    and assume the starting cash is available to spend.
                   </p>
                   <button onClick={() => openSource("customer-email")}>
                     Read the payment email <ArrowUpRight size={15} />
@@ -657,17 +662,17 @@ export function GuidedDemo({
                     <div className="j-clause-dates">
                       <span>
                         <Clock3 size={16} />
-                        14 calendar days after invoice issuance
+                        Payment due 14 days after the bill is sent
                       </span>
                       <small>
-                        That is the due-date rule, not a guarantee of
-                        settlement.
+                        A due date says when payment is owed. It doesn’t prove
+                        the money has arrived.
                       </small>
                     </div>
                   </div>
                   <div className="j-predicates">
                     <div className="j-card-label">
-                      <ScanLine size={16} /> NARROW EVIDENCE CHECKS{" "}
+                      <ScanLine size={16} /> CHECK THE PROOF{" "}
                       <span className="j-small-pill">Jev’s role</span>
                     </div>
                     <div className="j-predicate">
@@ -676,9 +681,9 @@ export function GuidedDemo({
                       </span>
                       <div>
                         <strong>Did the inspection pass?</strong>
-                        <span>Expected 20 Oct · not observed as of 06 Oct</span>
+                        <span>Planned for Oct 20 · no proof yet as of Oct 6</span>
                       </div>
-                      <small>Not observed</small>
+                      <small>Unknown</small>
                     </div>
                     <div className="j-and">AND</div>
                     <div className="j-predicate">
@@ -689,41 +694,41 @@ export function GuidedDemo({
                         <strong>
                           Did the customer receive the certificate?
                         </strong>
-                        <span>Expected 20 Oct · not observed as of 06 Oct</span>
+                        <span>Expected Oct 20 · no proof yet as of Oct 6</span>
                       </div>
-                      <small>Not observed</small>
+                      <small>Unknown</small>
                     </div>
                     <p className="j-soft-note">
-                      Qwen proposes typed terms → source validation and owner
-                      review. Jev checks narrow evidence questions. This
-                      illustration uses reviewed fixture inputs, with no live
-                      model call.
+                      Qwen reads the contract’s amounts and rules. Jev checks
+                      whether documents prove each condition. Here, both are
+                      still unknown. This step illustrates reviewed sample inputs;
+                      it does not call a model live.
                     </p>
                   </div>
                 </div>
                 <div className="j-date-chain">
                   <div>
                     <span>01</span>
-                    <strong>Eligibility</strong>
-                    <small>Conditions permit an invoice</small>
+                    <strong>Allowed to bill</strong>
+                    <small>Contract conditions are met</small>
                   </div>
                   <Connector />
                   <div>
                     <span>02</span>
-                    <strong>Invoice issued</strong>
-                    <small>Starts the payment clock</small>
+                    <strong>Bill sent</strong>
+                    <small>The 14-day countdown starts</small>
                   </div>
                   <Connector />
                   <div>
                     <span>03</span>
                     <strong>Due date</strong>
-                    <small>Contractual obligation</small>
+                    <small>Customer is expected to pay</small>
                   </div>
                   <Connector />
                   <div className="j-chain-last">
                     <span>04</span>
-                    <strong>Bank settlement</strong>
-                    <small>Cash the engine can model</small>
+                    <strong>Money arrives</strong>
+                    <small>Now it can pay the bills</small>
                   </div>
                 </div>
               </>
@@ -739,22 +744,22 @@ export function GuidedDemo({
                     <span className="j-eyebrow">THE TIMING GAP</span>
                     <h2>
                       {money(story.current.minimumCents)}
-                      <span>lowest modeled cash</span>
+                      <span>lowest cash if payment is late</span>
                     </h2>
                     <p>
-                      The {money(story.phaseCents)} phase payment may land on 24
-                      Oct or 20 Nov. In the later path, materials and crew costs
-                      arrive first.
+                      A {money(story.phaseCents)} payment for the first stage of
+                      work may arrive on Oct 24 or Nov 20. If it arrives later,
+                      wages and materials must be paid first.
                     </p>
                     <div className="j-verdict amber">
                       <span>
                         {story.current.passing} / {story.current.total}
                       </span>
                       <div>
-                        <strong>Declared paths preserve the reserve</strong>
+                        <strong>Tested cases keep the cash buffer</strong>
                         <small>
-                          Every path must cover the {money(story.reserveCents)}{" "}
-                          floor.
+                          The goal: keep {money(story.reserveCents)} aside for
+                          ongoing bills.
                         </small>
                       </div>
                     </div>
@@ -762,7 +767,7 @@ export function GuidedDemo({
                       className="j-text-button"
                       onClick={() => openSource("customer-email")}
                     >
-                      Inspect the settlement assumption{" "}
+                      Why these payment dates?{" "}
                       <ArrowUpRight size={15} />
                     </button>
                   </div>
@@ -779,28 +784,27 @@ export function GuidedDemo({
                       <ChevronRight size={16} />
                       <div>
                         <span>12 OCT → 04 NOV</span>
-                        <strong>Materials + crew</strong>
+                        <strong>Materials + workers</strong>
                         <small>−{money(reference.jobCostsCents, true)}</small>
                       </div>
                       <ChevronRight size={16} />
                       <div>
                         <span>20 NOV · LATE PATH</span>
-                        <strong>Phase payment</strong>
+                        <strong>Customer pays</strong>
                         <small>+{money(story.phaseCents, true)}</small>
                       </div>
                     </div>
                     <p className="j-chart-caption">
-                      The full curve also includes existing payroll, overhead,
-                      supplier commitments and the final receipt.
+                      The chart also includes wages and other bills the company
+                      already owes, plus the customer’s final payment.
                     </p>
                   </div>
                 </div>
                 <div className="j-scene-ribbon">
                   <Cpu size={17} />
                   <p>
-                    AI interprets language. Deterministic code calculates cash
-                    in cents. This is a bounded scenario analysis, not a
-                    probability forecast.
+                    Code calculates the balance in exact cents. It tests the
+                    dates entered here; it does not predict how likely they are.
                   </p>
                 </div>
               </>
@@ -836,9 +840,9 @@ export function GuidedDemo({
                       earlier in the job.
                     </h2>
                     <p>
-                      Advance part of the final receipt into the deposit. The
-                      contract stays at {money(story.contractCents)}; more cash
-                      is available when the work needs it.
+                      Ask the customer to pay part of the final bill upfront
+                      instead. The total stays {money(story.contractCents)}.
+                      The company has more cash when wages and materials are due.
                     </p>
                     <div className={`j-verdict ${proposed ? "mint" : "amber"}`}>
                       <span>
@@ -848,7 +852,7 @@ export function GuidedDemo({
                         / {story.current.total}
                       </span>
                       <div>
-                        <strong>Paths preserve the reserve</strong>
+                        <strong>Tested cases keep the cash buffer</strong>
                         <small>
                           {money(
                             proposed
@@ -867,7 +871,7 @@ export function GuidedDemo({
                           setProposed(true);
                         }}
                       >
-                        Apply the what-if <ArrowRight size={17} />
+                        Test the earlier payment <ArrowRight size={17} />
                       </button>
                     )}
                     {proposed && (
@@ -903,7 +907,7 @@ export function GuidedDemo({
                       <div className="j-allocation-labels">
                         <span>
                           <i />
-                          Deposit
+                          Upfront deposit
                           <strong>
                             {money(
                               proposed
@@ -914,12 +918,12 @@ export function GuidedDemo({
                         </span>
                         <span>
                           <i />
-                          Phase payment
+                          After first stage
                           <strong>{money(story.phaseCents)}</strong>
                         </span>
                         <span>
                           <i />
-                          Final receipt
+                          Final payment
                           <strong>
                             {money(
                               proposed
@@ -935,12 +939,12 @@ export function GuidedDemo({
                 <div className="j-scene-ribbon">
                   <ReceiptText size={17} />
                   <p>
-                    A proposed agreement, not an executed transaction. The
-                    customer must agree and the deposit must settle on time. All
-                    declared scenario assumptions still apply.
+                    This is a proposal to discuss with the customer. They must
+                    agree and pay on time. It works for the cases tested here;
+                    it is not a guarantee against every possible delay.
                   </p>
                   <button onClick={() => openSource("negotiation-bounds")}>
-                    View bounds <ArrowUpRight size={15} />
+                    Allowed changes <ArrowUpRight size={15} />
                   </button>
                 </div>
               </>
@@ -951,48 +955,48 @@ export function GuidedDemo({
                 <div className="j-learning-layout">
                   <div className="j-learning-main">
                     <div className="j-card-label">
-                      <Sparkles size={16} /> META-HARNESS{" "}
+                      <Sparkles size={16} /> THE AI IMPROVEMENT LOOP{" "}
                       <span className="j-small-pill">Recorded replay</span>
                     </div>
                     <div className="j-learning-flow">
                       <Node
                         icon={<Cpu size={22} />}
-                        title="Propose"
-                        sub="Agent suggests a workflow"
+                        title="Suggest"
+                        sub="AI changes which checks run"
                         tone="lavender"
                       />
                       <Connector />
                       <Node
                         icon={<RefreshCw size={22} />}
-                        title="Replay"
-                        sub={`${evidence.updates} frozen evidence updates`}
+                        title="Test"
+                        sub={`${evidence.updates} identical document updates`}
                         tone="amber"
                       />
                       <Connector />
                       <Node
                         icon={<ShieldCheck size={22} />}
-                        title="Gate"
-                        sub="Compare quality + work"
+                        title="Compare"
+                        sub="Same score with fewer calls?"
                       />
                       <Connector />
                       <Node
                         icon={<Check size={22} />}
                         title="Keep"
-                        sub="Only if the gate passes"
+                        sub="Only if quality checks pass"
                       />
                     </div>
                     <div className="j-learning-result">
                       <div>
-                        <span>Model requests</span>
+                        <span>AI requests</span>
                         <strong>
                           <s>{evidence.baseline.requests}</s>
                           <ArrowRight size={22} />
                           {evidence.candidate.requests}
                         </strong>
-                        <small>Recheck the affected evidence only</small>
+                        <small>Reuse answers when their sources haven’t changed</small>
                       </div>
                       <div>
-                        <span>Input tokens</span>
+                        <span>Text sent to AI (tokens)</span>
                         <strong>
                           <s>
                             {evidence.baseline.inputTokens.toLocaleString(
@@ -1004,7 +1008,7 @@ export function GuidedDemo({
                             "en-US",
                           )}
                         </strong>
-                        <small>Less repeated context</small>
+                        <small>Send less of the same text again</small>
                       </div>
                       <div>
                         <span>Correct checks</span>
@@ -1013,7 +1017,7 @@ export function GuidedDemo({
                           <small> / {evidence.candidate.total}</small>
                         </strong>
                         <small>
-                          Unchanged from baseline · one error remains
+                          Same score as before · one error remains
                         </small>
                       </div>
                     </div>
@@ -1021,9 +1025,9 @@ export function GuidedDemo({
                       <Check size={17} />
                       <span>
                         {evidence.workflowPromoted
-                          ? "Workflow candidate passed the fixed replay gate."
-                          : "Workflow candidate did not pass the replay gate."}{" "}
-                        Results apply to this frozen synthetic workload.
+                          ? "The new workflow passed the preset quality checks."
+                          : "The new workflow failed the preset quality checks."}{" "}
+                        Measured on these simulated updates, not every business.
                       </span>
                     </div>
                   </div>
@@ -1031,11 +1035,11 @@ export function GuidedDemo({
                     <Gem tone="lavender">
                       <FlaskConical size={24} />
                     </Gem>
-                    <span className="j-eyebrow">SEPARATE MODEL EXPERIMENT</span>
+                    <span className="j-eyebrow">FINE-TUNING THE CONTRACT READER</span>
                     <h2>
-                      A better reader.
+                      More correct terms.
                       <br />
-                      Still held to the gate.
+                      Still needs review.
                     </h2>
                     <div className="j-tune-score">
                       <span>{evidence.v5.baseExact}</span>
@@ -1044,18 +1048,18 @@ export function GuidedDemo({
                       <small>
                         / {evidence.v5.count}
                         <br />
-                        exact extractions
+                        payment rules correct
                       </small>
                     </div>
                     <p>
-                      Fine-tuning improved extraction, but left{" "}
-                      {evidence.v5.incorrectProposals} incorrect validated
-                      proposals.
+                      Training Qwen on 336 sample clauses improved its answers.
+                      But {evidence.v5.incorrectProposals} wrong proposals still
+                      passed the automatic checks on this unseen test.
                     </p>
                     <span className="j-hold-badge">
                       {evidence.v5.promoted
-                        ? "Promoted by evaluation"
-                        : "Not promoted · human review stays"}
+                        ? "Passed the release test"
+                        : "Not approved for automatic use"}
                     </span>
                     <button
                       className="j-text-button"
@@ -1068,9 +1072,10 @@ export function GuidedDemo({
                 <div className="j-scene-ribbon">
                   <GitBranch size={17} />
                   <p>
-                    Two distinct experiments: optimize which checks the agent
-                    runs; train a reader to extract better terms. Neither
-                    changes the deterministic cash engine.
+                    A new insurance email should trigger a certificate check,
+                    without rechecking an unchanged inspection report. The
+                    meta-harness tests that reuse. Fine-tuning separately teaches
+                    Qwen to read contracts; neither changes the cash arithmetic.
                   </p>
                 </div>
               </>
@@ -1102,10 +1107,11 @@ export function GuidedDemo({
                     </div>
                     {stressMode === "combined" ? (
                       <>
-                        <h2>Safe alone doesn’t mean safe together.</h2>
+                        <h2>Two small surprises can add up.</h2>
                         <p>
-                          Two suppliers can each add a $4,000 surcharge. These
-                          four paths assume the phase payment arrives on 24 Oct.
+                          Two materials orders can each cost $4,000 extra.
+                          Test neither, one, or both increases. In this example,
+                          the $30,000 customer payment arrives on Oct 24.
                         </p>
                         <div className="j-risk-matrix">
                           {stress.result.outcomes.map((outcome) => (
@@ -1117,52 +1123,51 @@ export function GuidedDemo({
                                 {Object.values(outcome.answers).filter(
                                   (answer) => answer === "surcharge",
                                 ).length === 0
-                                  ? "Both quotes honored"
+                                  ? "No extra costs"
                                   : Object.values(outcome.answers).filter(
                                         (answer) => answer === "surcharge",
                                       ).length === 2
-                                    ? "Both surcharges"
-                                    : "One surcharge"}
+                                    ? "Both orders cost more"
+                                    : "One order costs more"}
                               </span>
                               <strong>
                                 {money(outcome.withJob.minimumCents)}
                               </strong>
                               <small>
                                 {outcome.passes
-                                  ? "Reserve preserved"
-                                  : `${money(stress.result.reserveGapCents)} below reserve`}
+                                  ? "Cash buffer kept"
+                                  : `${money(stress.result.reserveGapCents)} below buffer`}
                               </small>
                             </div>
                           ))}
                         </div>
                         <span className="j-soft-note">
                           {stress.result.passingScenarioCount}/
-                          {stress.result.scenarioCount} declared paths preserve
-                          the reserve. The combined overrun is the one that
-                          matters.
+                          {stress.result.scenarioCount} tested cases keep the
+                          cash buffer. Together, the extra costs push cash below it.
                         </span>
                       </>
                     ) : (
                       <>
                         <h2>A missing number stays missing.</h2>
                         <p>
-                          Payroll-tax cash is unconfirmed. The inspection
-                          acceptance is also disputed.
+                          The amount owed in employee-related taxes is missing.
+                          Two documents also disagree on whether the inspection passed.
                         </p>
                         <div className="j-unknown-card">
                           <CircleHelp size={34} />
                           <span>
-                            Employer payroll taxes<strong>Unknown</strong>
+                            Tax payment amount<strong>Unknown</strong>
                           </span>
                           <span className="j-hold-badge">Needs input</span>
                         </div>
                         <div className="j-unknown-outcome">
                           <ShieldCheck size={20} />
                           <div>
-                            <strong>Supported verdict withheld</strong>
+                            <strong>Not enough information to decide</strong>
                             <p>
-                              Partial cash paths omit the unknown tax amount.
-                              They cannot establish coverage.
+                              The calculation is missing a bill. Headroom asks
+                              for the amount before saying the plan works.
                             </p>
                           </div>
                         </div>
@@ -1175,27 +1180,27 @@ export function GuidedDemo({
                         <ShieldCheck size={25} />
                       </Gem>
                       <span>
-                        DECISION RECEIPT<strong>Built to be inspected.</strong>
+                        CHECK THE RESULT<strong>See how we got here.</strong>
                       </span>
                     </div>
                     <div className="j-receipt-row">
                       <span>Scenario</span>
                       <strong>
                         {stressMode === "combined"
-                          ? "Two supplier risks"
-                          : "Evidence gap"}
+                          ? "Two materials cost increases"
+                          : "Missing tax amount"}
                       </strong>
                     </div>
                     <div className="j-receipt-row">
                       <span>Evidence + assumptions</span>
-                      <strong>Attached to snapshot</strong>
+                      <strong>Saved with this calculation</strong>
                     </div>
                     <div className="j-receipt-row">
                       <span>Calculation</span>
-                      <strong>Deterministic · integer cents</strong>
+                      <strong>Code adds and subtracts cents</strong>
                     </div>
                     <div className="j-receipt-row">
-                      <span>Server recomputation</span>
+                      <span>Server double-check</span>
                       <strong
                         className={
                           auditStatus === "verified"
@@ -1211,7 +1216,7 @@ export function GuidedDemo({
                       </strong>
                     </div>
                     <div className="j-receipt-hash">
-                      <span>SNAPSHOT FINGERPRINT</span>
+                      <span>INPUT ID · IDENTIFIES THIS EXACT VERSION</span>
                       <code>{activeResult.inputHash.slice(0, 24)}…</code>
                     </div>
                     <div className="j-sentry-note">
@@ -1219,9 +1224,9 @@ export function GuidedDemo({
                         <ScanLine size={19} />
                       </span>
                       <p>
-                        <strong>Sentry-instrumented evaluation</strong>Span:{" "}
-                        <code>decision.evaluate</code>, with snapshot, verdict
-                        and scenario metadata.
+                        <strong>Sentry helps trace bugs</strong>The calculation
+                        is instrumented with <code>decision.evaluate</code>, so
+                        developers can trace the inputs and result if it fails.
                       </p>
                     </div>
                     <button
@@ -1241,10 +1246,10 @@ export function GuidedDemo({
             <span className={`j-audit ${auditStatus}`}>
               <i />
               {auditStatus === "verified"
-                ? "Server recomputation matches"
+                ? "Server calculation matches this result"
                 : auditStatus === "pending"
                   ? "Verifying calculation…"
-                  : "Local calculation · server not verified"}
+                  : "Calculated here · server check unavailable"}
             </span>
             {auditStatus === "local" && (
               <button
@@ -1264,10 +1269,10 @@ export function GuidedDemo({
                   : "Evidence-gap case"
                 : chapter === 4 && proposed
                   ? "Proposed payment terms"
-                  : "Reference case · current terms"}
+                  : "Example job · current payment terms"}
             </span>
             <span className="j-motion-note">
-              Animations explain the flow; they are not model execution timers.
+              Animation shows the steps, not AI processing time.
             </span>
           </div>
         </main>
@@ -1292,7 +1297,7 @@ export function GuidedDemo({
             </button>
             <div>
               <strong>
-                {playing ? "Playing walkthrough" : "Your pace. Your decision."}
+                {playing ? "Playing walkthrough" : "Follow the example at your pace"}
               </strong>
               <span>
                 {playing
@@ -1363,7 +1368,7 @@ function SourceDialog({
         <span className="j-source-provenance">
           {source.provenance === "sponsor_dataset"
             ? "Intuit synthetic dataset"
-            : "Disclosed Headroom scenario addition"}
+            : "Sample document added for this demo"}
         </span>
         <p>{source.text}</p>
         <dl>

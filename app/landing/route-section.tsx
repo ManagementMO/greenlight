@@ -10,16 +10,16 @@ const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 type Lane = "llm" | "jev" | "code";
 
 const LANES: { id: Lane; name: string; job: string; cost: string }[] = [
-  { id: "llm", name: "Read the terms", job: "Language model → proposed structure", cost: "Source checks + owner review" },
-  { id: "jev", name: "Check the evidence", job: "Jev → narrow factual judgments", cost: "Missing evidence stays unknown" },
-  { id: "code", name: "Calculate the cash", job: "Fixed code → dates and cash paths", cost: "Exact cents · no model arithmetic" },
+  { id: "llm", name: "Read the contract", job: "Qwen finds amounts and payment rules", cost: "A person reviews what it found" },
+  { id: "jev", name: "Check what happened", job: "Jev checks documents for proof", cost: "No proof? The answer stays unknown" },
+  { id: "code", name: "Do the calculation", job: "Code adds up money in and money out", cost: "Shows when cash could run short" },
 ];
 
 // One representative question per role keeps the architecture easy to scan.
 const QUESTIONS: { lane: Lane; q: string; a: string }[] = [
-  { lane: "llm", q: "What makes the $30,000 phase invoice eligible?", a: "Inspection passed AND certificate received" },
-  { lane: "jev", q: "Has the planned inspection already passed?", a: "UNKNOWN · expected Oct 20, not observed" },
-  { lane: "code", q: "Lowest cash if the phase payment lands Nov 20?", a: "−$13,000 on Nov 4" },
+  { lane: "llm", q: "When can the company send its $30,000 bill?", a: "After inspection passes AND the customer receives the insurance certificate" },
+  { lane: "jev", q: "Is there proof the inspection passed?", a: "Unknown · it is planned for Oct 20" },
+  { lane: "code", q: "What if that $30,000 arrives on Nov 20?", a: "Cash drops to −$13,000 on Nov 4" },
 ];
 
 const OPEN = 320; // milliseconds spent opening the stage
@@ -81,12 +81,12 @@ export function RouteSection() {
           <Gradient colors={["#5963a0", "#356e78", "#171a2c"]} />
           <div className="lp-route-shade" />
         </div>
-        <p className="lp-route-caption">Where does each question go?</p>
+        <p className="lp-route-caption">From documents to a decision</p>
 
         <div className="lp-route-ui">
           <header>
             <p className="lp-eyebrow">02 · How it works</p>
-            <h2>Models interpret evidence. Code calculates the cash.</h2>
+            <h2>AI reads and checks. Code does the math.</h2>
           </header>
           <div className="lp-route-slot" aria-hidden="true">Incoming question</div>
           <div className="lp-route-lanes">
@@ -106,7 +106,7 @@ export function RouteSection() {
               </div>
             ))}
           </div>
-          <p className="lp-route-foot">Illustrated with the demo contract. Models propose; reviewed inputs drive the cash engine.</p>
+          <p className="lp-route-foot">The walkthrough uses a sample contract and inputs reviewed by a person. The cash calculation runs live; model experiments are recorded.</p>
         </div>
       </div>
     </section>

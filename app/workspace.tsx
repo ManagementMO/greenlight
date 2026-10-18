@@ -27,6 +27,38 @@ import type { LandingEvidence } from "@/lib/landing-evidence";
 
 type View = "tour" | "decision" | "evidence" | "lab";
 
+// Explain the engine's statuses without changing the underlying decision or export.
+const decisionCopy: Record<DecisionStatus, { title: string; explanation: string }> = {
+  NEEDS_INPUT: {
+    title: "More information is needed",
+    explanation: "A missing or disputed fact prevents a complete calculation. Review the sources before deciding whether this job works.",
+  },
+  SHORTFALL: {
+    title: "The plan falls below the cash buffer",
+    explanation: "Every case tested leaves less cash than the business wants to keep aside. Try getting paid earlier or review the costs.",
+  },
+  CONDITIONAL: {
+    title: "It works in some cases, but not all",
+    explanation: "Some payment or cost outcomes leave too little cash. Compare an earlier payment, or confirm which outcome to plan for.",
+  },
+  SUPPORTED_IN_TESTED_SCENARIOS: {
+    title: "Enough cash in every case tested",
+    explanation: "These payment dates and costs leave the planned cash buffer intact. The result still depends on the assumptions below.",
+  },
+};
+
+const paymentStatus = {
+  observed: "Confirmed in records",
+  assumed: "Expected, not received",
+  committed: "Bill to pay",
+} as const;
+
+const exampleDescriptions: Record<string, string> = {
+  "ductline-phase-delay": "The company must pay workers and buy materials before a $30,000 customer payment arrives. Try the two payment dates or a larger upfront deposit.",
+  "ductline-joint-stress": "Two materials orders might each cost $4,000 extra. Check whether the company can afford one increase, both, or neither.",
+  "ductline-missing-evidence": "A tax bill has no confirmed amount, and documents disagree about the inspection. Headroom needs those facts before it can support a decision.",
+};
+
 function decisionSnapshot(fixture: ScenarioFixture): DecisionInput {
   const parsed = validateDecisionInput(structuredClone(fixture));
   if (!parsed.success)
@@ -88,7 +120,7 @@ function SourceTag({ source }: { source: SourceEvidence }) {
     >
       {source.provenance === "sponsor_dataset"
         ? "Intuit synthetic dataset"
-        : "Added demo fixture"}
+        : "Sample document added for this demo"}
     </span>
   );
 }
@@ -111,16 +143,16 @@ function EvidenceView({
     <section className="evidence-view" aria-label="Source evidence">
       <div className="view-title-row">
         <div>
-          <span className="eyebrow">A decision you can trace</span>
-          <h1>Show your working.</h1>
+          <span className="eyebrow">The documents behind the numbers</span>
+          <h1>Where did this answer come from?</h1>
           <p className="view-intro">
-            The original sources, the added assumptions, and the cash movements
-            they support.
+            Open a source to see which payments it supports. Sample documents
+            and assumptions are labeled so they can be checked.
           </p>
         </div>
         <span className="outline-label">
           <Icon name="shield" size={15} />
-          Immutable sources
+          Original sources kept
         </span>
       </div>
       <div className="provenance-banner">
@@ -217,8 +249,7 @@ function EvidenceView({
                       <span>
                         <strong>{event.label}</strong>
                         <small>
-                          {dateLabel(event.date)} · {event.settlement}{" "}
-                          settlement
+                          {dateLabel(event.date)} · {paymentStatus[event.settlement]}
                         </small>
                       </span>
                       <span className="mono">
@@ -234,8 +265,8 @@ function EvidenceView({
               <Icon name="document" size={25} />
               <strong>No sources attached</strong>
               <p>
-                Add dated evidence and confirm the forward cash calendar before
-                relying on a decision.
+                Add the documents and confirm upcoming payments before
+                relying on the calculation.
               </p>
             </div>
           )}
@@ -461,7 +492,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
     setInput((current) => withScenarioAnswer(current, id, optionId));
     setCompareProposal(false);
     setEditError(null);
-    setNotice("What-if updated. Original source evidence is preserved.");
+    setNotice("Example updated. The original documents are unchanged.");
   }
 
   function updateDeposit() {
@@ -483,7 +514,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
       setCompareProposal(false);
       setEditError(null);
       setNotice(
-        "Deposit what-if updated. The final installment was offset to preserve the job total.",
+        "Deposit updated. The final payment changed by the same amount, so the total price stays the same.",
       );
     } catch (cause) {
       setEditError(
@@ -628,7 +659,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 aria-current={view === "lab" ? "page" : undefined}
               >
                 <Icon name="flask" />
-                <span>Improvement lab</span>
+                <span>Learning & results</span>
               </button>
             </nav>
             <div className="sidebar-case">
@@ -647,8 +678,8 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
             <span className="sidebar-illustration">
               <HeadroomMark size={38} />
             </span>
-            <strong>Grow with room to breathe.</strong>
-            <p>Good decisions leave room for payroll.</p>
+            <strong>A new job. The same bills.</strong>
+            <p>Check whether the cash arrives in time to cover both.</p>
             <button
               disabled={!ready}
               type="button"
@@ -673,9 +704,9 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
               <div className="decision-heading">
                 <div>
                   <span className="eyebrow">
-                    A clear path from opportunity to cash
+                    A new job, without running out of cash
                   </span>
-                  <h1>Can we take this job?</h1>
+                  <h1>Can the company afford this job?</h1>
                   <p>
                     {input.job.name}
                     <span className="inline-dot">·</span>
@@ -695,6 +726,12 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                   Export decision
                 </button>
               </div>
+              <p className="workspace-explainer">
+                Headroom compares when the customer pays with when wages and
+                other bills are due. The <strong>cash buffer</strong> is the
+                {" "}{money(input.reserveCents)} the company wants to keep aside
+                for ongoing expenses. Change an assumption below to see the effect.
+              </p>
               <div className={`decision-signal signal-${tone}`} role="status">
                 <span className="signal-icon">
                   <Icon
@@ -710,7 +747,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 </span>
                 <div>
                   <div className="signal-topline">
-                    <strong>{activeResult.statusLabel}</strong>
+                    <strong>{decisionCopy[activeResult.status].title}</strong>
                     {(proposalResult || isEdited) && (
                       <span className="draft-tag">
                         {proposalResult
@@ -720,13 +757,12 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                     )}
                   </div>
                   <p>
-                    {activeResult.reasons[0]?.message ??
-                      "Review the complete scenario and its assumptions before deciding."}
+                    {decisionCopy[activeResult.status].explanation}
                   </p>
                 </div>
                 <span className="signal-state">
                   {activeResult.status === "SUPPORTED_IN_TESTED_SCENARIOS"
-                    ? "RESERVE PROTECTED"
+                    ? "CASH BUFFER KEPT"
                     : activeResult.status === "NEEDS_INPUT"
                       ? "MORE INPUT NEEDED"
                       : "REVIEW REQUIRED"}
@@ -740,14 +776,14 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                   >
                     <div className="section-heading">
                       <div>
-                        <span className="eyebrow">The cash bridge</span>
-                        <h2 id="cash-heading">Timing changes everything.</h2>
+                        <span className="eyebrow">Money in, bills out</span>
+                        <h2 id="cash-heading">Cash available over time</h2>
                       </div>
                       <span className="currency-note mono">USD</span>
                     </div>
                     <div className="cash-metrics">
                       <div>
-                        <span>Lowest modeled cash</span>
+                        <span>Lowest cash in the forecast</span>
                         <strong
                           className={`cash-minimum mono ${activeResult.withJob.minimumCents < (input.reserveCents ?? 0) ? "negative-text" : ""}`}
                         >
@@ -758,11 +794,11 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                         </strong>
                         <small>
                           {dateLabel(activeResult.withJob.minimumDate)} · worst
-                          tested path
+                          tested case
                         </small>
                       </div>
                       <div>
-                        <span>Reserve gap</span>
+                        <span>Shortfall below the buffer</span>
                         <strong
                           className={`mono ${activeResult.status === "NEEDS_INPUT" ? "muted" : activeResult.reserveGapCents > 0 ? "negative-text" : "positive-text"}`}
                         >
@@ -774,23 +810,26 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           {activeResult.status === "NEEDS_INPUT"
                             ? "Needs complete inputs"
                             : activeResult.reserveGapCents > 0
-                              ? "Earlier liquidity needed"
-                              : "Within tested assumptions"}
+                              ? "This much more is needed earlier"
+                              : "Enough cash in the cases tested"}
                         </small>
                       </div>
                       <div>
-                        <span>Scenarios protecting reserve</span>
+                        <span>Cases that keep the buffer</span>
                         <strong className="mono">
-                          {activeResult.passingScenarioCount}
-                          <span className="metric-denominator">
-                            {" "}
-                            / {activeResult.scenarioCount}
-                          </span>
+                          {activeResult.status === "NEEDS_INPUT" ? "—" : (
+                            <>
+                              {activeResult.passingScenarioCount}
+                              <span className="metric-denominator">
+                                {" "}/ {activeResult.scenarioCount}
+                              </span>
+                            </>
+                          )}
                         </strong>
                         <small>
                           {activeResult.coverageComplete
-                            ? "All admissible combinations tested"
-                            : "Coverage incomplete"}
+                            ? "Every combination entered was tested"
+                            : "More information is needed"}
                         </small>
                       </div>
                     </div>
@@ -798,8 +837,8 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       <div className="provisional-note">
                         <Icon name="warning" size={14} />
                         <span>
-                          This is a provisional cash path. Complete the missing
-                          inputs before treating its balances as a decision.
+                          This chart is missing information. Its balances cannot
+                          show whether the plan works until those gaps are filled.
                         </span>
                       </div>
                     )}
@@ -843,7 +882,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       </span>
                       <span>
                         <i className="legend-line legend-baseline" />
-                        Company baseline
+                        Without this job
                       </span>
                       {proposalResult && (
                         <span>
@@ -853,14 +892,14 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       )}
                       <span>
                         <i className="legend-envelope" />
-                        Tested scenario paths
+                        Other cases tested
                       </span>
                     </div>
                     <div className="chart-policy">
                       <Icon name="shield" size={15} />
                       <span>
-                        {money(input.reserveCents)} reserve ·{" "}
-                        {money(input.openingCashCents)} opening cash · horizon{" "}
+                        {money(input.reserveCents)} cash buffer ·{" "}
+                        {money(input.openingCashCents)} starting cash · through{" "}
                         {dateLabel(input.horizonDate)}
                       </span>
                     </div>
@@ -889,7 +928,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       )}
                     </div>
                     <label className="scenario-picker">
-                      <span>Reference scenario</span>
+                      <span>Choose an example</span>
                       <select
                         disabled={!ready}
                         value={fixtureId}
@@ -904,7 +943,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       <Icon name="chevron-down" size={15} />
                     </label>
                     <p className="scenario-description">
-                      {fixture.description}
+                      {exampleDescriptions[fixture.id] ?? fixture.description}
                     </p>
                     {input.uncertainties.map((uncertainty) => (
                       <fieldset
@@ -950,7 +989,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           ))}
                         </div>
                         <span className="control-footnote">
-                          What-if hypothesis · {uncertainty.owner} · needed by{" "}
+                          Assumption to confirm with {uncertainty.owner} by{" "}
                           {dateLabel(uncertainty.requiredBy)}
                         </span>
                       </fieldset>
@@ -962,7 +1001,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           <Icon name="chevron-down" size={14} />
                         </summary>
                         <p>
-                          Move part of the final installment into the deposit.
+                          Ask for part of the final payment upfront instead.
                           The job total stays {money(input.job.priceCents)}.
                         </p>
                         <div className="terms-form">
@@ -1010,13 +1049,13 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           </button>
                         </div>
                         <p className="control-footnote" id="deposit-range">
-                          Negotiating ceiling:{" "}
+                          Largest deposit allowed in this example:{" "}
                           {money(
                             (originalDeposit?.amountCents ?? 0) +
                               (fixture.job.negotiation?.maxAdditionalCents ??
                                 0),
                           )}
-                          . This is a local proposal, subject to agreement.
+                          . The customer would still need to agree.
                         </p>
                         {editError && (
                           <p className="form-error" role="alert">
@@ -1030,22 +1069,22 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 <aside className="decision-secondary">
                   <section className="next-move">
                     <div className="section-heading">
-                      <span className="eyebrow">Your next move</span>
+                      <span className="eyebrow">A possible fix</span>
                       <span className="tiny-green-dot" />
                     </div>
                     {proposal?.status === "AVAILABLE" ? (
                       <>
                         <h2>
-                          A proposed path
+                          Get part of the payment
                           <br />
-                          to yes.
+                          earlier.
                         </h2>
                         <p>
                           Collect{" "}
                           <strong>
                             {money(proposal.additionalDepositCents)} more
                           </strong>{" "}
-                          upfront to close the modeled reserve gap.
+                          upfront to keep the cash buffer in the cases tested.
                         </p>
                         <div className="proposal-amount">
                           <span>Proposed deposit</span>
@@ -1058,7 +1097,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           </small>
                         </div>
                         <div className="proposal-shift">
-                          <span>Final installment</span>
+                          <span>Final payment</span>
                           <span className="mono">
                             <s>{money(proposal.originalFinalReceiptCents)}</s>
                             <Icon name="arrow-right" size={12} />
@@ -1070,7 +1109,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                         <div className="proposal-total">
                           <Icon name="check" size={14} />
                           <span>
-                            Total revenue remains{" "}
+                            Same total price:{" "}
                             {money(proposal.totalRevenueCents)}
                           </span>
                         </div>
@@ -1106,8 +1145,8 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                         </button>
                         <p className="proposal-disclaimer">
                           <Icon name="warning" size={12} />
-                          Draft proposal. Customer agreement and settlement
-                          timing still matter.
+                          A draft to discuss. The customer must agree and the
+                          payment must reach the bank on time.
                         </p>
                       </>
                     ) : (
@@ -1120,16 +1159,18 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                               : "Review the bottleneck."}
                         </h2>
                         <p>
-                          {proposal?.limitation ??
-                            result.reasons[0]?.message ??
-                            "Confirm the remaining conditions before accepting this opportunity."}
+                          {result.status === "NEEDS_INPUT"
+                            ? "Confirm missing amounts, dates, or disputed documents before testing a new payment schedule."
+                            : result.status === "SUPPORTED_IN_TESTED_SCENARIOS"
+                              ? "No larger deposit is needed for the cases tested. Confirm that the payment dates and bills match the real agreement."
+                              : "No earlier-payment proposal is available for this example. Review the costs, payment dates, and assumptions below."}
                         </p>
                         <div className="next-move-note">
                           <Icon name="shield" size={22} />
                           <span>
                             {input.forwardCalendarConfirmed
-                              ? "Forward cash calendar confirmed through"
-                              : "Forward cash calendar needs confirmation through"}
+                              ? "Upcoming payments reviewed through"
+                              : "Confirm upcoming payments through"}
                             <strong>
                               {dateLabel(input.calendarCoverageEnd, true)}
                             </strong>
@@ -1154,8 +1195,8 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                       <h3>{nextQuestion.question}</h3>
                       <p>
                         {nextQuestion.distinguishesFeasibility
-                          ? "The answer can change whether the tested plan protects your reserve."
-                          : "The answer narrows the cash exposure in the current plan."}
+                          ? "This answer can change whether enough cash is left for the buffer."
+                          : "This answer helps narrow how much cash the plan will need."}
                       </p>
                       <div className="question-meta">
                         <span>{nextQuestion.owner}</span>
@@ -1219,7 +1260,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 <div className="section-heading">
                   <div>
                     <span className="eyebrow">Every movement has a reason</span>
-                    <h2 id="calendar-heading">The forward cash calendar</h2>
+                    <h2 id="calendar-heading">Upcoming payments and bills</h2>
                   </div>
                   <span className="count-label">
                     {allEvents.length} movements ·{" "}
@@ -1233,9 +1274,9 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                     <thead>
                       <tr>
                         <th>Date</th>
-                        <th>Cash movement</th>
+                        <th>Money in or out</th>
                         <th>Source</th>
-                        <th>Settlement</th>
+                        <th>Payment status</th>
                         <th className="align-right">Amount</th>
                       </tr>
                     </thead>
@@ -1272,7 +1313,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                             <span
                               className={`settlement-state ${event.settlement}`}
                             >
-                              {event.settlement}
+                              {paymentStatus[event.settlement]}
                             </span>
                           </td>
                           <td
@@ -1292,7 +1333,7 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 <summary>
                   <span>
                     <Icon name="shield" size={16} />
-                    Assumptions, coverage & limits
+                    Assumptions and calculation details
                   </span>
                   <span className="count-label">
                     {activeResult.assumptions.length} assumptions{" "}
@@ -1302,14 +1343,20 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                 <div className="assumptions-body">
                   <p>
                     Tested {activeResult.scenarioCount} of{" "}
-                    {activeResult.possibleScenarioCount} admissible
-                    combinations.{" "}
+                    {activeResult.possibleScenarioCount} combinations of the
+                    dates and costs entered.{" "}
                     {activeResult.coverageComplete
-                      ? "Enumeration is complete for this bounded fixture."
-                      : "Coverage is incomplete; the current result cannot establish all modeled outcomes."}{" "}
-                    Future cash settlement remains conditional on the stated
-                    evidence and timing.
+                      ? "All those combinations were checked."
+                      : "The check is incomplete and cannot support a decision yet."}{" "}
+                    Actual payments still depend on what the customer agrees
+                    and when the money arrives.
                   </p>
+                  <strong>Calculation notes</strong>
+                  <ul>
+                    {activeResult.reasons.map((reason, index) => (
+                      <li key={`${reason.code}-${index}`}>{reason.message}</li>
+                    ))}
+                  </ul>
                   <ul>
                     {activeResult.assumptions.map((assumption, index) => (
                       <li key={index}>{assumption}</li>
@@ -1323,19 +1370,19 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
                           <li key={index}>{agreement}</li>
                         ))}
                       </ul>
-                      <p>{proposal.limitation}</p>
                     </>
                   )}
+                  {proposal?.limitation && <p>{proposal.limitation}</p>}
                 </div>
               </details>
               <div className="decision-footer">
                 <span>
                   <span className="small-status-dot" />
-                  Deterministic cash calculation · no model call ·{" "}
+                  Calculated in code · no AI call ·{" "}
                   {auditStatus === "verified"
-                    ? "server audit matches"
+                    ? "server calculation matches"
                     : auditStatus === "pending"
-                      ? "auditing snapshot"
+                      ? "checking with the server"
                       : "local calculation"}
                 </span>
                 <span className="mono">
@@ -1356,11 +1403,11 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
           {view === "lab" && <ImprovementLab />}
           <footer className="workspace-footer">
             <span>
-              Headroom <span className="muted">/</span> Growth with your eyes
-              open.
+              Headroom <span className="muted">/</span> Plan the cash before
+              taking the job.
             </span>
             <span>
-              Synthetic accounting data + disclosed scenario extensions.
+              Intuit sample data + example jobs and bills we added.
             </span>
             <a href="/landing">
               About Headroom <Icon name="arrow-up-right" size={12} />
@@ -1391,74 +1438,73 @@ export default function Headroom({ evidence }: { evidence: LandingEvidence }) {
       )}
       {helpOpen && (
         <Dialog
-          title="From opportunity to a grounded decision"
+          title="How to try this example"
           onClose={() => setHelpOpen(false)}
         >
           <div className="tour-intro">
             <HeadroomMark size={44} />
             <p>
-              Headroom asks one practical question: can this job fit the cash
-              you actually have, while protecting payroll?
+              Headroom checks whether a company can afford a new job and still
+              pay workers and bills while waiting for the customer’s money.
             </p>
           </div>
           <ol className="tour-steps">
             <li>
               <span>1</span>
               <div>
-                <strong>Start with a confirmed cash plan.</strong>
+                <strong>Start with the money and the bills.</strong>
                 <p>
-                  Available funds, upcoming commitments, job costs, and
-                  collection dates become a versioned snapshot.
+                  The example combines a starting bank balance, existing bills,
+                  new job costs, and dates the customer might pay.
                 </p>
               </div>
             </li>
             <li>
               <span>2</span>
               <div>
-                <strong>Follow the cash bridge.</strong>
+                <strong>Find where cash runs short.</strong>
                 <p>
-                  The fixed calculator tests joint timing and cost conditions.
-                  The chart exposes the low point and the reserve gap.
+                  Code adds and subtracts each payment. The chart shows the
+                  lowest balance and how far it falls below the cash buffer.
                 </p>
               </div>
             </li>
             <li>
               <span>3</span>
               <div>
-                <strong>Find the condition that matters.</strong>
+                <strong>Check what must happen before payment.</strong>
                 <p>
-                  Evidence and Jev judgments help interpret repeatable
-                  conditions. Eligibility to invoice and actual cash collection
-                  remain separate.
+                  Qwen reads the contract’s rules. Jev checks whether documents
+                  prove them. Being allowed to send a bill does not mean the
+                  customer has paid it.
                 </p>
               </div>
             </li>
             <li>
               <span>4</span>
               <div>
-                <strong>Compare a proposal, then agree it.</strong>
+                <strong>Try getting part of the payment earlier.</strong>
                 <p>
-                  Try a bounded deposit adjustment that preserves the contract
-                  total. Headroom prepares a draft; it does not execute a
-                  contract or move money.
+                  Increase the deposit and reduce the final payment by the same
+                  amount. Compare the chart, then open a draft payment request.
+                  It is not sent and no money moves.
                 </p>
               </div>
             </li>
             <li>
               <span>5</span>
               <div>
-                <strong>Measure what the system learns.</strong>
+                <strong>See what we improved.</strong>
                 <p>
-                  The improvement lab records fine-tuning, provider runs, and
-                  candidate experiments against a fixed evaluator.
+                  Learning & results shows the recorded tests: fewer repeated
+                  Jev calls and a more accurate Qwen reader that still needs review.
                 </p>
               </div>
             </li>
           </ol>
           <div className="tour-note">
-            This public workspace uses disclosed synthetic fixtures. Local
-            interactions run the deterministic engine. Provider results in the
-            lab carry their actual run origin.
+            This is sample business data. The cash calculation updates live.
+            AI experiment results are saved from earlier runs and labeled.
           </div>
           <button
             disabled={!ready}

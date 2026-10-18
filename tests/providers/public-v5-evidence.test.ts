@@ -58,18 +58,19 @@ describe("public V5 evaluation display boundary", () => {
   });
   it("labels development as diagnostic and displays supported and uncertainty denominators", () => {
     const html = renderToStaticMarkup(createElement(ExtractionV5ComparisonPanel, {value: fixture()}));
-    expect(html).toContain("Development only · no promotion");
+    expect(html).toContain("Development test only");
     expect(html).toContain("2 / 2");
     expect(html).toContain("1 / 1");
     expect(html).toContain("extraction-v5-development.json");
-    expect(html).toContain("not a live extractor deployment");
+    expect(html).toContain("results are from a recorded test");
+    expect(html).toContain("every AI-proposed contract rule still needs a person to check it");
   });
   it("separates measured improvement from a failed final release gate", () => {
     const html = renderToStaticMarkup(createElement(ExtractionV5ComparisonPanel, {value: fixture("final-evaluation")}));
-    expect(html).toContain("V5 candidate not promoted");
-    expect(html).toContain("Improvement over the base was measured");
-    expect(html).toContain("did not pass the full release gate");
+    expect(html).toContain("V5 not approved for automatic use");
+    expect(html).toContain("trained model got more answers right");
+    expect(html).toContain("failed the preset quality checks");
     expect(html).toContain("extraction-v5-evaluation.json");
-    expect(html).not.toContain("Final gate passed");
+    expect(html).not.toContain("Release checks passed");
   });
 });

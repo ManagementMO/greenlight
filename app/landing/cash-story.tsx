@@ -43,15 +43,15 @@ export function CashStory({ story }: { story: LandingCashStory }) {
   const minimumX = x(selected.minimumDate);
   const ticks = Array.from({ length: Math.floor(maxCash / 5_000_000) + 1 }, (_, i) => i * 5_000_000);
   const payments = [
-    { label: "Deposit", cents: selected.depositCents, start: 0, color: "var(--accent)" },
-    { label: "Phase payment", cents: story.phaseCents, start: selected.depositCents, color: "var(--amber)" },
+    { label: "Upfront deposit", cents: selected.depositCents, start: 0, color: "var(--accent)" },
+    { label: "After the first stage", cents: story.phaseCents, start: selected.depositCents, color: "var(--amber)" },
     { label: "Final payment", cents: selected.finalCents, start: selected.depositCents + story.phaseCents, color: "var(--lavender)" },
   ];
 
   return (
     <div className="lp-cash-story" data-proposed={proposed}>
       <div className="lp-story-toolbar">
-        <span>Ductline’s $120k clinic retrofit</span>
+        <span>Example: a $120k clinic heating & cooling job</span>
         <div className="lp-story-switch" role="group" aria-label="Compare payment terms">
           <button type="button" aria-pressed={!proposed} onClick={() => setProposed(false)}>Current terms</button>
           <button type="button" aria-pressed={proposed} onClick={() => setProposed(true)}>Proposed terms</button>
@@ -60,11 +60,11 @@ export function CashStory({ story }: { story: LandingCashStory }) {
 
       <div className="lp-story-main">
         <div className="lp-story-plot">
-          <div className="lp-story-legend"><span><i />{proposed ? "Proposed terms" : "Current terms"}</span><span>Worst declared collection path</span></div>
+          <div className="lp-story-legend"><span><i />{proposed ? "Proposed terms" : "Current terms"}</span><span>If the customer pays late</span></div>
           <div className="lp-story-chart" ref={chart}>
             <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`}>
               <title id={`${id}-title`}>{`${proposed ? "Proposed" : "Current"} cash path`}</title>
-              <desc id={`${id}-desc`}>Lowest modeled cash {money(selected.minimumCents)} on {dateLabel(selected.minimumDate)}. Reserve {money(story.reserveCents)}. The chart covers {dateLabel(first.date)} to {dateLabel(last.date)}. {proposed ? "The faint dashed line shows the current terms for comparison." : "Select proposed terms to compare the deposit advance."}</desc>
+              <desc id={`${id}-desc`}>Lowest cash in this forecast: {money(selected.minimumCents)} on {dateLabel(selected.minimumDate)}. Target cash buffer: {money(story.reserveCents)}. The chart covers {dateLabel(first.date)} to {dateLabel(last.date)}. {proposed ? "The faint dashed line shows the current terms for comparison." : "Select proposed terms to see what an earlier payment changes."}</desc>
               <defs>
                 <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="var(--story-color)" stopOpacity=".16" />
@@ -77,7 +77,7 @@ export function CashStory({ story }: { story: LandingCashStory }) {
               <path d={pathBefore} className="lp-story-path lp-story-before" />
               <path d={pathAfter} className="lp-story-path lp-story-after" />
               <line className="lp-story-reserve" x1={left} x2={right} y1={y(story.reserveCents)} y2={y(story.reserveCents)} />
-              <text className="lp-story-reserve-label" x={left + 6} y={y(story.reserveCents) - 9}>{shortMoney(story.reserveCents)} reserve</text>
+              <text className="lp-story-reserve-label" x={left + 6} y={y(story.reserveCents) - 9}>{shortMoney(story.reserveCents)} cash buffer</text>
               <line className="lp-story-marker" x1={minimumX} x2={minimumX} y1="24" y2={bottom} />
               <circle className="lp-story-minimum" cx={minimumX} cy="0" style={{ transform: `translateY(${y(selected.minimumCents)}px)` }} r="6" />
               <text className="lp-story-date" x={left} y={height - 8}>{dateLabel(first.date)}</text>
@@ -85,15 +85,15 @@ export function CashStory({ story }: { story: LandingCashStory }) {
               <text className="lp-story-date" x={right} y={height - 8} textAnchor="end">{dateLabel(last.date)}</text>
             </svg>
           </div>
-          <p className="lp-story-chart-note">Every step is a dated cash event from the engine. Both plans end at {money(selected.endingCents)}; the timing changes the low point.</p>
+          <p className="lp-story-chart-note">Each step is money arriving or a bill being paid. The dashed line marks {shortMoney(story.reserveCents)} kept aside for ongoing bills. Both plans end at {money(selected.endingCents)}; the difference is having enough cash along the way.</p>
         </div>
 
         <div className="lp-story-readout" aria-live="polite" aria-atomic="true">
           <p className="lp-eyebrow">{proposed ? "02 · Change the timing" : "01 · Find the gap"}</p>
           <strong>{money(selected.minimumCents)}</strong>
-          <span>lowest modeled cash · {dateLabel(selected.minimumDate)}</span>
-          <p>{proposed ? `Move ${money(story.advanceCents)} from the final payment into the deposit. The reserve survives every declared path.` : "Materials and crew are paid before the late customer payment. A profitable job still runs out of cash."}</p>
-          <div className="lp-story-coverage"><b>{selected.passing}/{selected.total}</b><span>declared paths preserve the reserve</span></div>
+          <span>lowest cash in the forecast · {dateLabel(selected.minimumDate)}</span>
+          <p>{proposed ? `Ask for ${money(story.advanceCents)} of the final payment upfront instead. That keeps the ${shortMoney(story.reserveCents)} buffer intact for both payment dates tested.` : "Workers and materials must be paid before the customer’s late payment. The company runs out of cash, even though the job earns more than it costs."}</p>
+          <div className="lp-story-coverage"><b>{selected.passing}/{selected.total}</b><span>tested cases keep the cash buffer</span></div>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export function CashStory({ story }: { story: LandingCashStory }) {
           {payments.map(p => <div key={p.label}><dt><i style={{ background: p.color }} />{p.label}</dt><dd>{money(p.cents)}</dd></div>)}
         </dl>
       </div>
-      <p className="lp-story-scope">Synthetic demo. Proposed terms require customer agreement and collection on the modeled dates. This is a comparison, not an executed payment change.</p>
+      <p className="lp-story-scope">Sample data. The customer would need to agree and pay on the dates shown. This tests two possible payment dates; it does not guarantee every possible outcome or change a real agreement.</p>
     </div>
   );
 }

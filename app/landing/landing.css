@@ -21,7 +21,7 @@
 .lp-hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 5vh; padding: 100px clamp(20px, 5vw, 80px) 48px; overflow: hidden; }
 .lp-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: 4vw; }
 .lp-hero-copy { display: grid; gap: 22px; perspective: 900px; }
-.lp-hero h1 { font-size: clamp(44px, 5.4vw, 84px); line-height: 1.04; max-width: 13ch; letter-spacing: -.025em; }
+.lp-hero h1 { font-size: clamp(40px, 4.8vw, 72px); line-height: 1.08; max-width: 18ch; letter-spacing: -.025em; }
 .lp-hero .lp-dock { justify-self: start; }
 .lp-hero-description { margin: 0; max-width: 46ch; font-size: 15px; line-height: 1.7; letter-spacing: -.012em; color: #d1d5e2; text-wrap: pretty; }
 .lp a:focus-visible, .lp button:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
@@ -221,3 +221,13 @@
 .lp:not(.lp-ready) .lp-route-ui { position: relative; }
 .lp:not(.lp-ready) .lp-route-caption, .lp:not(.lp-ready) .lp-route-slot { display: none; }
 .lp:not(.lp-ready) .lp-route-clip { clip-path: none; }
+
+/* Keep the explanation and evidence readable without enlarging the display titles. */
+.lp .lp-hero-description, .lp .lp-section-lede { font-size: 16px; line-height: 1.65; }
+.lp .lp-race-note, .lp .lp-proof > p, .lp .lp-tuning-result p,
+.lp .lp-save-note, .lp .lp-route-foot, .lp .lp-section-note { font-size: 13px; line-height: 1.65; }
+.lp .lp-proof dt, .lp .lp-route-lane-head em, .lp .lp-route-answer,
+.lp .lp-learning-flow span, .lp .lp-source code { font-size: 12px; line-height: 1.6; }
+.lp .lp-route-card { font-size: 14px; }
+.lp .lp-proof dt { max-width: 28ch; }
+.lp .lp-finale-inner > p { text-align: center; }

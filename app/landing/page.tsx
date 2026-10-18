@@ -11,7 +11,7 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap
 
 export const metadata: Metadata = {
   title: "Headroom — Take the next job. Keep room for payday.",
-  description: "Explore Headroom: source-backed cash decisions, reviewed payment proposals, and a measured AI improvement loop.",
+  description: "A big job can leave a small business short of cash. Headroom checks when money arrives and bills are due, then tests a better payment schedule.",
   alternates: { canonical: "/landing" },
 };
 

@@ -27,13 +27,13 @@ The meta-harness improves the **workflow around Jev**. It does not train Jev or 
 
 Use the guided presentation on the review branch, or the root page after it is merged. Enter presentation mode with the expand icon and use the arrow keys. For a short pitch, jump between these chapters:
 
-1. **Opportunity:** “Can we take this $120,000 job and still make payroll?”
-2. **Cash path:** Point at −$13,000. “The job has a positive modeled surplus, but the payment can arrive after the costs.”
-3. **Better terms:** Click **Apply the what-if**. “Advance $23,000 into the deposit. Both declared paths now preserve the $10,000 reserve.”
-4. **Learning:** Point at **18 → 6**. “We improved which evidence gets checked and reused, with unchanged measured correctness on this workload.”
-5. **Trust:** Select **Missing evidence**. “When material facts are missing, we withhold a supported answer.”
+1. **The problem:** “Can this company take a $120,000 job and still pay its team?”
+2. **The shortfall:** Point at −$13,000. “The job earns more than it costs, but the customer can pay after wages and materials are due.”
+3. **The fix:** Click **Test the earlier payment**. “Ask for $23,000 of the final payment upfront instead. Both payment dates we tested now keep $10,000 aside for ongoing bills.”
+4. **The learning:** Point at **18 → 6**. “A new insurance email should not make us recheck an unchanged inspection report. Our improvement loop tests which answers can be reused. We cut repeated AI calls with the same score on this test.”
+5. **The limits:** Select **Missing evidence**. “If a bill has no amount, Headroom asks for it before saying the plan works.”
 
-If a judge asks how the documents work, open **Conditions**, then a source. If they want to inspect the implementation evidence, open the workspace or the full experiments.
+If a judge asks how the documents work, open **The checks**, then a source. If they want the experiment details, open **Learning & results** in the workspace.
 
 ## Where fine-tuning fits
 

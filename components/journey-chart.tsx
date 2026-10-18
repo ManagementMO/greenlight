@@ -57,10 +57,11 @@ export function JourneyChart({
       <div className="j-chart-top">
         <span>
           <i />
-          {proposed ? "Proposed terms" : "Current terms"} · late-payment path
+          {proposed ? "Proposed terms" : "Current terms"} · if payment is late
         </span>
-        <span>Cash on hand</span>
+        <span>Available cash</span>
       </div>
+      <div className="j-chart-plot" tabIndex={0} role="region" aria-label="Cash chart; scroll horizontally on small screens">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         role="img"
@@ -70,11 +71,11 @@ export function JourneyChart({
           {proposed ? "Proposed" : "Current"} cash timeline
         </title>
         <desc id={`${id}-desc`}>
-          Lowest modeled cash: {demoMoney(active.minimumCents)} on{" "}
-          {active.minimumDate}. Required reserve:{" "}
+          Lowest cash in this forecast: {demoMoney(active.minimumCents)} on{" "}
+          {active.minimumDate}. Target cash buffer:{" "}
           {demoMoney(story.reserveCents)}. Ordered events preserve same-day cash
-          movements. {active.passing} of {active.total} declared scenarios
-          preserve the reserve.
+          movements. {active.passing} of {active.total} tested cases
+          keep the cash buffer.
         </desc>
         <defs>
           <linearGradient id={`${id}-fill`} x1="0" x2="0" y1="0" y2="1">
@@ -120,7 +121,7 @@ export function JourneyChart({
           y={y(story.reserveCents) - 9}
           className="j-reserve-label"
         >
-          {demoMoney(story.reserveCents, true)} reserve
+          {demoMoney(story.reserveCents, true)} cash buffer
         </text>
         {proposed && (
           <path d={path(story.current.points)} className="j-previous-path" />
@@ -170,8 +171,10 @@ export function JourneyChart({
             ),
         )}
       </svg>
+      </div>
+      <span className="j-chart-scroll-hint">Scroll sideways for the full timeline →</span>
       <div className="j-chart-bottom">
-        <span>Ordered cash events · same-day movements preserved</span>
+        <span>Each step is a payment or bill, in date order</span>
         <strong>
           {demoMoney(active.minimumCents)} <span>lowest cash</span>
         </strong>
