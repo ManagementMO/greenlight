@@ -31,6 +31,16 @@ async function main() {
       ),
     );
   const training = runs[0];
+  const trainingEvidence = training?.jobId
+    ? await readJson(`work/ml/${training.jobId}.training-evidence.json`)
+    : null;
+  const finalStep =
+    trainingEvidence !== null &&
+    trainingEvidence.jobId === training?.jobId &&
+    Number.isSafeInteger(trainingEvidence?.finalCheckpointStep) &&
+    trainingEvidence.finalCheckpointStep <= training.maxSteps
+      ? trainingEvidence.finalCheckpointStep
+      : null;
   const evaluations = (
     await Promise.all(
       ["proof", "base", "tuned"].map((label) =>
@@ -125,7 +135,7 @@ async function main() {
               : training.state === "failed" || training.state === "cancelled"
                 ? "failed"
                 : "running",
-          detail: `${training.currentStep ?? 0} of ${training.maxSteps} steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested.`,
+          detail: `${finalStep ?? training.currentStep ?? 0} of ${training.maxSteps} steps recorded${finalStep !== null ? " in the provider's committed checkpoint log" : " by the provider progress API"}. Completion-only training intended; the remote effective loss mask is not directly attested.`,
         },
         {
           name: "Merged export",

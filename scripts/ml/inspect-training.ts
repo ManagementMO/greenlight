@@ -1,4 +1,5 @@
 import { resolve } from "node:path";
+import { createHash } from "node:crypto";
 import { args, loadProjectEnv, saveJson, publicError } from "./shared";
 import { VeriClient } from "../../lib/providers/veri";
 async function main() {
@@ -31,6 +32,24 @@ async function main() {
     checkedAt: new Date().toISOString(),
   };
   await saveJson(resolve("work/ml", id + ".inspection.private.json"), raw);
+  const checkpointSteps = [
+    ...log.matchAll(/Committed checkpoint [^\n]* at step (\d+)/g),
+  ].map((match) => Number(match[1]));
+  const completed = log.match(
+    /Training completed in ([\d.]+)s, loss=([\d.eE+-]+)/,
+  );
+  await saveJson(resolve("work/ml", id + ".training-evidence.json"), {
+    jobId: id,
+    source: "provider-worker-log",
+    logSha256: createHash("sha256").update(log).digest("hex"),
+    finalCheckpointStep: checkpointSteps.length
+      ? Math.max(...checkpointSteps)
+      : null,
+    trainerDurationSeconds: completed ? Number(completed[1]) : null,
+    trainerLoss: completed ? Number(completed[2]) : null,
+    lastApiReportedStep: job.current_step ?? null,
+    checkedAt: raw.checkedAt,
+  });
   // Redact keys and signed URL query strings before any terminal output.
   for (const [key, value] of Object.entries(env))
     if (value && value.length > 5 && /KEY|TOKEN|DSN|SECRET/.test(key))
