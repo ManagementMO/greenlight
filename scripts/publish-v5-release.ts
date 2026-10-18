@@ -7,6 +7,7 @@ import { validPublicV5Evaluation, type PublicV5Evaluation } from "../lib/public-
 import { assertReviewedV5Evaluation, V5_GATE, v5PromptHash } from "../lib/providers/evaluation-v5";
 import { args, loadProjectEnv, saveJson } from "./ml/shared";
 import { assertPublishedV5Showcase } from "../lib/providers/showcase-v5";
+import { readVerifiedV5TrainingRecord } from "../lib/providers/v5-training-record";
 
 type RecordData = Record<string, any>;
 type ReleaseInput = {
@@ -102,6 +103,8 @@ function bindEvaluation(value: unknown, manifest: RecordData, input: ReleaseInpu
 /** No held-out labels are read here: publish-v5-evaluations verifies raw predictions first. */
 export function buildV5Release(input: ReleaseInput) {
   const {training: t, trainingManifest: m, tokenizerAudit: a, trainingEvidence: e, publication: p} = input;
+  if(t.postTrainingExport&&t.postTrainingExport.baseRevision!==a.baseRevisionObserved)
+    throw new Error("Repaired export base differs from the audited training base revision.");
   if (input.current.schemaVersion !== 1 || !date(input.generatedAt) ||
       t.mode !== "real-veri-sft" || t.state !== "completed" || t.cleanupVerified !== true ||
       t.promptProfile !== "reference-contract-v5" || m.promptProfile !== t.promptProfile ||
@@ -132,7 +135,7 @@ export function buildV5Release(input: ReleaseInput) {
   const serving = final?.tuned ?? development?.tuned;
   const training = {
     status: "completed", baseModel: t.baseModel, jobId: t.jobId, modelRepo: p.repo, modelRevision: p.revision,
-    detail: `${t.rows} examples, ${e.finalCheckpointStep} optimizer steps. V5 reference-contract extraction; training completion is separate from evaluation and deployment.`,
+    detail: `${t.rows} examples, ${e.finalCheckpointStep} optimizer steps.${t.postTrainingExport ? " Same saved adapter rematerialized on the pinned BF16 base; no retraining." : ""} V5 reference-contract extraction; training completion is separate from evaluation and deployment.`,
     stages: [
       {name: "V5 dataset", status: "verified", detail: `${t.rows} synthetic examples; SHA-256 ${t.datasetSha256}. Developer-reviewed labels, not customer adjudication.`},
       {name: "V5 fine-tuning", status: "completed", detail: `${e.finalCheckpointStep} of ${t.maxSteps} steps verified in the provider worker checkpoint log. Completion-only loss is intended; the remote effective loss mask is not attested.`},
@@ -157,6 +160,7 @@ export function buildV5Release(input: ReleaseInput) {
     remoteEffectiveLossMaskAttested: false, servingVerified: Boolean(serving),
     developmentPublished: Boolean(development), finalPublished: Boolean(final), promoted: final?.comparison.promoted ?? false,
     servingBoundary: "Recorded evaluation only. Public decisions use fixed code and saved evidence; every proposed term requires owner review.",
+    ...(t.postTrainingExport ? {postTrainingExport: pick(t.postTrainingExport, ["method", "noRetraining", "sourceTrainingJobId", "sourceTrainingRepo", "trainingSha256", "baseModel", "baseRevision", "adapterSha256", "mergeEvidenceSha256", "dtype"])} : {}),
   };
   const current: RecordData = {...input.current, generatedAt: input.generatedAt, training, budget};
   if (input.current.training?.modelRepo && input.current.training.modelRepo !== p.repo) {
@@ -185,7 +189,7 @@ async function main() {
   const options = args();
   if (typeof options["training-run"] !== "string") throw new Error("Provide --training-run work/ml/ACTUAL_V5_TRAINING_RECORD.json");
   const env = loadProjectEnv();
-  const training = await readJson(options["training-run"]);
+  const training = await readVerifiedV5TrainingRecord(options["training-run"]);
   if (typeof training.jobId !== "string" || !/^[a-zA-Z0-9_-]+$/.test(training.jobId) || typeof training.repo !== "string")
     throw new Error("Training identity is missing or malformed.");
   const auditBytes = await readFile("data/training/v5-reference-contract/tokenizer-audit.json", "utf8");

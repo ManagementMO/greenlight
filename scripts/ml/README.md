@@ -14,6 +14,8 @@ The completed experiment is **v4, `json-schema-v4`**: the same **276 training co
 
 V5 uses 336 training pairs, 300 optimizer steps and a 2,048-token limit. Follow the [V5 protocol](../../docs/extractor-v5-protocol.md) and [results](../../docs/extractor-v5-results.md). The commands below are the recorded workflow, not instructions to rerun an exposed final set for model selection. Replace `TUNED_REPO` and `TRAINING_RECORD` with the actual completed V5 artifact. Each paid command must finish, verify permanent stopping, and settle before the next starts.
 
+The initial 4-bit merged export regressed on development. A separate BF16 materialization reuses the original saved adapter and pinned base; the [local diagnostic](remerge-v5.py) records package versions, output hashes and excluded training canaries. A derived training record must preserve every original training field except its export repository/URL, bind the original record and adapter hashes, and identify the new materialization explicitly. It is not a new training job. Keep the initial development artifact archived before evaluating a repaired export. The paired final evaluation must use the selected export identity throughout.
+
 ```sh
 # Development first; six training canaries are excluded from metrics.
 npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label v5-base-dev --evaluation-dir data/evaluation/v5-development --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute

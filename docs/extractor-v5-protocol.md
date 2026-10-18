@@ -31,6 +31,8 @@ Development is for diagnosis and candidate selection. A final claim requires a s
 
 The independently reviewed **48-case final** is frozen before inference: 32 supported (eight atomic, 24 nested), eight ambiguous and eight unsupported. Its SHA-256 is `a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c`. All exact source, subject, amount, company and case identities and full source texts are disjoint from training, development and the V4 final. Abstract logic families overlap: this tests fresh prose and identities, not unseen logical-family generalization. Final predictions are not used to choose the candidate.
 
+**Development-stage export diagnostic, October 17:** the initial merged export regressed on the completed 24-case comparison and matched only three of six training canaries. The worker explicitly warned about rounding in a 4-bit merge; saved adapter weights are nonzero. Before opening the final set, a higher-precision materialization may be tested using that exact adapter and the pinned base. It must have a distinct artifact identity, preserve the initial development evidence, and complete matched development evaluation before candidate selection. This is an export-pipeline change, not new training or an isolated causal test of fine-tuning. The final gate and labels remain unchanged.
+
 ## Release gate declared before final predictions
 
 `extractor-gates-v3-useful-coverage` retains V2's matched-run checks and nonregression requirements, then adds an absolute usefulness floor:

@@ -1,6 +1,6 @@
 # Headroom extractor V5: training and evaluation
 
-**Status: training completed; matched development and final evaluation results are pending. V5 has not earned promotion.** A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
+**Status: training and the initial matched development comparison are complete. The initial export regressed; final evaluation is pending. V5 has not earned promotion.** A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
 
 ## What the model learns
 
@@ -38,8 +38,10 @@ The labels are developer-reviewed synthetic examples, not customer-adjudicated c
 
 | Metric | Base | V5 |
 | --- | --- | --- |
-| Development material-exact outputs / 24 | Pending | Pending |
-| Development correct supported proposals / 16 | Pending | Pending |
+| Initial development material-exact outputs / 24 | 9 | 7 |
+| Initial development fully valid outputs / 24 | 22 | 18 |
+| Initial development correct supported proposals / 16 | 4 | 2 |
+| Initial development incorrect fully validated proposals | 10 | 10 |
 | Final material-exact outputs / 48 | Pending | Pending |
 | Final fully valid outputs / 48 | Pending | Pending |
 | Final correct supported proposals / 32 | Pending | Pending |
@@ -47,7 +49,13 @@ The labels are developer-reviewed synthetic examples, not customer-adjudicated c
 | Final correct unsupported status / 8 | Pending | Pending |
 | Final incorrect fully validated proposals | Pending | Pending |
 
-**Current verdict: evaluation pending; not promoted.** Training loss is not a substitute for any result in this table.
+**Initial development verdict: regression, not a measured improvement. Final verdict pending; not promoted.** [All 48 actual development responses](../data/artifacts/extraction-v5-development.json) are published. Both deployments were permanently stopped and charges settled. Training loss is not a substitute for any result in this table.
+
+### Export diagnostic prompted by development
+
+Each model matched three of six V5 training canaries. These are diagnostic examples already present in training, excluded from development and final scores. The tuned export also produced malformed nested JSON and treated a business-day rule as a supported calendar-day rule. The saved adapter contains nonzero learned LoRA weights, while the worker log warns that merging into 4-bit linear layers can alter generations through rounding. These observations justify checking materialization before purchasing another training run; they do not prove that rounding caused every error.
+
+A local higher-precision merge diagnostic reuses the exact saved adapter and pinned base revision. It changes no training labels, prompt, scorer or gate. Any improved export must receive a distinct identity and a matched development evaluation before final candidate selection. Final cases remain untouched during this diagnostic.
 
 ## What earns promotion
 

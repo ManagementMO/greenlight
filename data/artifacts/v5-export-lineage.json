@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "method": "saved-v5-adapter-on-pinned-bfloat16-base",
+  "noRetraining": true,
+  "sourceTrainingJobId": "42d582a35d2f",
+  "sourceTrainingRepo": "machinelearningmo/greenlight-extractor-sft-v5-ed827924-74462f5d-33d",
+  "sourceTrainingRecordSha256": "f4fe587ab588d761fdf988ce6d9beb3799ee1aa7a5cc4b3b08200f6a504c4aaf",
+  "trainingSha256": "ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051",
+  "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+  "baseRevision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "adapterSha256": "cc56000273bc48fa5d318b21c44e152d6dc240b5f6f8f218823669cf0ad2c884",
+  "mergeEvidenceSha256": "fb0899dd1735e647255028944ee73fa6a97ea46df378602169a0a62c0bbcfedd",
+  "dtype": "bfloat16",
+  "files": [
+    {
+      "path": "chat_template.jinja",
+      "bytes": 2630,
+      "sha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326"
+    },
+    {
+      "path": "config.json",
+      "bytes": 1594,
+      "sha256": "da26ff7ce6758c81dbae173948e497ed7c41d89c7160e4980b51952119a05360"
+    },
+    {
+      "path": "generation_config.json",
+      "bytes": 213,
+      "sha256": "935a4737bf17d73211101534c6f228279e71fa814a4c7e51e66348a4eec4c9fb"
+    },
+    {
+      "path": "model-00001-of-00005.safetensors",
+      "bytes": 1989095024,
+      "sha256": "0c206fe7e47a0c0aad91a2d8f9742a2b5297e29a0c258c20508df90b9c281f6c"
+    },
+    {
+      "path": "model-00002-of-00005.safetensors",
+      "bytes": 1992409040,
+      "sha256": "dbbf7cc08fb2beae75330f76069efdf5cd1fdbf5030a9de1831852760a983274"
+    },
+    {
+      "path": "model-00003-of-00005.safetensors",
+      "bytes": 1997656952,
+      "sha256": "a6fb269ee60467790731ba4c6f9b1b36f59eb4ee1dbdcab8b795a8d99a643f32"
+    },
+    {
+      "path": "model-00004-of-00005.safetensors",
+      "bytes": 1963572880,
+      "sha256": "86baa571bcfeccbafc1528a82978aea68e1d08f9ad36870a1aeb60e02bb84011"
+    },
+    {
+      "path": "model-00005-of-00005.safetensors",
+      "bytes": 102247936,
+      "sha256": "18593af05e19125c798e5f6a29645038b8c487cd2faad3c418e444ab4b4db0e5"
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "bytes": 32855,
+      "sha256": "270b62f098dc5ee499f2cd6e375dfdc2089565c269d32823915be791a6e8a5ee"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 11422650,
+      "sha256": "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 694,
+      "sha256": "75ef394ee755c39d3a2b16beb104cba659ff00b956b92b5da68312592fd10653"
+    }
+  ],
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.20.1",
+    "peft": "0.21.2"
+  },
+  "localTrainingCanaries": {
+    "count": 6,
+    "materialExact": 6,
+    "boundary": "Local MPS diagnostics on training examples; excluded from held-out metrics and not a serving-quality claim."
+  },
+  "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+  "revision": "e1fdcddfef270b9448d24307c65b84728501121c",
+  "verifiedAt": "2026-10-18T04:28:19.778828+00:00",
+  "public": true
+}

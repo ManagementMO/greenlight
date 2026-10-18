@@ -10,15 +10,17 @@ import { compareV5Evaluations } from "./ml/compare-v5-evaluations";
 import type { LabeledExample } from "./ml/generate-data";
 import { readV5FinalSelection, assertV5FinalRunSelection } from "../lib/providers/final-selection-v5";
 import { veriRecoveryRecordPath, verifyVeriServingRecordIdentity } from "../lib/providers/veri-response-identity";
+import { readVerifiedV5TrainingRecord } from "../lib/providers/v5-training-record";
 
 const sha=(text:string)=>createHash("sha256").update(text).digest("hex");
 async function main(){
   const a=args(),env=loadProjectEnv();
   const split=String(a.split??"final");if(!["dev","final"].includes(split))throw new Error("Choose --split dev|final");
   if (!a["training-run"]) throw new Error("Provide --training-run work/ml/ACTUAL_V5_TRAINING_RECORD.json");
-  const training=JSON.parse(await readFile(String(a["training-run"]),"utf8"));
+  const training=await readVerifiedV5TrainingRecord(String(a["training-run"]));
   const trainingManifest=JSON.parse(await readFile("data/training/v5-reference-contract/manifest.json","utf8"));
   const audit=JSON.parse(await readFile("data/training/v5-reference-contract/tokenizer-audit.json","utf8"));
+  if(training.postTrainingExport&&training.postTrainingExport.baseRevision!==audit.baseRevisionObserved)throw new Error("Repaired export base differs from the audited training base revision.");
   if (training.mode!=="real-veri-sft"||training.state!=="completed"||!training.cleanupVerified||
       training.datasetSha256!==trainingManifest.hashes["train.jsonl"]||training.datasetSha256!==audit.trainingSha256||
       training.dataVersion!==trainingManifest.version||training.promptProfile!=="reference-contract-v5"||
