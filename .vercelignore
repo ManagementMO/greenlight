@@ -11,3 +11,4 @@ tests/
 scripts/
 *.log
 *.tsbuildinfo
+/bench/
