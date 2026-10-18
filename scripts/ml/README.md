@@ -6,7 +6,9 @@ Run from the repository root. Node 22 and the checked-in npm lock are required. 
 
 The public [Greenlight application](https://greenlight-two-psi.vercel.app) uses deterministic financial inputs and recorded genuine provider results. The historical four-step training proof used 16 v1 rows, exported public synthetic merged weights, and served a real canary. The canary was schema-invalid (a condition enum was emitted as an array); no final evaluation cases were queried. It proves the technical path, not useful extraction quality.
 
-The active release is `greenlight-clauses-v3`: **276 training rows, 23 proof rows, 40 frozen final cases**. Substantive job `95e43036a0b9` is running with **138 configured optimizer steps**, targeting `machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7`. Full base/tuned final evaluation has not been queried at this documentation checkpoint. Final scores, merged revision and release SHA remain pending. Read the published artifact manifest and owner records for later terminal results rather than interpreting this checkpoint as a final quality claim.
+The v3 substantive job completed all 138 optimizer steps and exported its model. Its original base-model final run returned zero valid outputs because the shared compact format example made enum choices look like an answer array. That [diagnostic is preserved](../../data/artifacts/legacy-v3-baseline.json), not used to claim an SFT improvement.
+
+The active experiment is **v4, `json-schema-v4`**: the same **276 training contexts/labels and 23 proof selections**, now paired with the validator's actual JSON Schema, and a **fresh independently reviewed 40-case final set**. Both models receive the same corrected prompt. Training job `b808db134828` uses 138 optimizer steps and a 1,536-token training limit. Final quality remains pending until actual base/tuned serving and the fixed gate complete. The [v4 protocol](../../docs/evaluation-policy.md), [training manifest](../../data/training/v4-schema-contract/manifest.json), [final manifest](../../data/evaluation/v4-schema-contract/manifest.json) and [local tokenizer evidence](../../data/artifacts/tokenizer-audit-v4.json) define the experiment.
 
 ## Commands
 
@@ -17,11 +19,11 @@ npx tsx scripts/ml/provider-smoke.ts
 # Real Anthropic and Jev inference on disclosed synthetic evidence.
 npx tsx scripts/ml/provider-smoke.ts --execute
 
-# Recreate the deterministic dataset ONLY before freezing an experiment.
-npx tsx scripts/ml/generate-data.ts
+# Validate/reproduce the v4 training conversion; frozen bytes cannot silently change.
+npx tsx scripts/ml/generate-v4-training.ts
 
 # Free local exact Qwen tokenizer and prompt/completion-prefix audit.
-uv run --no-project --with tokenizers==0.22.2 --with jinja2==3.1.6 scripts/ml/tokenizer-audit.py
+uv run --no-project --with tokenizers==0.22.2 --with jinja2==3.1.6 scripts/ml/tokenizer-audit.py --training-dir data/training/v4-schema-contract --max-seq-length 1536 --output work/ml/tokenizer-audit-v4-reproduction.json
 
 # Read-only live GPU price, credit, active-resource and dataset preflight.
 npx tsx scripts/ml/train-veri.ts --max-steps 4 --max-cents 600 --timeout-seconds 1800
@@ -33,15 +35,23 @@ npx tsx scripts/ml/train-veri.ts --max-steps 4 --max-cents 600 --timeout-seconds
 # Substitute the unique public synthetic HF repo emitted by the training command.
 npx tsx scripts/ml/serve-evaluate.ts --repo NAMESPACE/UNIQUE_REPO --label proof --canary-only --max-cents 200 --timeout-seconds 1800 --execute
 
-# After the tiny path works, substantive training reuses the same base model.
-npx tsx scripts/ml/train-veri.ts --data data/training/train.jsonl --name sft-v3 --max-steps 138 --max-cents 600 --timeout-seconds 3600 --execute
+# Substantive v4 training requires a matching tokenizer audit before upload/allocation.
+npx tsx scripts/ml/train-veri.ts --data data/training/v4-schema-contract/train.jsonl --audit work/ml/tokenizer-audit-v4-reproduction.json --name sft-v4 --max-steps 138 --max-seq-length 1536 --max-cents 600 --timeout-seconds 3600 --execute
+
+# Publish only a completed, reviewed synthetic export and verify anonymous access.
+npx tsx scripts/publish-model.ts --run work/ml/ACTUAL_TRAINING_RECORD.json --execute
 
 # Run the frozen heldout set with identical decoding, first base then tuned.
-npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label base --limit 40 --max-cents 200 --timeout-seconds 1800 --execute
-npx tsx scripts/ml/serve-evaluate.ts --repo NAMESPACE/UNIQUE_TUNED_REPO --label tuned --limit 40 --max-cents 200 --timeout-seconds 1800 --execute
+npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label base --evaluation-dir data/evaluation/v4-schema-contract --prompt-profile json-schema-v4 --limit 40 --max-cents 200 --timeout-seconds 3600 --execute
+npx tsx scripts/ml/serve-evaluate.ts --repo NAMESPACE/UNIQUE_TUNED_REPO --label tuned --evaluation-dir data/evaluation/v4-schema-contract --prompt-profile json-schema-v4 --limit 40 --max-cents 200 --timeout-seconds 3600 --execute
 
 # No paid requests: compare exact frozen cases, retain the base model on regression/tie.
 npx tsx scripts/ml/compare-evaluations.ts
+
+# No paid requests: re-score actual responses and publish allowlisted source-bound evidence.
+npx tsx scripts/publish-evaluations.ts
+npx tsx scripts/publish-showcase.ts
+npx tsx scripts/publish-artifacts.ts
 
 # Read-only account/resource reconciliation. Does not stop or create anything.
 npx tsx scripts/ml/reconcile.ts
@@ -54,6 +64,14 @@ npx tsx scripts/ml/reconcile.ts --settle RESERVATION_ID --kind deployment --reso
 Every training/serving invocation first checks for active Veri resources so balance deltas remain attributable. Run jobs sequentially. A reservation is a conservative authority to spend; it is not a bill. Reservation maxima across the entire project cannot exceed $20. Existing Veri credits count toward that cap. A settled cost above its reservation is recorded as an overrun and blocks further reservations until reviewed; it is never hidden. Timeouts and unknown create outcomes retain reservations. Inspect private records under `work/ml/` and provider state before reconciling.
 
 ## What is measured
+
+V4 preserves all v3 supervised contexts and labels, but gives both base and tuned models the same proper JSON Schema. Its final set is separately authored: 40 cases, 24 supported/eight ambiguous/eight unsupported, twelve new supported Boolean-composition families, disjoint identities and 21 invoice-issuance clocks. The independent coding-agent pre-query audit reviewed all source/target pairs, with one pre-query temporal-wording clarification whose original draft is archived. This is not independent human adjudication. The serving CLI refuses the v4 set until the manifest has its audited exact hash and final freeze. No final expected labels are sent to inference or training.
+
+Actual local v4 tokenization checks all 276 supervised rows: maximum 1,330 total tokens and minimum 54 completion tokens, exact prompt prefixes and no truncation at 1,536. The 40 final prompts have maximum 1,386 tokens; the maximum expected completion has 216. Every prompt plus the 768-token generation allowance fits the 4,096-token serving limit. The [public audit summary](../../data/artifacts/tokenizer-audit-v4.json) binds these numbers to the exact train/final/tokenizer/template hashes. These are serialization/capacity checks, not model-quality claims or remote loss-mask attestations.
+
+Base and tuned experiments must match the full frozen set, case order, expected classes, prompt profile, prompt-contract hash, individual prompt hashes, decoding and launch settings. Publication re-scores every actual raw response against the source context and frozen label, verifies recorded scores and every deterministic comparison field, and publishes a freshly recomputed comparison. The C120 illustration follows the gate-selected model, is bound to the exact current source excerpt and full-source hash, and is excluded from the final-set metrics. Its Jev suggestions also require the unchanged source-evidence hash and owner review.
+
+**The following v3 corpus description is historical context for the unchanged v4 training labels.** Its exposed final cases and ambiguous-prompt baseline are excluded from v4 release metrics.
 
 The active v3 corpus contains 276 supervised clause examples across 23 renderer families and a separate 40-example holdout across ten independently authored semantic families. This includes 84 training and 16 final cases with an invoice-issuance clock, including unsupported/ambiguous recipient clauses whose independent clock is preserved. There are 36 training and eight final recipient-negative cases: an explicit contractor/supplier receipt prerequisite is UNSUPPORTED in this narrow vocabulary; an unidentified recipient or unbound “we” is AMBIGUOUS. All positive certificate clauses explicitly require customer receipt. The original 192-row v1 data used by the four-step technical proof is preserved under `data/training/v1-technical-proof/`; the pre-recipient v2 corpus remains unchanged under `data/training/v2-invoice-clock-archive/`. Companies are split by namespace. Amounts, phase IDs, delays, conjunctions, alternatives, missing information, contradictory deadlines, negation and unsupported business-day/statutory rules are labeled by explicit typed scenario construction. The template logic was reviewed; this is synthetic developer-reviewed data, not independent customer/human ground truth. The manifest hashes all JSONL files. Regeneration refuses changes to an already frozen version. The training CLI accepts only hash-matched train/proof files explicitly classified PUBLIC_SYNTHETIC and never uploads final labels; model evaluation receives source contexts only. The evaluator refuses a changed frozen holdout and retains invalid JSON and errors in the denominator.
 

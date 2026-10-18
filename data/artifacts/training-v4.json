@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "origin": "recorded",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "jobId": "b808db134828",
+  "state": "completed",
+  "terminalVerified": true,
+  "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+  "dataVersion": "greenlight-clauses-v4-schema-contract",
+  "promptProfile": "json-schema-v4",
+  "trainingSha256": "2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571",
+  "trainingCount": 276,
+  "tokenizerAuditSha256": "c1fe9e8f10d2849a62265460e7e621adb77ee427c94174f27efad4e90d7c13dd",
+  "parameters": {
+    "optimizerSteps": 138,
+    "maxSeqLength": 1536,
+    "learningRate": 0.0001,
+    "loraRank": 8,
+    "loraAlpha": 16,
+    "microBatchSize": 1,
+    "gradientAccumulationSteps": 2,
+    "loadIn4Bit": true,
+    "useUnsloth": false
+  },
+  "workerEvidence": {
+    "finalCheckpointStep": 138,
+    "trainerDurationSeconds": 494.5,
+    "trainerAverageLoss": 0.0389,
+    "lastApiReportedStep": 137,
+    "logSha256": "42b18c0dc7b1441ffac95aa585eaca1b1ade78e4485680039bb21d29ecd586cf",
+    "verifiedAt": "2026-10-18T01:43:52.974Z"
+  },
+  "model": {
+    "repo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+    "observedRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
+    "public": true,
+    "anonymousConfigHttp": 200
+  },
+  "bookedCostUsd": 0.5,
+  "costBoundary": "Conservative integer-cent ledger cost, reconciled only after positive terminal provider charge; not a claim of exact invoice precision.",
+  "completedAt": "2026-10-18T01:43:20.498Z",
+  "boundary": "Genuine training and standalone merged export. Quality requires the separate matched frozen inference comparison. Local completion-only intent is verified; remote effective token-level loss tensors and loaded serving precision are not directly attested."
+}

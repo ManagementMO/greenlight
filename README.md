@@ -8,7 +8,9 @@ The application includes an interactive cash bridge, source evidence, bounded wh
 
 [Open Greenlight](https://greenlight-two-psi.vercel.app) · [Demo guide](docs/demo-guide.md) · [Domain and data provenance](data/scenarios/README.md) · [Provider/ML runbook](scripts/ml/README.md) · [Technical plan](docs/Greenlight-revised-plan.md)
 
-**Team P0 checkpoint:** start with the [team handoff](docs/TEAM-HANDOFF.md). The application runs without model-provider keys; corrected v4 training and final evaluation are still in progress on a separate workstream.
+**Team P0 checkpoint:** start with the [team handoff](docs/TEAM-HANDOFF.md). The application runs without model-provider keys; corrected v4 final evaluation continues on a separate workstream after completed training.
+
+**RAG preparation:** the [California small-business source pack](research/california/README.md) contains 33 official-source records and a [dataset-backed task map](research/california/backlog.md). It is a reviewed research handoff for the next feature; retrieval is not integrated into the app yet. The selected sponsor company is in New York, so California applicability must be established for a future job/business context.
 
 ![Greenlight decision workspace showing the $120,000 HVAC opportunity, cash bridge and $10,000 reserve, a $23,000 liquidity gap, and the conserved $65,000 deposit proposal.](docs/assets/decision-workspace.png)
 
@@ -111,14 +113,14 @@ A genuine **four-step SFT/LoRA proof on 16 examples** completed on `Qwen/Qwen3-4
 
 The original **v3** substantive run completed **138 optimizer steps on 276 examples** and exported merged weights. Its subsequent base-model test exposed an ambiguous format example in the shared prompt: enum choices looked like an answer array. All 40 base answers failed validation. That diagnostic is [preserved](data/artifacts/legacy-v3-baseline.json); it is excluded from quality-improvement claims.
 
-The **v4** experiment gives both models the validator's actual JSON Schema. It keeps the same 276 training contexts and labels, changes only the shared prompt contract, and uses a fresh independently authored 40-case final set. The actual Qwen tokenizer verifies every supervised row: **1,330 maximum total tokens**, at least **54 completion tokens**, exact prompt boundaries, and **zero truncation at 1,536**. A hash-bound token audit must pass before the training CLI can upload v4 data or allocate a GPU. The new 138-step run and its separate matched evaluation are underway; no v4 quality result is claimed at this checkpoint.
+The **v4** experiment gives both models the validator's actual JSON Schema. It keeps the same 276 training contexts and labels, changes only the shared prompt contract, and uses a fresh independently authored 40-case final set. The actual Qwen tokenizer verifies every supervised row: **1,330 maximum total tokens**, at least **54 completion tokens**, exact prompt boundaries, and **zero truncation at 1,536**. A hash-bound token audit must pass before the training CLI can upload v4 data or allocate a GPU. Training completed all **138 steps**, with a committed checkpoint and [public merged model](https://huggingface.co/machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770). Its separate matched evaluation is underway; no v4 quality result is claimed at this checkpoint.
 
 | Evidence | Current reporting boundary |
 | --- | --- |
 | Historical four-step, 16-row technical proof | Trained, exported publicly, and served; canary schema-invalid. No final cases queried and no quality claim. |
 | Substantive v3 extraction training | 276 rows, committed checkpoint at step 138; historical merged artifact preserved. |
 | Legacy v3 baseline diagnostic | 0/40 valid answers under an ambiguous compact format example. Not used to claim an SFT gain. |
-| Corrected v4 training | Same 276 labels, proper JSON Schema prompt, hash-bound tokenizer audit, 138 configured steps. Running at this checkpoint. |
+| Corrected v4 training | Same 276 labels, proper JSON Schema prompt, hash-bound tokenizer audit, committed checkpoint138/138. [Recorded training proof](data/artifacts/training-v4.json). |
 | Fresh matched 40-case v4 comparison | Pending and not yet queried. Publish actual outputs, exact errors, supported coverage, unsafe proposals and latency; retain the base on a tie or regression. |
 
 The checked-in [v4 training manifest](data/training/v4-schema-contract/manifest.json) binds the supervised rows to the unchanged [v3 labels](data/training/manifest.json), publication policy, schema profile and hashes. The v4 final set is authored separately under `data/evaluation/v4-schema-contract/`. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. Earlier versions remain archived as historical evidence. Only fictional clauses classified `PUBLIC_SYNTHETIC` may be uploaded or exported publicly; customer books, private documents, credentials and production traces are excluded.

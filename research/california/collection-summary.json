@@ -1,0 +1,47 @@
+{
+  "completedAt": "2026-10-18T01:42:15Z",
+  "seedCount": 33,
+  "publisherCounts": {
+    "California EDD": 4,
+    "California CDTFA": 4,
+    "California FTB": 3,
+    "California DIR / DLSE": 1,
+    "California DIR / DWC": 1,
+    "California DIR": 2,
+    "California DIR / Cal/OSHA": 2,
+    "California DIR / CHSWC": 1,
+    "California CSLB": 4,
+    "California Office of the Small Business Advocate": 3,
+    "California Secretary of State": 2,
+    "U.S. Small Business Administration": 2,
+    "Intuit QuickBooks Help": 4
+  },
+  "retrievalCounts": {
+    "metadata-only": 10,
+    "fetched": 20,
+    "fetched-partial": 3
+  },
+  "robotsSignals": {
+    "allowed": 23,
+    "not-found": 4,
+    "unknown-access-or-format": 6
+  },
+  "snapshots": 7,
+  "pageGetAttempts": 23,
+  "robotsGetAttempts": 10,
+  "paidApiCalls": 0,
+  "warning": "Counts cover this direct collector only; web discovery search/open requests are listed separately in research notes. No recursive crawl or RAG integration.",
+  "partialFetchNote": "Three CalOSBA pages stopped at the 2 MiB receive cap (curl56); their hashes describe partial bodies only. No larger retry attempted.",
+  "explicitDirectRequestAttemptsTotal": 44,
+  "requestAccounting": {
+    "pythonTlsFailureAttempts": 10,
+    "systemCurlRobotsProbe": 1,
+    "systemCurlRobotsChecks": 10,
+    "systemCurlPageGets": 23,
+    "webSearchQueries": 28,
+    "webPageOpenRequests": 6,
+    "note": "Counts are explicit tool/script attempts, not redirect-expanded server request counts or provider billing metrics. Web search/open may use cached responses."
+  },
+  "publicSourceBodyCopies": 0,
+  "privateSnapshots": "7 DIR excerpts, each at most110 whitespace words, with source URL/time/received-body SHA/notices; deliberately excluded from public export."
+}
