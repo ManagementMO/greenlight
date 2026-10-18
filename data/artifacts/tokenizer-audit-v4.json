@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "origin": "local-actual-tokenizer-audit",
+  "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+  "baseRevisionObserved": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "promptProfile": "json-schema-v4",
+  "promptContractSha256": "d09726c34142328140875cfc3ec6b17edfc6c30c6300e0e35fdfdc98700fe2e6",
+  "tokenizerSha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "chatTemplateSha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+  "training": {
+    "sha256": "2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571",
+    "examples": 276,
+    "maxTotalTokens": 1330,
+    "minCompletionTokens": 54,
+    "allPromptTokenPrefixesMatch": true,
+    "truncatedAt1536": 0,
+    "selectedTrainingLimit": 1536
+  },
+  "evaluation": {
+    "sha256": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a",
+    "caseCount": 40,
+    "maxPromptTokens": 1386,
+    "maxExpectedCompletionTokens": 216,
+    "maxGeneration": 768,
+    "maxModelLen": 4096,
+    "allFit": true,
+    "auditedAt": "2026-10-18T01:34:35.105948+00:00"
+  },
+  "sourceAuditHashes": {
+    "training": "c1fe9e8f10d2849a62265460e7e621adb77ee427c94174f27efad4e90d7c13dd",
+    "evaluation": "7aafcb65f0db99d96055441dbd486b3447e3b4bf41e79cac45e2fcab3e47372e"
+  },
+  "boundary": "Actual local tokenizer and template checks only; no inference accuracy, remote loss-tensor or loaded-runtime attestation."
+}

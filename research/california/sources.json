@@ -1,0 +1,1541 @@
+{
+  "schemaVersion": 1,
+  "kind": "PUBLIC_PRIMARY_SOURCE_RESEARCH_SEEDS",
+  "createdAt": "2026-10-18T01:42:15Z",
+  "sourceCount": 33,
+  "warning": "Not an ingested knowledge base or legal/tax/financial/safety advice. Applicability, vintage, rights and refresh require review. Company-047 is NY; CA applicability is unconfirmed.",
+  "records": [
+    {
+      "id": "edd-calendar",
+      "title": "Payroll Tax Calendar",
+      "observedTitle": null,
+      "publisher": "California EDD",
+      "url": "https://edd.ca.gov/en/Payroll_Taxes/Due_Dates_Calendar",
+      "finalUrl": null,
+      "topics": [
+        "payroll",
+        "tax-calendar"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employer payroll taxes; select year and deposit schedule",
+      "originalSummary": "Starting point for identifying payroll return and deposit dates after the employer's filing schedule is known.",
+      "limitations": "Calendar is year-specific; quarterly reporting does not establish the correct deposit frequency. No date is inserted into a cash forecast from this seed.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:26Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-edd-terms",
+      "robots": {
+        "url": "https://edd.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "a345bfad4d415c93d2813e71cdc1dded09c7599fbad2f4ff7954a7bb1253b4e6"
+      },
+      "licenseSignals": {
+        "signal": "qualified-copying-with-automated-scraping-restriction",
+        "policyUrl": "https://edd.ca.gov/en/about_edd/conditions_of_use/",
+        "note": "Policy seen via official web result: most state-created information may be shared/copied; bots/spiders scraping require explicit allowance. No direct page scrape or snapshot attempted."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "edd-filings",
+      "title": "Required Filings and Due Dates",
+      "observedTitle": null,
+      "publisher": "California EDD",
+      "url": "https://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/",
+      "finalUrl": null,
+      "topics": [
+        "payroll",
+        "tax-calendar",
+        "reporting"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employer payroll reporting and deposit requirements",
+      "originalSummary": "Explains the different forms and filing/deposit concepts that a payroll completeness checklist needs to distinguish.",
+      "limitations": "Employer type, federal deposit schedule and withholding amounts are missing from the Greenlight fixture. Current application requires review.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:26Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-edd-terms",
+      "robots": {
+        "url": "https://edd.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "a345bfad4d415c93d2813e71cdc1dded09c7599fbad2f4ff7954a7bb1253b4e6"
+      },
+      "licenseSignals": {
+        "signal": "qualified-copying-with-automated-scraping-restriction",
+        "policyUrl": "https://edd.ca.gov/en/about_edd/conditions_of_use/",
+        "note": "Policy seen via official web result: most state-created information may be shared/copied; bots/spiders scraping require explicit allowance. No direct page scrape or snapshot attempted."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "edd-resources",
+      "title": "Payroll Taxes Resources",
+      "observedTitle": null,
+      "publisher": "California EDD",
+      "url": "https://edd.ca.gov/en/Payroll_Taxes/",
+      "finalUrl": null,
+      "topics": [
+        "payroll",
+        "tax-types"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employer and employee payroll-tax categories",
+      "originalSummary": "Navigation source for distinguishing employer-paid amounts from employee withholdings and finding the right official tax resource.",
+      "limitations": "A resource hub is not a calculation engine; historical gross wages do not reveal every tax or remittance.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:26Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-edd-terms",
+      "robots": {
+        "url": "https://edd.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "a345bfad4d415c93d2813e71cdc1dded09c7599fbad2f4ff7954a7bb1253b4e6"
+      },
+      "licenseSignals": {
+        "signal": "qualified-copying-with-automated-scraping-restriction",
+        "policyUrl": "https://edd.ca.gov/en/about_edd/conditions_of_use/",
+        "note": "Policy seen via official web result: most state-created information may be shared/copied; bots/spiders scraping require explicit allowance. No direct page scrape or snapshot attempted."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "edd-reporting",
+      "title": "Reporting Requirements",
+      "observedTitle": null,
+      "publisher": "California EDD",
+      "url": "https://edd.ca.gov/en/payroll_Taxes/Reporting_Requirements",
+      "finalUrl": null,
+      "topics": [
+        "payroll",
+        "new-hires",
+        "contractor-reporting"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employer reporting; separate employee and independent-contractor paths",
+      "originalSummary": "Links the employer-registration, new-hire, contractor-reporting and year-end information needed before expanding a crew.",
+      "limitations": "Worker classification and applicability must be established separately. No new-hire or contractor fact is inferred from this page.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:26Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-edd-terms",
+      "robots": {
+        "url": "https://edd.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "a345bfad4d415c93d2813e71cdc1dded09c7599fbad2f4ff7954a7bb1253b4e6"
+      },
+      "licenseSignals": {
+        "signal": "qualified-copying-with-automated-scraping-restriction",
+        "policyUrl": "https://edd.ca.gov/en/about_edd/conditions_of_use/",
+        "note": "Policy seen via official web result: most state-created information may be shared/copied; bots/spiders scraping require explicit allowance. No direct page scrape or snapshot attempted."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cdtfa-contractors",
+      "title": "Tax Guide for Construction Contractors",
+      "observedTitle": "Tax Guide for Construction Contractors",
+      "publisher": "California CDTFA",
+      "url": "https://www.cdtfa.ca.gov/industry/construction-contractors/",
+      "finalUrl": "https://cdtfa.ca.gov/industry/construction-contractors/",
+      "topics": [
+        "contractor-tax",
+        "materials",
+        "sales-use-tax"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Construction contractors; transaction and contract type matter",
+      "originalSummary": "Industry-specific entry point for asking which materials, fixtures, equipment and jobs need a tax review before relying on a supplier-cost estimate.",
+      "limitations": "General agency guidance, not a substitute for law or a project-specific tax classification. Do not apply a universal sales-tax percentage.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:26Z",
+      "contentRetrievedAt": "2026-10-18T01:41:26Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 32313,
+      "bodyTruncated": false,
+      "contentSha256": "497e3ac7d85a6871e5d1aae67801835e4b2ffa3a4355f9f85269cbbd57f8edae",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": "Wed, 11 Dec 2024 06:15:43 GMT",
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cdtfa.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "63e7cde2210593e59e5609d0f58898f1c311eefd99c1ab63cdd9349da43abab2"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://cdtfa.ca.gov/privacy.htm"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cdtfa-start",
+      "title": "Getting Started — Tax Guide for Construction Contractors",
+      "observedTitle": "Getting Started - Tax Guide for Construction Contractors",
+      "publisher": "California CDTFA",
+      "url": "https://www.cdtfa.ca.gov/industry/construction-contractors/getting-started.htm",
+      "finalUrl": "https://cdtfa.ca.gov/industry/construction-contractors/getting-started.htm",
+      "topics": [
+        "contractor-tax",
+        "registration",
+        "filing"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Construction-contractor registration and filing resources",
+      "originalSummary": "Connects contractor work to the relevant registration and return-filing resources for a missing-obligation questionnaire.",
+      "limitations": "Registration status and actual transaction facts are absent; a link to a filing calendar does not establish a liability.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:27Z",
+      "contentRetrievedAt": "2026-10-18T01:41:27Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 32476,
+      "bodyTruncated": false,
+      "contentSha256": "ba1c7a7ad7fcde1bb7b5e7cb3a54c6f54d26577deae6f7e8ff94c9092a662804",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": "Wed, 11 Dec 2024 06:15:44 GMT",
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cdtfa.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "63e7cde2210593e59e5609d0f58898f1c311eefd99c1ab63cdd9349da43abab2"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://cdtfa.ca.gov/privacy.htm"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cdtfa-dates",
+      "title": "Filing Dates for Sales & Use Tax Returns",
+      "observedTitle": "Filing Dates for Sales & Use Tax Returns",
+      "publisher": "California CDTFA",
+      "url": "https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-returns-filing-dates.htm",
+      "finalUrl": "https://cdtfa.ca.gov/taxes-and-fees/sales-use-tax-returns-filing-dates.htm",
+      "topics": [
+        "sales-use-tax",
+        "tax-calendar"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Assigned reporting frequency, program, period and holiday rules",
+      "originalSummary": "Useful calendar reference once a business supplies its assigned filing basis and reporting period.",
+      "limitations": "Frequency, tax program, account obligations and disaster relief must be checked before deriving any actionable date.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:28Z",
+      "contentRetrievedAt": "2026-10-18T01:41:28Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 38519,
+      "bodyTruncated": false,
+      "contentSha256": "16e4ebdab7e9a1b5b124210d5c89e422ea688ad5392888561ab710b1e913eebb",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": "Fri, 14 Nov 2025 21:21:21 GMT",
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cdtfa.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "63e7cde2210593e59e5609d0f58898f1c311eefd99c1ab63cdd9349da43abab2"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://cdtfa.ca.gov/privacy.htm"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cdtfa-payments",
+      "title": "Filing and Payments — Tax Guide for New Permit and License Holders",
+      "observedTitle": "Filing and Payments — Tax Guide for New Permit and License Holders",
+      "publisher": "California CDTFA",
+      "url": "https://www.cdtfa.ca.gov/industry/new-permit-and-license-holders/filing-and-payments.htm",
+      "finalUrl": "https://cdtfa.ca.gov/industry/new-permit-and-license-holders/filing-and-payments.htm",
+      "topics": [
+        "sales-use-tax",
+        "filing",
+        "bookkeeping"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "CDTFA permit/license holders; assigned reporting basis",
+      "originalSummary": "Identifies the filing-basis and sales/purchase records a business must supply before discussing tax payment timing.",
+      "limitations": "A held permit and the assigned basis require user evidence; a banking transaction cannot establish them.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:29Z",
+      "contentRetrievedAt": "2026-10-18T01:41:29Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 37442,
+      "bodyTruncated": false,
+      "contentSha256": "89d1fdb8b98bc8c0dc32b5cac7751bb284e7a19e1733bbe43a5ae68b1e1f1221",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": "Fri, 24 Apr 2026 18:40:34 GMT",
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cdtfa.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "63e7cde2210593e59e5609d0f58898f1c311eefd99c1ab63cdd9349da43abab2"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://cdtfa.ca.gov/privacy.htm"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "ftb-business-dates",
+      "title": "Due dates: businesses",
+      "observedTitle": "Due dates: businesses | FTB.ca.gov",
+      "publisher": "California FTB",
+      "url": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "finalUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "topics": [
+        "income-tax",
+        "tax-calendar",
+        "entity-type"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Business entity type, tax year and form determine the path",
+      "originalSummary": "Supports an entity-aware tax-calendar checklist rather than treating every business as the same legal form.",
+      "limitations": "Legal name ending LLC does not establish its tax election, filing obligation or exact payment amount.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:33Z",
+      "contentRetrievedAt": "2026-10-18T01:41:33Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 57281,
+      "bodyTruncated": false,
+      "contentSha256": "38a1dd572199dc4fe200b51c7610e98bdd0326c817396749c238c8a5c1b2d499",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.ftb.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "4631642902c65f6654f7587ad390cd864e17ccbe873b0df45277aa5c2db5636c"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.ftb.ca.gov/your-rights/privacy/index.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "ftb-corporate-estimates",
+      "title": "2026 Instructions for Form 100-ES",
+      "observedTitle": "2026 Instructions for Form 100-ES | FTB.ca.gov",
+      "publisher": "California FTB",
+      "url": "https://www.ftb.ca.gov/forms/2026/2026-100-es-instructions.html",
+      "finalUrl": "https://www.ftb.ca.gov/forms/2026/2026-100-es-instructions.html",
+      "topics": [
+        "income-tax",
+        "estimated-tax",
+        "tax-calendar"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "2026 corporate estimated-tax instructions; only relevant entities",
+      "originalSummary": "A dated primary reference for the corporate estimated-tax branch of a future obligations checklist.",
+      "limitations": "2026 and corporation-specific. Do not select this branch for the source LLC without verified tax classification.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:34Z",
+      "contentRetrievedAt": "2026-10-18T01:41:34Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 84627,
+      "bodyTruncated": false,
+      "contentSha256": "972c31b7eef2d2e5a8a3b750b27dfcd68da5662f3634b66d7745f17f85ad6ffc",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.ftb.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "4631642902c65f6654f7587ad390cd864e17ccbe873b0df45277aa5c2db5636c"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.ftb.ca.gov/your-rights/privacy/index.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "ftb-corporations",
+      "title": "Corporations",
+      "observedTitle": "Corporations | FTB.ca.gov",
+      "publisher": "California FTB",
+      "url": "https://www.ftb.ca.gov/file/business/types/Corporations/",
+      "finalUrl": "https://www.ftb.ca.gov/file/business/types/Corporations/",
+      "topics": [
+        "income-tax",
+        "entity-type"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Corporation-specific tax overview",
+      "originalSummary": "Provides context and links for the corporation branch when an owner confirms that classification.",
+      "limitations": "Not a source of the company's actual tax election or tax liability; an LLC may require another path.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:35Z",
+      "contentRetrievedAt": "2026-10-18T01:41:35Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 33557,
+      "bodyTruncated": false,
+      "contentSha256": "2ca88378a197c74c203f53db66bf4da994a3670e78418b4aafaa786aad849c2b",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.ftb.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "4631642902c65f6654f7587ad390cd864e17ccbe873b0df45277aa5c2db5636c"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.ftb.ca.gov/your-rights/privacy/index.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-paydays",
+      "title": "Paydays, pay periods, and the final wages",
+      "observedTitle": "Paydays, pay periods, and the final wages",
+      "publisher": "California DIR / DLSE",
+      "url": "https://www.dir.ca.gov/dlse/FAQ_Paydays.htm",
+      "finalUrl": "https://www.dir.ca.gov/dlse/FAQ_Paydays.htm",
+      "topics": [
+        "payroll",
+        "paydays",
+        "payroll-records"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employees; exemptions and employment facts matter",
+      "originalSummary": "Reference for a payroll timing and record-completeness review that keeps established wage payments distinct from customer collections.",
+      "limitations": "Exceptions, worker classification and payroll periods matter. Do not reschedule wages merely to make a cash plan pass.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:36Z",
+      "contentRetrievedAt": "2026-10-18T01:41:36Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 72701,
+      "bodyTruncated": false,
+      "contentSha256": "8405c5e1ffcce3861fac051b1df4e8f12e7d328dbd6428865794e4a8b686759d",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-workers-comp",
+      "title": "Answers to frequently asked questions about workers' compensation for employers",
+      "observedTitle": "DWC FAQs for employers",
+      "publisher": "California DIR / DWC",
+      "url": "https://www.dir.ca.gov/DWC/faqs.html",
+      "finalUrl": "https://www.dir.ca.gov/DWC/faqs.html",
+      "topics": [
+        "workers-compensation",
+        "employer-costs"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "California employer coverage; trade-specific rules can add requirements",
+      "originalSummary": "Helps ask for coverage and premium facts that can be missing from a crew-expansion budget.",
+      "limitations": "A FAQ cannot prove an employer is insured or establish the premium, exclusions or a specific contractor's obligations.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:38Z",
+      "contentRetrievedAt": "2026-10-18T01:41:38Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 71329,
+      "bodyTruncated": false,
+      "contentSha256": "a9903041d3a84fc4459b64c01bd111d3bb4e8f5164e835bda3dcf5d6f44fedb6",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-public-works",
+      "title": "Public Works Contractors",
+      "observedTitle": "Contractors",
+      "publisher": "California DIR",
+      "url": "https://www.dir.ca.gov/public-works/contractors.html",
+      "finalUrl": "https://www.dir.ca.gov/public-works/contractors.html",
+      "topics": [
+        "public-works",
+        "prevailing-wage",
+        "certified-payroll"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Public works only; project classification must be confirmed",
+      "originalSummary": "Entry point for the registration, prevailing-wage, apprenticeship and certified-payroll questions raised by a public project.",
+      "limitations": "Not a general rule for every private HVAC project. Funding and project classification require separate evidence.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:39Z",
+      "contentRetrievedAt": "2026-10-18T01:41:39Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 49849,
+      "bodyTruncated": false,
+      "contentSha256": "c206425501d482db2c52b7dc1d61124d56a06f4789acb76c5b05d42e90a6a26d",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-heat",
+      "title": "Outdoor Heat Illness Prevention",
+      "observedTitle": "Outdoor Heat Illness Prevention",
+      "publisher": "California DIR / Cal/OSHA",
+      "url": "https://www.dir.ca.gov/dosh/heat-illness/outdoor.html",
+      "finalUrl": "https://www.dir.ca.gov/dosh/heat-illness/outdoor.html",
+      "topics": [
+        "workplace-safety",
+        "outdoor-work",
+        "heat"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Outdoor-work guidance; indoor and other standards are separate",
+      "originalSummary": "Useful discovery source for work-planning questions whose missing costs or resources might affect a proposed job.",
+      "limitations": "Weather, worksite, exposure, task and current standards need review. This is not a complete job-specific safety plan.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:40Z",
+      "contentRetrievedAt": "2026-10-18T01:41:40Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 56598,
+      "bodyTruncated": false,
+      "contentSha256": "b3dcbe614982078acb3f0048249307094d7377bb4a7b0322e0f0ba39daa07b82",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-small-business-safety",
+      "title": "Worker Safety and Health",
+      "observedTitle": "Worker Safety and Health",
+      "publisher": "California DIR",
+      "url": "https://www.dir.ca.gov/smallbusiness/Worker-Safety-and-Health.htm",
+      "finalUrl": "https://www.dir.ca.gov/smallbusiness/Worker-Safety-and-Health.htm",
+      "topics": [
+        "workplace-safety",
+        "small-business",
+        "recordkeeping"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Small-business workplace-safety orientation",
+      "originalSummary": "Routes owners to official safety-program and recordkeeping resources before treating a future crew/worksite plan as complete.",
+      "limitations": "A broad hub has gaps for particular hazards and trades; it does not certify compliance.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:41Z",
+      "contentRetrievedAt": "2026-10-18T01:41:41Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 57861,
+      "bodyTruncated": false,
+      "contentSha256": "935bba4b63129ee522dbe2d135c25d951e99e9fd6ef79f437df3944de6b1c5db",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-construction-safety",
+      "title": "Construction Guide for Employers",
+      "observedTitle": "Construction Guide for Employers",
+      "publisher": "California DIR / Cal/OSHA",
+      "url": "https://www.dir.ca.gov/dosh/Construction-guide-summary.html",
+      "finalUrl": "https://www.dir.ca.gov/dosh/Construction-guide-summary.html",
+      "topics": [
+        "workplace-safety",
+        "construction",
+        "site-documents"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Construction safety; task-specific standards and guidance",
+      "originalSummary": "A task/resource index for checking whether a proposed construction plan has omitted required site documents or safety activities.",
+      "limitations": "Not an inspection result or complete checklist for a particular project; regulatory links need current review.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:43Z",
+      "contentRetrievedAt": "2026-10-18T01:41:43Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 111379,
+      "bodyTruncated": false,
+      "contentSha256": "1a79a145fc0eb0f20550486ba4f3eea4d9c694ac9acd5ba67d919c38afba8e8d",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "dir-iipp",
+      "title": "Injury and Illness Prevention Program resources",
+      "observedTitle": "Commission on Health and Safety and Workers' Compensation - Home Page",
+      "publisher": "California DIR / CHSWC",
+      "url": "https://www.dir.ca.gov/chswc/WOSHTEP/iipp/",
+      "finalUrl": "https://www.dir.ca.gov/chswc/WOSHTEP/iipp/",
+      "topics": [
+        "workplace-safety",
+        "IIPP",
+        "small-business"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Program-development resources; different workplace categories",
+      "originalSummary": "Links small-business and other program templates and training resources for a later missing-plan checklist.",
+      "limitations": "Template availability does not establish that an employer has implemented a suitable program. Source page carries historical dates.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:44Z",
+      "contentRetrievedAt": "2026-10-18T01:41:44Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "bytesRead": 55516,
+      "bodyTruncated": false,
+      "contentSha256": "8c32640b0430f49c3f7682c7c763a466bf4128f30e16990e70c358a7ee5dbdcf",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.dir.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "2fc29d0408f694f65b8073127eda356503a3bc2ac04ada43fa25a9dd5073cd8a"
+      },
+      "licenseSignals": {
+        "signal": "qualified-public-domain-for-state-created-information",
+        "policyUrl": "https://www.dir.ca.gov/od_pub/conditions.html",
+        "note": "Official policy Ownership section generally permits copying state-created information unless otherwise indicated; third-party material/images excluded. Only a short plain-text research excerpt is saved privately."
+      },
+      "observedPolicyLinks": [
+        "https://www.dir.ca.gov/od_pub/conditions.html",
+        "https://www.dir.ca.gov/od_pub/privacy.html"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cslb-contracts",
+      "title": "What should I look for in a contract and binding agreements?",
+      "observedTitle": "What should I look for in a contract and binding agreements? - CSLB",
+      "publisher": "California CSLB",
+      "url": "https://www.cslb.ca.gov/Consumers/Hire_A_Contractor/Contracts_and_Binding_Agreements.aspx",
+      "finalUrl": "https://www.cslb.ca.gov/Consumers/Hire_A_Contractor/Contracts_and_Binding_Agreements.aspx",
+      "topics": [
+        "contracts",
+        "home-improvement",
+        "payment-schedule"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Consumer/home-improvement context; not every commercial contract",
+      "originalSummary": "A scope-sensitive reference for reviewing residential contract and payment-schedule questions.",
+      "limitations": "Home-improvement rules must not be transplanted into the commercial clinic job. No deposit cap is activated automatically.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:45Z",
+      "contentRetrievedAt": "2026-10-18T01:41:45Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytesRead": 35698,
+      "bodyTruncated": false,
+      "contentSha256": "96d6fcba695545e6d6ed820f88e3ea647f229cc4ea766845c0a6201c8ef8c9b0",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cslb.ca.gov/robots.txt",
+        "signal": "not-found",
+        "httpStatus": 404,
+        "contentSha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.dca.ca.gov/about_dca/privacy_policy.shtml"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cslb-home-improvement",
+      "title": "Learn About Home Improvement Contracts",
+      "observedTitle": "Learn About Home Improvement Contracts - CSLB",
+      "publisher": "California CSLB",
+      "url": "https://www.cslb.ca.gov/Consumers/Hire_A_Contractor/Home_Improvement_Contracts/Homeowner_Checklists.aspx",
+      "finalUrl": "https://www.cslb.ca.gov/Consumers/Hire_A_Contractor/Home_Improvement_Contracts/Homeowner_Checklists.aspx",
+      "topics": [
+        "home-improvement",
+        "contracts",
+        "consumer-checklist"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Residential home-improvement consumer checklist",
+      "originalSummary": "Helps classify the residential branch and identify missing reviewed contract information before analyzing a homeowner job.",
+      "limitations": "Residential scope must be established. A consumer checklist is not a new term in an unsigned job proposal.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:46Z",
+      "contentRetrievedAt": "2026-10-18T01:41:46Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytesRead": 31094,
+      "bodyTruncated": false,
+      "contentSha256": "2280b17378c3bab52ca828dac5e3c7d2cfcb746ab717e99b5aeab4c5c8bff50f",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cslb.ca.gov/robots.txt",
+        "signal": "not-found",
+        "httpStatus": 404,
+        "contentSha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.dca.ca.gov/about_dca/privacy_policy.shtml"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cslb-license",
+      "title": "Before Applying for a License",
+      "observedTitle": "Before Applying For Exam",
+      "publisher": "California CSLB",
+      "url": "https://www.cslb.ca.gov/Contractors/Applicants/Contractors_License/Exam_Application/Before_Applying_For_License.aspx",
+      "finalUrl": "https://www.cslb.ca.gov/Contractors/Applicants/Contractors_License/Exam_Application/Before_Applying_For_License.aspx",
+      "topics": [
+        "contractor-licensing",
+        "business-qualification"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Contractor licensing application guidance",
+      "originalSummary": "Background for deciding which licensing facts to request before a new job or market entry.",
+      "limitations": "This page does not verify an actual license, classification, status or exemption; those need authoritative current lookup.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:47Z",
+      "contentRetrievedAt": "2026-10-18T01:41:47Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytesRead": 46982,
+      "bodyTruncated": false,
+      "contentSha256": "7ce43eff3188e7ed5fb99ecd70087c6eb72edcd826bb6a16bc1494f68e29f441",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cslb.ca.gov/robots.txt",
+        "signal": "not-found",
+        "httpStatus": 404,
+        "contentSha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.dca.ca.gov/about_dca/privacy_policy.shtml"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "cslb-c20",
+      "title": "C-20 — Warm-Air Heating, Ventilating and Air-Conditioning Contractor",
+      "observedTitle": "Licensing Classifications Detail-CSLB",
+      "publisher": "California CSLB",
+      "url": "https://www.cslb.ca.gov/About_Us/Library/Licensing_Classifications/Licensing_Classifications_Detail.aspx?Class=C20",
+      "finalUrl": "https://www.cslb.ca.gov/About_Us/Library/Licensing_Classifications/Licensing_Classifications_Detail.aspx?Class=C20",
+      "topics": [
+        "contractor-licensing",
+        "HVAC",
+        "trade-scope"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "C-20 trade-classification text; actual contractor status is separate",
+      "originalSummary": "HVAC-specific classification reference for a later job-scope and credential questionnaire.",
+      "limitations": "The dataset's NAICS code is not a California license or proof that all proposed work falls under one classification.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:48Z",
+      "contentRetrievedAt": "2026-10-18T01:41:48Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytesRead": 30196,
+      "bodyTruncated": false,
+      "contentSha256": "d9d01ff78c6ecd9e4c2a2e227b6ae1b4682aac00acc2c078c2112fa8947ee60b",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.cslb.ca.gov/robots.txt",
+        "signal": "not-found",
+        "httpStatus": 404,
+        "contentSha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.dca.ca.gov/about_dca/privacy_policy.shtml"
+      ],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "calosba-permits",
+      "title": "Guide to Permits, Licensing, and Regulations",
+      "observedTitle": "Permits, Licenses & Regulation | California Office of the Small Business Advocate (CalOSBA)",
+      "publisher": "California Office of the Small Business Advocate",
+      "url": "https://www.calosba.ca.gov/for-small-businesses-and-non-profits/permits-licenses-regulation/",
+      "finalUrl": "https://www.calosba.ca.gov/for-small-businesses-and-non-profits/permits-licenses-regulation/",
+      "topics": [
+        "permits",
+        "business-setup",
+        "agency-routing"
+      ],
+      "jurisdiction": "California + local",
+      "applicabilityScope": "Agency and permit discovery; city/county and activity matter",
+      "originalSummary": "Routes a new California business or worksite to the agencies whose missing permits or registrations need review.",
+      "limitations": "An agency directory cannot establish local permit requirements or lead times for the proposed job.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:41:50Z",
+      "contentRetrievedAt": "2026-10-18T01:41:50Z",
+      "retrievalStatus": "fetched-partial",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytesRead": 2097152,
+      "bodyTruncated": true,
+      "contentSha256": "d4dfd6a2f16e96850f943c10d76b6b65da02408409e36709902bb7da977b7522",
+      "hashScope": "received partial body only; not a full-document hash",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "curl: (56) Exceeded the maximum allowed file size (2097152) with 2097152 bytes",
+      "robots": {
+        "url": "https://www.calosba.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "11d2f5bec369ec283d68b1964a5f3730c7d9799a4170ea9f315bc316de985859"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.calosba.ca.gov/conditions-of-use/",
+        "https://www.calosba.ca.gov/privacy-policy/",
+        "https://www.calosba.ca.gov/terms-of-use/"
+      ],
+      "metaRobots": [
+        "max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      ],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "calosba-learning",
+      "title": "The CalOSBA Business Learning Center",
+      "observedTitle": "Business Learning Center | California Office of the Small Business Advocate (CalOSBA)",
+      "publisher": "California Office of the Small Business Advocate",
+      "url": "https://calosba.ca.gov/for-small-businesses-and-non-profits/business-learning-center/",
+      "finalUrl": "https://calosba.ca.gov/for-small-businesses-and-non-profits/business-learning-center/",
+      "topics": [
+        "small-business",
+        "advising",
+        "resources"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Small-business resource and advisor directory",
+      "originalSummary": "Useful handoff source when a cash-readiness question reveals missing business, workforce or planning expertise.",
+      "limitations": "Broad discovery hub; resource links and advisor availability require checking.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:01Z",
+      "contentRetrievedAt": "2026-10-18T01:42:01Z",
+      "retrievalStatus": "fetched-partial",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytesRead": 2097152,
+      "bodyTruncated": true,
+      "contentSha256": "2a99075f37e1e49841e40d2911658b1b3474d40c27c674a9496f50572b7df05e",
+      "hashScope": "received partial body only; not a full-document hash",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "curl: (56) Exceeded the maximum allowed file size (2097152) with 2097152 bytes",
+      "robots": {
+        "url": "https://calosba.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "11d2f5bec369ec283d68b1964a5f3730c7d9799a4170ea9f315bc316de985859"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://calosba.ca.gov/conditions-of-use/",
+        "https://calosba.ca.gov/privacy-policy/",
+        "https://calosba.ca.gov/terms-of-use/"
+      ],
+      "metaRobots": [
+        "max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      ],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "calosba-contractor-guide",
+      "title": "Business Quick Start Guides",
+      "observedTitle": "Business Quick Start Guides | California Office of the Small Business Advocate (CalOSBA)",
+      "publisher": "California Office of the Small Business Advocate",
+      "url": "https://calosba.ca.gov/for-small-businesses-and-non-profits/business-learning-center/business-quick-start-guides/",
+      "finalUrl": "https://calosba.ca.gov/for-small-businesses-and-non-profits/business-learning-center/business-quick-start-guides/",
+      "topics": [
+        "contractor-startup",
+        "business-setup",
+        "agency-routing"
+      ],
+      "jurisdiction": "California + local",
+      "applicabilityScope": "Industry guide directory, including contractor/building-engineering categories",
+      "originalSummary": "A bounded way to discover official contractor start-up guides without crawling every program website.",
+      "limitations": "The linked contractor guides were not all downloaded or reviewed; language/industry selection remains explicit.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:06Z",
+      "contentRetrievedAt": "2026-10-18T01:42:06Z",
+      "retrievalStatus": "fetched-partial",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytesRead": 2097152,
+      "bodyTruncated": true,
+      "contentSha256": "26d3c9ba60a683a5b2cca83664b1ca72b879d4437d4169354064a4e2f4b4b03d",
+      "hashScope": "received partial body only; not a full-document hash",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "curl: (56) Exceeded the maximum allowed file size (2097152) with 2097152 bytes",
+      "robots": {
+        "url": "https://calosba.ca.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "11d2f5bec369ec283d68b1964a5f3730c7d9799a4170ea9f315bc316de985859"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://calosba.ca.gov/conditions-of-use/",
+        "https://calosba.ca.gov/privacy-policy/",
+        "https://calosba.ca.gov/terms-of-use/"
+      ],
+      "metaRobots": [
+        "max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      ],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "sos-forms",
+      "title": "Forms, Samples and Fees",
+      "observedTitle": null,
+      "publisher": "California Secretary of State",
+      "url": "https://www.sos.ca.gov/business-programs/business-entities/forms",
+      "finalUrl": null,
+      "topics": [
+        "entity-filings",
+        "statement-of-information",
+        "forms"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Entity type and formation jurisdiction determine forms",
+      "originalSummary": "Official entry point for reviewing an entity's filing and statement-of-information checklist.",
+      "limitations": "No submission or fee payment is authorized. Entity records and filing status are not present in the fixture.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:11Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "robots-not-cleared; no direct page GET attempted",
+      "robots": {
+        "url": "https://www.sos.ca.gov/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": 200,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "sos-faq",
+      "title": "Business Entities Frequently Asked Questions",
+      "observedTitle": null,
+      "publisher": "California Secretary of State",
+      "url": "https://www.sos.ca.gov/business-programs/business-entities/faqs",
+      "finalUrl": null,
+      "topics": [
+        "entity-filings",
+        "statement-of-information",
+        "business-setup"
+      ],
+      "jurisdiction": "California",
+      "applicabilityScope": "Different requirements for corporations, LLCs and other entity types",
+      "originalSummary": "A reference for asking which entity filings and registrations are relevant before calendarizing administrative costs.",
+      "limitations": "Company name alone does not establish formation state, filing status or California nexus. Do not execute filings.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:11Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "robots-not-cleared; no direct page GET attempted",
+      "robots": {
+        "url": "https://www.sos.ca.gov/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": 200,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "sba-manage",
+      "title": "Manage your business",
+      "observedTitle": "Manage your business - Small Business AdministrationLock",
+      "publisher": "U.S. Small Business Administration",
+      "url": "https://www.sba.gov/counseling/manage-your-business/",
+      "finalUrl": "https://www.sba.gov/counseling/manage-your-business/",
+      "topics": [
+        "cash-flow",
+        "bookkeeping",
+        "payroll",
+        "financial-planning"
+      ],
+      "jurisdiction": "United States (general guidance)",
+      "applicabilityScope": "Small-business financial-management orientation; not state-specific law",
+      "originalSummary": "General financial-management context connecting receivables, payables, payroll and reconciliation to a cash-readiness workflow.",
+      "limitations": "Educational guidance is not a forecast, contract, tax calculation or evidence of available cash.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:11Z",
+      "contentRetrievedAt": "2026-10-18T01:42:11Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytesRead": 348184,
+      "bodyTruncated": false,
+      "contentSha256": "544ab6bea250deb785efde2f31ecbb0a84161374d4ba14a1ab655e13b84223d5",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.sba.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "14e6a41de4ba7c5d03c24286cd02d9701e3a3695f21371bb4a4fdeba46090c74"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.copyright.gov/",
+        "https://www.sba.gov/about-sba/open-government/about-the-sba-gov-website/#website-privacy"
+      ],
+      "metaRobots": [
+        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      ],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "sba-financial-literacy",
+      "title": "Financial Literacy Resources for America's Small Businesses",
+      "observedTitle": "Financial Literacy Resources for America’s Small Businesses - Small Business AdministrationLock",
+      "publisher": "U.S. Small Business Administration",
+      "url": "https://www.sba.gov/blog/2025/2025-04/financial-literacy-resources-americas-small-businesses/",
+      "finalUrl": "https://www.sba.gov/blog/2025/2025-04/financial-literacy-resources-americas-small-businesses/",
+      "topics": [
+        "financial-planning",
+        "advising",
+        "bookkeeping"
+      ],
+      "jurisdiction": "United States (general guidance)",
+      "applicabilityScope": "Dated April 2025 educational resource list",
+      "originalSummary": "A concise resource index for small-business financial education and qualified advisory help.",
+      "limitations": "Historical blog/resource links are not current operational instructions or a guarantee of service availability.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:12Z",
+      "contentRetrievedAt": "2026-10-18T01:42:12Z",
+      "retrievalStatus": "fetched",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytesRead": 144874,
+      "bodyTruncated": false,
+      "contentSha256": "06825942700d0db5b0b13147d34fa571563f87f4a1c67a8e988b531cf58d22d3",
+      "hashScope": "received bytes; partial body if truncated",
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": null,
+      "robots": {
+        "url": "https://www.sba.gov/robots.txt",
+        "signal": "allowed",
+        "parser": "Python RobotFileParser; observation, not a reuse license",
+        "contentSha256": "14e6a41de4ba7c5d03c24286cd02d9701e3a3695f21371bb4a4fdeba46090c74"
+      },
+      "licenseSignals": {
+        "signal": "not-established",
+        "policyUrl": null
+      },
+      "observedPolicyLinks": [
+        "https://www.sba.gov/about-sba/open-government/about-the-sba-gov-website/#website-privacy"
+      ],
+      "metaRobots": [
+        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      ],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "intuit-progress",
+      "title": "Set up and send progress invoices",
+      "observedTitle": null,
+      "publisher": "Intuit QuickBooks Help",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/invoicing/set-send-progress-invoices-quickbooks-online/L0Ymm6WjR_US_en_US",
+      "finalUrl": null,
+      "topics": [
+        "invoicing",
+        "progress-invoicing",
+        "bookkeeping"
+      ],
+      "jurisdiction": "QuickBooks Online US product",
+      "applicabilityScope": "US product help; plan/feature/UI version may differ",
+      "originalSummary": "Product reference for linking staged invoicing to an estimate while keeping the accounting workflow separate from actual bank settlement.",
+      "limitations": "The selected company manifest has zero estimates. Feature eligibility and a real connection are unverified. No invoice is created by this research.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:15Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-vendor",
+      "robots": {
+        "url": "https://quickbooks.intuit.com/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": null,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "vendor-copyright-no-redistribution-grant-established",
+        "policyUrl": "https://www.intuit.com/legal/terms/en-us/quickbooks/online/",
+        "note": "Product terms are not assumed to grant help-article scraping or redistribution. URL/title/original summary only; article not copied."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "intuit-reconcile",
+      "title": "Reconcile an account in QuickBooks Online",
+      "observedTitle": null,
+      "publisher": "Intuit QuickBooks Help",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/statement-reconciliation/reconcile-account-quickbooks-online/L3XzsllsK_US_en_US",
+      "finalUrl": null,
+      "topics": [
+        "bank-reconciliation",
+        "bookkeeping",
+        "available-cash"
+      ],
+      "jurisdiction": "QuickBooks Online US product",
+      "applicabilityScope": "Account/statement reconciliation product help",
+      "originalSummary": "Reference for explaining why ledger reconstruction, statement reconciliation and unrestricted available cash are different evidence steps.",
+      "limitations": "Help documentation does not supply a missing bank statement, restrictions, holds or verified opening funds.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:15Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-vendor",
+      "robots": {
+        "url": "https://quickbooks.intuit.com/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": null,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "vendor-copyright-no-redistribution-grant-established",
+        "policyUrl": "https://www.intuit.com/legal/terms/en-us/quickbooks/online/",
+        "note": "Product terms are not assumed to grant help-article scraping or redistribution. URL/title/original summary only; article not copied."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "intuit-record-payments",
+      "title": "Record invoice payments",
+      "observedTitle": null,
+      "publisher": "Intuit QuickBooks Help",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/invoicing/record-invoice-payments-quickbooks-online/L4ZadDW7F_US_en_US",
+      "finalUrl": null,
+      "topics": [
+        "invoicing",
+        "payments",
+        "undeposited-funds"
+      ],
+      "jurisdiction": "QuickBooks Online US product",
+      "applicabilityScope": "Invoice payment recording; product/plan-specific steps",
+      "originalSummary": "Reference for separating an invoice, a recorded customer payment, an undeposited balance and an eventual bank movement.",
+      "limitations": "A saved payment or changed invoice status does not itself prove settled, spendable bank funds. No banking operation is performed.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:15Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-vendor",
+      "robots": {
+        "url": "https://quickbooks.intuit.com/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": null,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "vendor-copyright-no-redistribution-grant-established",
+        "policyUrl": "https://www.intuit.com/legal/terms/en-us/quickbooks/online/",
+        "note": "Product terms are not assumed to grant help-article scraping or redistribution. URL/title/original summary only; article not copied."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    },
+    {
+      "id": "intuit-due-dates",
+      "title": "Fix inconsistencies in due date and invoice date",
+      "observedTitle": null,
+      "publisher": "Intuit QuickBooks Help",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/small-business-processes/due-date-invoice-date-match-using-due-receipt-term/L47lsTLK2_US_en_US",
+      "finalUrl": null,
+      "topics": [
+        "invoicing",
+        "payment-terms",
+        "due-date"
+      ],
+      "jurisdiction": "QuickBooks Online US product",
+      "applicabilityScope": "Due-on-receipt product configuration troubleshooting",
+      "originalSummary": "A narrow product example showing that invoice dates, configured terms and displayed due dates need separate attention.",
+      "limitations": "This is not authority to replace a signed contractual payment clock or infer bank settlement; it concerns a specific product setting.",
+      "discoveredAt": "2026-10-18T01:39:00Z",
+      "metadataRecordedAt": "2026-10-18T01:42:15Z",
+      "contentRetrievedAt": null,
+      "retrievalStatus": "metadata-only",
+      "httpStatus": null,
+      "contentType": null,
+      "bytesRead": null,
+      "bodyTruncated": null,
+      "contentSha256": null,
+      "hashScope": null,
+      "lastModifiedHeader": null,
+      "etag": null,
+      "fetchLimitation": "metadata-only-vendor",
+      "robots": {
+        "url": "https://quickbooks.intuit.com/robots.txt",
+        "signal": "unknown-access-or-format",
+        "httpStatus": null,
+        "contentSha256": null
+      },
+      "licenseSignals": {
+        "signal": "vendor-copyright-no-redistribution-grant-established",
+        "policyUrl": "https://www.intuit.com/legal/terms/en-us/quickbooks/online/",
+        "note": "Product terms are not assumed to grant help-article scraping or redistribution. URL/title/original summary only; article not copied."
+      },
+      "observedPolicyLinks": [],
+      "metaRobots": [],
+      "trust": "UNTRUSTED_RETRIEVAL_DATA; no contract, transaction or instruction authority",
+      "redistribution": "Public artifact contains URL/title/metadata and original summary only; no source article body or excerpt."
+    }
+  ]
+}

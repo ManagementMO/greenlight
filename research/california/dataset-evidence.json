@@ -1,0 +1,54 @@
+{
+  "rowCount": 2419,
+  "bankKinds": {
+    "opening_equity": 1,
+    "deposit_receipt": 4,
+    "bill_payment": 516,
+    "wage_payment": 182,
+    "customer_payment": 1703,
+    "owner_distribution": 1,
+    "journal_entry": 12
+  },
+  "lastRecord": "- id: bank-002419\n  sim_day: 365\n  date: '2026-10-06'\n  amount: '232.96'\n  direction: debit\n  running_balance_amount: '74882.38'\n  source_document_id: rcpt-02087\n  memo: Customer payment received\n  kind: customer_payment\n  sim_event_ids:\n  - event-12699\n",
+  "files": {
+    "company.yaml": "e10e74f732c3d753f90acda88604af79ea9840be74389e46737f79ec512fb7f3",
+    "bank_transactions.yaml": "2e55a5085be47d9e0605c807f5862ea0e7b935be8731d14becf63d5b700e37d3",
+    "manifest.yaml": "57c3ceefdc99d4687b78e77921599b915f4a55e0aad2a82d35638e244a1a513d"
+  },
+  "kind": "LOCAL_PRESERVED_SYNTHETIC_SOURCE_INSPECTION",
+  "checkedAt": "2026-10-18T01:44:35Z",
+  "datasetId": "CL251215/QuickBooks-Hackathon-2026",
+  "datasetRevision": "dc68d478a190c879f26fd94b764298c2c6308fa7",
+  "companyId": "company-047",
+  "sourceAddressState": "NY",
+  "sourceAddressCity": "Albany",
+  "companyIndustryNaics": "238220",
+  "californiaApplicability": "UNCONFIRMED",
+  "sourceFilesRelativeToRepo": [
+    "data/scenarios/source/company.yaml",
+    "data/scenarios/source/bank_transactions.yaml",
+    "data/scenarios/source/manifest.yaml",
+    "data/scenarios/intuit-source.json"
+  ],
+  "manifestEntityCounts": {
+    "accounts": 38,
+    "bank_transactions": 2419,
+    "bill_payments": 516,
+    "bills": 549,
+    "company": 1,
+    "customer_payments": 1703,
+    "customers": 37,
+    "employees": 7,
+    "estimates": 0,
+    "invoices": 863,
+    "items": 8,
+    "journal_entries": 1533,
+    "management_decisions": 65,
+    "market_context": 52,
+    "payroll_runs": 182,
+    "personas": 58,
+    "projects": 5,
+    "sales_receipts": 0
+  },
+  "inspectionBoundary": "Company row, complete bank table and manifest inspected locally. Other entity counts are manifest-backed, not independently audited row tables or supported adapters. No full archive newly downloaded."
+}

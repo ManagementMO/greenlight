@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T01:33:36.525Z",
+  "generatedAt": "2026-10-18T01:45:48.296Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -20,14 +20,16 @@
     },
     {
       "provider": "Veri",
-      "status": "pending",
+      "status": "verified",
       "origin": "recorded",
+      "checkedAt": "2026-10-18T01:43:20.498Z",
       "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
     },
     {
       "provider": "Hugging Face",
-      "status": "pending",
+      "status": "verified",
       "origin": "recorded",
+      "checkedAt": "2026-10-18T01:43:20.498Z",
       "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
     },
     {
@@ -52,13 +54,13 @@
       },
       {
         "name": "Fine-tuning",
-        "status": "running",
-        "detail": "0 of 138 steps recorded by the provider progress API. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "status": "completed",
+        "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
       },
       {
         "name": "Merged export",
-        "status": "pending",
-        "detail": "Waiting for completed merged export."
+        "status": "verified",
+        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
       },
       {
         "name": "Serving canary",
@@ -151,8 +153,8 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 1.73,
-    "reservedUsd": 6,
+    "spentUsd": 2.23,
+    "reservedUsd": 2,
     "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
   },
   "provenance": [

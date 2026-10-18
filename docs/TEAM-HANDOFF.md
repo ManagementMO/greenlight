@@ -32,6 +32,8 @@ The hosted checkpoint is https://greenlight-two-psi.vercel.app. The demo's clock
 
 ## What is working now
 
+The model-evidence follow-up branch also contains a [33-source California research pack](../research/california/README.md) and [six prioritized dataset-backed tasks](../research/california/backlog.md). They are preparation for later RAG work, with jurisdiction, vintage and actual-data-presence boundaries. Company-047 is in Albany, NY; a California job/workforce/tax context is unconfirmed.
+
 - Default $120,000 job: late phase collection reaches negative $13,000; advancing $23,000 from the final installment to the deposit restores the $10,000 modeled reserve without changing total revenue.
 - Joint supplier-risk and missing-evidence scenarios exercise failure cases, not just the happy path.
 - Genuine Anthropic/Jev MetaHarness result: 18 to 6 Jev requests, unchanged 20/21 correct and 15/21 decisive judgments, zero false `MET` judgments on the recorded synthetic workload.
