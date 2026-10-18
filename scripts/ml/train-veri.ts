@@ -8,7 +8,7 @@ import {
   DEFAULT_BASE_MODEL,
 } from "../../lib/providers/veri";
 import { usdToCentsCeil } from "../../lib/budget/ledger";
-import { assertPublicSyntheticTrainingData } from "../../lib/providers/data-policy";
+import { assertBoundTokenizerAudit, assertPublicSyntheticTrainingData } from "../../lib/providers/data-policy";
 import {
   args,
   intArg,
@@ -37,7 +37,8 @@ export async function train() {
     budget = ledger();
   const timeoutSeconds = intArg(a, "timeout-seconds", 1800, 300, 3600),
     maxCents = intArg(a, "max-cents", 600, 50, 600),
-    maxSteps = intArg(a, "max-steps", 4, 1, 300);
+    maxSteps = intArg(a, "max-steps", 4, 1, 300),
+    maxSeqLength = intArg(a, "max-seq-length", 1536, 1024, 3072);
   const datasetFile = resolve(String(a.data ?? "data/training/proof.jsonl")),
     data = await readFile(datasetFile, "utf8");
   const digest = createHash("sha256").update(data).digest("hex");
@@ -45,6 +46,15 @@ export async function train() {
     await readFile(resolve(dirname(datasetFile), "manifest.json"), "utf8"),
   );
   assertPublicSyntheticTrainingData(dataManifest, basename(datasetFile), data);
+  const baseModel = String(a.model ?? DEFAULT_BASE_MODEL);
+  let tokenizerAuditSha256: string | undefined;
+  if (dataManifest.promptProfile === "json-schema-v4") {
+    const auditBytes = await readFile(resolve(String(a.audit ?? "work/ml/tokenizer-audit-v4.json")), "utf8");
+    assertBoundTokenizerAudit(JSON.parse(auditBytes), {
+      sha: digest, baseModel, rows: data.trim().split("\n").length, maxSeqLength,
+    });
+    tokenizerAuditSha256 = createHash("sha256").update(auditBytes).digest("hex");
+  }
   const [catalog, balance, burn] = await Promise.all([
     client.catalog(),
     client.balance(),
@@ -87,12 +97,15 @@ export async function train() {
     datasetId: "assigned-after-upload",
     repo,
     maxSteps,
-    baseModel: String(a.model ?? DEFAULT_BASE_MODEL),
+    maxSeqLength,
+    baseModel,
     outputName: "greenlight-" + suffix,
   });
   const plan = {
     schemaVersion: 1,
     mode: "real-veri-sft",
+    dataVersion: dataManifest.version,
+    promptProfile: dataManifest.promptProfile ?? "legacy-v3",
     datasetFile,
     datasetSha256: digest,
     rows: data.trim().split("\n").length,
@@ -100,6 +113,8 @@ export async function train() {
     repo,
     submissionName: request.output_name,
     maxSteps,
+    maxSeqLength,
+    tokenizerAuditSha256,
     timeoutSeconds,
     maxCents,
     verifiedRateUsdPerGpuHour: gpu.usd_per_gpu_hr,

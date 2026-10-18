@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createHash } from "node:crypto";
-import { assertPublicSyntheticTrainingData } from "../../lib/providers/data-policy";
+import { assertBoundTokenizerAudit, assertPublicSyntheticTrainingData } from "../../lib/providers/data-policy";
 const content =
   '{"prompt":"fictional clause","completion":"fictional target"}\n';
 const manifest = {
@@ -44,5 +44,22 @@ describe("public synthetic model export policy", () => {
         content + "extra",
       ),
     ).toThrow(/hash/);
+  });
+});
+
+describe("paid training tokenizer audit gate", () => {
+  const expected = { sha: "reviewed-data", baseModel: "Qwen/base", rows: 276, maxSeqLength: 1536 };
+  const audit = { trainingSha256: expected.sha, baseModel: expected.baseModel, examples: 276,
+    maxTokens: 1330, minCompletionTokens: 54, allPromptTokenPrefixesMatch: true };
+  it("accepts complete matching supervised examples at the selected sequence limit", () => {
+    expect(assertBoundTokenizerAudit(audit, expected).maxTokens).toBe(1330);
+  });
+  it("refuses a stale audit, wrong model, or incomplete dataset", () => {
+    for (const changed of [{ trainingSha256: "old-data" }, { baseModel: "other" }, { examples: 23 }])
+      expect(() => assertBoundTokenizerAudit({ ...audit, ...changed }, expected)).toThrow(/match/);
+  });
+  it("refuses prefix errors, absent completions and truncation", () => {
+    for (const changed of [{ allPromptTokenPrefixesMatch: false }, { minCompletionTokens: 0 }, { maxTokens: 1537 }, { maxTokens: undefined }])
+      expect(() => assertBoundTokenizerAudit({ ...audit, ...changed }, expected)).toThrow(/prefix|completion|truncate/);
   });
 });

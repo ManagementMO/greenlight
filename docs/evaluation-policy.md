@@ -1,5 +1,17 @@
 # Extractor evaluation policy
 
+## V4 protocol frozen before final queries
+
+The v3 protocol below is preserved as historical evidence. Its completed base run returned zero valid answers because the compact format example represented enum choices as an array. [Actual outputs](../data/artifacts/legacy-v3-baseline.json) are retained. No tuned-v3 final run was used to claim an improvement against that ambiguous baseline.
+
+V4 uses the validator's actual strict JSON Schema for both base and tuned prompts, profile `json-schema-v4`. Its 276 training contexts and labels are unchanged from v3; training SHA256 is `2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571`. The actual tokenizer audit found maximum 1,330 supervised tokens, minimum 54 completion tokens, exact prompt prefixes and no truncation at 1,536. A matching audit is required before upload/allocation.
+
+The fresh [v4 final set](../data/evaluation/v4-schema-contract/manifest.json) contains 40 cases: 24 supported, eight ambiguous and eight unsupported, with twelve new supported Boolean-composition families and disjoint namespaces. Independent coding-agent review checked all 40 pairs before inference. A possible order-of-events ambiguity in case 16 was clarified before queries; its expected label was unchanged, and the author draft is archived. Final SHA256: `a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a`. Final freeze and audit: **2026-10-18 01:33:48 UTC**. These are synthetic developer-reviewed expectations, not independent human/customer adjudication.
+
+The same `extractor-gates-v2` promotion thresholds apply. Both runs must match frozen bytes, case order, expected labels, per-case prompt hashes, prompt profile, prompt-contract hash, decoding and launch settings. The same artifact-pipeline precision caveat below applies. No prompt, training label or threshold may be adjusted after these final predictions and reuse this set for a fresh quality claim. The C120 illustration is separate from all 40-case metrics.
+
+## Historical v3 protocol
+
 Policy frozen **2026-10-18 00:58 UTC**, before querying any v3 final evaluation cases. Gate version: **`extractor-gates-v2`**.
 
 The training corpus is `greenlight-clauses-v3`: 276 training examples and a separate 40-case final set. The final set has 24 expected `PROPOSED`, 8 `AMBIGUOUS` and 8 `UNSUPPORTED` cases. Its SHA-256 is `c3eb6159c750732260662dd04912c4c15152108ed4af04fd6034b689c4c819eb`. Semantic renderer families and company namespaces are disjoint from training. Labels are developer/template-reviewed synthetic expectations, not independently adjudicated customer evidence.

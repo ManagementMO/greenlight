@@ -65,6 +65,17 @@ const saferCandidate = () =>
   );
 
 describe("fine-tuned extractor promotion gate", () => {
+  it("refuses different prompt contracts and individual case prompts", () => {
+    const base = { ...experiment(), promptProfile: "json-schema-v4", promptContractSha256: "contract",
+      rows: experiment().rows.map((row) => ({ ...row, promptSha256: "a".repeat(64) })) };
+    const candidate = structuredClone(base);
+    expect(compareEvaluations(base, candidate).status).toBe("quality-tied");
+    expect(() => compareEvaluations(base, { ...candidate, promptProfile: "legacy-v3" })).toThrow(/prompt/);
+    expect(() => compareEvaluations(base, { ...candidate, promptContractSha256: "changed" })).toThrow(/prompt/);
+    candidate.rows[0].promptSha256 = "b".repeat(64);
+    expect(() => compareEvaluations(base, candidate)).toThrow(/per-case prompts/);
+    expect(() => compareEvaluations({ ...base, rows: experiment().rows }, { ...base, rows: experiment().rows })).toThrow(/per-case prompts/);
+  });
   it("reports a versioned tie and retains the base extractor", () => {
     const result = compareEvaluations(experiment(), experiment());
     expect(result.gateVersion).toBe("extractor-gates-v2");
@@ -182,6 +193,10 @@ describe("fine-tuned extractor promotion gate", () => {
         decode: { temperature: 1 },
       }),
     ).toThrow(/data|decoding/i);
+    expect(() => compareEvaluations(
+      { ...experiment(), launch: { maxModelLen: 4096 } },
+      { ...experiment(), launch: { maxModelLen: 2048 } },
+    )).toThrow(/launch/);
     expect(() =>
       compareEvaluations(experiment(), { ...experiment(), exampleCount: 23 }),
     ).toThrow(/24|full/i);

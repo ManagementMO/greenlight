@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "origin": "recorded",
+  "status": "legacy-prompt-diagnostic",
+  "reason": "The compact schema example represented condition choices as an array and ALL/ANY children as prose. The original base copied this invalid shape. This run is preserved and is not used to claim a fine-tuning gain. The corrected comparison uses an actual JSON Schema and a fresh protected evaluation set.",
+  "artifact": {
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "private": false,
+    "files": [
+      ".gitattributes",
+      "LICENSE",
+      "README.md",
+      "config.json",
+      "generation_config.json",
+      "merges.txt",
+      "model-00001-of-00003.safetensors",
+      "model-00002-of-00003.safetensors",
+      "model-00003-of-00003.safetensors",
+      "model.safetensors.index.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "vocab.json"
+    ],
+    "configuration": {
+      "configSha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "modelType": "qwen3",
+      "architectures": [
+        "Qwen3ForCausalLM"
+      ],
+      "declaredDtype": "bfloat16",
+      "quantization": {},
+      "runtimeDtype": "Not directly attested; model config is repository evidence only."
+    }
+  },
+  "evaluationSha256": "c3eb6159c750732260662dd04912c4c15152108ed4af04fd6034b689c4c819eb",
+  "decode": {
+    "temperature": 0,
+    "maxTokens": 768
+  },
+  "summary": {
+    "count": 40,
+    "valid": 0,
+    "materialExact": 0,
+    "statusCorrect": 0,
+    "proposed": 0,
+    "unsafeProposed": 0,
+    "expectedProposed": 24,
+    "correctSupportedProposals": 0,
+    "validityRate": 0,
+    "materialExactRate": 0,
+    "rawProposalRate": 0,
+    "correctSupportedProposalRate": 0,
+    "proposedPrecision": null,
+    "byExpectedStatus": {
+      "PROPOSED": {
+        "count": 24,
+        "valid": 0,
+        "statusCorrect": 0,
+        "materialExact": 0,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "statusAccuracy": 0,
+        "materialExactRate": 0
+      },
+      "AMBIGUOUS": {
+        "count": 8,
+        "valid": 0,
+        "statusCorrect": 0,
+        "materialExact": 0,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "statusAccuracy": 0,
+        "materialExactRate": 0
+      },
+      "UNSUPPORTED": {
+        "count": 8,
+        "valid": 0,
+        "statusCorrect": 0,
+        "materialExact": 0,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "statusAccuracy": 0,
+        "materialExactRate": 0
+      }
+    }
+  },
+  "stopVerified": true,
+  "completedAt": "2026-10-18T01:23:03.137Z",
+  "rows": [
+    {
+      "id": "eval-nested_alternative_prerequisite-0:s1",
+      "family": "eval__nested_alternative_prerequisite",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-nested_alternative_prerequisite-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-both_routes_with_certificate-0:s1",
+      "family": "eval__both_routes_with_certificate",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"INVOICE_ACCEPTED\"],\"subject\":\"job_eval_1\",\"children\":\"ALL/ANY children only\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-both_routes_with_certificate-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"children\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized key: \\\"children\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received string\"\n        },\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_big\",\n          \"maximum\": 4,\n          \"inclusive\": true,\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Too big: expected string to have <=4 characters\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-negation_of_or-0:s1",
+      "family": "eval__negation_of_or",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-negation_of_or-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-future_negotiation-0:s1",
+      "family": "eval__future_negotiation",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_1\"},\"due\":null,\"sourceIds\":[\"eval-future_negotiation-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-statutory_override-0:s1",
+      "family": "eval__statutory_override",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-statutory_override-0:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-document_instruction_attack-0:s1",
+      "family": "eval__document_instruction_attack",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"INVOICE_ACCEPTED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":0,\"invoiceSubject\":\"phase_1\"},\"sourceIds\":[\"eval-document_instruction_attack-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-certificate_and_alternative_eligibility_invoice_clock-0:s1",
+      "family": "eval__certificate_and_alternative_eligibility_invoice_clock",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-certificate_and_alternative_eligibility_invoice_clock-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-acceptance_and_delivery_issue_later-0:s1",
+      "family": "eval__acceptance_and_delivery_issue_later",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":0,\"invoiceSubject\":\"phase_1\"},\"sourceIds\":[\"eval-acceptance_and_delivery_issue_later-0:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-noncustomer_receipt_billing_condition-0:s1",
+      "family": "eval__noncustomer_receipt_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":0,\"invoiceSubject\":\"phase_1\"},\"sourceIds\":[\"eval-noncustomer_receipt_billing_condition-0:s1\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"trigger condition is based on supplier receipt, not customer receipt; customer receipt is not required; clause explicitly conditioned on contractor receipt, which is UNSUPPORTED\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-undisclosed_receipt_party_billing_condition-0:s1",
+      "family": "eval__undisclosed_receipt_party_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_1\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-undisclosed_receipt_party_billing_condition-0:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"unidentified recipient makes trigger AMBIGUOUS\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-nested_alternative_prerequisite-1:s1",
+      "family": "eval__nested_alternative_prerequisite",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":7},\"sourceIds\":[\"eval-nested_alternative_prerequisite-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-both_routes_with_certificate-1:s1",
+      "family": "eval__both_routes_with_certificate",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"INVOICE_ACCEPTED\"],\"subject\":\"job_eval_2\",\"children\":\"ALL/ANY children only\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":7},\"sourceIds\":[\"eval-both_routes_with_certificate-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"children\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized key: \\\"children\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received string\"\n        },\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_big\",\n          \"maximum\": 4,\n          \"inclusive\": true,\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Too big: expected string to have <=4 characters\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-negation_of_or-1:s1",
+      "family": "eval__negation_of_or",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":7},\"sourceIds\":[\"eval-negation_of_or-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-future_negotiation-1:s1",
+      "family": "eval__future_negotiation",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_2\"},\"due\":null,\"sourceIds\":[\"eval-future_negotiation-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-statutory_override-1:s1",
+      "family": "eval__statutory_override",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-statutory_override-1:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-document_instruction_attack-1:s1",
+      "family": "eval__document_instruction_attack",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"INVOICE_ACCEPTED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":7,\"invoiceSubject\":\"phase_2\"},\"sourceIds\":[\"eval-document_instruction_attack-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-certificate_and_alternative_eligibility_invoice_clock-1:s1",
+      "family": "eval__certificate_and_alternative_eligibility_invoice_clock",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":7},\"sourceIds\":[\"eval-certificate_and_alternative_eligibility_invoice_clock-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-acceptance_and_delivery_issue_later-1:s1",
+      "family": "eval__acceptance_and_delivery_issue_later",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":7,\"invoiceSubject\":\"phase_2\"},\"sourceIds\":[\"eval-acceptance_and_delivery_issue_later-1:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-noncustomer_receipt_billing_condition-1:s1",
+      "family": "eval__noncustomer_receipt_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":7,\"invoiceSubject\":\"phase_2\"},\"sourceIds\":[\"eval-noncustomer_receipt_billing_condition-1:s1\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"trigger condition is based on supplier receipt, not customer receipt; customer receipt is not required, making it unsupportable under defined rules\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-undisclosed_receipt_party_billing_condition-1:s1",
+      "family": "eval__undisclosed_receipt_party_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_2\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":7},\"sourceIds\":[\"eval-undisclosed_receipt_party_billing_condition-1:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"unidentified recipient makes trigger AMBIGUOUS\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-nested_alternative_prerequisite-2:s1",
+      "family": "eval__nested_alternative_prerequisite",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":14},\"sourceIds\":[\"eval-nested_alternative_prerequisite-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-both_routes_with_certificate-2:s1",
+      "family": "eval__both_routes_with_certificate",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"INVOICE_ACCEPTED\"],\"subject\":\"job_eval_3\",\"children\":\"ALL\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":14},\"sourceIds\":[\"eval-both_routes_with_certificate-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"children\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized key: \\\"children\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received string\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-negation_of_or-2:s1",
+      "family": "eval__negation_of_or",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":14},\"sourceIds\":[\"eval-negation_of_or-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-future_negotiation-2:s1",
+      "family": "eval__future_negotiation",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_3\"},\"due\":null,\"sourceIds\":[\"eval-future_negotiation-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-statutory_override-2:s1",
+      "family": "eval__statutory_override",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-statutory_override-2:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-document_instruction_attack-2:s1",
+      "family": "eval__document_instruction_attack",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"INVOICE_ACCEPTED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"phase_3\"},\"sourceIds\":[\"eval-document_instruction_attack-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-certificate_and_alternative_eligibility_invoice_clock-2:s1",
+      "family": "eval__certificate_and_alternative_eligibility_invoice_clock",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":14},\"sourceIds\":[\"eval-certificate_and_alternative_eligibility_invoice_clock-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-acceptance_and_delivery_issue_later-2:s1",
+      "family": "eval__acceptance_and_delivery_issue_later",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"phase_3\"},\"sourceIds\":[\"eval-acceptance_and_delivery_issue_later-2:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-noncustomer_receipt_billing_condition-2:s1",
+      "family": "eval__noncustomer_receipt_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"phase_3\"},\"sourceIds\":[\"eval-noncustomer_receipt_billing_condition-2:s1\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"trigger condition is based on supplier receipt, not customer receipt, which is not explicitly authorized or recognized as a valid customer receipt event\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-undisclosed_receipt_party_billing_condition-2:s1",
+      "family": "eval__undisclosed_receipt_party_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_3\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":14},\"sourceIds\":[\"eval-undisclosed_receipt_party_billing_condition-2:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"unidentified recipient makes trigger AMBIGUOUS\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-nested_alternative_prerequisite-3:s1",
+      "family": "eval__nested_alternative_prerequisite",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_4\",\"children\":\"ALL/ANY children only\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":21},\"sourceIds\":[\"eval-nested_alternative_prerequisite-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"children\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized key: \\\"children\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received string\"\n        },\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_big\",\n          \"maximum\": 4,\n          \"inclusive\": true,\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Too big: expected string to have <=4 characters\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-both_routes_with_certificate-3:s1",
+      "family": "eval__both_routes_with_certificate",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\",\"INVOICE_ACCEPTED\"],\"subject\":\"job_eval_4\",\"children\":\"ALL/ANY children only\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":21},\"sourceIds\":[\"eval-both_routes_with_certificate-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"children\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized key: \\\"children\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received string\"\n        },\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_big\",\n          \"maximum\": 4,\n          \"inclusive\": true,\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Too big: expected string to have <=4 characters\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-negation_of_or-3:s1",
+      "family": "eval__negation_of_or",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":21},\"sourceIds\":[\"eval-negation_of_or-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-future_negotiation-3:s1",
+      "family": "eval__future_negotiation",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ANY\",\"condition\":[\"PHASE_ACCEPTED\",\"INSPECTION_PASSED\"],\"subject\":\"phase_4\"},\"due\":null,\"sourceIds\":[\"eval-future_negotiation-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-statutory_override-3:s1",
+      "family": "eval__statutory_override",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":0},\"sourceIds\":[\"eval-statutory_override-3:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"missing or unsupported facts\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-document_instruction_attack-3:s1",
+      "family": "eval__document_instruction_attack",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"INVOICE_ACCEPTED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":21,\"invoiceSubject\":\"phase_4\"},\"sourceIds\":[\"eval-document_instruction_attack-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-certificate_and_alternative_eligibility_invoice_clock-3:s1",
+      "family": "eval__certificate_and_alternative_eligibility_invoice_clock",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":21},\"sourceIds\":[\"eval-certificate_and_alternative_eligibility_invoice_clock-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-acceptance_and_delivery_issue_later-3:s1",
+      "family": "eval__acceptance_and_delivery_issue_later",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ALL\",\"condition\":[\"PHASE_ACCEPTED\",\"DELIVERY_CONFIRMED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":21,\"invoiceSubject\":\"phase_4\"},\"sourceIds\":[\"eval-acceptance_and_delivery_issue_later-3:s1\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+      "score": {
+        "expectedStatus": "PROPOSED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ATOM\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid input: expected \\\"ATOM\\\"\"\n        },\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-noncustomer_receipt_billing_condition-3:s1",
+      "family": "eval__noncustomer_receipt_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":21,\"invoiceSubject\":\"phase_4\"},\"sourceIds\":[\"eval-noncustomer_receipt_billing_condition-3:s1\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"trigger condition is not customer receipt, supplier receipt is specified and not authorized as customer representative\"]}",
+      "score": {
+        "expectedStatus": "UNSUPPORTED",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    },
+    {
+      "id": "eval-undisclosed_receipt_party_billing_condition-3:s1",
+      "family": "eval__undisclosed_receipt_party_billing_condition",
+      "output": "{\"schemaVersion\":1,\"amountRef\":\"payment_amount\",\"trigger\":{\"op\":\"ATOM\",\"condition\":[\"CUSTOMER_CERTIFICATE_RECEIVED\"],\"subject\":\"phase_4\"},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_TRIGGER\",\"days\":21},\"sourceIds\":[\"eval-undisclosed_receipt_party_billing_condition-3:s1\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"unidentified recipient makes trigger AMBIGUOUS\"]}",
+      "score": {
+        "expectedStatus": "AMBIGUOUS",
+        "valid": false,
+        "materialExact": false,
+        "proposed": false,
+        "unsafeProposed": false,
+        "statusCorrect": false,
+        "error": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"AGREEMENT_SIGNED\",\n            \"DELIVERY_CONFIRMED\",\n            \"PHASE_ACCEPTED\",\n            \"INSPECTION_PASSED\",\n            \"CUSTOMER_CERTIFICATE_RECEIVED\",\n            \"INVOICE_ACCEPTED\"\n          ],\n          \"path\": [\n            \"condition\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"AGREEMENT_SIGNED\\\"|\\\"DELIVERY_CONFIRMED\\\"|\\\"PHASE_ACCEPTED\\\"|\\\"INSPECTION_PASSED\\\"|\\\"CUSTOMER_CERTIFICATE_RECEIVED\\\"|\\\"INVOICE_ACCEPTED\\\"\"\n        }\n      ],\n      [\n        {\n          \"code\": \"invalid_value\",\n          \"values\": [\n            \"ALL\",\n            \"ANY\"\n          ],\n          \"path\": [\n            \"op\"\n          ],\n          \"message\": \"Invalid option: expected one of \\\"ALL\\\"|\\\"ANY\\\"\"\n        },\n        {\n          \"expected\": \"array\",\n          \"code\": \"invalid_type\",\n          \"path\": [\n            \"children\"\n          ],\n          \"message\": \"Invalid input: expected array, received undefined\"\n        },\n        {\n          \"code\": \"unrecognized_keys\",\n          \"keys\": [\n            \"condition\",\n            \"subject\"\n          ],\n          \"path\": [],\n          \"message\": \"Unrecognized keys: \\\"condition\\\", \\\"subject\\\"\"\n        }\n      ]\n    ],\n    \"path\": [\n      \"trigger\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]"
+      }
+    }
+  ]
+}

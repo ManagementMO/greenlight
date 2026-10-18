@@ -41,13 +41,14 @@ async function main() {
     trainingEvidence.finalCheckpointStep <= training.maxSteps
       ? trainingEvidence.finalCheckpointStep
       : null;
-  const evaluations = (
+  const evaluationRecords = (
     await Promise.all(
-      ["proof", "base", "tuned"].map((label) =>
+      ["proof", "legacy-v3-base", "base", "tuned"].map((label) =>
         readJson("work/ml/evaluation-" + label + ".json"),
       ),
     )
   ).filter(Boolean) as RecordData[];
+  const evaluations = [...new Map(evaluationRecords.map((run) => [run.reservationId, run])).values()];
   const serving = evaluations.find(
     (run) =>
       run.artifact?.repo === training?.repo &&
@@ -159,6 +160,8 @@ async function main() {
     name:
       run.label === "proof"
         ? "Merged model serving proof — training canary only"
+        : run.promptProfile !== "json-schema-v4"
+          ? "Archived v3 compact-prompt diagnostic"
         : `${run.label} · frozen extraction evaluation`,
     origin: "recorded",
     model: run.artifact?.repo,
@@ -173,7 +176,7 @@ async function main() {
           canaryValid: Number(Boolean(run.canary?.score?.valid)),
           canaryExact: Number(Boolean(run.canary?.score?.materialExact)),
         },
-    detail: `${run.status}. ${run.stopVerified ? "GPU permanently stopped and read back." : "GPU cleanup verification incomplete."} ${run.label === "proof" ? "No frozen test cases queried in this technical proof." : "Same immutable evaluation examples and decoding are required for a promotion comparison."}`,
+    detail: `${run.status}. ${run.stopVerified ? "GPU permanently stopped and read back." : "GPU cleanup verification incomplete."} ${run.label === "proof" ? "No frozen test cases queried in this technical proof." : run.promptProfile !== "json-schema-v4" ? "Ambiguous legacy format example produced schema-copying errors. Preserved for provenance and excluded from the v4 quality comparison." : "Same immutable evaluation examples, per-case prompt hashes and decoding are required for a promotion comparison."}`,
   }));
   if (comparison)
     current.extractionComparison = {
@@ -212,6 +215,18 @@ async function main() {
       firstPartyFrame: telemetry.firstPartyFrame,
       verifiedAt: telemetry.verifiedAt,
       environment: telemetry.environment,
+      issueStatus: telemetry.issueStatus,
+      regression: telemetry.productionRegression
+        ? {
+            originalOutputBytes: telemetry.reproducedOutputBytes,
+            originalEnvironment: telemetry.environment,
+            productionOutputBytes: telemetry.productionRegression.outputBytes,
+            inputBytes: telemetry.productionRegression.inputBytes,
+            scenarioCount: telemetry.productionRegression.scenarioCount,
+            http: telemetry.productionRegression.http,
+            verifiedAt: telemetry.productionRegression.verifiedAt,
+          }
+        : undefined,
     };
   const extractionDemo = await readJson("data/artifacts/extraction-demo.json");
   if (extractionDemo) current.extractionDemo = extractionDemo;

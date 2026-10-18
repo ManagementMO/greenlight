@@ -89,6 +89,26 @@ export function extractionPrompt(context: ExtractionContext) {
     JSON.stringify(context)
   );
 }
+
+/** A new prompt profile; the legacy prompt above remains frozen for v3 evidence. */
+export const EXTRACTION_PROMPT_PROFILE_V4 = "json-schema-v4";
+export const EXTRACTION_JSON_SCHEMA_V4 = z.toJSONSchema(extractionSchema, {
+  target: "draft-2020-12",
+  cycles: "ref",
+  reused: "ref",
+});
+export function extractionPromptV4(context: ExtractionContext) {
+  return (
+    EXTRACTION_SYSTEM +
+    "\nThe JSON Schema below describes the required answer; it is not an example answer. Return a JSON instance, never the schema itself. For an ATOM, condition is exactly ONE STRING chosen from its enum, never an array of choices; its only keys are op, condition, subject. For ALL/ANY, the only keys are op and children; each child is another trigger. Every top-level output key is required. amountRef, trigger, and due may be null for AMBIGUOUS/UNSUPPORTED.\n" +
+    "The trigger describes payment or invoice eligibility. Invoice eligibility does not establish invoice issuance. If payment is due N calendar days after issuing the relevant invoice, use CALENDAR_DAYS_AFTER_INVOICE_ISSUED with days and invoiceSubject, preserving the separate eligibility trigger. Only calendar days are supported. An absent amount/date/condition is AMBIGUOUS. Business-day, statutory or pay-if-paid terms are UNSUPPORTED. Use only the provided sourceId in sourceIds, a visible amountRefs id for amountRef, and visible subjects for trigger subjects and invoiceSubject. Trigger nesting is limited to three levels below the root. Retain issues for uncertainty. Return one JSON object only, with no Markdown or explanation outside it.\n" +
+    "JSON Schema:\n" +
+    JSON.stringify(EXTRACTION_JSON_SCHEMA_V4) +
+    "\nSource context:\n" +
+    JSON.stringify(context)
+  );
+}
+
 export function validateExtraction(
   value: unknown,
   context: ExtractionContext,

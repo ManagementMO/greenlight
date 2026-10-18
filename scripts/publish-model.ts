@@ -26,6 +26,7 @@ async function main() {
   let matchedCorpus = "";
   for (const root of [
     "data/training",
+    "data/training/v4-schema-contract",
     "data/training/v1-technical-proof",
     "data/training/v2-invoice-clock-archive",
   ]) {
@@ -79,7 +80,7 @@ tags:
 
 This is a merged QLoRA derivative of [${run.baseModel}](https://huggingface.co/${run.baseModel}), published for the [Greenlight project](https://github.com/ManagementMO/greenlight).
 
-Training used **${run.rows} synthetic examples and ${run.maxSteps} optimizer steps** through Veri. Dataset SHA-256: \`${run.datasetSha256}\`. Training job: \`${run.jobId}\`. Rank 8, 4-bit loading, learning rate 0.0001, sequence limit 1536, micro-batch 1, gradient accumulation 2.
+Training used **${run.rows} synthetic examples and ${run.maxSteps} configured optimizer steps** through Veri. Dataset SHA-256: \`${run.datasetSha256}\`. Training job: \`${run.jobId}\`. Rank 8, 4-bit loading, learning rate 0.0001, sequence limit ${run.maxSeqLength ?? 1536}, micro-batch 1, gradient accumulation 2. Prompt profile: \`${run.promptProfile ?? "legacy-v3"}\`.
 
 ${run.maxSteps <= 4 ? "**Technical integration proof only.** Four steps demonstrate training, merge and export; they do not establish useful extraction quality." : "This model proposes bounded structured payment terms. Consult the repository’s matched frozen base/tuned evaluation before making any quality claim."}
 

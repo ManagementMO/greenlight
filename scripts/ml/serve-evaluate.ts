@@ -7,7 +7,7 @@ import {
   boundedDeploymentRequest,
   DEFAULT_BASE_MODEL,
 } from "../../lib/providers/veri";
-import { extractionPrompt } from "../../lib/providers/extraction";
+import { extractionPrompt, extractionPromptV4 } from "../../lib/providers/extraction";
 import {
   scoreExtraction,
   summarizeExtraction,
@@ -118,6 +118,14 @@ async function main() {
     a = args(),
     repo = String(a.repo ?? DEFAULT_BASE_MODEL),
     label = String(a.label ?? "base");
+  const evaluationDir = resolve(String(a["evaluation-dir"] ?? "data/evaluation/v4-schema-contract"));
+  if (![resolve("data/training"), resolve("data/evaluation/v4-schema-contract")].includes(evaluationDir))
+    throw new Error("Choose a reviewed frozen evaluation directory.");
+  const promptProfile = String(a["prompt-profile"] ?? "json-schema-v4");
+  if (!["legacy-v3", "json-schema-v4"].includes(promptProfile))
+    throw new Error("Unknown extraction prompt contract.");
+  const prompt = promptProfile === "legacy-v3" ? extractionPrompt : extractionPromptV4;
+  const promptContractSha256 = createHash("sha256").update(prompt({sourceId:"PROMPT_CONTRACT",text:"",amountRefs:[],subjects:[]})).digest("hex");
   const maxCents = intArg(a, "max-cents", 200, 25, 400),
     timeoutSeconds = intArg(a, "timeout-seconds", 1800, 300, 3600);
   const client = new VeriClient({
@@ -126,8 +134,16 @@ async function main() {
     }),
     budget = ledger();
   const manifest = JSON.parse(
-    await readFile(resolve("data/training/manifest.json"), "utf8"),
+    await readFile(resolve(evaluationDir, "manifest.json"), "utf8"),
   );
+  if (manifest.dataClassification !== "PUBLIC_SYNTHETIC")
+    throw new Error("Only reviewed public synthetic evaluation data may reach the model.");
+  if (evaluationDir === resolve("data/evaluation/v4-schema-contract") &&
+      (promptProfile !== "json-schema-v4" || manifest.promptProfile !== promptProfile ||
+       manifest.frozen !== true ||
+       manifest.reviewStatus !== "independently-audited-before-query" ||
+       manifest.independentAudit?.evaluationSha256 !== manifest.hashes?.["evaluation.frozen.jsonl"]))
+    throw new Error("V4 final queries require the matching prompt and independently audited frozen case hash.");
   if (
     !Number.isInteger(manifest.evaluationCount) ||
     manifest.evaluationCount < 1 ||
@@ -142,7 +158,7 @@ async function main() {
     manifest.evaluationCount,
   );
   const raw = await readFile(
-      resolve("data/training/evaluation.frozen.jsonl"),
+      resolve(evaluationDir, "evaluation.frozen.jsonl"),
       "utf8",
     ),
     hash = createHash("sha256").update(raw).digest("hex");
@@ -197,6 +213,9 @@ async function main() {
       : "frozen-heldout-evaluation",
     artifact,
     dataVersion: manifest.version,
+    evaluationDir,
+    promptProfile,
+    promptContractSha256,
     evaluationSha256: hash,
     frozenCaseCount: all.length,
     exampleCount: examples.length,
@@ -308,7 +327,7 @@ async function main() {
         client.chat(
           servingDeploymentId,
           repo,
-          [{ role: "user", content: extractionPrompt(canary.context) }],
+          [{ role: "user", content: prompt(canary.context) }],
           768,
         ),
     );
@@ -332,7 +351,7 @@ async function main() {
           client.chat(
             servingDeploymentId,
             repo,
-            [{ role: "user", content: extractionPrompt(example.context) }],
+            [{ role: "user", content: prompt(example.context) }],
             768,
           ),
         );
@@ -345,6 +364,7 @@ async function main() {
       recordExtractionScore(id, example.id, score);
       rows.push({
         id: example.id,
+        promptSha256: createHash("sha256").update(prompt(example.context)).digest("hex"),
         family: example.family,
         returnedModel: response.model,
         latencyMs: Date.now() - t,
@@ -384,7 +404,7 @@ async function main() {
         client.chat(
           servingDeploymentId,
           repo,
-          [{ role: "user", content: extractionPrompt(source.context) }],
+            [{ role: "user", content: prompt(source.context) }],
           768,
         ),
       );

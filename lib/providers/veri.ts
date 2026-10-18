@@ -34,6 +34,7 @@ export function boundedTrainingRequest(input: {
   datasetId: string;
   repo: string;
   maxSteps?: number;
+  maxSeqLength?: number;
   baseModel?: string;
   outputName?: string;
   gpuType?: string;
@@ -43,6 +44,9 @@ export function boundedTrainingRequest(input: {
   const maxSteps = input.maxSteps ?? 4;
   if (!Number.isInteger(maxSteps) || maxSteps < 1 || maxSteps > 300)
     throw new Error("Training steps exceed experiment bound");
+  const maxSeqLength = input.maxSeqLength ?? 1536;
+  if (!Number.isInteger(maxSeqLength) || maxSeqLength < 1024 || maxSeqLength > 3072)
+    throw new Error("Sequence length exceeds verified experiment bound");
   return {
     job_type: "managed",
     method: "sft_text",
@@ -55,7 +59,7 @@ export function boundedTrainingRequest(input: {
       learning_rate: 0.0001,
       num_epochs: 1,
       max_steps: maxSteps,
-      max_seq_length: 1536,
+      max_seq_length: maxSeqLength,
       packing: false,
       use_unsloth: false,
       lora_rank: 8,

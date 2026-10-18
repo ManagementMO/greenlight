@@ -8,6 +8,8 @@ The application includes an interactive cash bridge, source evidence, bounded wh
 
 [Open Greenlight](https://greenlight-two-psi.vercel.app) · [Demo guide](docs/demo-guide.md) · [Domain and data provenance](data/scenarios/README.md) · [Provider/ML runbook](scripts/ml/README.md) · [Technical plan](docs/Greenlight-revised-plan.md)
 
+**Team P0 checkpoint:** start with the [team handoff](docs/TEAM-HANDOFF.md). The application runs without model-provider keys; corrected v4 training and final evaluation are still in progress on a separate workstream.
+
 ![Greenlight decision workspace showing the $120,000 HVAC opportunity, cash bridge and $10,000 reserve, a $23,000 liquidity gap, and the conserved $65,000 deposit proposal.](docs/assets/decision-workspace.png)
 
 ## Try the decision
@@ -107,16 +109,19 @@ The reviewable result, manifests, frozen workload hash and per-question predicti
 
 A genuine **four-step SFT/LoRA proof on 16 examples** completed on `Qwen/Qwen3-4B-Instruct-2507` through Veri, exported [public synthetic merged weights](https://huggingface.co/machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp), and served a real canary. The canary failed schema validation: a single condition enum was returned as an array. This is technical train → export → serve evidence, with **no quality improvement claim**. No frozen final cases were queried in that proof.
 
-The substantive **v3** run uses **276 training examples**, a **23-example proof subset**, and **40 frozen final cases**. It explicitly tests invoice-issuance clocks and customer-recipient semantics. Job `95e43036a0b9` is running with **138 configured optimizer steps**; its intended merged repository is `machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7`. Full base/tuned final evaluation has not yet been queried at this documentation checkpoint. Final serving and quality claims must come from the completed artifacts.
+The original **v3** substantive run completed **138 optimizer steps on 276 examples** and exported merged weights. Its subsequent base-model test exposed an ambiguous format example in the shared prompt: enum choices looked like an answer array. All 40 base answers failed validation. That diagnostic is [preserved](data/artifacts/legacy-v3-baseline.json); it is excluded from quality-improvement claims.
+
+The **v4** experiment gives both models the validator's actual JSON Schema. It keeps the same 276 training contexts and labels, changes only the shared prompt contract, and uses a fresh independently authored 40-case final set. The actual Qwen tokenizer verifies every supervised row: **1,330 maximum total tokens**, at least **54 completion tokens**, exact prompt boundaries, and **zero truncation at 1,536**. A hash-bound token audit must pass before the training CLI can upload v4 data or allocate a GPU. The new 138-step run and its separate matched evaluation are underway; no v4 quality result is claimed at this checkpoint.
 
 | Evidence | Current reporting boundary |
 | --- | --- |
 | Historical four-step, 16-row technical proof | Trained, exported publicly, and served; canary schema-invalid. No final cases queried and no quality claim. |
-| Substantive v3 extraction training | 276 rows, 138 configured optimizer steps; job `95e43036a0b9` running at this checkpoint. |
-| v3 merged release and serving canary | Pending. Publish the actual artifact revision and inference result after verification. |
-| Matched 40-case base/tuned comparison | Pending and not yet queried. Publish exact errors, correct supported-proposal coverage, review burden, unsafe proposals and latency; retain the base on a tie or regression. |
+| Substantive v3 extraction training | 276 rows, committed checkpoint at step 138; historical merged artifact preserved. |
+| Legacy v3 baseline diagnostic | 0/40 valid answers under an ambiguous compact format example. Not used to claim an SFT gain. |
+| Corrected v4 training | Same 276 labels, proper JSON Schema prompt, hash-bound tokenizer audit, 138 configured steps. Running at this checkpoint. |
+| Fresh matched 40-case v4 comparison | Pending and not yet queried. Publish actual outputs, exact errors, supported coverage, unsafe proposals and latency; retain the base on a tie or regression. |
 
-The checked-in [v3 manifest](data/training/manifest.json) records the 276/23/40 split, 23 training families, ten held-out families, publication policy and hashes. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. Earlier versions remain archived as historical evidence. Only fictional clauses classified `PUBLIC_SYNTHETIC` may be uploaded or exported publicly; customer books, private documents, credentials and production traces are excluded.
+The checked-in [v4 training manifest](data/training/v4-schema-contract/manifest.json) binds the supervised rows to the unchanged [v3 labels](data/training/manifest.json), publication policy, schema profile and hashes. The v4 final set is authored separately under `data/evaluation/v4-schema-contract/`. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. Earlier versions remain archived as historical evidence. Only fictional clauses classified `PUBLIC_SYNTHETIC` may be uploaded or exported publicly; customer books, private documents, credentials and production traces are excluded.
 
 The required extraction release gate is **`extractor-gates-v2`**. Coverage means **correct supported proposals divided by supported expected cases**. Raw `PROPOSED` volume measures review burden; it is neither accuracy nor automatic activation. A release must improve material accuracy without weakening schema validity, safe handling, or correct supported-proposal coverage. Final results and the release SHA remain pending until that reviewed comparison completes. See the [ML runbook](scripts/ml/README.md) for the exact evidence boundaries.
 
@@ -144,11 +149,11 @@ npx tsx scripts/ml/provider-smoke.ts --execute
 # Anthropic-authored manifest + real baseline/candidate Jev replay.
 npx tsx scripts/harness/experiment.ts
 
-# Optional new proof on the active v3 23-row subset; historical proof used 16 rows.
+# Optional legacy technical proof; historical proof used 16 rows.
 npx tsx scripts/ml/train-veri.ts --max-steps 4 --max-cents 600 --timeout-seconds 1800 --execute
 
-# Substantive training; do not regenerate frozen data during an experiment.
-npx tsx scripts/ml/train-veri.ts --data data/training/train.jsonl --name sft-v3 --max-steps 138 --max-cents 600 --timeout-seconds 3600 --execute
+# Substantive v4 training; requires the matching local tokenizer audit.
+npx tsx scripts/ml/train-veri.ts --data data/training/v4-schema-contract/train.jsonl --name sft-v4 --max-steps 138 --max-seq-length 1536 --max-cents 600 --timeout-seconds 3600 --execute
 ```
 
 For a technical serving check, use `scripts/ml/serve-evaluate.ts --canary-only` with the actual unique public synthetic repository emitted by training. It skips both final cases and the C-120 showcase. Final evaluation uses the same **40** frozen cases and decoding for base and tuned models, followed by `npx tsx scripts/ml/compare-evaluations.ts`. The showcase is separately scored and excluded from final metrics. Full commands and bounds are in the [ML runbook](scripts/ml/README.md). Keep private raw responses, resource records and the ledger under ignored `work/`.
@@ -159,7 +164,9 @@ Reservations survive errors and ambiguous outcomes. Training/serving creation is
 
 The Intuit release supplies synthetic books. Greenlight preserves company-047's original source files and reconstructs **2,419 ledger rows to $74,882.38**, as of **October 6, 2026**. This bank balance becomes available cash only under the demo's explicit assumption of zero restricted funds. The forward calendar, reserve, clinic job, costs, contracts, communications and uncertainty bounds are constructed additions. It is not a live QuickBooks connection. [Pinned provenance](data/scenarios/intuit-source.json)
 
-Sentry captured a real **oversized public-response defect**, with a readable first-party TypeScript frame, a trace and a structured log. The fix bounds public input, estimated calculation work and output size, and returns compact scenario summaries. Review the [captured issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2), [defect trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697), [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd), and [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b) with project access. Identifiers are also published in the artifact manifest. Browser errors and masked Session Replay are configured; source-map upload uses the build auth token. Configuration alone is not proof that every telemetry product ingested an event, and the health flag reports DSN configuration only.
+Sentry captured a real **oversized public-response defect**, with a readable first-party TypeScript frame, a trace and a structured log. The fix bounds public input, estimated calculation work and output size, and returns compact scenario summaries. The original development reproduction returned **83,662,869 bytes**; the production regression returned **428,167 bytes**, HTTP 200, while preserving all **256 scenario summaries** and the worst-case timeline. These are separate environment runs, not a latency benchmark. The issue is resolved.
+
+Review the [captured issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2), [defect trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697), [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd), [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b), and [verified 51-second masked Session Replay](https://greenlight-full.sentry.io/explore/replays/2938f6342b1742e48e437e0cf48add8c/) with project access. Identifiers and measured regression sizes are also published in the artifact manifest. Source maps upload with each production build. The health flag reports DSN configuration only; the linked ingested records provide separate runtime proof.
 
 The interface began on a fresh [Paper canvas](https://app.paper.design/file/01M5653KWM6RPTEPWYPP37FKZX); the responsive application is implemented in Next.js/React. Further Paper MCP work encountered the account's weekly quota.
 

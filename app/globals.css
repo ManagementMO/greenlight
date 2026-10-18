@@ -2339,6 +2339,10 @@ pre {
   gap: 11px;
   padding-bottom: 22px;
 }
+.training-stages li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .training-stages li:not(:last-child)::before {
   content: "";
   position: absolute;
@@ -2544,6 +2548,48 @@ pre {
 .observability-frame > span {
   color: #a1b2bc;
   font-size: 8px;
+}
+.observability-regression {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #e0e8ee;
+}
+.regression-measurements {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  color: #7893a3;
+}
+.regression-measurements > div {
+  display: grid;
+  gap: 5px;
+}
+.regression-measurements span {
+  color: #708a9c;
+  font-size: 10px;
+}
+.regression-measurements strong {
+  color: #4f6e80;
+  font-family: var(--font-mono), monospace;
+  font-size: 15px;
+  font-weight: 500;
+}
+.regression-measurements small {
+  font-family: var(--font-body), sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+.observability-regression > p {
+  color: #7d95a5;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 9px;
+  overflow-wrap: anywhere;
+}
+.observability-regression > p + p {
+  color: #8fa4b1;
+  margin-top: 4px;
 }
 .observability-links {
   display: flex;

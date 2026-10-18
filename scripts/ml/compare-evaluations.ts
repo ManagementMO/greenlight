@@ -9,6 +9,7 @@ import {
 import { args, saveJson, publicError } from "./shared";
 type Row = {
   id: string;
+  promptSha256?: string;
   latencyMs: number;
   usage?: { prompt_tokens: number; completion_tokens: number };
   score: ExtractionScore;
@@ -19,6 +20,9 @@ type Experiment = {
   exampleCount: number;
   frozenCaseCount?: number;
   decode: unknown;
+  launch?: unknown;
+  promptProfile?: string;
+  promptContractSha256?: string;
   rows: Row[];
   summary: ExtractionSummary;
   artifact: { repo: string; revision: string };
@@ -52,9 +56,12 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
     );
   if (
     base.evaluationSha256 !== tuned.evaluationSha256 ||
-    JSON.stringify(base.decode) !== JSON.stringify(tuned.decode)
+    JSON.stringify(base.decode) !== JSON.stringify(tuned.decode) ||
+    !isDeepStrictEqual(base.launch, tuned.launch)
   )
-    throw new Error("Experiments differ in evaluation data or decoding");
+    throw new Error("Experiments differ in evaluation data, decoding or launch settings");
+  if (base.promptProfile !== tuned.promptProfile || base.promptContractSha256 !== tuned.promptContractSha256)
+    throw new Error("Experiments differ in prompt profile or prompt contract");
   const expectedCount = base.frozenCaseCount ?? 24;
   if (
     expectedCount < 24 ||
@@ -71,6 +78,12 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
     );
   if (base.rows.some((r, i) => r.id !== tuned.rows[i]?.id))
     throw new Error("Experiments evaluated different case identities/order");
+  if (
+    base.rows.some((row, i) => row.promptSha256 !== tuned.rows[i].promptSha256) ||
+    (base.promptProfile === "json-schema-v4" &&
+      base.rows.some((row) => !/^[a-f0-9]{64}$/.test(row.promptSha256 ?? "")))
+  )
+    throw new Error("Experiments must use identical verified per-case prompts");
   if (
     new Set(base.rows.map((row) => row.id)).size !== expectedCount ||
     base.rows.some((row) => !row.id)
@@ -111,6 +124,8 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
     baseArtifact: base.artifact,
     tunedArtifact: tuned.artifact,
     evaluationSha256: base.evaluationSha256,
+    promptProfile: base.promptProfile,
+    promptContractSha256: base.promptContractSha256,
     caseCount: expectedCount,
     base: baseSummary,
     tuned: tunedSummary,

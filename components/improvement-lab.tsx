@@ -70,6 +70,15 @@ type ExtractionComparison = {
   origin: "recorded";
   detail: string;
 };
+type ObservabilityRegression = {
+  originalOutputBytes: number;
+  originalEnvironment: "development";
+  productionOutputBytes: number;
+  inputBytes: number;
+  scenarioCount: number;
+  http: number;
+  verifiedAt: string;
+};
 type Artifacts = {
   schemaVersion: number;
   generatedAt?: string;
@@ -85,12 +94,68 @@ type Artifacts = {
     firstPartyFrame: string;
     verifiedAt: string;
     environment: string;
+    issueStatus?: "resolved" | "unresolved" | "ignored";
+    regression?: ObservabilityRegression;
     productionTraceUrl?: string;
     evidenceTraceUrl?: string;
     replayUrl?: string;
   };
   provenance?: unknown[];
 };
+
+function validRegression(
+  value: ObservabilityRegression | undefined,
+): value is ObservabilityRegression {
+  return !!(
+    value &&
+    value.originalEnvironment === "development" &&
+    value.http === 200 &&
+    typeof value.verifiedAt === "string" &&
+    !Number.isNaN(Date.parse(value.verifiedAt)) &&
+    [
+      value.originalOutputBytes,
+      value.productionOutputBytes,
+      value.inputBytes,
+      value.scenarioCount,
+    ].every((number) => Number.isSafeInteger(number) && number > 0)
+  );
+}
+
+function ResponseSizeProof({ value }: { value: ObservabilityRegression }) {
+  const integer = (number: number) =>
+    new Intl.NumberFormat("en-US").format(number);
+  return (
+    <div
+      className="observability-regression"
+      aria-label="Recorded response-size regression"
+    >
+      <div className="regression-measurements">
+        <div>
+          <span>Original · development reproduction</span>
+          <strong>
+            {integer(value.originalOutputBytes)} <small>output bytes</small>
+          </strong>
+        </div>
+        <Icon name="arrow-right" size={16} />
+        <div>
+          <span>Production regression</span>
+          <strong>
+            {integer(value.productionOutputBytes)} <small>output bytes</small>
+          </strong>
+        </div>
+      </div>
+      <p>
+        HTTP {value.http} · {integer(value.scenarioCount)} scenario summaries
+        preserved · {integer(value.inputBytes)} production input bytes ·
+        verified {time(value.verifiedAt)}
+      </p>
+      <p>
+        Recorded response sizes across development and production; no latency
+        comparison is implied.
+      </p>
+    </div>
+  );
+}
 
 function validComparison(
   value: ExtractionComparison | undefined,
@@ -595,7 +660,13 @@ export function ImprovementLab() {
                     {data.observability.environment} · verified{" "}
                     {time(data.observability.verifiedAt)}
                   </span>
+                  {["resolved", "unresolved", "ignored"].includes(
+                    data.observability.issueStatus ?? "",
+                  ) && <span>Issue {data.observability.issueStatus}</span>}
                 </div>
+                {validRegression(data.observability.regression) && (
+                  <ResponseSizeProof value={data.observability.regression} />
+                )}
                 <div className="observability-links">
                   <a
                     href={data.observability.issueUrl}

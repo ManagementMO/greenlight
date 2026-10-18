@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T01:07:22.968Z",
+  "generatedAt": "2026-10-18T01:33:36.525Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -20,16 +20,14 @@
     },
     {
       "provider": "Veri",
-      "status": "verified",
+      "status": "pending",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:05:22.551Z",
       "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
     },
     {
       "provider": "Hugging Face",
-      "status": "verified",
+      "status": "pending",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:05:22.551Z",
       "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
     },
     {
@@ -43,24 +41,24 @@
   "training": {
     "status": "running",
     "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
-    "jobId": "95e43036a0b9",
-    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7",
+    "jobId": "b808db134828",
+    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
     "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
     "stages": [
       {
         "name": "Dataset",
         "status": "verified",
-        "detail": "276 examples; SHA-256 0b2aade3cb4a4724ede90442943f63919e1ca832c83555aa415bd39f8ddc79f3. Template-reviewed synthetic labels, not independent human adjudication."
+        "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
       },
       {
         "name": "Fine-tuning",
-        "status": "completed",
-        "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "status": "running",
+        "detail": "0 of 138 steps recorded by the provider progress API. Completion-only training intended; the remote effective loss mask is not directly attested."
       },
       {
         "name": "Merged export",
-        "status": "verified",
-        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        "status": "pending",
+        "detail": "Waiting for completed merged export."
       },
       {
         "name": "Serving canary",
@@ -81,6 +79,28 @@
         "canaryExact": 0
       },
       "detail": "completed. GPU permanently stopped and read back. No frozen test cases queried in this technical proof."
+    },
+    {
+      "id": "veri-serving-base-b091a92b-9bd5-463c-8ad0-66eadd3ac161",
+      "name": "Archived v3 compact-prompt diagnostic",
+      "origin": "recorded",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "sampleCount": 40,
+      "metrics": {
+        "count": 40,
+        "valid": 0,
+        "materialExact": 0,
+        "statusCorrect": 0,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0,
+        "materialExactRate": 0,
+        "rawProposalRate": 0,
+        "correctSupportedProposalRate": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. Ambiguous legacy format example produced schema-copying errors. Preserved for provenance and excluded from the v4 quality comparison."
     }
   ],
   "experiments": [
@@ -131,8 +151,8 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 1.47,
-    "reservedUsd": 2,
+    "spentUsd": 1.73,
+    "reservedUsd": 6,
     "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
   },
   "provenance": [
@@ -155,6 +175,16 @@
     "replayUrl": "https://greenlight-full.sentry.io/explore/replays/2938f6342b1742e48e437e0cf48add8c/",
     "firstPartyFrame": "app/api/decision/route.ts:26",
     "verifiedAt": "2026-10-18T00:24:00Z",
-    "environment": "development"
+    "environment": "development",
+    "issueStatus": "resolved",
+    "regression": {
+      "originalOutputBytes": 83662869,
+      "originalEnvironment": "development",
+      "productionOutputBytes": 428167,
+      "inputBytes": 229967,
+      "scenarioCount": 256,
+      "http": 200,
+      "verifiedAt": "2026-10-18T01:16:19.776Z"
+    }
   }
 }

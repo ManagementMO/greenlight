@@ -28,3 +28,36 @@ export function assertPublicSyntheticTrainingData(
     dataClassification: "PUBLIC_SYNTHETIC" as const,
   };
 }
+
+/** Refuse a paid run if its token audit is stale or any supervised answer is truncated. */
+export function assertBoundTokenizerAudit(
+  audit: {
+    trainingSha256?: unknown;
+    baseModel?: unknown;
+    examples?: unknown;
+    maxTokens?: unknown;
+    minCompletionTokens?: unknown;
+    allPromptTokenPrefixesMatch?: unknown;
+  },
+  expected: { sha: string; baseModel: string; rows: number; maxSeqLength: number },
+) {
+  if (
+    audit.trainingSha256 !== expected.sha ||
+    audit.baseModel !== expected.baseModel ||
+    audit.examples !== expected.rows
+  )
+    throw new Error("Tokenizer audit does not match the exact training data, model and row count");
+  if (
+    audit.allPromptTokenPrefixesMatch !== true ||
+    !Number.isSafeInteger(audit.minCompletionTokens) ||
+    Number(audit.minCompletionTokens) <= 0
+  )
+    throw new Error("Tokenizer audit must verify every prompt prefix and positive completion tokens");
+  if (
+    !Number.isSafeInteger(audit.maxTokens) ||
+    Number(audit.maxTokens) <= 0 ||
+    Number(audit.maxTokens) > expected.maxSeqLength
+  )
+    throw new Error("Selected sequence limit would truncate the audited training data");
+  return { maxTokens: Number(audit.maxTokens), examples: expected.rows };
+}
