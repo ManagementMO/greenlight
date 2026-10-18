@@ -5,6 +5,7 @@ import { validPublicV5Evaluation, type PublicV5Evaluation } from "../public-extr
 import { scoreExtraction } from "./evaluation";
 import { v5PromptHash, V5_GATE } from "./evaluation-v5";
 import { buildC120Showcase } from "./showcase";
+import recordedEvidence from "../../data/artifacts/evidence-judgments.json";
 
 type RecordData = Record<string, any>;
 const sha = (text: string) => createHash("sha256").update(text).digest("hex");
@@ -67,4 +68,8 @@ export function assertPublishedV5Showcase(value: RecordData, final: PublicV5Eval
   const score = scoreExtraction(value.rawOutput, source.context, source.expected);
   if (!isDeepStrictEqual(value.candidate, score.parsed ?? null) || value.materialExact !== score.materialExact || value.validationError !== (score.error ?? null))
     throw new Error("V5 source illustration candidate was changed or repaired after inference.");
+  const judgments = recordedEvidence.judgments.map(judgment => ({predicate: judgment.predicate, verdict: judgment.verdict, confidence: judgment.confidence}));
+  if (value.judgmentModel !== recordedEvidence.model || value.judgmentRunId !== recordedEvidence.runId ||
+      value.judgmentEvidenceSha256 !== recordedEvidence.evidenceSha256 || !isDeepStrictEqual(value.judgments, judgments))
+    throw new Error("V5 source illustration judgments differ from the recorded Jev evidence.");
 }

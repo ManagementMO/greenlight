@@ -57,5 +57,8 @@ describe("V5 source illustration authority", () => {
     expect(() => assertPublishedV5Showcase(result, f.final)).toThrow("changed or repaired");
     const other = buildV5Showcase(f.final, f.raw, f.evidence); other.rawOutput += "x";
     expect(() => assertPublishedV5Showcase(other, f.final)).toThrow("actual output");
+    const judgments = buildV5Showcase(f.final, f.raw, f.evidence);
+    judgments.judgments[0].verdict = "fabricated";
+    expect(() => assertPublishedV5Showcase(judgments, f.final)).toThrow("recorded Jev");
   });
 });
