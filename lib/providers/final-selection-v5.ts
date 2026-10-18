@@ -5,7 +5,9 @@ import { z } from "zod";
 import { assertReviewedV5Evaluation, assertV5RunIdentity, v5PromptHash } from "./evaluation-v5";
 import { scoreExtraction, summarizeExtraction } from "./evaluation";
 import { extractionPromptV5 } from "./extraction-v5";
-import type { LabeledExample } from "../../scripts/ml/generate-data";
+import type { ExtractedClause, ExtractionContext } from "./extraction";
+
+type DevelopmentExample = { id: string; context: ExtractionContext; expected: ExtractedClause };
 
 export const V5_FINAL_SELECTION_PATH = "data/artifacts/v5-final-selection.json";
 const developmentPath = "data/artifacts/extraction-v5-development.json";
@@ -38,7 +40,7 @@ export async function createV5FinalSelection(rationale: string): Promise<V5Final
   assertReviewedV5Evaluation(devManifest, "development-only");
   assertReviewedV5Evaluation(finalManifest, "final-evaluation");
   const devBytes = await readFile("data/evaluation/v5-development/evaluation.frozen.jsonl", "utf8");
-  const cases = new Map<string, LabeledExample>(devBytes.trim().split("\n").map(line => { const row = JSON.parse(line); return [row.id, row]; }));
+  const cases = new Map<string, DevelopmentExample>(devBytes.trim().split("\n").map(line => { const row = JSON.parse(line); return [row.id, row]; }));
   if (sha(trainBytes) !== trainingManifest.hashes["train.jsonl"] ||
       sha(devBytes) !== devManifest.hashes["evaluation.frozen.jsonl"] || cases.size !== devManifest.evaluationCount ||
       development.origin !== "recorded" || development.purpose !== "development-only" || development.caseCount !== cases.size ||
