@@ -139,7 +139,7 @@ export function buildV5Release(input: ReleaseInput) {
     stages: [
       {name: "V5 dataset", status: "verified", detail: `${t.rows} synthetic examples; SHA-256 ${t.datasetSha256}. Developer-reviewed labels, not customer adjudication.`},
       {name: "V5 fine-tuning", status: "completed", detail: `${e.finalCheckpointStep} of ${t.maxSteps} steps verified in the provider worker checkpoint log. Completion-only loss is intended; the remote effective loss mask is not attested.`},
-      {name: "V5 merged export", status: "verified", detail: "Public Hugging Face configuration verified. Observed repository revision identifies the export, not the provider's effective loaded weights."},
+      {name: "V5 merged export", status: "verified", detail: `${t.postTrainingExport ? "Saved trained adapter safely rematerialized on the pinned BF16 base. " : ""}Public Hugging Face configuration verified. Observed repository revision identifies the export, not the provider's effective loaded weights.`},
       {name: "V5 serving inference", status: serving ? "verified" : "pending", detail: serving ? "Recorded model responses returned; serving resources stopped and final costs settled. This is evaluation serving, not a public live endpoint." : "Awaiting a complete, validated public serving evaluation with resource cleanup and settled costs."},
       {name: "V5 development", status: development ? "completed" : "pending", detail: development ? `${development.caseCount} frozen development cases compared. Development cannot authorize promotion.` : "Development comparison is not yet published."},
       {name: "V5 final gate", status: final ? final.comparison.promoted ? "passed" : "blocked" : "pending", detail: final ? `${final.caseCount} frozen final cases. ${final.comparison.promoted ? "Predeclared gate passed; owner review remains mandatory and public live inference stays off." : "Candidate not promoted. Relative improvement does not override the usefulness and safety gate."}` : "Final evaluation and gate result are not yet published."},
@@ -163,6 +163,11 @@ export function buildV5Release(input: ReleaseInput) {
     ...(t.postTrainingExport ? {postTrainingExport: pick(t.postTrainingExport, ["method", "noRetraining", "sourceTrainingJobId", "sourceTrainingRepo", "trainingSha256", "baseModel", "baseRevision", "adapterSha256", "mergeEvidenceSha256", "dtype"])} : {}),
   };
   const current: RecordData = {...input.current, generatedAt: input.generatedAt, training, budget};
+  if(Array.isArray(current.providers)) current.providers=current.providers.map((entry: RecordData)=>
+    entry.provider === "Veri" ? {...entry,status:"verified",origin:"recorded",checkedAt:t.completedAt,model:t.baseModel,
+      detail:`Completed ${e.finalCheckpointStep}-step V5 SFT and saved adapter. Export materialization, actual serving, and quality have separate evidence below.`} :
+    entry.provider === "Hugging Face" ? {...entry,status:"verified",origin:"recorded",checkedAt:p.verifiedAt,model:p.repo,
+      detail:`Verified public export at observed revision ${p.revision}. ${t.postTrainingExport ? "BF16 materialization and original adapter have recorded hashes. " : ""}Repository identity does not attest the provider's loaded weight bytes.`} : entry);
   if (input.current.training?.modelRepo && input.current.training.modelRepo !== p.repo) {
     const history = Array.isArray(input.current.trainingHistory) ? [...input.current.trainingHistory] : [];
     if (!history.some(item => item.modelRepo === input.current.training.modelRepo && item.jobId === input.current.training.jobId))

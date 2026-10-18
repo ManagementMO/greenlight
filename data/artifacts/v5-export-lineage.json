@@ -81,7 +81,7 @@
   },
   "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
   "revision": "51fcc48bf3ae0753d9633ea6566575585c347271",
-  "verifiedAt": "2026-10-18T04:28:19.778828+00:00",
+  "verifiedAt": "2026-10-18T04:35:06.184Z",
   "public": true,
   "adapterSubdirectory": "training-adapter"
 }
