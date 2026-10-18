@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Lora } from "next/font/google";
 import Landing from "./landing";
 import { getLandingEvidence } from "@/lib/landing-evidence";
+import { getLandingCashStory } from "@/lib/landing-cash-story";
 import "./landing.css";
+import "./cash-story.css";
 
 const serif = Lora({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className={`${serif.variable} ${sans.variable}`}>
-      <Landing evidence={getLandingEvidence()} />
+      <Landing evidence={getLandingEvidence()} cashStory={getLandingCashStory()} />
     </div>
   );
 }
