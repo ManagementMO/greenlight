@@ -1,25 +1,24 @@
 // "Routing": a small card opens to full screen, then the Ductline job's questions
-// arrive one at a time and drop into the lane that can answer them most cheaply.
-// Answers come from the same fixture as the Hidden gap; lane costs from bench/results/REPORT.md.
+// arrive one at a time. This explains the architecture using the reviewed fixture;
+// it is not a live provider trace or a benchmark of per-question prices.
 
 import { createTimeline, type ScrollObserver } from "animejs";
 import dynamic from "next/dynamic";
-import { JEV, ROUTED } from "./hero-race";
 
 const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 
 type Lane = "llm" | "jev" | "code";
 
 const LANES: { id: Lane; name: string; job: string; cost: string }[] = [
-  { id: "llm", name: "Language model", job: "Reads the documents", cost: `~${ROUTED.readSecs.toFixed(1)}s · ~$${ROUTED.cost.toFixed(2)} per case` },
-  { id: "jev", name: "Jev", job: "Answers yes/no checks", cost: `${JEV.secs.toFixed(2)}s · $${JEV.cost.toFixed(5)} per check` },
-  { id: "code", name: "Fixed code", job: "Does the math and dates", cost: "Instant · $0" },
+  { id: "llm", name: "Language model", job: "Proposes structured terms", cost: "Source validation + owner review" },
+  { id: "jev", name: "Jev", job: "Judges narrow evidence questions", cost: "MET / NOT_MET / UNKNOWN / CONFLICTING" },
+  { id: "code", name: "Fixed code", job: "Calculates cash and dates", cost: "Integer cents · no model call" },
 ];
 
 // Arrival order interleaves the lanes so the sorting is visible.
 const QUESTIONS: { lane: Lane; q: string; a: string }[] = [
-  { lane: "llm", q: "What does the contract say about the phase payment?", a: "$30,000 at phase completion" },
-  { lane: "jev", q: "Did the inspection pass?", a: "MET" },
+  { lane: "llm", q: "What makes the $30,000 phase invoice eligible?", a: "Inspection passed AND certificate received" },
+  { lane: "jev", q: "Has the planned inspection already passed?", a: "UNKNOWN · expected Oct 20, not observed" },
   { lane: "code", q: "Lowest cash if the phase payment lands Nov 20?", a: "−$13,000 on Nov 4" },
   { lane: "llm", q: "Which costs belong to this job?", a: "4 supplier and crew payments" },
   { lane: "jev", q: "Has the phase payment reached the bank?", a: "UNKNOWN" },
@@ -91,8 +90,8 @@ export function RouteSection() {
 
         <div className="lp-route-ui">
           <header>
-            <p className="lp-eyebrow">Routing</p>
-            <h2>Each question goes to the cheapest thing that can answer it correctly.</h2>
+            <p className="lp-eyebrow">Illustrated architecture · reviewed demo fixture</p>
+            <h2>Models interpret evidence. Code calculates the cash.</h2>
           </header>
           <div className="lp-route-slot" aria-hidden="true">Incoming question</div>
           <div className="lp-route-lanes">
@@ -112,7 +111,7 @@ export function RouteSection() {
               </div>
             ))}
           </div>
-          <p className="lp-route-foot">The model never does arithmetic. Every dollar figure comes from tested code.</p>
+          <p className="lp-route-foot">Models propose; source checks and owner review come first. The cash engine uses reviewed inputs.</p>
         </div>
       </div>
     </section>
