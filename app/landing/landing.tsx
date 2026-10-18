@@ -40,12 +40,34 @@ function Chars({ text, attr = "data-char" }: { text: string; attr?: string }) {
   );
 }
 
+function DockGlyph({ kind }: { kind: "workspace" | "evidence" | "lab" }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {kind === "workspace" && <>
+        <rect x="3.5" y="4" width="17" height="16" rx="3" fill="currentColor" fillOpacity=".09" />
+        <path d="m6.5 14.5 3.5-4 3 2.5 4.5-5" />
+        <path d="M6.5 17h11" opacity=".4" />
+      </>}
+      {kind === "evidence" && <>
+        <path d="M6.5 6.5H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10" opacity=".45" />
+        <rect x="7" y="3" width="14" height="16" rx="2.5" fill="currentColor" fillOpacity=".09" />
+        <path d="M10.5 7h7M10.5 10h4m-3 4 1.5 1.5 3.5-3.5" />
+      </>}
+      {kind === "lab" && <>
+        <path d="M7.5 14h9l2.6 4.4a1.7 1.7 0 0 1-1.5 2.6H6.4a1.7 1.7 0 0 1-1.5-2.6Z" fill="currentColor" fillOpacity=".18" stroke="none" />
+        <path d="M8.5 3h7M10 3v6.5l-5.1 8.9A1.7 1.7 0 0 0 6.4 21h11.2a1.7 1.7 0 0 0 1.5-2.6L14 9.5V3M7.5 14h9" />
+        <circle cx="10" cy="17.5" r=".75" fill="currentColor" stroke="none" />
+      </>}
+    </svg>
+  );
+}
+
 function Dock({ label = "Open live demo" }: { label?: string }) {
   return (
     <div className="lp-dock">
-      <a href={DEMO} aria-label="Decision workspace"><Icon name="timeline" size={18} /></a>
-      <a href="/#evidence" aria-label="Evidence"><Icon name="evidence" size={18} /></a>
-      <a href="/#lab" aria-label="Improvement lab"><Icon name="flask" size={18} /></a>
+      <a className="lp-dock-icon" href={DEMO} aria-label="Decision workspace" title="Decision workspace"><DockGlyph kind="workspace" /></a>
+      <a className="lp-dock-icon" href="/#evidence" aria-label="Evidence" title="Evidence"><DockGlyph kind="evidence" /></a>
+      <a className="lp-dock-icon" href="/#lab" aria-label="Improvement lab" title="Improvement lab"><DockGlyph kind="lab" /></a>
       <a className="lp-dock-cta" href={DEMO}>{label} <Icon name="arrow-right" size={16} /></a>
     </div>
   );

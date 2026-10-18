@@ -70,14 +70,18 @@
 .lp-proof > p { margin: 0; font-size: 11px; line-height: 1.6; color: var(--muted); }
 
 /* Dock */
-.lp-dock { display: flex; align-items: center; gap: 6px; padding: 6px; border: 1px solid var(--line); border-radius: 16px; background: rgba(19,20,28,.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 10px 32px rgba(5,7,20,.16); }
-.lp-dock a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(244,243,233,.07); color: var(--fg); text-decoration: none; transition: transform 180ms var(--ease), background 160ms ease, box-shadow 180ms ease; }
-.lp-dock a[aria-label="Decision workspace"] { color: var(--accent); }
-.lp-dock a[aria-label="Evidence"] { color: var(--amber); }
-.lp-dock a[aria-label="Improvement lab"] { color: var(--lavender); }
-.lp-dock .lp-dock-cta { width: auto; padding: 0 22px; display: flex; gap: 10px; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 13px; letter-spacing: -.015em; box-shadow: inset 0 1px 0 rgba(244,243,233,.3); }
+.lp-dock { display: flex; align-items: center; gap: 6px; padding: 6px; border: 1px solid rgba(245,242,233,.2); border-radius: 16px; background: linear-gradient(165deg, rgba(245,242,233,.075), transparent 65%), rgba(19,20,28,.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 12px 32px rgba(5,7,20,.2), inset 0 1px 0 rgba(245,242,233,.08); }
+.lp-dock a { position: relative; isolation: isolate; display: grid; place-items: center; flex-grow: 1; width: 44px; height: 44px; border: 1px solid transparent; border-radius: 10px; color: var(--fg); text-decoration: none; transition: transform 180ms var(--ease), background-color 160ms ease, border-color 160ms ease; }
+.lp-dock a[aria-label="Decision workspace"] { --dock-tint: var(--accent); }
+.lp-dock a[aria-label="Evidence"] { --dock-tint: var(--amber); }
+.lp-dock a[aria-label="Improvement lab"] { --dock-tint: var(--lavender); }
+.lp-dock .lp-dock-icon { color: var(--dock-tint); border-color: color-mix(in srgb, var(--dock-tint) 26%, transparent); background: radial-gradient(ellipse at 50% 110%, color-mix(in srgb, var(--dock-tint) 14%, transparent), transparent 75%), rgba(245,242,233,.035); box-shadow: inset 0 1px 0 rgba(245,242,233,.12), inset 0 -1px 1px rgba(5,7,20,.18), 0 3px 8px rgba(5,7,20,.16); }
+.lp-dock-icon::before { content: ""; position: absolute; z-index: -1; inset: 1px 1px 45%; border-radius: 8px 8px 50% 50%; background: linear-gradient(rgba(245,242,233,.12), rgba(245,242,233,.015)); pointer-events: none; }
+.lp-dock-icon svg { filter: drop-shadow(0 1px 1px rgba(5,7,20,.25)); }
+.lp-dock .lp-dock-cta { width: auto; padding: 0 22px; display: flex; justify-content: center; gap: 10px; background: linear-gradient(170deg, rgba(255,255,255,.2), transparent 65%), var(--accent); border-color: rgba(245,242,233,.28); color: var(--accent-ink); font-weight: 600; font-size: 13px; letter-spacing: -.015em; box-shadow: inset 0 1px 0 rgba(244,243,233,.3), 0 3px 8px rgba(5,7,20,.12); }
 .lp-dock a:active { transform: scale(.97); }
-@media (hover: hover) and (pointer: fine) { .lp-dock a:hover { transform: translateY(-2px); background: rgba(244,243,233,.14); } .lp-dock .lp-dock-cta:hover { background: #beeace; box-shadow: 0 4px 18px rgba(169,223,188,.12); } }
+@media (hover: hover) and (pointer: fine) { .lp-dock a:hover { transform: translateY(-2px); } .lp-dock .lp-dock-icon:hover { background-color: rgba(245,242,233,.08); border-color: color-mix(in srgb, var(--dock-tint) 50%, transparent); } .lp-dock .lp-dock-cta:hover { background-color: #beeace; } }
+@media (prefers-reduced-motion: reduce) { .lp-dock a { transition: none; } .lp-dock a:hover, .lp-dock a:active { transform: none; } }
 
 /* Shared */
 .lp-eyebrow { font: 400 11px/1.5 var(--mono); letter-spacing: .095em; text-transform: uppercase; color: var(--lavender); margin: 0; }
