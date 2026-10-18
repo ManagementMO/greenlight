@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "origin": "recorded",
+  "runId": "jev-c120-c0d4e07b-8f06-45fd-b792-f385816225a0",
+  "snapshotDate": "2026-10-06",
+  "companyId": "company-047",
+  "jobId": "clinic-retrofit-120",
+  "model": "jev-1.14.0",
+  "requestHash": "43d0f24417c4b19388ac4474503de3bcc6273e6693a2894396d058dc8a2185fe",
+  "evidenceSha256": "9f17fda05791dc19e8e9505bec91779b00c90267bc6707fceddf086d50905fa6",
+  "sourceIds": [
+    "signed-contract",
+    "customer-email",
+    "inspection-plan"
+  ],
+  "generatedAt": "2026-10-18T00:41:20.877Z",
+  "latencyMs": 436,
+  "judgments": [
+    {
+      "predicate": "As of 2026-10-06, the phase-one inspection has actually passed; a future plan alone does not establish this.",
+      "verdict": "NOT_MET",
+      "confidence": 0.89,
+      "sourceIds": [
+        "signed-contract",
+        "customer-email",
+        "inspection-plan"
+      ]
+    },
+    {
+      "predicate": "As of 2026-10-06, the customer or its explicitly authorized project manager has actually received the phase-one insurance certificate. A future expected receipt is not observed receipt.",
+      "verdict": "UNKNOWN",
+      "confidence": 0.56,
+      "sourceIds": [
+        "signed-contract",
+        "customer-email",
+        "inspection-plan"
+      ]
+    },
+    {
+      "predicate": "As of 2026-10-06, the USD30,000 phase payment has actually reached settled bank funds. Invoice eligibility, a due date and forecast collection windows do not establish settlement.",
+      "verdict": "NOT_MET",
+      "confidence": 0.93,
+      "sourceIds": [
+        "signed-contract",
+        "customer-email",
+        "inspection-plan"
+      ]
+    }
+  ],
+  "detail": "Current evidence truth as of October6. The cash engine separately tests explicitly disclosed future conditions and settlement assumptions. These judgments never create an invoice, activate a receipt or move money."
+}

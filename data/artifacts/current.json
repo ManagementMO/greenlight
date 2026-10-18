@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-18T01:33:36.525Z",
+  "providers": [
+    {
+      "provider": "Anthropic",
+      "status": "verified",
+      "origin": "recorded",
+      "model": "claude-sonnet-4-6",
+      "checkedAt": "2026-10-18T00:12:34.068Z",
+      "detail": "Real inference and bounded MetaHarness configuration author. Experiment results are saved; opening this page makes no paid calls."
+    },
+    {
+      "provider": "TypeSafe / Jev",
+      "status": "verified",
+      "origin": "recorded",
+      "model": "jev-1.14.0",
+      "checkedAt": "2026-10-18T00:12:34.068Z",
+      "detail": "Real atomic evidence judgments and the matched baseline/candidate experiment. Same model, propositions, evidence, accuracy and coverage on the recorded workload."
+    },
+    {
+      "provider": "Veri",
+      "status": "pending",
+      "origin": "recorded",
+      "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
+    },
+    {
+      "provider": "Hugging Face",
+      "status": "pending",
+      "origin": "recorded",
+      "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
+    },
+    {
+      "provider": "Sentry",
+      "status": "verified",
+      "origin": "recorded",
+      "checkedAt": "2026-10-18T00:24:00Z",
+      "detail": "Actual oversized-response defect captured with a readable TypeScript frame, trace and log. Regression now bounds public input, calculation and output."
+    }
+  ],
+  "training": {
+    "status": "running",
+    "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+    "jobId": "b808db134828",
+    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+    "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
+    "stages": [
+      {
+        "name": "Dataset",
+        "status": "verified",
+        "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
+      },
+      {
+        "name": "Fine-tuning",
+        "status": "running",
+        "detail": "0 of 138 steps recorded by the provider progress API. Completion-only training intended; the remote effective loss mask is not directly attested."
+      },
+      {
+        "name": "Merged export",
+        "status": "pending",
+        "detail": "Waiting for completed merged export."
+      },
+      {
+        "name": "Serving canary",
+        "status": "pending",
+        "detail": "Awaiting real deployment inference and permanent stop verification."
+      }
+    ]
+  },
+  "evaluations": [
+    {
+      "id": "veri-serving-proof-a838d4a7-c6e7-4997-a093-06e448582833",
+      "name": "Merged model serving proof — training canary only",
+      "origin": "recorded",
+      "model": "machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp",
+      "sampleCount": 0,
+      "metrics": {
+        "canaryValid": 0,
+        "canaryExact": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. No frozen test cases queried in this technical proof."
+    },
+    {
+      "id": "veri-serving-base-b091a92b-9bd5-463c-8ad0-66eadd3ac161",
+      "name": "Archived v3 compact-prompt diagnostic",
+      "origin": "recorded",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "sampleCount": 40,
+      "metrics": {
+        "count": 40,
+        "valid": 0,
+        "materialExact": 0,
+        "statusCorrect": 0,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0,
+        "materialExactRate": 0,
+        "rawProposalRate": 0,
+        "correctSupportedProposalRate": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. Ambiguous legacy format example produced schema-copying errors. Preserved for provenance and excluded from the v4 quality comparison."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "metaharness-mvd2oofj",
+      "name": "Dependency-aware evidence updates",
+      "status": "promoted",
+      "origin": "recorded",
+      "sampleCount": 21,
+      "baseline": {
+        "correct": 20,
+        "total": 21,
+        "decisive": 15,
+        "falseSatisfied": 0,
+        "modelCalls": 18,
+        "accuracy": 0.9523809523809523,
+        "coverage": 0.7142857142857143,
+        "inputTokens": 12666,
+        "outputTokens": 891,
+        "costUsd": 0.18,
+        "latencyMs": 2771,
+        "cacheHits": 3
+      },
+      "candidate": {
+        "correct": 20,
+        "total": 21,
+        "decisive": 15,
+        "falseSatisfied": 0,
+        "modelCalls": 6,
+        "accuracy": 0.9523809523809523,
+        "coverage": 0.7142857142857143,
+        "inputTokens": 3998,
+        "outputTokens": 392,
+        "costUsd": 0.06,
+        "latencyMs": 832,
+        "cacheHits": 13
+      },
+      "metrics": {
+        "baselineAccuracy": 0.9523809523809523,
+        "candidateAccuracy": 0.9523809523809523,
+        "baselineCalls": 18,
+        "candidateCalls": 6,
+        "baselineLatencyMs": 2771,
+        "candidateLatencyMs": 832
+      },
+      "detail": "Both workflows cache stable work and use the same pinned Jev model, propositions and available evidence. Synthetic, predeclared localized-update workload; no general production speedup claim. Cost is conservatively rounded up per call, not the exact provider invoice. Gate: passed."
+    }
+  ],
+  "budget": {
+    "capUsd": 20,
+    "spentUsd": 1.73,
+    "reservedUsd": 6,
+    "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
+  },
+  "provenance": [
+    {
+      "label": "Intuit QuickBooks Hackathon 2026",
+      "url": "https://huggingface.co/datasets/CL251215/QuickBooks-Hackathon-2026",
+      "detail": "Synthetic sponsor accounting data; future schedules and job evidence are disclosed extensions."
+    },
+    {
+      "label": "Paper design",
+      "url": "https://app.paper.design/file/01M5653KWM6RPTEPWYPP37FKZX",
+      "detail": "Fresh canvas created; initial layout authored. Further MCP design work limited by the account's weekly quota."
+    }
+  ],
+  "observability": {
+    "issueUrl": "https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2",
+    "traceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697",
+    "productionTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd",
+    "evidenceTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b",
+    "replayUrl": "https://greenlight-full.sentry.io/explore/replays/2938f6342b1742e48e437e0cf48add8c/",
+    "firstPartyFrame": "app/api/decision/route.ts:26",
+    "verifiedAt": "2026-10-18T00:24:00Z",
+    "environment": "development",
+    "issueStatus": "resolved",
+    "regression": {
+      "originalOutputBytes": 83662869,
+      "originalEnvironment": "development",
+      "productionOutputBytes": 428167,
+      "inputBytes": 229967,
+      "scenarioCount": 256,
+      "http": 200,
+      "verifiedAt": "2026-10-18T01:16:19.776Z"
+    }
+  }
+}

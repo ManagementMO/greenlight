@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-final-v4-schema-contract",
+  "promptProfile": "json-schema-v4",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "frozen": true,
+  "frozenAt": "2026-10-18T01:33:48Z",
+  "evaluationCount": 40,
+  "statusCounts": {
+    "PROPOSED": 24,
+    "AMBIGUOUS": 8,
+    "UNSUPPORTED": 8
+  },
+  "splitUnit": "New Boolean composition, case renderer, source, subject, amount-reference and company namespace, disjoint from existing training and v3 final data.",
+  "supportedFamilyCount": 12,
+  "families": [
+    "parallel_complete_routes",
+    "two_separate_alternative_gates",
+    "prior_invoice_certificate_or_acceptance",
+    "signature_with_compound_or_prior_invoice",
+    "signed_prior_invoice_or_inspected_acceptance",
+    "two_independent_credit_gates",
+    "delivery_certificate_or_acceptance_invoice",
+    "inspection_and_two_complete_document_routes",
+    "customer_certificate_or_three_part_route",
+    "three_gates_with_two_alternatives",
+    "signed_inspected_certificate_or_delivered_invoice",
+    "acceptance_with_two_complete_clearance_routes",
+    "unselected_current_pricing_schedule",
+    "unbound_current_invoice_identity",
+    "unsettled_boolean_attachment",
+    "ambiguous_physical_unit_reference",
+    "unconfirmed_receipt_authority",
+    "unresolved_attachment_priority",
+    "certificate_subject_cross_reference_gap",
+    "unselected_deadline_inside_range",
+    "hour_duration_after_issuance",
+    "first_weekday_after_invoice",
+    "indexed_percentage_payment_amount",
+    "exclusive_either_with_lapse",
+    "ordered_receipt_inside_hour_window",
+    "bank_guarantee_additional_predicate",
+    "independent_escrow_recipient",
+    "mixed_calendar_and_bank_business_offset"
+  ],
+  "companyNamespace": "v4final_company_",
+  "sourceNamespace": "v4final_case_",
+  "subjectNamespace": "v4final_",
+  "conditionVocabulary": [
+    "AGREEMENT_SIGNED",
+    "DELIVERY_CONFIRMED",
+    "PHASE_ACCEPTED",
+    "INSPECTION_PASSED",
+    "CUSTOMER_CERTIFICATE_RECEIVED",
+    "INVOICE_ACCEPTED"
+  ],
+  "labelAuthority": "Explicit typed expected clauses authored and developer-reviewed with new fictional prose before any v4 model predictions; no provider predictions or evaluated-model outputs were used as ground truth. Not independent human/customer adjudication.",
+  "evaluationAccess": "Protected final labels are for the fixed evaluator and pre-query auditor only. Inference receives context fields only, never expected, labelRationale, family or status labels. Never upload this file as training data.",
+  "publicationPolicy": "Fictional PUBLIC_SYNTHETIC content only; no private accounting books, customer documents, credentials or production traces. Protection is experimental access separation, not confidentiality of real personal data.",
+  "freezePolicy": "The JSONL bytes and SHA256 are fixed before predictions. Do not regenerate or edit after exposure to predictions. Any later correction requires a new version preserving this artifact.",
+  "reviewStatus": "independently-audited-before-query",
+  "independentAudit": {
+    "auditor": "/root/independent_review",
+    "checkedAt": "2026-10-18T01:33:48Z",
+    "evaluationSha256": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a",
+    "caseCount": 40,
+    "method": "Independent coding-agent review of all source/label pairs and references before model predictions; not independent human/customer adjudication."
+  },
+  "requiresIndependentAuditBeforeQuery": true,
+  "predecessorEvaluationVersion": "greenlight-clauses-v3",
+  "predecessorEvaluationSha256": "c3eb6159c750732260662dd04912c4c15152108ed4af04fd6034b689c4c819eb",
+  "hashes": {
+    "evaluation.frozen.jsonl": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a"
+  },
+  "preQueryCorrections": [
+    {
+      "caseId": "v4final-case-16",
+      "changedField": "context.text",
+      "expectedLabelChanged": false,
+      "reason": "Independent reviewer identified First/Then as a possible temporal-order requirement. Clarified that inspection and one document path are conjunctive requirements whose completion order is unrestricted.",
+      "authorDraftSha256": "9df4c4842b0340ebacab4bd98ea7d191f197526299214683b096dd1fd57e73e9",
+      "authorDraftArchive": "review/author-draft-9df4c484/evaluation.author-draft.jsonl",
+      "correctedSha256": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a",
+      "correctedBeforeAnyFinalInference": true
+    }
+  ]
+}

@@ -1,8 +1,12 @@
 # Greenlight: revised system and adversarial feasibility audit
 
-**Execution settings confirmed:** product name Greenlight, local project `/Users/mo/Downloads/greenlight`, Anthropic for the general model, and one Sentry organization with a project named `greenlight-full`. The public GitHub repository is [ManagementMO/greenlight](https://github.com/ManagementMO/greenlight). The hosted demonstration has an initial $20 out-of-pocket cap across project services. Credentials live in the project's ignored `.env`. Sponsor credits must be verified separately. Workflow replay runs locally; no hosted sandbox service or key is required. See [setup checklist](./Greenlight-setup-checklist.md) for outstanding accounts and credentials.
+**Execution settings confirmed:** product name Greenlight, local project `/Users/mo/Downloads/greenlight`, Anthropic for the general model, and one Sentry organization with a project named `greenlight-full`. The public GitHub repository is [ManagementMO/greenlight](https://github.com/ManagementMO/greenlight), and the public application is [greenlight-two-psi.vercel.app](https://greenlight-two-psi.vercel.app). The project has a $20 total authorized spending cap across services. Credentials live in the ignored `.env`; an existing provider balance is not additional authorization. Paid experiments run through the local owner CLI; no hosted sandbox service or key is required. See the [setup checklist](./Greenlight-setup-checklist.md) for the implemented account and runtime boundaries.
 
-Prepared October 17, 2026. This replaces the earlier time-boxed proposal. Scope is chosen for correctness, customer value, and testability, not a hackathon deadline. This is a proposed implementation: public documentation/source inspection and ten local deterministic design probes are complete; live provider calls, training, serving, and application integration are not.
+Prepared October 17, 2026, with an implementation checkpoint added during the v3 training run. This retains the accepted design and proof gates rather than redefining the system. Scope is chosen for correctness, customer value and testability.
+
+**Implementation checkpoint:** the deterministic cash engine, three disclosed scenarios, source panel, what-if/proposal experience, recorded improvement lab and public Vercel application are implemented. Actual Anthropic/Jev inference produced the matched 18→6-request MetaHarness result with unchanged 20/21 correctness and 15/21 decisive coverage. The historical four-step, 16-row Qwen proof trained, exported public synthetic merged weights and served a real canary; that canary was schema-invalid, so it is technical path evidence only. The active v3 corpus has 276 training, 23 proof and 40 frozen final rows; job `95e43036a0b9` is running with 138 configured optimizer steps. Full base/tuned final evaluation has not been queried at this checkpoint. Final quality, merged release identity and release SHA remain pending.
+
+Sentry captured the actual oversized-response defect with a readable application frame, trace and log; production decision and AI evidence traces are recorded in the artifact manifest. Paper received an initial layout on a fresh canvas before its weekly MCP quota limited further work. The architecture below describes the accepted service design. The current public application uses reviewed structured fixtures and recorded model results; it does not automatically activate model-extracted terms or expose paid provider execution.
 
 ## Decision
 
@@ -31,7 +35,7 @@ The central technical claim is narrower and testable: after the system has learn
 
 The initial supported business is a commercial HVAC, electrical, or solar supply-and-install contractor. Support USD, explicit job-cost schedules, a small number of milestone payments, and textual evidence. These restrictions define a domain where interpretation and cash consequences can be checked.
 
-Supported payment conditions include an agreed deposit, delivery, phase acceptance, inspection result, certificate receipt, and invoice acceptance. Support bounded AND/OR combinations and explicit calendar-day payment terms. Unsupported statutory terms, disputed legal precedence, image-only documents, unspecified business-day calendars, or unrepresentable clauses remain visible unresolved items. They are not silently approximated.
+Supported payment conditions include an agreed deposit, delivery, phase acceptance, inspection result, explicit customer certificate receipt, and invoice acceptance. Support bounded AND/OR combinations and explicit calendar-day payment terms. `CUSTOMER_CERTIFICATE_RECEIVED` requires the customer or an explicitly authorized customer representative to receive the certificate for the identified subject. An explicit contractor/supplier receipt prerequisite is unsupported in this vocabulary; an unidentified recipient or unbound “we” is ambiguous. A supplier-only evidence event does not alter a contract's explicit customer-receipt prerequisite. Unsupported statutory terms, disputed legal precedence, image-only documents, unspecified business-day calendars, or unrepresentable clauses remain unresolved rather than silently approximated.
 
 The owner supplies or confirms three things:
 
@@ -88,27 +92,30 @@ Apply each event idempotently. If a source sends the same identity with conflict
 
 ### Fine-tuned extractor: what it learns
 
-Use a small open instruct model, with **Qwen3-4B-Instruct-2507 as an initial candidate**, subject to provider/model compatibility checks. It learns to map relevant text and visible reference tables to our typed obligation schema, including ambiguity and unsupported cases. It does not learn the customer’s cash balance or financial arithmetic.
+The implemented training path uses **Qwen3-4B-Instruct-2507**. It learns to map relevant text and visible reference tables to the typed obligation schema, including ambiguity and unsupported cases. It does not learn the customer's cash balance or financial arithmetic. The active v3 manifest freezes 276 training rows across 23 renderer families, a 23-row proof subset and 40 final cases across ten held-out families. The 138-step substantive run is separate from the historical four-step proof. These are typed synthetic/developer-reviewed labels, not independent human or customer adjudication.
 
 Example training pair:
 
 ```text
 INPUT
 Contract C17, span 8:
-"Thirty thousand dollars becomes payable fourteen calendar days
- after phase-one inspection has passed and the insurance
- certificate has been received."
+"Thirty thousand dollars becomes invoice-eligible after phase-one
+ inspection passes and the customer receives the job's insurance
+ certificate. Payment is due fourteen calendar days after that
+ phase-one invoice is actually issued."
 Visible references: phase_1, job_17, amount_C17_8 = USD 30,000.
 
 TARGET (illustrative schema)
 amount_ref: amount_C17_8
-trigger: ALL(inspection_passed(phase_1), certificate_received(job_17))
-due_rule: trigger_time + 14 calendar days
+trigger: ALL(INSPECTION_PASSED(phase_1), CUSTOMER_CERTIFICATE_RECEIVED(job_17))
+due_rule: CALENDAR_DAYS_AFTER_INVOICE_ISSUED(days=14, invoiceSubject=phase_1)
 sources: [C17:s8]
 interpretation: PROPOSED
 ```
 
-If the passage does not establish who receives the certificate or what “completion” means, the target must include that unresolved field. Do not train the model to guess it. Code parses scalar amounts, resolves references, checks currency/parties, and rejects invalid trees. Material new terms are staged for review before activation. Source checks alone do not certify semantic correctness.
+If the passage does not establish who receives the certificate or what “completion” means, preserve ambiguity instead of guessing. An unsupported recipient prerequisite has a null trigger; independently grounded amount and due-clock fields can still survive. Code parses scalar amounts, resolves references, checks currency/parties, and rejects invalid trees. Material new terms remain proposed for review before activation. Source checks alone do not certify semantic correctness.
+
+The pure `resolvePaymentClock` connects a reviewed rule to dates: eligibility October 20 and actual issuance October 22 imply November 5 for a fourteen-day invoice clock. Missing issuance withholds the due date; eligibility cannot substitute. Issuance before eligibility is inconsistent and also withholds the derived date. The engine rejects a stale stored due date after the issuance date changes. None of these operations generates an invoice or manufactures collection/bank settlement.
 
 The training set combines independently checked typed scenarios, varied natural-language renderings, manually reviewed difficult examples, and adjudicated extraction failures from the system. Generate the underlying scenario before its prose, but review that the prose actually expresses the label. Add contradictions, negation, revised clauses, irrelevant neighboring milestones, missing dates, and unsupported language. Do not use Jev agreement as ground truth.
 
@@ -127,7 +134,9 @@ Veri supports SFT and LoRA, but its deployment API documents that directly deplo
 5. Deploy the merged repository, verify that it reaches serving state, and inspect a known canary’s response and the loaded artifact identity.
 6. Only then perform the substantive training/evaluation run and deploy a pinned release.
 
-A private-repository export does not by itself prove the serving worker can read that repository. Verify authentication on the full path. Do not make a private artifact public merely to bypass an integration problem. Veri’s beta multi-adapter fleet is an alternative, requiring explicit base/adapter compatibility and its API-specific setup; it is not assumed interchangeable with ordinary deployment.
+A private-repository export does not by itself prove the serving worker can read it. The first private-export serving attempt exposed an authentication-token propagation gap. The current owner-authorized workflow exports **public synthetic merged weights** with `private:false`; its manifest is explicitly `PUBLIC_SYNTHETIC`, and the CLI refuses private or unclassified training material. Only fictional generated clauses are included, never private customer data, accounting books, credentials or production traces. This authorization does not generalize to private-data models; their serving authentication remains a separate unverified gate. Veri's beta multi-adapter fleet remains an alternative requiring its own base/adapter and API validation.
+
+The historical 16-row, four-step proof completed training and public merged export, reached real serving, returned a schema-invalid canary and was permanently stopped. It queried no frozen final cases. The substantive v3 run targets `machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7`; its completed export, canary and full base/tuned quality comparison are still pending at this checkpoint.
 
 Pin immutable release repositories or an otherwise verified immutable artifact. A mutable HF repository name and a cached model can serve different weights than expected. Verify base revision, tokenizer, chat template, adapter compatibility, exported files, and actual loaded release. Confirm the effective training loss mask and truncation in the runner: a provider accepting a format does not prove it used the intended assistant/completion-only objective.
 
@@ -194,7 +203,7 @@ flowchart LR
     H --> J[Repeatable specialist + Jev + code routine]
 ```
 
-Prime Agent is the experiment author. Use its workspace/refinement capabilities to propose bounded manifest changes, which a fixed local runner validates and executes. If a later experiment executes candidate code, use a disposable local container with a narrow tool interface; do not run arbitrary candidate code in the host evaluation process. Its built-in REPL is not a security isolation boundary. It is not a prebuilt compiler for financial business processes. Source: [Prime Agent](https://github.com/PrimeIntellect-ai/prime-agent).
+The Prime Agent role is the experiment author. The current implementation uses Anthropic to author a bounded declarative manifest, inspired by the [Prime Agent](https://github.com/PrimeIntellect-ai/prime-agent) refinement pattern; it does not claim to execute that repository's runtime. Its current mutable keys are dependency/snapshot caching, evidence scoping, batching and a constrained confidence threshold. A fixed runner and separate frozen gates evaluate the candidate. If a later experiment executes candidate code, use a disposable local container with a narrow tool interface; a model REPL is not security isolation or a prebuilt compiler for financial business processes.
 
 The mutable workflow manifest controls retrieval filters/context selection, prompts, Jev question wording with fixed label meanings, batching, and selection among existing typed tools. It can propose new code changes separately, but they require normal engineering review and fixed tests before deployment. It cannot edit the cash engine, label definitions, evaluation answers, company permissions, source-authority policy, or release gates.
 
@@ -222,13 +231,13 @@ Measure material extraction errors, false satisfied conditions, appropriate unce
 
 All deterministic invariants and safety-critical curated cases must pass. Freeze thresholds and evaluation definitions before looking at final results. Select candidates using training/development data; use a protected final set for the frozen release claim. Repeated exposure to the same final set turns it into development data, requiring a new protected set. Record failed candidates too.
 
-Do not promote a change that appears more accurate merely because it refuses most questions. Compare at matched coverage/review burden, or publish the full tradeoff. If a tuned model or Jev adds cost without improving the quality/latency tradeoff, retain the working baseline and report the result. A valid SFT run is real fine-tuning; it does not by itself establish a useful fine-tuning result.
+Do not promote a change that appears more accurate merely because it refuses most questions. For extraction, the required `extractor-gates-v2` coverage is exactly correct `PROPOSED` interpretations divided by all expected supported cases. Raw proposal count is owner review burden, not correct coverage or automatic activation. Preserve correct supported-proposal coverage, schema validity and safe handling while requiring material-accuracy improvement; a tie retains the base. Report the full tradeoff and gate version. If a tuned model or Jev adds cost without improving the relevant quality/latency tradeoff, retain the working baseline and report it. A valid SFT run does not by itself establish useful fine-tuning.
 
 ## Data reality and the demonstration
 
 The Intuit release supplies synthetic accounting records and permits disclosed extensions. It is not a live QuickBooks connection. It lacks the complete contract/email/inspection corpus and confirmed future operational plan needed here. Source: [Intuit brief](https://docs.google.com/document/d/1JGmvJvZugbFrJW2WSrrPF96r_wB_xaMkfqVM49LE4nU/edit), [provided dataset](https://huggingface.co/datasets/CL251215/QuickBooks-Hackathon-2026/tree/main).
 
-Inspection of company-047, Ductline Mechanical & Supply LLC, found a final bank running balance of $74,882.38 at the dataset’s 2026-10-06 end, five projects, and no estimates. Payroll records are marked gross-only. Therefore the previous illustrative $25,000 opening cash and new $120,000 job must not be presented as an untouched example from that company. Create a disclosed candidate-job fixture, confirm a forward cash calendar, and reconcile the actual opening available funds.
+The implemented company-047 adapter reconstructs all 2,419 visible bank rows for Ductline Mechanical & Supply LLC to $74,882.38 at the dataset's October 6, 2026 end. It distinguishes ledger balance from available cash: the demo explicitly assumes zero restricted funds. The constructed forward calendar contains $49,882.38 in existing commitments, leaving a $25,000 baseline minimum before the candidate-job effect. The new $120,000 job, schedule, contract, communications and reserve policy are labeled additions, not untouched company records. Historical gross-only payroll does not establish future taxes; the missing-input fixture preserves that gap.
 
 Keep sponsor records, added scenario documents, and generated training examples visibly separate. At earlier replay dates reconstruct as-of information; do not expose future payments, final statuses, hidden simulation state, or labels to models. Align the demo clock to the snapshot rather than silently treating old records as current.
 
@@ -244,7 +253,7 @@ The compelling demonstration is to change the evidence and see the cash conseque
 
 ### Local adversarial probes completed during this audit
 
-Ten deterministic cases passed their explicit expected outcomes in a standalone scratch calculation. They are design evidence, not an implemented application test suite or validation of either model.
+The ten cases below were the original standalone design probes. Their historical outcomes are retained for context. The implemented domain regression suite now also covers payment-clock anchors, material proposal preconditions, conserved cent-minimal search, source-date leakage, settled-event immutability, correction cycles and incomplete scenario/horizon coverage. Neither scratch probes nor deterministic tests validate model quality.
 
 | Probe | Observed result | Requirement it establishes |
 | --- | --- | --- |
@@ -271,7 +280,7 @@ Implement event ordering, cash baseline, joint scenarios, status precedence, que
 
 ### Gate 3 — Provider integration and actual trained artifact
 
-Prove real Jev requests and the complete open-model SFT → merged export → serving path with a small checked training set. Validate response schemas, actual artifact identity, version pinning, private-repo access, retries, and cold-start behavior. Done when the app can call the genuinely trained artifact; a dashboard saying “training complete” is insufficient.
+Prove real Jev requests and the complete open-model SFT → merged export → serving path with a small checked training set. Validate response schemas, artifact identity, version pinning, the authorized public-synthetic serving path, lifecycle recovery and cold-start behavior. The historical technical proof completed this path but returned a schema-invalid canary. A completed substantive model and its valid serving/evaluation artifacts remain a release gate; a dashboard saying “training complete” is insufficient. Private-data serving would require additional authentication proof.
 
 ### Gate 4 — Evidence interpretation with honest uncertainty
 

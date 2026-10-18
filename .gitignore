@@ -20,10 +20,16 @@ dist/
 coverage/
 
 # Local runs and large private artifacts
-work/
-artifacts/
-checkpoints/
+/work/
+/artifacts/
+/checkpoints/
 *.sqlite
 *.sqlite3
 *.log
 .DS_Store
+*.tsbuildinfo
+.superpowers/
+.playwright-cli/
+scripts/ml/provider-docs/
+.vercel
+.env*

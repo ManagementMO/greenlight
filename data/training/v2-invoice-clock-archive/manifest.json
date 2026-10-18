@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-clauses-v2",
+  "trainingCount": 240,
+  "proofCount": 20,
+  "evaluationCount": 32,
+  "splitUnit": "semantic renderer family AND company namespace",
+  "trainFamilies": [
+    "signed_deposit",
+    "delivery_balance",
+    "phase_acceptance",
+    "inspection_payment",
+    "certificate_receipt",
+    "invoice_accepted",
+    "inspection_and_certificate",
+    "delivery_or_acceptance",
+    "three_conditions",
+    "specific_date",
+    "missing_amount",
+    "missing_time",
+    "business_day_rule",
+    "pay_if_paid",
+    "negated_early_payment",
+    "contradictory_deadlines",
+    "invoice_clock_after_inspection_and_certificate",
+    "invoice_clock_after_acceptance",
+    "invoice_clock_after_delivery_or_inspection",
+    "invoice_clock_after_certificate"
+  ],
+  "heldoutFamilies": [
+    "nested_alternative_prerequisite",
+    "both_routes_with_certificate",
+    "negation_of_or",
+    "future_negotiation",
+    "statutory_override",
+    "document_instruction_attack",
+    "certificate_and_alternative_eligibility_invoice_clock",
+    "acceptance_and_delivery_issue_later"
+  ],
+  "labelAuthority": "Typed scenarios and separately authored holdout clauses. Template review, not independent human adjudication. No model generated ground truth.",
+  "evaluationAccess": "Frozen final labels are read only by the code evaluator, never uploaded to training or passed to the MetaHarness candidate-author model. Evaluation requests contain source contexts only.",
+  "lossMask": "Conversational prompt+completion, vanilla TRL SFT; completion-only default. Verify worker log/tokenization before claiming effective masking.",
+  "hashes": {
+    "train.jsonl": "052bfeaceb98fc5d8e2380b99ecaeb6908a565e968a2d33e63af80f37f45bea1",
+    "proof.jsonl": "c012392cae64f2aab303f4578a245398d431bba60792b00b5db367c7b0d14e93",
+    "train-labels.jsonl": "513831b34833d2ac3067ee249f2f84046987d1865127db0901dab944ea431770",
+    "evaluation.frozen.jsonl": "b830ff22d4ae37af6ff54a3b27198f8557e7627fe066fcd90acf1605da30d4b9"
+  }
+}
