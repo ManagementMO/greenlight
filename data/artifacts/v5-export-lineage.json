@@ -80,7 +80,8 @@
     "boundary": "Local MPS diagnostics on training examples; excluded from held-out metrics and not a serving-quality claim."
   },
   "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
-  "revision": "e1fdcddfef270b9448d24307c65b84728501121c",
+  "revision": "51fcc48bf3ae0753d9633ea6566575585c347271",
   "verifiedAt": "2026-10-18T04:28:19.778828+00:00",
-  "public": true
+  "public": true,
+  "adapterSubdirectory": "training-adapter"
 }

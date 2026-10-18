@@ -16,6 +16,16 @@ V5 uses 336 training pairs, 300 optimizer steps and a 2,048-token limit. Follow 
 
 The initial 4-bit merged export regressed on development. A separate BF16 materialization reuses the original saved adapter and pinned base; the [local diagnostic](remerge-v5.py) records package versions, output hashes and excluded training canaries. A derived training record must preserve every original training field except its export repository/URL, bind the original record and adapter hashes, and identify the new materialization explicitly. It is not a new training job. Keep the initial development artifact archived before evaluating a repaired export. The paired final evaluation must use the selected export identity throughout.
 
+The original adapter is published under `training-adapter/` in the repaired model repository. Reproduce its local materialization and six **training** diagnostics from public artifacts:
+
+```sh
+npx tsx scripts/ml/prepare-v5-remerge.ts --output work/ml/v5-reproduction
+uv run --no-project --with torch==2.14.1 --with transformers==5.20.1 --with peft==0.21.2 --with python-dotenv scripts/ml/remerge-v5.py --directory work/ml/v5-reproduction
+npx tsx scripts/ml/prepare-v5-remerge.ts --output work/ml/v5-reproduction --score
+```
+
+These commands download the pinned base, save about 8 GB of merged weights under ignored `work/`, and run locally. They neither retrain nor allocate a paid GPU. Canary success is excluded from held-out results.
+
 ```sh
 # Development first; six training canaries are excluded from metrics.
 npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label v5-base-dev --evaluation-dir data/evaluation/v5-development --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute

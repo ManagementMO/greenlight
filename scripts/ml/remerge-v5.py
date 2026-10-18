@@ -5,7 +5,7 @@ work/ml/v5-precision-repair/. This materializes weights and runs six training
 canaries locally; it does not allocate a provider GPU, retrain, or publish.
 The implementation and package versions are bound by merge-evidence.json.
 """
-import gc, hashlib, json, time
+import argparse, gc, hashlib, json, time
 from pathlib import Path
 from datetime import datetime, timezone
 from dotenv import load_dotenv
@@ -15,7 +15,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 from safetensors.torch import load_file
 
-root=Path('work/ml/v5-precision-repair')
+parser=argparse.ArgumentParser()
+parser.add_argument('--directory',default='work/ml/v5-precision-repair')
+root=Path(parser.parse_args().directory)
+if not root.resolve().is_relative_to(Path('work/ml').resolve()):raise ValueError('Use an ignored work/ml directory')
 audit=json.loads(Path('data/training/v5-reference-contract/tokenizer-audit.json').read_text())
 provenance=json.loads((root/'adapter-provenance.json').read_text())
 weights=load_file(str(root/'adapter/adapter_model.safetensors'))
