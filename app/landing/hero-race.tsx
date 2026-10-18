@@ -53,18 +53,18 @@ export function HeroRace({ evidence }: { evidence: LandingEvidence }) {
   return (
     <div className="lp-race" ref={root} data-hero-fade>
       <div className="lp-race-head">
-        <span>Recorded Jev workflow · request counts</span>
+        <span>Measured AI workflow · recorded run</span>
         <button type="button" onClick={() => tl.current?.restart()}>Replay</button>
       </div>
 
       <div className="lp-race-lane is-direct">
-        <div className="lp-race-top"><b>Full-job evidence recheck</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
+        <div className="lp-race-top"><b>Recheck the whole job</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
         <div className="lp-race-track" aria-hidden="true"><i className="lp-race-fill" /></div>
         <div className="lp-race-result">Correct judgments <b>{evidence.baseline.correct}/{evidence.baseline.total}</b></div>
       </div>
 
       <div className="lp-race-lane is-routed">
-        <div className="lp-race-top"><b>Scoped, batched evidence checks</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
+        <div className="lp-race-top"><b>Check only what changed, together</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
         <div className="lp-race-track" aria-hidden="true">
           <i className="lp-race-read" style={{ transform: `scaleX(${evidence.candidate.requests / evidence.baseline.requests})` }} />
         </div>

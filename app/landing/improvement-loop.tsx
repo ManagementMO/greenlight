@@ -42,15 +42,21 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
   }, []);
 
   return (
-    <section className="lp-save" ref={root}>
+    <section className="lp-save" ref={root} id="results">
       <div className="lp-save-copy">
-        <p className="lp-eyebrow">Measured workflow improvement</p>
-        <h2>Same measured quality. Fewer AI calls.</h2>
+        <p className="lp-eyebrow">03 · Learn, test, improve</p>
+        <h2>Improve the workflow. Prove the difference.</h2>
         <p>
-          Headroom&apos;s MetaHarness tests evidence scoping, batching, and dependency-aware caching against
-          fixed quality gates. This recorded candidate used fewer calls while preserving measured correctness,
-          decisive coverage, and zero false MET judgments on this workload.
+          The MetaHarness proposes a better way to check evidence: read only what changed,
+          batch related questions, and reuse unaffected answers. A separate evaluator tests it
+          on the same fixed cases before it can pass.
         </p>
+        <div className="lp-tuning-result">
+          <h3>Fine-tuning the contract reader.</h3>
+          <p>We trained a model to turn clauses into payment terms: <strong>{evidence.v5.baseExact}/{evidence.v5.count} → {evidence.v5.tunedExact}/{evidence.v5.count}</strong> outputs with every material field correct on a separate synthetic test.</p>
+          <p>V5 still made {evidence.v5.incorrectProposals} incorrect validated proposals: <b>{evidence.v5.promoted ? 'promoted under the published gate' : 'not promoted'}</b>. The demo keeps reviewed inputs.</p>
+          <a href="https://github.com/ManagementMO/headroom/blob/main/docs/extractor-v5-results.md">Read the fine-tuning results ↗</a>
+        </div>
       </div>
 
       <div className="lp-save-card">
@@ -71,8 +77,7 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
             ))}
           </tbody>
         </table>
-        <p className="lp-save-note">Recorded test: {evidence.updates} synthetic evidence updates, {evidence.candidate.total} judgments. One conflicting-evidence error remains. This is one workload, not a general production benchmark. <a href="/#lab">Inspect the experiment →</a></p>
-        <p className="lp-save-note">Separate V5 extractor: {evidence.v5.baseExact}/{evidence.v5.count} → {evidence.v5.tunedExact}/{evidence.v5.count} material-exact outputs. {evidence.v5.incorrectProposals} incorrect validated proposals remain; {evidence.v5.promoted ? 'promoted under the published gate' : 'not promoted'}. The cash demo uses reviewed inputs.</p>
+        <p className="lp-save-note">Recorded Jev test: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments. No false “met” judgments; one conflicting-evidence error remains. Results apply to this workload. <a href="/#lab">Inspect the experiment →</a></p>
       </div>
     </section>
   );

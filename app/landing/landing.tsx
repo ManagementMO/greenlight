@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
-import { animate, createScope, onScroll, scrambleText, stagger } from "animejs";
+import { animate, createScope, onScroll, stagger } from "animejs";
 import { Icon } from "@/components/icons";
 import { HeroRace } from "./hero-race";
 import type { LandingEvidence } from "@/lib/landing-evidence";
@@ -77,23 +77,21 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
     let stopRoute = () => {};
     const scope = createScope({ root: el }).add(() => {
-      const sync = (target: Element, enter = "top top", leave = "bottom bottom") =>
-        onScroll({ target, enter, leave, sync: 0.2 });
-
       // Progress pill.
       animate(".lp-progress i", { scaleX: [0.08, 1], ease: "linear", autoplay: onScroll({ target: el, enter: "top top", leave: "bottom bottom", sync: true }) });
 
       // Hero: a short, overlapping reveal keeps the demo immediately within reach.
       animate("[data-hero-fade]", { opacity: [0, 1], y: [12, 0], duration: 460, delay: stagger(50, { start: 140 }), ease: "outCubic" });
 
-      // Feature headlines: letters fill in as you scroll.
+      // Short entrance reveals finish on their own, including after an anchor jump.
       el.querySelectorAll<HTMLElement>(".lp-feature").forEach((row) => {
         animate(row.querySelectorAll("[data-char]"), {
-          opacity: [0.12, 1],
-          filter: ["blur(6px)", "blur(0px)"],
-          delay: stagger(12),
-          ease: "linear",
-          autoplay: onScroll({ target: row, enter: "bottom top", leave: "center center", sync: 0.3 }),
+          opacity: [0, 1],
+          y: [8, 0],
+          duration: 420,
+          delay: stagger(10),
+          ease: "outCubic",
+          autoplay: onScroll({ target: row, enter: "bottom-=80 top" }),
         });
         animate(row.querySelectorAll("[data-fade]"), {
           opacity: [0, 1],
@@ -107,11 +105,12 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
       // Feature 1: the screenshot settles into place, then the pins drop in one by one.
       const frame = el.querySelector(".lp-demo-frame")!;
       animate(frame, {
-        scale: [0.86, 1],
-        y: [80, 0],
-        opacity: [0.3, 1],
-        ease: "outQuad",
-        autoplay: onScroll({ target: frame, enter: "bottom top", leave: "center center", sync: 0.3 }),
+        scale: [0.96, 1],
+        y: [24, 0],
+        opacity: [0, 1],
+        duration: 650,
+        ease: "outCubic",
+        autoplay: onScroll({ target: frame, enter: "bottom-=80 top" }),
       });
       animate(".lp-pin", {
         opacity: [0, 1],
@@ -122,31 +121,30 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
         autoplay: onScroll({ target: frame, enter: "bottom-=320 top" }),
       });
 
-      // Feature 2: each figure drops a line to its source, which decodes.
+      // Each figure connects to a legible source label; never scramble the evidence.
       const row = el.querySelector(".lp-sources-row")!;
       const sourceIn = () => onScroll({ target: row, enter: "bottom-=120 top" });
       animate(".lp-source b", { opacity: [0, 1], y: [24, 0], duration: 800, delay: stagger(160), ease: "outExpo", autoplay: sourceIn() });
       animate(".lp-source span", { opacity: [0, 0.7], duration: 600, delay: stagger(160, { start: 200 }), autoplay: sourceIn() });
       animate(".lp-source i", { scaleY: [0, 1], duration: 500, delay: stagger(160, { start: 350 }), ease: "outQuad", autoplay: sourceIn() });
       animate(".lp-source code", {
-        innerHTML: scrambleText({ chars: "0123456789§ABCDEFX#" }),
         opacity: [0, 1],
-        duration: 900,
-        delay: stagger(160, { start: 650 }),
+        duration: 400,
+        delay: stagger(100, { start: 350 }),
         autoplay: sourceIn(),
       });
 
-      // Routing: the card opens, then questions drop into the LLM, Jev or code lane.
+      // A short entrance explains the three roles without pinning the scroll.
       const route = el.querySelector(".lp-route")!;
-      stopRoute = routeTimeline(route, sync(route));
+      stopRoute = routeTimeline(route, onScroll({ target: route, enter: "center top" }));
 
       // Finale.
       animate(".lp-finale [data-char]", {
         opacity: [0, 1],
         y: ["0.6em", "0em"],
         rotateX: [-80, 0],
-        delay: stagger(40),
-        duration: 900,
+        delay: stagger(22),
+        duration: 600,
         ease: "outExpo",
         autoplay: onScroll({ target: ".lp-finale", enter: "bottom-=200 top" }),
       });
@@ -174,7 +172,13 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
   return (
     <main className="lp" ref={root}>
-      <nav className="lp-topnav" aria-label="Landing navigation"><a href="#top">Headroom</a><a href={DEMO}>Open demo ↗</a></nav>
+      <nav className="lp-topnav" aria-label="Landing navigation">
+        <a href="#top">Headroom</a>
+        <a className="lp-nav-detail" href="#decision">The decision</a>
+        <a className="lp-nav-detail" href="#how-it-works">How it works</a>
+        <a href="#results">Results</a>
+        <a href={DEMO}>Open demo ↗</a>
+      </nav>
       <div className="lp-progress" aria-hidden="true"><i /></div>
 
       {/* Hero */}
@@ -182,11 +186,11 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
         <Gradient colors={["#5866a8", "#356e78", "#171a2c"]} />
         <div className="lp-hero-inner">
           <div className="lp-hero-copy">
-            <p className="lp-eyebrow" data-hero-fade>Headroom · room for the next job</p>
+            <p className="lp-eyebrow" data-hero-fade>Headroom · cash decisions for small businesses</p>
             <h1 aria-label="Stop paying an AI to do arithmetic.">
               <Chars text="Stop paying an AI to do arithmetic." attr="data-hero-char" />
             </h1>
-            <p className="lp-hero-description" data-hero-fade>Can you take a $120,000 job without missing payroll? Headroom connects evidence to a fixed cash engine, then tests a payment plan you can review.</p>
+            <p className="lp-hero-description" data-hero-fade>Can you take a $120,000 job and still make payroll? Headroom connects your books, commitments, and contract terms to show the cash gap—and a payment change you can review.</p>
             <div data-hero-fade><Dock /></div>
           </div>
           <HeroRace evidence={evidence} />
@@ -197,16 +201,20 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
               <div key={p.label}><dt>{p.label}</dt><dd>{p.value}</dd></div>
             ))}
           </dl>
-          <p>One recorded Jev experiment: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments. One error remains. Public demo clicks use reviewed inputs and recorded model results.</p>
+          <p>Recorded Jev test: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments; one error remains. Demo cash calculations run live on reviewed inputs; model results are recorded.</p>
         </div>
       </section>
 
-      {/* Card opens to full screen */}
-      <RouteSection />
-
       {/* Feature 1: the product, annotated */}
-      <section className="lp-feature lp-demo">
+      <section className="lp-feature lp-demo" id="decision">
+        <p className="lp-eyebrow">01 · The decision</p>
         <h2 aria-label="See the gap before you sign"><Chars text="See the gap before you sign" /></h2>
+        <p className="lp-section-lede">A profitable job can still leave payroll unfunded. Test the timing before you commit.</p>
+        <dl className="lp-decision-summary">
+          <div><dt>Current terms</dt><dd>−$13,000<span>lowest modeled cash</span></dd></div>
+          <div><dt>Move to the deposit</dt><dd>+$23,000<span>from the final payment</span></dd></div>
+          <div><dt>Proposed terms</dt><dd>$10,000<span>lowest modeled cash</span></dd></div>
+        </dl>
         <div className="lp-demo-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/landing/decision-workspace.png" width={1440} height={1000} loading="lazy" alt="Headroom decision workspace: lowest modeled cash −$13,000 on Nov 4 and a proposed $65,000 deposit" />
@@ -216,17 +224,20 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
             </div>
           ))}
         </div>
-        <p className="lp-section-note">Actual Headroom workspace. Proposed terms require agreement and modeled collection; total contract revenue stays $120,000.</p>
+        <p className="lp-section-note">Same $120,000 contract. The proposal requires customer agreement and the modeled collection dates. Explore the actual workspace below.</p>
         <div className="lp-btns" data-fade>
           <a className="lp-btn lp-btn-solid" href={DEMO}>Open live demo →</a>
-          <a className="lp-btn lp-btn-light" href={SOURCE}>Source</a>
+          <a className="lp-btn lp-btn-light" href="#how-it-works">How it works ↓</a>
         </div>
       </section>
+
+      <RouteSection />
 
       <ImprovementLoop evidence={evidence} />
 
       {/* Feature 2: figures tied to their sources */}
       <section className="lp-feature lp-sources">
+        <p className="lp-eyebrow">04 · Trace the evidence</p>
         <h2 aria-label="Every number has a source"><Chars text="Every number has a source" /></h2>
         <div className="lp-sources-row">
           {SOURCES.map((x) => (
@@ -238,7 +249,7 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
             </div>
           ))}
         </div>
-        <p className="lp-section-note">Constructed forward-plan evidence. Invoice eligibility, issuance, due date, and bank settlement are separate. The inspection is expected, not observed.</p>
+        <p className="lp-section-note">These are disclosed demo plans. An expected inspection is not a passed inspection; an invoice due date is not money in the bank.</p>
         <a className="lp-sources-link" href="/#evidence" data-fade>Inspect the evidence →</a>
       </section>
 
@@ -258,10 +269,11 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
           <h3>Built at LA Hacks 2026</h3>
           <p><a href={SOURCE}>Source on GitHub ↗</a></p>
           <p><a href={DEMO}>Live demo ↗</a></p>
+          <p>Built with Intuit data, Jev, Veri, Anthropic, Sentry, and Paper.</p>
         </div>
         <div>
-          <h3>Read this first</h3>
-          <p>Intuit synthetic books anchor the demo; future jobs, commitments, and documents are disclosed additions. Headroom does not connect to live QuickBooks, send messages, execute agreements, or move funds.</p>
+          <h3>What you’re trying</h3>
+          <p>Intuit’s synthetic books plus disclosed demo jobs, commitments, and documents. Cash calculations run live; model results are recorded. No live QuickBooks connection, automatic payments, or agreements.</p>
         </div>
       </footer>
     </main>
