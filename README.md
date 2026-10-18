@@ -6,7 +6,9 @@ Greenlight turns that question into a traceable cash decision: the bottleneck, t
 
 The application includes an interactive cash bridge, source evidence, bounded what-if controls, conserved funding proposals, and an improvement lab. The public demonstration runs deterministic calculations and displays recorded genuine provider experiments. It does not start paid inference or GPU jobs when someone visits or clicks Replay.
 
-[Demo guide](docs/demo-guide.md) · [Domain and data provenance](data/scenarios/README.md) · [Provider/ML runbook](scripts/ml/README.md) · [Technical plan](docs/Greenlight-revised-plan.md)
+[Open Greenlight](https://greenlight-two-psi.vercel.app) · [Demo guide](docs/demo-guide.md) · [Domain and data provenance](data/scenarios/README.md) · [Provider/ML runbook](scripts/ml/README.md) · [Technical plan](docs/Greenlight-revised-plan.md)
+
+![Greenlight decision workspace showing the $120,000 HVAC opportunity, cash bridge and $10,000 reserve, a $23,000 liquidity gap, and the conserved $65,000 deposit proposal.](docs/assets/decision-workspace.png)
 
 ## Try the decision
 
@@ -46,7 +48,7 @@ npm run build
 npm start
 ```
 
-The build supports Vercel deployment. A production URL should be taken from the verified release, not inferred from the repository name. The health endpoint reports the current public execution mode:
+The public application is deployed at [greenlight-two-psi.vercel.app](https://greenlight-two-psi.vercel.app). The health endpoint reports the current public execution mode; it does not certify model quality:
 
 ```sh
 curl -s http://localhost:3000/api/health
@@ -80,6 +82,8 @@ flowchart TD
 
 **The model roles are separate.** The Qwen extractor pipeline learns to map clauses into bounded typed obligations and uncertainty. Jev answers atomic semantic questions such as whether an inspection passed or a customer accepted a proposal. Anthropic authors a restricted workflow manifest. Neither a model judgment nor a promoted manifest can replace arithmetic, change evaluator labels, or activate an unsigned payment amendment.
 
+**Payment stages and recipients are explicit.** Inspection plus customer receipt of a certificate may establish invoice eligibility. A term of fourteen calendar days **after invoice issuance** starts from the supplied issuance date: eligibility October 20 and issuance October 22 produce a November 5 due date. Missing issuance withholds that date, and neither eligibility nor due date creates bank settlement. A certificate received by a supplier does not establish receipt by the customer. The typed extractor preserves an explicit customer prerequisite; a clause requiring a contractor/supplier recipient is unsupported in this narrow vocabulary, while an unidentified recipient or unbound “we” is ambiguous. The deterministic payment-clock resolver connects reviewed rules to dates without automatically activating model output.
+
 **The improvement loop is measured.** The candidate can change dependency caching, evidence scoping, batching and a constrained confidence threshold. The evaluator and workload are frozen separately from the author. Promotion requires no loss of correctness or decisive coverage, zero false `MET` judgments in the evaluated workload, and an improvement in quality or request count. Rejected results remain reportable.
 
 ## What the MetaHarness experiment actually measured
@@ -101,18 +105,20 @@ The reviewable result, manifests, frozen workload hash and per-question predicti
 
 ## Fine-tuning evidence and release gates
 
-A genuine **four-step SFT/LoRA proof on 16 examples** completed on `Qwen/Qwen3-4B-Instruct-2507` through Veri and returned a merged Hugging Face export. That proves a real training/export operation; four steps cannot establish a useful extraction improvement.
+A genuine **four-step SFT/LoRA proof on 16 examples** completed on `Qwen/Qwen3-4B-Instruct-2507` through Veri, exported [public synthetic merged weights](https://huggingface.co/machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp), and served a real canary. The canary failed schema validation: a single condition enum was returned as an array. This is technical train → export → serve evidence, with **no quality improvement claim**. No frozen final cases were queried in that proof.
 
-The substantive release includes an invoice-issuance semantics review and a separate base-versus-tuned experiment. Final serving and quality claims must come from the completed artifacts, rather than from the proof job's completion status.
+The substantive **v3** run uses **276 training examples**, a **23-example proof subset**, and **40 frozen final cases**. It explicitly tests invoice-issuance clocks and customer-recipient semantics. Job `95e43036a0b9` is running with **138 configured optimizer steps**; its intended merged repository is `machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7`. Full base/tuned final evaluation has not yet been queried at this documentation checkpoint. Final serving and quality claims must come from the completed artifacts.
 
 | Evidence | Current reporting boundary |
 | --- | --- |
-| Four-step, 16-row integration proof | Training completed; merged export returned. |
-| Substantive extraction schema/corpus | Invoice-issuance behavior is being checked before the final comparison. |
-| Pinned merged release and serving canary | Publish the verified artifact identity and actual inference result when complete. |
-| Same-base, same-decoding held-out comparison | Publish exact case counts, errors, coverage, unsafe proposals and latency; retain the base on a tie or regression. No final gain is claimed here. |
+| Historical four-step, 16-row technical proof | Trained, exported publicly, and served; canary schema-invalid. No final cases queried and no quality claim. |
+| Substantive v3 extraction training | 276 rows, 138 configured optimizer steps; job `95e43036a0b9` running at this checkpoint. |
+| v3 merged release and serving canary | Pending. Publish the actual artifact revision and inference result after verification. |
+| Matched 40-case base/tuned comparison | Pending and not yet queried. Publish exact errors, correct supported-proposal coverage, review burden, unsafe proposals and latency; retain the base on a tie or regression. |
 
-The checked-in corpus manifest records the current splits and hashes. The initial corpus contains 192 supervised rows and a separate 24-case holdout, split by renderer family and company namespace. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. A schema/corpus correction requires a new frozen release identity. See the [ML runbook](scripts/ml/README.md) for tokenizer checks, loss-mask evidence, artifact checks, lifecycle recovery, and the comparison gate.
+The checked-in [v3 manifest](data/training/manifest.json) records the 276/23/40 split, 23 training families, ten held-out families, publication policy and hashes. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. Earlier versions remain archived as historical evidence. Only fictional clauses classified `PUBLIC_SYNTHETIC` may be uploaded or exported publicly; customer books, private documents, credentials and production traces are excluded.
+
+The required extraction release gate is **`extractor-gates-v2`**. Coverage means **correct supported proposals divided by supported expected cases**. Raw `PROPOSED` volume measures review burden; it is neither accuracy nor automatic activation. A release must improve material accuracy without weakening schema validity, safe handling, or correct supported-proposal coverage. Final results and the release SHA remain pending until that reviewed comparison completes. See the [ML runbook](scripts/ml/README.md) for the exact evidence boundaries.
 
 ## Owner CLI and spending boundary
 
@@ -138,14 +144,14 @@ npx tsx scripts/ml/provider-smoke.ts --execute
 # Anthropic-authored manifest + real baseline/candidate Jev replay.
 npx tsx scripts/harness/experiment.ts
 
-# Genuine proof training and merged export.
+# Optional new proof on the active v3 23-row subset; historical proof used 16 rows.
 npx tsx scripts/ml/train-veri.ts --max-steps 4 --max-cents 600 --timeout-seconds 1800 --execute
 
 # Substantive training; do not regenerate frozen data during an experiment.
-npx tsx scripts/ml/train-veri.ts --data data/training/train.jsonl --name sft-v1 --max-steps 96 --max-cents 600 --timeout-seconds 3000 --execute
+npx tsx scripts/ml/train-veri.ts --data data/training/train.jsonl --name sft-v3 --max-steps 138 --max-cents 600 --timeout-seconds 3600 --execute
 ```
 
-For serving, pass the **actual unique repository emitted by training** to `scripts/ml/serve-evaluate.ts`; run the same frozen cases with the base and tuned models, then run `npx tsx scripts/ml/compare-evaluations.ts`. Full commands and their bounds are in the [ML runbook](scripts/ml/README.md). Keep private raw responses, resource records and the ledger under ignored `work/`.
+For a technical serving check, use `scripts/ml/serve-evaluate.ts --canary-only` with the actual unique public synthetic repository emitted by training. It skips both final cases and the C-120 showcase. Final evaluation uses the same **40** frozen cases and decoding for base and tuned models, followed by `npx tsx scripts/ml/compare-evaluations.ts`. The showcase is separately scored and excluded from final metrics. Full commands and bounds are in the [ML runbook](scripts/ml/README.md). Keep private raw responses, resource records and the ledger under ignored `work/`.
 
 Reservations survive errors and ambiguous outcomes. Training/serving creation is not blindly retried. Heartbeats, detached recovery guards, verified resource stopping, and retained reservations handle lifecycle failures. These controls do not invent a provider-side hard budget TTL or treat an unreported zero cost as proof that a GPU run was free. Existing Veri balance is not counted as extra spending authorization.
 
@@ -153,7 +159,7 @@ Reservations survive errors and ambiguous outcomes. Training/serving creation is
 
 The Intuit release supplies synthetic books. Greenlight preserves company-047's original source files and reconstructs **2,419 ledger rows to $74,882.38**, as of **October 6, 2026**. This bank balance becomes available cash only under the demo's explicit assumption of zero restricted funds. The forward calendar, reserve, clinic job, costs, contracts, communications and uncertainty bounds are constructed additions. It is not a live QuickBooks connection. [Pinned provenance](data/scenarios/intuit-source.json)
 
-Sentry instrumentation covers server decisions, workflow/model spans, structured logs, browser errors and masked Session Replay; source-map upload is configured when the build auth token is present. Snapshot, version and experiment identifiers connect calculations to their operational traces. The health endpoint's `sentryConfigured` flag reports DSN configuration, not verified ingestion. The release evidence must establish actual receipt of errors, traces and logs separately.
+Sentry captured a real **oversized public-response defect**, with a readable first-party TypeScript frame, a trace and a structured log. The fix bounds public input, estimated calculation work and output size, and returns compact scenario summaries. Review the [captured issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2), [defect trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697), [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd), and [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b) with project access. Identifiers are also published in the artifact manifest. Browser errors and masked Session Replay are configured; source-map upload uses the build auth token. Configuration alone is not proof that every telemetry product ingested an event, and the health flag reports DSN configuration only.
 
 The interface began on a fresh [Paper canvas](https://app.paper.design/file/01M5653KWM6RPTEPWYPP37FKZX); the responsive application is implemented in Next.js/React. Further Paper MCP work encountered the account's weekly quota.
 

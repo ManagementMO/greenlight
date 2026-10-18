@@ -100,7 +100,9 @@ async function main() {
     current.training = {
       status:
         training.state === "completed"
-          ? "completed"
+          ? serving
+            ? "completed"
+            : "running"
           : training.state === "failed"
             ? "failed"
             : "running",
@@ -117,7 +119,12 @@ async function main() {
         },
         {
           name: "Fine-tuning",
-          status: training.state === "completed" ? "completed" : "running",
+          status:
+            training.state === "completed"
+              ? "completed"
+              : training.state === "failed" || training.state === "cancelled"
+                ? "failed"
+                : "running",
           detail: `${training.currentStep ?? 0} of ${training.maxSteps} steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested.`,
         },
         {
@@ -163,10 +170,15 @@ async function main() {
       status: comparison.status,
       promoted: comparison.promoted,
       caseCount: comparison.caseCount,
+      gateVersion: comparison.gateVersion,
       base: comparison.base,
       tuned: comparison.tuned,
       deltas: comparison.deltas,
       gate: comparison.gate,
+      verifiedAt: comparison.verifiedAt,
+      origin: "recorded",
+      detail:
+        "Genuine sequential base/tuned inference on the same frozen synthetic clauses. Proposals require owner review; this experiment does not activate financial terms.",
       evaluationSha256: comparison.evaluationSha256,
     };
   current.budget = {
@@ -180,6 +192,9 @@ async function main() {
     current.observability = {
       issueUrl: telemetry.issueUrl,
       traceUrl: telemetry.traceUrl,
+      productionTraceUrl: telemetry.productionTraceUrl,
+      evidenceTraceUrl: telemetry.evidenceTraceUrl,
+      replayUrl: telemetry.replayUrl,
       firstPartyFrame: telemetry.firstPartyFrame,
       verifiedAt: telemetry.verifiedAt,
       environment: telemetry.environment,

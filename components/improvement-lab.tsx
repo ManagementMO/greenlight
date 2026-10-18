@@ -50,6 +50,26 @@ type TrainingArtifact = {
   stages?: { name: string; status: string; detail?: string }[];
   detail?: string;
 };
+type ExtractionSummary = {
+  count: number;
+  valid: number;
+  materialExact: number;
+  correctSupportedProposals: number;
+  unsafeProposed: number;
+};
+type ExtractionComparison = {
+  status: string;
+  promoted: boolean;
+  caseCount: number;
+  gateVersion: string;
+  base: ExtractionSummary;
+  tuned: ExtractionSummary;
+  gate: string;
+  evaluationSha256: string;
+  verifiedAt: string;
+  origin: "recorded";
+  detail: string;
+};
 type Artifacts = {
   schemaVersion: number;
   generatedAt?: string;
@@ -58,15 +78,135 @@ type Artifacts = {
   evaluations: EvaluationArtifact[];
   experiments: ExperimentArtifact[];
   budget?: { capUsd: number; spentUsd: number; reservedUsd: number };
+  extractionComparison?: ExtractionComparison;
   observability?: {
     issueUrl: string;
     traceUrl: string;
     firstPartyFrame: string;
     verifiedAt: string;
     environment: string;
+    productionTraceUrl?: string;
+    evidenceTraceUrl?: string;
+    replayUrl?: string;
   };
   provenance?: unknown[];
 };
+
+function validComparison(
+  value: ExtractionComparison | undefined,
+): value is ExtractionComparison {
+  if (
+    !value ||
+    value.origin !== "recorded" ||
+    !Number.isSafeInteger(value.caseCount) ||
+    value.caseCount < 1 ||
+    typeof value.gateVersion !== "string" ||
+    !value.gateVersion ||
+    typeof value.promoted !== "boolean" ||
+    typeof value.gate !== "string"
+  )
+    return false;
+  return [value.base, value.tuned].every(
+    (summary) =>
+      summary &&
+      summary.count === value.caseCount &&
+      [
+        "count",
+        "valid",
+        "materialExact",
+        "correctSupportedProposals",
+        "unsafeProposed",
+      ].every(
+        (key) =>
+          Number.isSafeInteger(summary[key as keyof ExtractionSummary]) &&
+          summary[key as keyof ExtractionSummary] >= 0 &&
+          summary[key as keyof ExtractionSummary] <= value.caseCount,
+      ),
+  );
+}
+
+function ExtractionComparisonPanel({ value }: { value: ExtractionComparison }) {
+  const rows: {
+    key: keyof ExtractionSummary;
+    label: string;
+    lowerIsBetter?: boolean;
+  }[] = [
+    { key: "materialExact", label: "Material fields match" },
+    { key: "valid", label: "Schema-valid outputs" },
+    { key: "correctSupportedProposals", label: "Correct supported proposals" },
+    { key: "unsafeProposed", label: "Unsafe proposals", lowerIsBetter: true },
+  ];
+  return (
+    <section
+      className="extraction-comparison"
+      aria-label="Recorded base versus tuned extraction comparison"
+    >
+      <div className="section-heading">
+        <div>
+          <span className="eyebrow">Fixed evaluation · recorded inference</span>
+          <h2>Did fine-tuning earn its place?</h2>
+        </div>
+        <span
+          className={`state-badge state-${value.promoted ? "promoted" : "blocked"}`}
+        >
+          {value.promoted ? "Candidate promoted" : "Base extractor retained"}
+        </span>
+      </div>
+      <p className="comparison-intro">
+        {value.caseCount} frozen synthetic clauses. {value.detail}
+      </p>
+      <div className="comparison-table-scroll">
+        <table className="comparison-table">
+          <thead>
+            <tr>
+              <th>Measured outcome</th>
+              <th>Base extractor</th>
+              <th>Tuned candidate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.key}>
+                <td>
+                  {row.label}
+                  {row.lowerIsBetter && <small>lower is better</small>}
+                </td>
+                <td className="mono">{value.base[row.key]}</td>
+                <td className="mono">{value.tuned[row.key]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <details className="comparison-provenance">
+        <summary>
+          Release gate & provenance <Icon name="chevron-down" size={13} />
+        </summary>
+        <div>
+          <span>Fixed gate version</span>
+          <code>{value.gateVersion}</code>
+        </div>
+        <p>{value.gate}</p>
+        <div>
+          <span>Evaluation SHA-256</span>
+          <code>{value.evaluationSha256}</code>
+        </div>
+        <div>
+          <span>Recorded verification</span>
+          <span>{time(value.verifiedAt)}</span>
+        </div>
+      </details>
+      <div className="comparison-boundary">
+        <Icon name="shield" size={14} />
+        <span>
+          Material checks use synthetic clauses reviewed by the developers.
+          Proposals still require owner review; these results approve no
+          contract or cash receipt.
+        </span>
+      </div>
+    </section>
+  );
+}
 
 function humanize(value: string) {
   return value
@@ -250,7 +390,7 @@ export function ImprovementLab() {
                     <Icon name="document" size={20} />
                   </span>
                   <strong>Reviewed examples</strong>
-                  <p>Source-grounded terms and adjudicated corrections.</p>
+                  <p>Source-grounded terms and reviewed corrections.</p>
                 </div>
                 <span className="flow-connector">→</span>
                 <div>
@@ -472,6 +612,36 @@ export function ImprovementLab() {
                   >
                     Trace & related log <Icon name="arrow-up-right" size={13} />
                   </a>
+                  {data.observability.productionTraceUrl && (
+                    <a
+                      href={data.observability.productionTraceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Production decision trace{" "}
+                      <Icon name="arrow-up-right" size={13} />
+                    </a>
+                  )}
+                  {data.observability.evidenceTraceUrl && (
+                    <a
+                      href={data.observability.evidenceTraceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Evidence interpretation trace{" "}
+                      <Icon name="arrow-up-right" size={13} />
+                    </a>
+                  )}
+                  {data.observability.replayUrl && (
+                    <a
+                      href={data.observability.replayUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Recorded session replay{" "}
+                      <Icon name="arrow-up-right" size={13} />
+                    </a>
+                  )}
                 </div>
               </div>
             </section>
@@ -486,6 +656,9 @@ export function ImprovementLab() {
                 {data.evaluations.length} runs
               </span>
             </div>
+            {validComparison(data.extractionComparison) && (
+              <ExtractionComparisonPanel value={data.extractionComparison} />
+            )}
             {data.evaluations.length ? (
               <div className="evaluation-list">
                 {data.evaluations.map((run) => (

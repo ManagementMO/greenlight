@@ -34,6 +34,7 @@ export function materialKey(value: ExtractedClause) {
   });
 }
 export interface ExtractionScore {
+  expectedStatus: ExtractedClause["status"];
   valid: boolean;
   materialExact: boolean;
   proposed: boolean;
@@ -50,6 +51,7 @@ export function scoreExtraction(
   try {
     const out = parseExtraction(text, context);
     return {
+      expectedStatus: expected.status,
       valid: true,
       materialExact: materialKey(out) === materialKey(expected),
       proposed: out.status === "PROPOSED",
@@ -60,6 +62,7 @@ export function scoreExtraction(
     };
   } catch (error) {
     return {
+      expectedStatus: expected.status,
       valid: false,
       materialExact: false,
       proposed: false,
@@ -72,9 +75,68 @@ export function scoreExtraction(
 export function summarizeExtraction(scores: ExtractionScore[]) {
   const n = scores.length;
   if (n === 0) throw new Error("Cannot score an empty evaluation");
-  const count = (key: Exclude<keyof ExtractionScore, "error" | "parsed">) =>
+  const flags = [
+    "valid",
+    "materialExact",
+    "proposed",
+    "unsafeProposed",
+    "statusCorrect",
+  ] as const;
+  for (const score of scores) {
+    if (
+      !["PROPOSED", "AMBIGUOUS", "UNSUPPORTED"].includes(
+        score.expectedStatus,
+      ) ||
+      flags.some((key) => typeof score[key] !== "boolean")
+    )
+      throw new Error("Invalid extraction score or missing expected class");
+    if (
+      (!score.valid && flags.some((key) => key !== "valid" && score[key])) ||
+      score.unsafeProposed !== (score.proposed && !score.materialExact) ||
+      (score.materialExact &&
+        (!score.statusCorrect ||
+          score.proposed !== (score.expectedStatus === "PROPOSED"))) ||
+      (score.statusCorrect &&
+        score.proposed !== (score.expectedStatus === "PROPOSED")) ||
+      (score.parsed &&
+        (!score.valid ||
+          score.proposed !== (score.parsed.status === "PROPOSED")))
+    )
+      throw new Error("Internally inconsistent extraction score");
+  }
+  const count = (key: (typeof flags)[number]) =>
     scores.filter((x) => x[key]).length;
   const proposed = count("proposed");
+  const expectedProposed = scores.filter(
+    (score) => score.expectedStatus === "PROPOSED",
+  ).length;
+  const correctSupportedProposals = scores.filter(
+    (score) =>
+      score.expectedStatus === "PROPOSED" &&
+      score.proposed &&
+      score.materialExact,
+  ).length;
+  const breakdown = (status: ExtractedClause["status"]) => {
+    const matching = scores.filter((score) => score.expectedStatus === status);
+    const statusCorrect = matching.filter(
+      (score) => score.statusCorrect,
+    ).length;
+    const materialExact = matching.filter(
+      (score) => score.materialExact,
+    ).length;
+    return {
+      count: matching.length,
+      valid: matching.filter((score) => score.valid).length,
+      statusCorrect,
+      materialExact,
+      proposed: matching.filter((score) => score.proposed).length,
+      unsafeProposed: matching.filter((score) => score.unsafeProposed).length,
+      statusAccuracy: matching.length ? statusCorrect / matching.length : null,
+      materialExactRate: matching.length
+        ? materialExact / matching.length
+        : null,
+    };
+  };
   return {
     count: n,
     valid: count("valid"),
@@ -82,11 +144,21 @@ export function summarizeExtraction(scores: ExtractionScore[]) {
     statusCorrect: count("statusCorrect"),
     proposed,
     unsafeProposed: count("unsafeProposed"),
+    expectedProposed,
+    correctSupportedProposals,
     validityRate: count("valid") / n,
     materialExactRate: count("materialExact") / n,
-    automaticCoverage: proposed / n,
-    proposedPrecision: proposed
-      ? scores.filter((x) => x.proposed && x.materialExact).length / proposed
+    // Every proposal still needs owner review. Raw proposal volume includes mistakes.
+    rawProposalRate: proposed / n,
+    correctSupportedProposalRate: expectedProposed
+      ? correctSupportedProposals / expectedProposed
       : null,
+    proposedPrecision: proposed ? correctSupportedProposals / proposed : null,
+    byExpectedStatus: {
+      PROPOSED: breakdown("PROPOSED"),
+      AMBIGUOUS: breakdown("AMBIGUOUS"),
+      UNSUPPORTED: breakdown("UNSUPPORTED"),
+    },
   };
 }
+export type ExtractionSummary = ReturnType<typeof summarizeExtraction>;

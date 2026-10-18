@@ -44,6 +44,7 @@ export function CashBridge({
   reserveCents,
   currency = "USD",
   incomplete = false,
+  interactive = true,
 }: {
   current: CashChartSeries;
   baseline?: CashChartSeries;
@@ -52,6 +53,7 @@ export function CashBridge({
   reserveCents: number;
   currency?: string;
   incomplete?: boolean;
+  interactive?: boolean;
 }) {
   const gradientId = useId().replaceAll(":", "");
   const [activePoint, setActivePoint] = useState<CashChartPoint | null>(null);
@@ -270,8 +272,10 @@ export function CashBridge({
               cy={y(point.balanceCents)}
               r="10"
               fill="transparent"
-              tabIndex={0}
+              tabIndex={interactive ? 0 : -1}
               role="button"
+              aria-disabled={!interactive}
+              style={{ pointerEvents: interactive ? "auto" : "none" }}
               aria-label={`${shortDate(point.date)}, ${point.label}, cash ${money(point.balanceCents)}`}
               onMouseEnter={() => setActivePoint(point)}
               onMouseLeave={() => setActivePoint(null)}

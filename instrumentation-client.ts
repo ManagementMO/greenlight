@@ -19,7 +19,12 @@ Sentry.init({
     return event;
   },
   integrations: [
-    Sentry.replayIntegration({ maskAllText: true, blockAllMedia: true }),
+    Sentry.replayIntegration({
+      maskAllText: true,
+      blockAllMedia: true,
+      // An earlier buffered session must not override the operator's explicit recording sample.
+      stickySession: !recordDemo,
+    }),
   ],
   replaysSessionSampleRate: recordDemo ? 1 : 0.1,
   replaysOnErrorSampleRate: 1,

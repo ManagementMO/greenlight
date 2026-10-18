@@ -102,7 +102,63 @@ describe("independent extraction evaluator", () => {
     expect(summary.count).toBe(2);
     expect(summary.valid).toBe(1);
     expect(summary.materialExact).toBe(0);
-    expect(summary.automaticCoverage).toBe(0);
+    expect(summary.rawProposalRate).toBe(0);
+    expect(summary.correctSupportedProposals).toBe(0);
+    expect(summary.correctSupportedProposalRate).toBe(0);
     expect(summary.proposedPrecision).toBeNull();
+  });
+  it("separates raw review volume from correctly supported proposals and retains invalid cases in class denominators", () => {
+    const supported = evaluation.find((x) => x.expected.status === "PROPOSED");
+    const ambiguous = evaluation.find((x) => x.expected.status === "AMBIGUOUS");
+    const unsupported = evaluation.find(
+      (x) => x.expected.status === "UNSUPPORTED",
+    );
+    const wrongTerms = structuredClone(supported.expected);
+    wrongTerms.due.days++;
+    const wrongStatus = { ...unsupported.expected, status: "AMBIGUOUS" };
+    const invalid = scoreExtraction(
+      "invalid JSON",
+      supported.context,
+      supported.expected,
+    );
+    expect(invalid.expectedStatus).toBe("PROPOSED");
+    const summary = summarizeExtraction([
+      scoreExtraction(
+        JSON.stringify(supported.expected),
+        supported.context,
+        supported.expected,
+      ),
+      scoreExtraction(
+        JSON.stringify(wrongTerms),
+        supported.context,
+        supported.expected,
+      ),
+      invalid,
+      scoreExtraction(
+        JSON.stringify(ambiguous.expected),
+        ambiguous.context,
+        ambiguous.expected,
+      ),
+      scoreExtraction(
+        JSON.stringify(wrongStatus),
+        unsupported.context,
+        unsupported.expected,
+      ),
+    ]);
+    expect(summary.expectedProposed).toBe(3);
+    expect(summary.correctSupportedProposals).toBe(1);
+    expect(summary.correctSupportedProposalRate).toBe(1 / 3);
+    expect(summary.rawProposalRate).toBe(2 / 5);
+    expect(summary.proposedPrecision).toBe(1 / 2);
+    expect(summary.unsafeProposed).toBe(1);
+    expect(summary.byExpectedStatus.PROPOSED).toMatchObject({
+      count: 3,
+      valid: 2,
+      materialExact: 1,
+      statusAccuracy: 2 / 3,
+    });
+    expect(summary.byExpectedStatus.AMBIGUOUS.statusAccuracy).toBe(1);
+    expect(summary.byExpectedStatus.UNSUPPORTED.statusAccuracy).toBe(0);
+    expect(summary).not.toHaveProperty("automaticCoverage");
   });
 });

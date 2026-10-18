@@ -1,6 +1,6 @@
 # Greenlight demonstration guide
 
-This is a short operator run-of-show for the implemented application. Use the local app at [http://localhost:3000](http://localhost:3000), or the production address from the verified release. Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
+This is a short operator run-of-show for the implemented application. Open [Greenlight](https://greenlight-two-psi.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
 
 ## Before presenting
 
@@ -74,15 +74,21 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 
 **Say:** “The trained model has a different job from Jev. We fine-tune Qwen to turn clauses into proposed typed obligations. Jev handles repeated atomic evidence judgments; ordinary code handles money.”
 
-**Say:** “A real four-step proof trained on sixteen examples and returned a merged Hugging Face export. That proves training and export, not a quality improvement. The substantive release is checked separately for invoice-issuance semantics, real serving, and a matched base-versus-tuned comparison.”
+**Say:** “A real four-step proof trained on sixteen examples, exported public synthetic merged weights, and served a real canary. That canary failed our schema, so this proves the technical path, not extraction quality. We keep the failure visible.”
 
-**Conditional cue — only when final published evidence exists:** Read the actual case count, model revision, schema version, quality/coverage figures and serving result shown in the lab. If the result ties or regresses, say so and explain that the release gate retains the base model.
+**Say:** “The substantive v3 run uses 276 training examples and 138 optimizer steps. Its 40 final cases have not yet been queried at this checkpoint. They check the important details: who received a certificate, when an invoice was actually issued, and whether the model should withhold a proposal.”
 
-**If final evaluation is still pending:** “The integration proof completed; the final model comparison is still pending. The application keeps that boundary visible.”
+**Optional operator cue — only when a genuine, validated invoice-clock showcase is present:** Expand **Test the invoice clock**. Keep hypothetical eligibility on October 20 and hypothetical issuance on October 22. With a fourteen-day invoice clock, show November 5. Clear issuance to show that the due date is withheld. This preview does not mutate the cash forecast or activate extracted terms.
 
-**Operator:** If verified Sentry evidence is available in the release, show the actual decision/workflow trace and corresponding structured log. Use an actual captured issue and fix if one has been recorded.
+**Optional say:** “Even when billing becomes eligible on October 20, this clock waits for the invoice to be issued. A supplier receiving a certificate also does not prove the customer received it. We keep those parties and stages separate.”
 
-**Say:** “Snapshot and experiment IDs link the application to Sentry traces and logs. They help explain failures in the running system. A trace is operational evidence; it is not a financial truth label.”
+**Conditional cue — only when final published evidence exists:** Read the actual 40-case result, model revision, schema version, `extractor-gates-v2` verdict and serving result shown in the lab. Correct supported-proposal coverage measures correct proposed interpretations on supported expected cases. Raw proposal count is review burden, not automatic approval. If the result ties or regresses, say so and explain that the release gate retains the base model.
+
+**If final evaluation is still pending:** “The train-export-serve proof completed with a schema-invalid canary. The substantive model is still being tested. We have no final quality result to claim yet.”
+
+**Operator:** Open the [actual oversized-response issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2) and its [recorded trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697) with project access. The manifest also links a [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd) and [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b).
+
+**Say:** “A small request expanded into an oversized response. Sentry gave us a readable application frame, trace and log; we fixed the API with input, work and output limits plus compact scenario summaries. Production and AI traces show the running paths. A trace is operational evidence; it is not a financial truth label.”
 
 ## 3:20 — Close on the product
 
@@ -101,6 +107,8 @@ The public lab's Replay action rechecks the gates against a recorded genuine mod
 | Can a model quietly promote itself? | The author outputs a restricted manifest. Fixed external gates check quality, coverage, false Met judgments and actual improvement. |
 | Is the measured 18-to-6 reduction universal? | No. It is one recorded, predeclared synthetic localized-update experiment. |
 | Does a completed training job prove better quality or deployed inference? | No. Export, actual serving, pinned artifact identity and matched evaluation are separate gates. |
+| Does more `PROPOSED` output mean better automation? | No. Correct supported-proposal coverage measures useful interpretations; raw proposal volume is owner review burden. No model output activates itself. |
+| What data can be public in the model repository? | Only the approved fictional `PUBLIC_SYNTHETIC` training corpus and its merged weights. No private books, customer documents, credentials or production traces. |
 | Can the public demo spend the owner's budget? | No. Public decisions are deterministic, and model experiments are recorded. Paid operations run through the private CLI's durable $20 budget authority. |
 
 When a provider or network is unavailable, keep the deterministic demonstration running and identify any model result by its recorded origin. Never substitute invented model output, hide a failed experiment, or present a planned artifact as verified.

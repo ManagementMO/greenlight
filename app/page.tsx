@@ -279,6 +279,10 @@ function EvidenceView({
 }
 
 export default function Greenlight() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(true);
+  }, []);
   const fixtures = useMemo(() => listScenarios(), []);
   const initialFixture = getScenario("ductline-phase-delay") ?? fixtures[0];
   const [fixtureId, setFixtureId] = useState(initialFixture.id);
@@ -492,7 +496,7 @@ export default function Greenlight() {
       : "No funding proposal is available for the current input.";
 
   return (
-    <div className="greenlight-app">
+    <div className="greenlight-app" data-hydrated={ready}>
       <a className="skip-link" href="#main-content">
         Skip to decision workspace
       </a>
@@ -525,6 +529,7 @@ export default function Greenlight() {
             Synthetic demo
           </span>
           <button
+            disabled={!ready}
             type="button"
             className="topbar-help"
             aria-label="How it works"
@@ -550,6 +555,7 @@ export default function Greenlight() {
             <span className="sidebar-label">Workspace</span>
             <nav className="main-navigation" aria-label="Workspace navigation">
               <button
+                disabled={!ready}
                 type="button"
                 className={view === "decision" ? "active" : ""}
                 onClick={() => setView("decision")}
@@ -560,6 +566,7 @@ export default function Greenlight() {
                 <span className="nav-dot" />
               </button>
               <button
+                disabled={!ready}
                 type="button"
                 className={view === "evidence" ? "active" : ""}
                 onClick={() => setView("evidence")}
@@ -570,6 +577,7 @@ export default function Greenlight() {
                 <span className="nav-count mono">{input.evidence.length}</span>
               </button>
               <button
+                disabled={!ready}
                 type="button"
                 className={view === "lab" ? "active" : ""}
                 onClick={() => setView("lab")}
@@ -597,7 +605,11 @@ export default function Greenlight() {
             </span>
             <strong>Grow with room to breathe.</strong>
             <p>Good decisions leave room for payroll.</p>
-            <button type="button" onClick={() => setHelpOpen(true)}>
+            <button
+              disabled={!ready}
+              type="button"
+              onClick={() => setHelpOpen(true)}
+            >
               Take the short tour <Icon name="arrow-right" size={14} />
             </button>
             <span className="sidebar-build mono">LA HACKS · GREENLIGHT</span>
@@ -630,6 +642,7 @@ export default function Greenlight() {
                   </p>
                 </div>
                 <button
+                  disabled={!ready}
                   type="button"
                   className="button button-secondary button-small"
                   onClick={downloadDecision}
@@ -747,6 +760,7 @@ export default function Greenlight() {
                       </div>
                     )}
                     <CashBridge
+                      interactive={ready}
                       current={chartSeries(
                         activeResult.withJob,
                         "with-job",
@@ -820,6 +834,7 @@ export default function Greenlight() {
                       </div>
                       {isEdited && (
                         <button
+                          disabled={!ready}
                           type="button"
                           className="text-button"
                           onClick={() => changeFixture(fixtureId)}
@@ -832,6 +847,7 @@ export default function Greenlight() {
                     <label className="scenario-picker">
                       <span>Reference scenario</span>
                       <select
+                        disabled={!ready}
                         value={fixtureId}
                         onChange={(event) => changeFixture(event.target.value)}
                       >
@@ -854,6 +870,7 @@ export default function Greenlight() {
                         <legend>{uncertainty.question}</legend>
                         <div className="option-pills">
                           <button
+                            disabled={!ready}
                             type="button"
                             className={
                               !input.answers?.[uncertainty.id]
@@ -869,6 +886,7 @@ export default function Greenlight() {
                           </button>
                           {uncertainty.options.map((option) => (
                             <button
+                              disabled={!ready}
                               type="button"
                               key={option.id}
                               className={
@@ -907,6 +925,7 @@ export default function Greenlight() {
                           <label>
                             <span>Deposit amount · USD</span>
                             <input
+                              disabled={!ready}
                               inputMode="decimal"
                               type="text"
                               value={
@@ -922,6 +941,7 @@ export default function Greenlight() {
                           <label>
                             <span>Deposit collected</span>
                             <select
+                              disabled={!ready}
                               value={collectionDraft ?? depositEvent.date ?? ""}
                               onChange={(event) =>
                                 setCollectionDraft(event.target.value)
@@ -937,6 +957,7 @@ export default function Greenlight() {
                             </select>
                           </label>
                           <button
+                            disabled={!ready}
                             type="button"
                             className="button button-secondary button-small"
                             onClick={updateDeposit}
@@ -1010,6 +1031,7 @@ export default function Greenlight() {
                           </span>
                         </div>
                         <button
+                          disabled={!ready}
                           type="button"
                           className={`button button-primary proposal-compare ${compareProposal ? "is-compared" : ""}`}
                           onClick={() => {
@@ -1027,6 +1049,7 @@ export default function Greenlight() {
                           />
                         </button>
                         <button
+                          disabled={!ready}
                           type="button"
                           className="text-button proposal-request"
                           onClick={() => {
@@ -1069,6 +1092,7 @@ export default function Greenlight() {
                           </span>
                         </div>
                         <button
+                          disabled={!ready}
                           type="button"
                           className="button button-secondary"
                           onClick={() => setView("evidence")}
@@ -1105,6 +1129,7 @@ export default function Greenlight() {
                       ))}
                       {nextQuestion.sourceIds[0] && (
                         <button
+                          disabled={!ready}
                           type="button"
                           className="text-button"
                           onClick={() =>
@@ -1131,6 +1156,7 @@ export default function Greenlight() {
                         ”
                       </blockquote>
                       <button
+                        disabled={!ready}
                         type="button"
                         onClick={() => inspectEvidence(evidencePreview.id)}
                       >
@@ -1184,6 +1210,7 @@ export default function Greenlight() {
                           <td>
                             {event.sourceIds[0] ? (
                               <button
+                                disabled={!ready}
                                 type="button"
                                 className="source-link"
                                 onClick={() =>
@@ -1306,6 +1333,7 @@ export default function Greenlight() {
           <Icon name="check" size={16} />
           <span>{notice}</span>
           <button
+            disabled={!ready}
             type="button"
             onClick={() => setNotice(null)}
             aria-label="Dismiss notification"
@@ -1386,6 +1414,7 @@ export default function Greenlight() {
             lab carry their actual run origin.
           </div>
           <button
+            disabled={!ready}
             type="button"
             className="button button-primary tour-start"
             onClick={() => {
@@ -1413,6 +1442,7 @@ export default function Greenlight() {
           <pre className="request-draft">{requestText}</pre>
           <div className="dialog-actions">
             <button
+              disabled={!ready}
               type="button"
               className="button button-secondary"
               onClick={() => setRequestOpen(false)}
@@ -1420,6 +1450,7 @@ export default function Greenlight() {
               Close draft
             </button>
             <button
+              disabled={!ready}
               type="button"
               className="button button-primary"
               onClick={async () => {

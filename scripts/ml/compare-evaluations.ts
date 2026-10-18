@@ -1,16 +1,17 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { isDeepStrictEqual } from "node:util";
+import {
+  summarizeExtraction,
+  type ExtractionScore,
+  type ExtractionSummary,
+} from "../../lib/providers/evaluation";
 import { args, saveJson, publicError } from "./shared";
 type Row = {
   id: string;
   latencyMs: number;
   usage?: { prompt_tokens: number; completion_tokens: number };
-  score: {
-    materialExact: boolean;
-    valid: boolean;
-    proposed: boolean;
-    unsafeProposed: boolean;
-  };
+  score: ExtractionScore;
 };
 type Experiment = {
   status: string;
@@ -19,13 +20,7 @@ type Experiment = {
   frozenCaseCount?: number;
   decode: unknown;
   rows: Row[];
-  summary: {
-    count: number;
-    valid: number;
-    materialExact: number;
-    proposed: number;
-    unsafeProposed: number;
-  };
+  summary: ExtractionSummary;
   artifact: { repo: string; revision: string };
   stopVerified: boolean;
   costUsd: number;
@@ -35,6 +30,15 @@ function median(values: number[]) {
   const sorted = [...values].sort((a, b) => a - b),
     n = sorted.length;
   return n % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+}
+export const EXTRACTOR_GATE_VERSION = "extractor-gates-v2";
+function verifiedSummary(experiment: Experiment): ExtractionSummary {
+  const summary = summarizeExtraction(experiment.rows.map((row) => row.score));
+  if (!isDeepStrictEqual(experiment.summary, summary))
+    throw new Error(
+      "Experiment summary aggregates differ from its per-case scores",
+    );
+  return summary;
 }
 export function compareEvaluations(base: Experiment, tuned: Experiment) {
   if (
@@ -55,25 +59,46 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
   if (
     expectedCount < 24 ||
     (tuned.frozenCaseCount ?? 24) !== expectedCount ||
+    base.exampleCount !== expectedCount ||
+    tuned.exampleCount !== expectedCount ||
     base.rows.length !== expectedCount ||
     tuned.rows.length !== expectedCount ||
     base.summary?.count !== expectedCount ||
     tuned.summary?.count !== expectedCount
   )
     throw new Error(
-      `Full${expectedCount}-case independent holdout required; spot checks cannot promote`,
+      `Full ${expectedCount}-case independent holdout required; spot checks cannot promote`,
     );
   if (base.rows.some((r, i) => r.id !== tuned.rows[i]?.id))
     throw new Error("Experiments evaluated different case identities/order");
-  const matchedCoverage = tuned.summary.proposed >= base.summary.proposed;
+  if (
+    new Set(base.rows.map((row) => row.id)).size !== expectedCount ||
+    base.rows.some((row) => !row.id)
+  )
+    throw new Error("Evaluation case identities must be nonempty and unique");
+  if (
+    base.rows.some(
+      (row, i) =>
+        row.score.expectedStatus !== tuned.rows[i].score.expectedStatus,
+    )
+  )
+    throw new Error("Experiments differ in expected case labels");
+  const baseSummary = verifiedSummary(base),
+    tunedSummary = verifiedSummary(tuned);
+  // Incorrect PROPOSED guesses never count as useful supported-case coverage.
+  // Correctly retaining uncertainty may reduce raw review volume without a regression.
+  const matchedCoverage =
+    tunedSummary.correctSupportedProposals >=
+    baseSummary.correctSupportedProposals;
   const noRegression =
-    tuned.summary.materialExact >= base.summary.materialExact &&
-    tuned.summary.valid >= base.summary.valid &&
-    tuned.summary.unsafeProposed <= base.summary.unsafeProposed &&
+    tunedSummary.materialExact >= baseSummary.materialExact &&
+    tunedSummary.valid >= baseSummary.valid &&
+    tunedSummary.unsafeProposed <= baseSummary.unsafeProposed &&
     matchedCoverage;
-  const improved = tuned.summary.materialExact > base.summary.materialExact;
+  const improved = tunedSummary.materialExact > baseSummary.materialExact;
   return {
     schemaVersion: 1,
+    gateVersion: EXTRACTOR_GATE_VERSION,
     status: noRegression
       ? improved
         ? "quality-improved"
@@ -85,24 +110,28 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
     tunedArtifact: tuned.artifact,
     evaluationSha256: base.evaluationSha256,
     caseCount: expectedCount,
-    base: base.summary,
-    tuned: tuned.summary,
+    base: baseSummary,
+    tuned: tunedSummary,
     deltas: {
-      materialExact: tuned.summary.materialExact - base.summary.materialExact,
-      valid: tuned.summary.valid - base.summary.valid,
-      proposed: tuned.summary.proposed - base.summary.proposed,
-      unsafeProposed:
-        tuned.summary.unsafeProposed - base.summary.unsafeProposed,
+      materialExact: tunedSummary.materialExact - baseSummary.materialExact,
+      valid: tunedSummary.valid - baseSummary.valid,
+      proposed: tunedSummary.proposed - baseSummary.proposed,
+      unsafeProposed: tunedSummary.unsafeProposed - baseSummary.unsafeProposed,
+      correctSupportedProposals:
+        tunedSummary.correctSupportedProposals -
+        baseSummary.correctSupportedProposals,
     },
     latency: {
       baseWarmMedianMs: median(base.rows.map((r) => r.latencyMs)),
       tunedWarmMedianMs: median(tuned.rows.map((r) => r.latencyMs)),
       baseProvisioningMs: base.provisioningMs,
       tunedProvisioningMs: tuned.provisioningMs,
-      limit: `Sequential${expectedCount}-case descriptive timings, not a controlled significance test. Provisioning reported separately.`,
+      limit: `Sequential ${expectedCount}-case descriptive timings, not a controlled significance test. Provisioning reported separately.`,
     },
-    coverageMatchedOrHigher: matchedCoverage,
-    gate: "Improve material accuracy with no regression in schema validity, unsafe proposals, or automatic coverage; exact same frozen cases/decoding. A tie is reported and retains the base extractor.",
+    correctSupportedCoverageMatchedOrHigher: matchedCoverage,
+    coverageMetric:
+      "Material-exact PROPOSED outputs on expected-PROPOSED cases; raw proposals are review volume, including unsafe guesses.",
+    gate: "Improve material accuracy with no regression in schema validity, unsafe proposals, or correctly supported proposals; exact same full frozen cases, expected classes and decoding. Summaries are recomputed and checked against per-case scores. Raw proposal rate and class-specific accuracy are reported separately. All material proposals require owner review. A tie retains the base extractor.",
     verifiedAt: new Date().toISOString(),
   };
 }

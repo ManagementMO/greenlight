@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T00:44:14.712Z",
+  "generatedAt": "2026-10-18T00:56:06.837Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -20,16 +20,14 @@
     },
     {
       "provider": "Veri",
-      "status": "verified",
+      "status": "pending",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T00:20:36.179Z",
       "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
     },
     {
       "provider": "Hugging Face",
-      "status": "verified",
+      "status": "pending",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T00:20:36.179Z",
       "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
     },
     {
@@ -41,26 +39,26 @@
     }
   ],
   "training": {
-    "status": "completed",
+    "status": "running",
     "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
-    "jobId": "3f18d1c5354b",
-    "modelRepo": "machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp",
-    "detail": "16 examples, 4 optimizer steps. Technical path proof only; this tiny run is not evidence of improved extraction quality.",
+    "jobId": "95e43036a0b9",
+    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v3-0b2aade3-dae6e098-ba7",
+    "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
     "stages": [
       {
         "name": "Dataset",
         "status": "verified",
-        "detail": "16 examples; SHA-256 931b140b8447cf1a434b64e82fff428831a679fd7eb704803aba91bec2771b8d. Template-reviewed synthetic labels, not independent human adjudication."
+        "detail": "276 examples; SHA-256 0b2aade3cb4a4724ede90442943f63919e1ca832c83555aa415bd39f8ddc79f3. Template-reviewed synthetic labels, not independent human adjudication."
       },
       {
         "name": "Fine-tuning",
-        "status": "completed",
-        "detail": "4 of 4 steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "status": "running",
+        "detail": "0 of 138 steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested."
       },
       {
         "name": "Merged export",
-        "status": "verified",
-        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        "status": "pending",
+        "detail": "Waiting for completed merged export."
       },
       {
         "name": "Serving canary",
@@ -69,7 +67,20 @@
       }
     ]
   },
-  "evaluations": [],
+  "evaluations": [
+    {
+      "id": "veri-serving-proof-a838d4a7-c6e7-4997-a093-06e448582833",
+      "name": "Merged model serving proof — training canary only",
+      "origin": "recorded",
+      "model": "machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp",
+      "sampleCount": 0,
+      "metrics": {
+        "canaryValid": 0,
+        "canaryExact": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. No frozen test cases queried in this technical proof."
+    }
+  ],
   "experiments": [
     {
       "id": "metaharness-mvd2oofj",
@@ -118,8 +129,8 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 0.8,
-    "reservedUsd": 2,
+    "spentUsd": 1.03,
+    "reservedUsd": 6,
     "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
   },
   "provenance": [
@@ -137,6 +148,8 @@
   "observability": {
     "issueUrl": "https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2",
     "traceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697",
+    "productionTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd",
+    "evidenceTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b",
     "firstPartyFrame": "app/api/decision/route.ts:26",
     "verifiedAt": "2026-10-18T00:24:00Z",
     "environment": "development"
