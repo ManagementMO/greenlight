@@ -70,11 +70,47 @@ async function hfMetadata(repo: string, token: string) {
     throw new Error(
       "Artifact still contains standalone-adapter metadata; merged export needs verification",
     );
+  const configResponse = await fetch(
+    `https://huggingface.co/${repo}/resolve/${result.sha}/config.json`,
+    {
+      headers: { authorization: "Bearer " + token },
+      signal: AbortSignal.timeout(30000),
+    },
+  );
+  if (!configResponse.ok)
+    throw new Error(
+      `HF config retrieval failed with HTTP ${configResponse.status}`,
+    );
+  const configText = await configResponse.text();
+  if (configText.length > 1_000_000)
+    throw new Error("HF model config exceeds inspection bound");
+  const config = JSON.parse(configText);
+  const quantization = Object.fromEntries(
+    [
+      "quant_method",
+      "load_in_4bit",
+      "load_in_8bit",
+      "bnb_4bit_quant_type",
+      "bnb_4bit_use_double_quant",
+      "bnb_4bit_compute_dtype",
+    ]
+      .filter((key) => config.quantization_config?.[key] !== undefined)
+      .map((key) => [key, config.quantization_config[key]]),
+  );
   return {
     repo: result.id,
     revision: result.sha,
     private: result.private,
     files,
+    configuration: {
+      configSha256: createHash("sha256").update(configText).digest("hex"),
+      modelType: config.model_type,
+      architectures: config.architectures,
+      declaredDtype: config.dtype ?? config.torch_dtype ?? null,
+      quantization,
+      runtimeDtype:
+        "Not directly attested; model config is repository evidence only.",
+    },
   };
 }
 async function main() {
@@ -148,6 +184,10 @@ async function main() {
   );
   if (estimatedMaximum > maxCents || balance.balance_usd < maxCents / 100)
     throw new Error("Serving bound exceeds reserved budget/credit");
+  const request = boundedDeploymentRequest(
+    repo,
+    "greenlight-" + label + "-" + randomUUID(),
+  );
   const plan = {
     schemaVersion: 1,
     label,
@@ -161,6 +201,13 @@ async function main() {
     frozenCaseCount: all.length,
     exampleCount: examples.length,
     decode: { temperature: 0, maxTokens: 768 },
+    launch: {
+      engine: request.engine,
+      gpu: request.gpu,
+      vllmExtraArgs: request.vllm_extra_args,
+    },
+    comparisonScope:
+      "Same frozen cases, prompts, schema and decoding compare the original released base against the trained/exported artifact. Weight quantization and potentially serving dtype differ. This measures the combined artifact pipeline, not the causal effect of fine-tuning alone.",
     maxCents,
     timeoutSeconds,
     verifiedRateUsdPerGpuHour: gpu.usd_per_gpu_hr,
@@ -176,10 +223,6 @@ async function main() {
     record = resolve("work/ml", id + ".json"),
     deadline = Date.now() + timeoutSeconds * 1000;
   initOwnerTelemetry("extractor-evaluation", id);
-  const request = boundedDeploymentRequest(
-    repo,
-    "greenlight-" + label + "-" + randomUUID(),
-  );
   const identity: SubmissionIdentity = {
     schemaVersion: 1,
     submissionId: id,

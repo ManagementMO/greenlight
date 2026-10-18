@@ -177,8 +177,12 @@ async function main() {
       gate: comparison.gate,
       verifiedAt: comparison.verifiedAt,
       origin: "recorded",
+      methodology: comparison.methodology,
+      baseArtifact: comparison.baseArtifact,
+      tunedArtifact: comparison.tunedArtifact,
+      latency: comparison.latency,
       detail:
-        "Genuine sequential base/tuned inference on the same frozen synthetic clauses. Proposals require owner review; this experiment does not activate financial terms.",
+        "Genuine sequential inference on the same frozen synthetic clauses compares the original base and trained/exported artifact pipelines. Quantization and possibly serving precision differ, so the comparison does not isolate fine-tuning alone. Proposals require owner review and do not activate financial terms.",
       evaluationSha256: comparison.evaluationSha256,
     };
   current.budget = {

@@ -15,6 +15,8 @@ The already-completed four-step technical serving proof queried one training can
 - Verify the repository's observed SHA before and after the run, disable deployment model caching, and record returned model identity. The provider API does not attest the precise loaded commit.
 - Run the C120 source illustration separately after the final cases. It is excluded from all final-set metrics.
 
+Precision scope recorded before final queries: this compares the original released base artifact against the trained/merged export artifact. The base declares BF16 without a quantization configuration; the technical export declares BitsAndBytes NF4 with double quantization and BF16 quantization compute, with a top-level FP32 dtype. The substantive export will be inspected independently. Serving may infer different activation dtypes from those configs. Both runs record pinned config hashes, allowlisted precision/quantization fields and the same launch arguments. Effective loaded dtype is unverified unless provider logs establish it. Results measure the combined training/export/runtime pipeline and do not isolate the causal effect of LoRA alone; latency has the same limitation.
+
 ## Promotion rule
 
 The tuned candidate must strictly improve material-exact count with no regression in schema-valid count, correct supported proposals, or unsafe-proposal count. A tie retains the base. Summaries are recomputed from validated per-case scores; inconsistent aggregates, duplicate or incomplete cases, differing labels, differing frozen hashes and differing decoding are refused.

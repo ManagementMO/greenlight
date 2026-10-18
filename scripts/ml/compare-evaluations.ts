@@ -106,6 +106,8 @@ export function compareEvaluations(base: Experiment, tuned: Experiment) {
       : "rejected-regression",
     promoted: noRegression && improved,
     qualityImprovementMeasured: improved && noRegression,
+    methodology:
+      "Matched frozen cases, prompts, schema and decoding compare the original base artifact pipeline with the trained/merged export pipeline. Weight quantization and possibly runtime dtype differ; the result does not isolate LoRA's causal effect. Repository configuration is observed, effective loaded precision is not attested.",
     baseArtifact: base.artifact,
     tunedArtifact: tuned.artifact,
     evaluationSha256: base.evaluationSha256,

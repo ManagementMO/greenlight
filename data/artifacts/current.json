@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T00:56:06.837Z",
+  "generatedAt": "2026-10-18T01:01:07.368Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -53,7 +53,7 @@
       {
         "name": "Fine-tuning",
         "status": "running",
-        "detail": "0 of 138 steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "detail": "5 of 138 steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested."
       },
       {
         "name": "Merged export",
@@ -150,6 +150,7 @@
     "traceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697",
     "productionTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd",
     "evidenceTraceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b",
+    "replayUrl": "https://greenlight-full.sentry.io/explore/replays/2938f6342b1742e48e437e0cf48add8c/",
     "firstPartyFrame": "app/api/decision/route.ts:26",
     "verifiedAt": "2026-10-18T00:24:00Z",
     "environment": "development"
