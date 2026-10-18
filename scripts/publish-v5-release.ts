@@ -6,6 +6,7 @@ import { SpendLedger, type BudgetSnapshot } from "../lib/budget/ledger";
 import { validPublicV5Evaluation, type PublicV5Evaluation } from "../lib/public-extraction-evaluation";
 import { assertReviewedV5Evaluation, V5_GATE, v5PromptHash } from "../lib/providers/evaluation-v5";
 import { args, loadProjectEnv, saveJson } from "./ml/shared";
+import { assertPublishedV5Showcase } from "../lib/providers/showcase-v5";
 
 type RecordData = Record<string, any>;
 type ReleaseInput = {
@@ -18,6 +19,7 @@ type ReleaseInput = {
   publication: RecordData;
   development?: unknown;
   final?: unknown;
+  showcase?: RecordData;
   developmentManifest: RecordData;
   finalManifest: RecordData;
   budget: BudgetSnapshot;
@@ -167,6 +169,11 @@ export function buildV5Release(input: ReleaseInput) {
   delete current.extractionV5Final;
   if (development) current.extractionV5Development = development;
   if (final) current.extractionV5Final = final;
+  if (input.showcase) {
+    if (!final) throw new Error("V5 showcase cannot be released without a final evaluation.");
+    assertPublishedV5Showcase(input.showcase, final);
+    current.extractionDemo = input.showcase;
+  }
   return {current, publicTraining};
 }
 
@@ -190,6 +197,7 @@ async function main() {
     publication: await readJson(`work/ml/published-${basename(training.repo)}.json`),
     development: await readJson("data/artifacts/extraction-v5-development.json", true),
     final: await readJson("data/artifacts/extraction-v5-evaluation.json", true),
+    showcase: await readJson("data/artifacts/extraction-v5-demo.json", true),
     developmentManifest: await readJson("data/evaluation/v5-development/manifest.json"),
     finalManifest: await readJson("data/evaluation/v5-final/manifest.json"),
     budget: await new SpendLedger(resolve("work/budget/ledger.json")).snapshot(), generatedAt: new Date().toISOString(),

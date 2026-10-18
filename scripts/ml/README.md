@@ -29,11 +29,12 @@ npx tsx scripts/ml/serve-evaluate.ts --repo TUNED_REPO --label v5-tuned-final --
 
 # Local publication re-scores every response before publishing model quality.
 npx tsx scripts/publish-v5-evaluations.ts --split final --training-run TRAINING_RECORD
+npx tsx scripts/publish-v5-showcase.ts
 npx tsx scripts/publish-v5-release.ts --training-run TRAINING_RECORD
 npx tsx scripts/ml/reconcile.ts
 ```
 
-The final selection binds exact model revisions, training/development/final hashes, prompts, decoding, serving configuration and completed development evidence. The provider's returned deployment alias is checked against the submitted unique deployment. The observed HF revision is not an attestation of loaded weight bytes. Public V5 summaries are separate from the archived V4 experiment. The historical publisher refuses to mix V5 training with V4 results.
+The final selection binds exact model revisions, training/development/final hashes, prompts, decoding, serving configuration and completed development evidence. The provider's returned deployment alias is checked against the submitted unique deployment. The observed HF revision is not an attestation of loaded weight bytes. Public V5 summaries are separate from the archived V4 experiment. The historical publisher refuses to mix V5 training with V4 results. The optional source illustration comes from the model selected by the final gate, preserves its exact output, and is excluded from final metrics. It never selects whichever one-off answer looks best.
 
 ## Historical V4 commands
 
