@@ -1,12 +1,14 @@
-# Greenlight team handoff
+# Headroom team handoff
+
+The public project and GitHub repository are now **Headroom**. For an existing checkout, run `git remote set-url origin https://github.com/ManagementMO/headroom.git`. The original local directory, provider projects, frozen data and model identifiers may still say Greenlight; do not rewrite historical experiment evidence. Use [the new brand assets](brand/README.md) for future UI, deck and film work.
 
 This is a runnable shared checkpoint. The decision workspace, evidence view, what-if controls, conserved payment proposal, recorded MetaHarness replay and Sentry instrumentation are implemented. The public demo runs without provider credentials. Real v4 training and evaluation are complete: the tuned extractor was rejected by the frozen gate. [Actual results and next ML experiment](extractor-v4-results.md).
 
 ## Start working
 
 ```sh
-git clone https://github.com/ManagementMO/greenlight.git
-cd greenlight
+git clone https://github.com/ManagementMO/headroom.git
+cd headroom
 npm ci --legacy-peer-deps
 npm run dev
 ```
@@ -19,7 +21,7 @@ npm test
 npm run typecheck
 ```
 
-The hosted checkpoint is https://greenlight-two-psi.vercel.app. The demo's clock is October 6, 2026, and its data is synthetic accounting plus explicitly disclosed future scenarios.
+The hosted checkpoint is https://headroom-lahacks.vercel.app. The demo's clock is October 6, 2026, and its data is synthetic accounting plus explicitly disclosed future scenarios.
 
 The [Paper design and launch-storyboard handoff](design/README.md) is separate from frontend code. It includes 11 authored artboards, source-derived chart geometry, mobile direction, tokens and JSX references. Frontend owners can use it without waiting for model evaluation.
 

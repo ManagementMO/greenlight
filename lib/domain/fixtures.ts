@@ -297,7 +297,7 @@ const phaseDelay: ScenarioFixture = {
     },
   ],
   provenance: {
-    label: "Intuit synthetic books + disclosed Greenlight scenario additions",
+    label: "Intuit synthetic books + disclosed Headroom scenario additions",
     datasetUrl: intuit.datasetUrl,
     accountingSource: "company-047 / bank-002419 / 2026-10-06 / $74,882.38",
     additions: [
@@ -359,7 +359,7 @@ incomplete.name = "Ductline · evidence gap";
 incomplete.description =
   "A reassuring email and gross-only payroll figures cannot establish cash coverage.";
 incomplete.narrative =
-  "A message says 'approved to bill,' while inspection acceptance is disputed and a payroll-tax amount is missing. Greenlight keeps partial cash paths visible and withholds a supported verdict until material facts are resolved.";
+  "A message says 'approved to bill,' while inspection acceptance is disputed and a payroll-tax amount is missing. Headroom keeps partial cash paths visible and withholds a supported verdict until material facts are resolved.";
 incomplete.unresolvedTerms = [
   "Phase acceptance conflicts with the customer's unresolved punch-list message.",
   "Gross-only payroll history does not establish employer taxes; the future payroll-tax amount needs confirmation.",

@@ -7,10 +7,18 @@ const body = IBM_Plex_Sans({ subsets: ['latin'], weight: 'variable', variable: '
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Greenlight — Take the job. Protect payroll.',
-  description: 'Explore the cash, evidence, and payment changes behind a fundable job. A transparent LA Hacks demonstration with a tested financial engine and measured AI workflows.',
-  applicationName: 'Greenlight',
-  openGraph: { title: 'Greenlight', description: 'Take the job. Protect payroll.', type: 'website' },
+  metadataBase: new URL('https://headroom-lahacks.vercel.app'),
+  title: 'Headroom — Take the next job. Keep room for payday.',
+  description: 'Can you take the next big job without borrowing or missing payroll? Headroom connects cash, contract evidence, and payment terms to show a supported path forward.',
+  applicationName: 'Headroom',
+  openGraph: {
+    title: 'Headroom — Take the next job. Keep room for payday.',
+    description: 'Evidence-backed decisions for small business.',
+    type: 'website',
+    images: [{ url: '/brand/headroom-banner.png', width: 1672, height: 941, alt: 'Headroom: a mint cash path clears the payroll threshold and opens room to grow.' }],
+  },
+  twitter: { card: 'summary_large_image', title: 'Headroom', description: 'Take the next job. Keep room for payday.', images: ['/brand/headroom-banner.png'] },
+  icons: { icon: '/brand/headroom-mark.png', apple: '/brand/headroom-mark.png' },
 };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#087F5B' };
 

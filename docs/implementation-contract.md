@@ -1,4 +1,4 @@
-# Greenlight implementation contract
+# Headroom implementation contract
 
 The accepted specification is `docs/Greenlight-revised-plan.md`. Preserve its invariants and evidence boundaries. This file defines the build interfaces.
 

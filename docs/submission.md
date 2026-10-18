@@ -1,14 +1,14 @@
-# Greenlight
+# Headroom
 
-**Take the job. Protect payroll.**
+**Take the next job. Keep room for payday.**
 
-[Open the working demo](https://greenlight-two-psi.vercel.app) · [Source and reproducible tooling](https://github.com/ManagementMO/greenlight) · [Presentation guide](demo-guide.md)
+[Open the working demo](https://headroom-lahacks.vercel.app) · [Source and reproducible tooling](https://github.com/ManagementMO/headroom) · [Devpost draft](devpost.md) · [Presentation guide](demo-guide.md)
 
 ## The problem
 
 A profitable job can still bankrupt a small contractor when suppliers and payroll come before customer collections. Financial agents often give a plausible answer without establishing which payment conditions are satisfied, when the invoice clock begins, or when money actually reaches the bank.
 
-Greenlight turns “Can we take this $120,000 job?” into an inspectable decision. It shows the cash bottleneck, the source or assumption behind it, the question that would change the answer, and the smallest permitted payment adjustment. In the default scenario, advancing $23,000 from the final installment into the deposit restores the $10,000 reserve across both declared collection paths. Total contract revenue stays $120,000.
+Headroom turns “Can we take this $120,000 job?” into an inspectable decision. It shows the cash bottleneck, the source or assumption behind it, the question that would change the answer, and the smallest permitted payment adjustment. In the default scenario, advancing $23,000 from the final installment into the deposit restores the $10,000 reserve across both declared collection paths. Total contract revenue stays $120,000.
 
 ## The technical idea
 

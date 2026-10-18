@@ -19,7 +19,7 @@ import type {
 } from "@/lib/domain";
 import { CashBridge, type CashChartSeries } from "@/components/cash-bridge";
 import { Dialog } from "@/components/dialog";
-import { GreenlightMark, Icon } from "@/components/icons";
+import { HeadroomMark, Icon } from "@/components/icons";
 import { ImprovementLab } from "@/components/improvement-lab";
 import { RecordedExtraction } from "@/components/recorded-extraction";
 
@@ -278,7 +278,7 @@ function EvidenceView({
   );
 }
 
-export default function Greenlight() {
+export default function Headroom() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     setReady(true);
@@ -466,7 +466,7 @@ export default function Greenlight() {
 
   function downloadDecision() {
     const payload = {
-      product: "Greenlight",
+      product: "Headroom",
       synthetic: true,
       exportedAt: new Date().toISOString(),
       snapshot: input,
@@ -482,7 +482,7 @@ export default function Greenlight() {
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = `greenlight-${input.id}-v${input.version}.json`;
+    link.download = `headroom-${input.id}-v${input.version}.json`;
     link.click();
     URL.revokeObjectURL(url);
     setNotice(
@@ -508,11 +508,11 @@ export default function Greenlight() {
             event.preventDefault();
             setView("decision");
           }}
-          aria-label="Greenlight decision workspace"
+          aria-label="Headroom decision workspace"
         >
-          <GreenlightMark size={32} />
+          <HeadroomMark size={32} />
           <span>
-            greenlight<span className="brand-period">.</span>
+            headroom<span className="brand-period">.</span>
           </span>
         </a>
         <div className="topbar-divider" />
@@ -540,10 +540,10 @@ export default function Greenlight() {
           </button>
           <a
             className="github-link"
-            href="https://github.com/ManagementMO/greenlight"
+            href="https://github.com/ManagementMO/headroom"
             target="_blank"
             rel="noreferrer"
-            aria-label="View Greenlight on GitHub"
+            aria-label="View Headroom on GitHub"
           >
             <Icon name="arrow-up-right" size={18} />
           </a>
@@ -601,7 +601,7 @@ export default function Greenlight() {
           </div>
           <div className="sidebar-bottom">
             <span className="sidebar-illustration">
-              <GreenlightMark size={38} />
+              <HeadroomMark size={38} />
             </span>
             <strong>Grow with room to breathe.</strong>
             <p>Good decisions leave room for payroll.</p>
@@ -612,7 +612,7 @@ export default function Greenlight() {
             >
               Take the short tour <Icon name="arrow-right" size={14} />
             </button>
-            <span className="sidebar-build mono">LA HACKS · GREENLIGHT</span>
+            <span className="sidebar-build mono">LA HACKS · HEADROOM</span>
           </div>
         </aside>
         <main className="main-content" id="main-content">
@@ -1312,14 +1312,14 @@ export default function Greenlight() {
           {view === "lab" && <ImprovementLab />}
           <footer className="workspace-footer">
             <span>
-              Greenlight <span className="muted">/</span> Growth with your eyes
+              Headroom <span className="muted">/</span> Growth with your eyes
               open.
             </span>
             <span>
               Synthetic accounting data + disclosed scenario extensions.
             </span>
             <a
-              href="https://github.com/ManagementMO/greenlight"
+              href="https://github.com/ManagementMO/headroom"
               target="_blank"
               rel="noreferrer"
             >
@@ -1348,9 +1348,9 @@ export default function Greenlight() {
           onClose={() => setHelpOpen(false)}
         >
           <div className="tour-intro">
-            <GreenlightMark size={44} />
+            <HeadroomMark size={44} />
             <p>
-              Greenlight asks one practical question: can this job fit the cash
+              Headroom asks one practical question: can this job fit the cash
               you actually have, while protecting payroll?
             </p>
           </div>
@@ -1392,7 +1392,7 @@ export default function Greenlight() {
                 <strong>Compare a proposal, then agree it.</strong>
                 <p>
                   Try a bounded deposit adjustment that preserves the contract
-                  total. Greenlight prepares a draft; it does not execute a
+                  total. Headroom prepares a draft; it does not execute a
                   contract or move money.
                 </p>
               </div>

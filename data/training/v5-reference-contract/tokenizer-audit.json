@@ -1,0 +1,3049 @@
+{
+  "schemaVersion": 1,
+  "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+  "dataVersion": "greenlight-clauses-v5-reference-contract",
+  "trainingSha256": "ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051",
+  "promptProfile": "reference-contract-v5",
+  "maxSeqLength": 2048,
+  "baseRevisionObserved": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "tokenizerSha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "chatTemplateSha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+  "tokenizerClass": "Qwen2Tokenizer",
+  "eosToken": "<|im_end|>",
+  "examples": 336,
+  "maxTokens": 1631,
+  "invoiceIssuanceClockExamples": 168,
+  "minCompletionTokens": 57,
+  "allPromptTokenPrefixesMatch": true,
+  "truncatedExamplesAt1536": 54,
+  "truncatedExamplesAtMaxSeqLength": 0,
+  "intendedLossMask": "completion-only from TRL prompt-completion format default",
+  "remoteEffectiveMaskVerified": false,
+  "boundary": "Local tokenization and intended mask validation; does not inspect tensors on the remote worker.",
+  "rows": [
+    {
+      "index": 0,
+      "tokens": 1540,
+      "promptTokens": 1324,
+      "completionTokens": 216,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 1,
+      "tokens": 1533,
+      "promptTokens": 1351,
+      "completionTokens": 182,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 2,
+      "tokens": 1479,
+      "promptTokens": 1304,
+      "completionTokens": 175,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 3,
+      "tokens": 1272,
+      "promptTokens": 1211,
+      "completionTokens": 61,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 4,
+      "tokens": 1338,
+      "promptTokens": 1250,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 5,
+      "tokens": 1315,
+      "promptTokens": 1231,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 6,
+      "tokens": 1604,
+      "promptTokens": 1378,
+      "completionTokens": 226,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 7,
+      "tokens": 1462,
+      "promptTokens": 1304,
+      "completionTokens": 158,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 8,
+      "tokens": 1497,
+      "promptTokens": 1314,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 9,
+      "tokens": 1529,
+      "promptTokens": 1345,
+      "completionTokens": 184,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 10,
+      "tokens": 1335,
+      "promptTokens": 1243,
+      "completionTokens": 92,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 11,
+      "tokens": 1533,
+      "promptTokens": 1330,
+      "completionTokens": 203,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 12,
+      "tokens": 1289,
+      "promptTokens": 1210,
+      "completionTokens": 79,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 13,
+      "tokens": 1495,
+      "promptTokens": 1314,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 14,
+      "tokens": 1274,
+      "promptTokens": 1212,
+      "completionTokens": 62,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 15,
+      "tokens": 1355,
+      "promptTokens": 1264,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 16,
+      "tokens": 1418,
+      "promptTokens": 1268,
+      "completionTokens": 150,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 17,
+      "tokens": 1537,
+      "promptTokens": 1335,
+      "completionTokens": 202,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 18,
+      "tokens": 1280,
+      "promptTokens": 1198,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 19,
+      "tokens": 1578,
+      "promptTokens": 1378,
+      "completionTokens": 200,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 20,
+      "tokens": 1516,
+      "promptTokens": 1335,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 21,
+      "tokens": 1564,
+      "promptTokens": 1353,
+      "completionTokens": 211,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 22,
+      "tokens": 1327,
+      "promptTokens": 1234,
+      "completionTokens": 93,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 23,
+      "tokens": 1302,
+      "promptTokens": 1218,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 24,
+      "tokens": 1334,
+      "promptTokens": 1247,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 25,
+      "tokens": 1362,
+      "promptTokens": 1256,
+      "completionTokens": 106,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 26,
+      "tokens": 1349,
+      "promptTokens": 1257,
+      "completionTokens": 92,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 27,
+      "tokens": 1436,
+      "promptTokens": 1276,
+      "completionTokens": 160,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 28,
+      "tokens": 1531,
+      "promptTokens": 1337,
+      "completionTokens": 194,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 29,
+      "tokens": 1280,
+      "promptTokens": 1217,
+      "completionTokens": 63,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 30,
+      "tokens": 1475,
+      "promptTokens": 1292,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 31,
+      "tokens": 1546,
+      "promptTokens": 1329,
+      "completionTokens": 217,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 32,
+      "tokens": 1464,
+      "promptTokens": 1274,
+      "completionTokens": 190,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 33,
+      "tokens": 1585,
+      "promptTokens": 1353,
+      "completionTokens": 232,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 34,
+      "tokens": 1519,
+      "promptTokens": 1328,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 35,
+      "tokens": 1331,
+      "promptTokens": 1240,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 36,
+      "tokens": 1403,
+      "promptTokens": 1268,
+      "completionTokens": 135,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 37,
+      "tokens": 1362,
+      "promptTokens": 1265,
+      "completionTokens": 97,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 38,
+      "tokens": 1587,
+      "promptTokens": 1387,
+      "completionTokens": 200,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 39,
+      "tokens": 1457,
+      "promptTokens": 1266,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 40,
+      "tokens": 1368,
+      "promptTokens": 1249,
+      "completionTokens": 119,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 41,
+      "tokens": 1355,
+      "promptTokens": 1252,
+      "completionTokens": 103,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 42,
+      "tokens": 1404,
+      "promptTokens": 1298,
+      "completionTokens": 106,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 43,
+      "tokens": 1594,
+      "promptTokens": 1365,
+      "completionTokens": 229,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 44,
+      "tokens": 1531,
+      "promptTokens": 1349,
+      "completionTokens": 182,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 45,
+      "tokens": 1506,
+      "promptTokens": 1309,
+      "completionTokens": 197,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 46,
+      "tokens": 1498,
+      "promptTokens": 1324,
+      "completionTokens": 174,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 47,
+      "tokens": 1303,
+      "promptTokens": 1220,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 48,
+      "tokens": 1471,
+      "promptTokens": 1287,
+      "completionTokens": 184,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 49,
+      "tokens": 1372,
+      "promptTokens": 1249,
+      "completionTokens": 123,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 50,
+      "tokens": 1362,
+      "promptTokens": 1271,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 51,
+      "tokens": 1279,
+      "promptTokens": 1197,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 52,
+      "tokens": 1318,
+      "promptTokens": 1238,
+      "completionTokens": 80,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 53,
+      "tokens": 1484,
+      "promptTokens": 1297,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 54,
+      "tokens": 1521,
+      "promptTokens": 1342,
+      "completionTokens": 179,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 55,
+      "tokens": 1522,
+      "promptTokens": 1346,
+      "completionTokens": 176,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 56,
+      "tokens": 1602,
+      "promptTokens": 1384,
+      "completionTokens": 218,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 57,
+      "tokens": 1384,
+      "promptTokens": 1283,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 58,
+      "tokens": 1505,
+      "promptTokens": 1333,
+      "completionTokens": 172,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 59,
+      "tokens": 1465,
+      "promptTokens": 1306,
+      "completionTokens": 159,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 60,
+      "tokens": 1344,
+      "promptTokens": 1254,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 61,
+      "tokens": 1412,
+      "promptTokens": 1263,
+      "completionTokens": 149,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 62,
+      "tokens": 1305,
+      "promptTokens": 1221,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 63,
+      "tokens": 1333,
+      "promptTokens": 1243,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 64,
+      "tokens": 1472,
+      "promptTokens": 1319,
+      "completionTokens": 153,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 65,
+      "tokens": 1464,
+      "promptTokens": 1325,
+      "completionTokens": 139,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 66,
+      "tokens": 1279,
+      "promptTokens": 1216,
+      "completionTokens": 63,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 67,
+      "tokens": 1581,
+      "promptTokens": 1354,
+      "completionTokens": 227,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 68,
+      "tokens": 1583,
+      "promptTokens": 1360,
+      "completionTokens": 223,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 69,
+      "tokens": 1362,
+      "promptTokens": 1259,
+      "completionTokens": 103,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 70,
+      "tokens": 1433,
+      "promptTokens": 1273,
+      "completionTokens": 160,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 71,
+      "tokens": 1497,
+      "promptTokens": 1308,
+      "completionTokens": 189,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 72,
+      "tokens": 1331,
+      "promptTokens": 1239,
+      "completionTokens": 92,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 73,
+      "tokens": 1485,
+      "promptTokens": 1311,
+      "completionTokens": 174,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 74,
+      "tokens": 1489,
+      "promptTokens": 1308,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 75,
+      "tokens": 1542,
+      "promptTokens": 1345,
+      "completionTokens": 197,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 76,
+      "tokens": 1581,
+      "promptTokens": 1384,
+      "completionTokens": 197,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 77,
+      "tokens": 1292,
+      "promptTokens": 1210,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 78,
+      "tokens": 1501,
+      "promptTokens": 1319,
+      "completionTokens": 182,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 79,
+      "tokens": 1332,
+      "promptTokens": 1234,
+      "completionTokens": 98,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 80,
+      "tokens": 1317,
+      "promptTokens": 1230,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 81,
+      "tokens": 1393,
+      "promptTokens": 1278,
+      "completionTokens": 115,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 82,
+      "tokens": 1496,
+      "promptTokens": 1314,
+      "completionTokens": 182,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 83,
+      "tokens": 1311,
+      "promptTokens": 1231,
+      "completionTokens": 80,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 84,
+      "tokens": 1314,
+      "promptTokens": 1225,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 85,
+      "tokens": 1574,
+      "promptTokens": 1358,
+      "completionTokens": 216,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 86,
+      "tokens": 1314,
+      "promptTokens": 1229,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 87,
+      "tokens": 1385,
+      "promptTokens": 1282,
+      "completionTokens": 103,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 88,
+      "tokens": 1313,
+      "promptTokens": 1226,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 89,
+      "tokens": 1301,
+      "promptTokens": 1214,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 90,
+      "tokens": 1502,
+      "promptTokens": 1335,
+      "completionTokens": 167,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 91,
+      "tokens": 1495,
+      "promptTokens": 1312,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 92,
+      "tokens": 1490,
+      "promptTokens": 1331,
+      "completionTokens": 159,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 93,
+      "tokens": 1520,
+      "promptTokens": 1331,
+      "completionTokens": 189,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 94,
+      "tokens": 1567,
+      "promptTokens": 1340,
+      "completionTokens": 227,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 95,
+      "tokens": 1515,
+      "promptTokens": 1325,
+      "completionTokens": 190,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 96,
+      "tokens": 1309,
+      "promptTokens": 1224,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 97,
+      "tokens": 1471,
+      "promptTokens": 1293,
+      "completionTokens": 178,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 98,
+      "tokens": 1520,
+      "promptTokens": 1311,
+      "completionTokens": 209,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 99,
+      "tokens": 1561,
+      "promptTokens": 1364,
+      "completionTokens": 197,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 100,
+      "tokens": 1279,
+      "promptTokens": 1198,
+      "completionTokens": 81,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 101,
+      "tokens": 1357,
+      "promptTokens": 1259,
+      "completionTokens": 98,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 102,
+      "tokens": 1525,
+      "promptTokens": 1321,
+      "completionTokens": 204,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 103,
+      "tokens": 1359,
+      "promptTokens": 1273,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 104,
+      "tokens": 1510,
+      "promptTokens": 1322,
+      "completionTokens": 188,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 105,
+      "tokens": 1462,
+      "promptTokens": 1300,
+      "completionTokens": 162,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 106,
+      "tokens": 1477,
+      "promptTokens": 1296,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 107,
+      "tokens": 1559,
+      "promptTokens": 1359,
+      "completionTokens": 200,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 108,
+      "tokens": 1437,
+      "promptTokens": 1264,
+      "completionTokens": 173,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 109,
+      "tokens": 1291,
+      "promptTokens": 1206,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 110,
+      "tokens": 1352,
+      "promptTokens": 1266,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 111,
+      "tokens": 1342,
+      "promptTokens": 1254,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 112,
+      "tokens": 1583,
+      "promptTokens": 1356,
+      "completionTokens": 227,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 113,
+      "tokens": 1479,
+      "promptTokens": 1296,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 114,
+      "tokens": 1548,
+      "promptTokens": 1355,
+      "completionTokens": 193,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 115,
+      "tokens": 1546,
+      "promptTokens": 1330,
+      "completionTokens": 216,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 116,
+      "tokens": 1461,
+      "promptTokens": 1327,
+      "completionTokens": 134,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 117,
+      "tokens": 1345,
+      "promptTokens": 1250,
+      "completionTokens": 95,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 118,
+      "tokens": 1456,
+      "promptTokens": 1278,
+      "completionTokens": 178,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 119,
+      "tokens": 1294,
+      "promptTokens": 1216,
+      "completionTokens": 78,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 120,
+      "tokens": 1357,
+      "promptTokens": 1253,
+      "completionTokens": 104,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 121,
+      "tokens": 1507,
+      "promptTokens": 1323,
+      "completionTokens": 184,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 122,
+      "tokens": 1343,
+      "promptTokens": 1239,
+      "completionTokens": 104,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 123,
+      "tokens": 1533,
+      "promptTokens": 1347,
+      "completionTokens": 186,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 124,
+      "tokens": 1469,
+      "promptTokens": 1294,
+      "completionTokens": 175,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 125,
+      "tokens": 1345,
+      "promptTokens": 1250,
+      "completionTokens": 95,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 126,
+      "tokens": 1574,
+      "promptTokens": 1374,
+      "completionTokens": 200,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 127,
+      "tokens": 1502,
+      "promptTokens": 1320,
+      "completionTokens": 182,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 128,
+      "tokens": 1450,
+      "promptTokens": 1274,
+      "completionTokens": 176,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 129,
+      "tokens": 1334,
+      "promptTokens": 1250,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 130,
+      "tokens": 1338,
+      "promptTokens": 1253,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 131,
+      "tokens": 1601,
+      "promptTokens": 1375,
+      "completionTokens": 226,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 132,
+      "tokens": 1555,
+      "promptTokens": 1364,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 133,
+      "tokens": 1549,
+      "promptTokens": 1340,
+      "completionTokens": 209,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 134,
+      "tokens": 1379,
+      "promptTokens": 1257,
+      "completionTokens": 122,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 135,
+      "tokens": 1380,
+      "promptTokens": 1265,
+      "completionTokens": 115,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 136,
+      "tokens": 1440,
+      "promptTokens": 1304,
+      "completionTokens": 136,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 137,
+      "tokens": 1560,
+      "promptTokens": 1362,
+      "completionTokens": 198,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 138,
+      "tokens": 1517,
+      "promptTokens": 1320,
+      "completionTokens": 197,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 139,
+      "tokens": 1312,
+      "promptTokens": 1224,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 140,
+      "tokens": 1399,
+      "promptTokens": 1273,
+      "completionTokens": 126,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 141,
+      "tokens": 1532,
+      "promptTokens": 1328,
+      "completionTokens": 204,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 142,
+      "tokens": 1419,
+      "promptTokens": 1283,
+      "completionTokens": 136,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 143,
+      "tokens": 1521,
+      "promptTokens": 1326,
+      "completionTokens": 195,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 144,
+      "tokens": 1483,
+      "promptTokens": 1298,
+      "completionTokens": 185,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 145,
+      "tokens": 1533,
+      "promptTokens": 1321,
+      "completionTokens": 212,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 146,
+      "tokens": 1381,
+      "promptTokens": 1281,
+      "completionTokens": 100,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 147,
+      "tokens": 1431,
+      "promptTokens": 1268,
+      "completionTokens": 163,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 148,
+      "tokens": 1483,
+      "promptTokens": 1296,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 149,
+      "tokens": 1427,
+      "promptTokens": 1295,
+      "completionTokens": 132,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 150,
+      "tokens": 1332,
+      "promptTokens": 1248,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 151,
+      "tokens": 1498,
+      "promptTokens": 1309,
+      "completionTokens": 189,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 152,
+      "tokens": 1552,
+      "promptTokens": 1346,
+      "completionTokens": 206,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 153,
+      "tokens": 1446,
+      "promptTokens": 1289,
+      "completionTokens": 157,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 154,
+      "tokens": 1478,
+      "promptTokens": 1293,
+      "completionTokens": 185,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 155,
+      "tokens": 1537,
+      "promptTokens": 1352,
+      "completionTokens": 185,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 156,
+      "tokens": 1381,
+      "promptTokens": 1277,
+      "completionTokens": 104,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 157,
+      "tokens": 1541,
+      "promptTokens": 1321,
+      "completionTokens": 220,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 158,
+      "tokens": 1476,
+      "promptTokens": 1295,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 159,
+      "tokens": 1528,
+      "promptTokens": 1326,
+      "completionTokens": 202,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 160,
+      "tokens": 1316,
+      "promptTokens": 1233,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 161,
+      "tokens": 1383,
+      "promptTokens": 1284,
+      "completionTokens": 99,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 162,
+      "tokens": 1518,
+      "promptTokens": 1334,
+      "completionTokens": 184,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 163,
+      "tokens": 1560,
+      "promptTokens": 1347,
+      "completionTokens": 213,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 164,
+      "tokens": 1360,
+      "promptTokens": 1270,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 165,
+      "tokens": 1386,
+      "promptTokens": 1260,
+      "completionTokens": 126,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 166,
+      "tokens": 1310,
+      "promptTokens": 1222,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 167,
+      "tokens": 1562,
+      "promptTokens": 1340,
+      "completionTokens": 222,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 168,
+      "tokens": 1414,
+      "promptTokens": 1275,
+      "completionTokens": 139,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 169,
+      "tokens": 1506,
+      "promptTokens": 1302,
+      "completionTokens": 204,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 170,
+      "tokens": 1335,
+      "promptTokens": 1245,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 171,
+      "tokens": 1554,
+      "promptTokens": 1344,
+      "completionTokens": 210,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 172,
+      "tokens": 1417,
+      "promptTokens": 1295,
+      "completionTokens": 122,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 173,
+      "tokens": 1475,
+      "promptTokens": 1302,
+      "completionTokens": 173,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 174,
+      "tokens": 1313,
+      "promptTokens": 1229,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 175,
+      "tokens": 1274,
+      "promptTokens": 1193,
+      "completionTokens": 81,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 176,
+      "tokens": 1325,
+      "promptTokens": 1235,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 177,
+      "tokens": 1289,
+      "promptTokens": 1206,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 178,
+      "tokens": 1386,
+      "promptTokens": 1284,
+      "completionTokens": 102,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 179,
+      "tokens": 1287,
+      "promptTokens": 1223,
+      "completionTokens": 64,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 180,
+      "tokens": 1505,
+      "promptTokens": 1318,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 181,
+      "tokens": 1300,
+      "promptTokens": 1226,
+      "completionTokens": 74,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 182,
+      "tokens": 1425,
+      "promptTokens": 1299,
+      "completionTokens": 126,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 183,
+      "tokens": 1339,
+      "promptTokens": 1248,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 184,
+      "tokens": 1318,
+      "promptTokens": 1230,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 185,
+      "tokens": 1317,
+      "promptTokens": 1227,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 186,
+      "tokens": 1279,
+      "promptTokens": 1217,
+      "completionTokens": 62,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 187,
+      "tokens": 1263,
+      "promptTokens": 1206,
+      "completionTokens": 57,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 188,
+      "tokens": 1329,
+      "promptTokens": 1241,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 189,
+      "tokens": 1313,
+      "promptTokens": 1226,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 190,
+      "tokens": 1365,
+      "promptTokens": 1261,
+      "completionTokens": 104,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 191,
+      "tokens": 1309,
+      "promptTokens": 1231,
+      "completionTokens": 78,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 192,
+      "tokens": 1551,
+      "promptTokens": 1331,
+      "completionTokens": 220,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 193,
+      "tokens": 1544,
+      "promptTokens": 1353,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 194,
+      "tokens": 1559,
+      "promptTokens": 1348,
+      "completionTokens": 211,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 195,
+      "tokens": 1484,
+      "promptTokens": 1295,
+      "completionTokens": 189,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 196,
+      "tokens": 1481,
+      "promptTokens": 1294,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 197,
+      "tokens": 1485,
+      "promptTokens": 1285,
+      "completionTokens": 200,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 198,
+      "tokens": 1321,
+      "promptTokens": 1233,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 199,
+      "tokens": 1457,
+      "promptTokens": 1281,
+      "completionTokens": 176,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 200,
+      "tokens": 1325,
+      "promptTokens": 1236,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 201,
+      "tokens": 1522,
+      "promptTokens": 1334,
+      "completionTokens": 188,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 202,
+      "tokens": 1508,
+      "promptTokens": 1303,
+      "completionTokens": 205,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 203,
+      "tokens": 1309,
+      "promptTokens": 1221,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 204,
+      "tokens": 1328,
+      "promptTokens": 1240,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 205,
+      "tokens": 1502,
+      "promptTokens": 1316,
+      "completionTokens": 186,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 206,
+      "tokens": 1577,
+      "promptTokens": 1356,
+      "completionTokens": 221,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 207,
+      "tokens": 1603,
+      "promptTokens": 1376,
+      "completionTokens": 227,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 208,
+      "tokens": 1559,
+      "promptTokens": 1355,
+      "completionTokens": 204,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 209,
+      "tokens": 1580,
+      "promptTokens": 1349,
+      "completionTokens": 231,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 210,
+      "tokens": 1389,
+      "promptTokens": 1283,
+      "completionTokens": 106,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 211,
+      "tokens": 1287,
+      "promptTokens": 1204,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 212,
+      "tokens": 1334,
+      "promptTokens": 1247,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 213,
+      "tokens": 1524,
+      "promptTokens": 1333,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 214,
+      "tokens": 1367,
+      "promptTokens": 1274,
+      "completionTokens": 93,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 215,
+      "tokens": 1312,
+      "promptTokens": 1229,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 216,
+      "tokens": 1330,
+      "promptTokens": 1241,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 217,
+      "tokens": 1526,
+      "promptTokens": 1339,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 218,
+      "tokens": 1336,
+      "promptTokens": 1249,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 219,
+      "tokens": 1290,
+      "promptTokens": 1208,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 220,
+      "tokens": 1333,
+      "promptTokens": 1244,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 221,
+      "tokens": 1541,
+      "promptTokens": 1323,
+      "completionTokens": 218,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 222,
+      "tokens": 1435,
+      "promptTokens": 1287,
+      "completionTokens": 148,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 223,
+      "tokens": 1374,
+      "promptTokens": 1275,
+      "completionTokens": 99,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 224,
+      "tokens": 1510,
+      "promptTokens": 1326,
+      "completionTokens": 184,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 225,
+      "tokens": 1346,
+      "promptTokens": 1246,
+      "completionTokens": 100,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 226,
+      "tokens": 1360,
+      "promptTokens": 1270,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 227,
+      "tokens": 1384,
+      "promptTokens": 1284,
+      "completionTokens": 100,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 228,
+      "tokens": 1432,
+      "promptTokens": 1259,
+      "completionTokens": 173,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 229,
+      "tokens": 1526,
+      "promptTokens": 1327,
+      "completionTokens": 199,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 230,
+      "tokens": 1520,
+      "promptTokens": 1337,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 231,
+      "tokens": 1429,
+      "promptTokens": 1291,
+      "completionTokens": 138,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 232,
+      "tokens": 1521,
+      "promptTokens": 1328,
+      "completionTokens": 193,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 233,
+      "tokens": 1296,
+      "promptTokens": 1218,
+      "completionTokens": 78,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 234,
+      "tokens": 1530,
+      "promptTokens": 1332,
+      "completionTokens": 198,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 235,
+      "tokens": 1468,
+      "promptTokens": 1299,
+      "completionTokens": 169,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 236,
+      "tokens": 1368,
+      "promptTokens": 1267,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 237,
+      "tokens": 1354,
+      "promptTokens": 1258,
+      "completionTokens": 96,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 238,
+      "tokens": 1430,
+      "promptTokens": 1298,
+      "completionTokens": 132,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 239,
+      "tokens": 1316,
+      "promptTokens": 1238,
+      "completionTokens": 78,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 240,
+      "tokens": 1432,
+      "promptTokens": 1303,
+      "completionTokens": 129,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 241,
+      "tokens": 1573,
+      "promptTokens": 1361,
+      "completionTokens": 212,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 242,
+      "tokens": 1521,
+      "promptTokens": 1334,
+      "completionTokens": 187,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 243,
+      "tokens": 1349,
+      "promptTokens": 1248,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 244,
+      "tokens": 1299,
+      "promptTokens": 1217,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 245,
+      "tokens": 1328,
+      "promptTokens": 1239,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 246,
+      "tokens": 1545,
+      "promptTokens": 1325,
+      "completionTokens": 220,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 247,
+      "tokens": 1545,
+      "promptTokens": 1335,
+      "completionTokens": 210,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 248,
+      "tokens": 1364,
+      "promptTokens": 1249,
+      "completionTokens": 115,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 249,
+      "tokens": 1503,
+      "promptTokens": 1308,
+      "completionTokens": 195,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 250,
+      "tokens": 1545,
+      "promptTokens": 1333,
+      "completionTokens": 212,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 251,
+      "tokens": 1496,
+      "promptTokens": 1304,
+      "completionTokens": 192,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 252,
+      "tokens": 1316,
+      "promptTokens": 1225,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 253,
+      "tokens": 1412,
+      "promptTokens": 1308,
+      "completionTokens": 104,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 254,
+      "tokens": 1351,
+      "promptTokens": 1261,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 255,
+      "tokens": 1341,
+      "promptTokens": 1236,
+      "completionTokens": 105,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 256,
+      "tokens": 1518,
+      "promptTokens": 1307,
+      "completionTokens": 211,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 257,
+      "tokens": 1320,
+      "promptTokens": 1234,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 258,
+      "tokens": 1442,
+      "promptTokens": 1268,
+      "completionTokens": 174,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 259,
+      "tokens": 1364,
+      "promptTokens": 1263,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 260,
+      "tokens": 1359,
+      "promptTokens": 1258,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 261,
+      "tokens": 1471,
+      "promptTokens": 1290,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 262,
+      "tokens": 1313,
+      "promptTokens": 1225,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 263,
+      "tokens": 1316,
+      "promptTokens": 1226,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 264,
+      "tokens": 1506,
+      "promptTokens": 1302,
+      "completionTokens": 204,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 265,
+      "tokens": 1461,
+      "promptTokens": 1292,
+      "completionTokens": 169,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 266,
+      "tokens": 1489,
+      "promptTokens": 1313,
+      "completionTokens": 176,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 267,
+      "tokens": 1501,
+      "promptTokens": 1305,
+      "completionTokens": 196,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 268,
+      "tokens": 1550,
+      "promptTokens": 1347,
+      "completionTokens": 203,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 269,
+      "tokens": 1302,
+      "promptTokens": 1220,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 270,
+      "tokens": 1324,
+      "promptTokens": 1235,
+      "completionTokens": 89,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 271,
+      "tokens": 1360,
+      "promptTokens": 1261,
+      "completionTokens": 99,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 272,
+      "tokens": 1481,
+      "promptTokens": 1310,
+      "completionTokens": 171,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 273,
+      "tokens": 1570,
+      "promptTokens": 1356,
+      "completionTokens": 214,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 274,
+      "tokens": 1486,
+      "promptTokens": 1298,
+      "completionTokens": 188,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 275,
+      "tokens": 1533,
+      "promptTokens": 1352,
+      "completionTokens": 181,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 276,
+      "tokens": 1461,
+      "promptTokens": 1289,
+      "completionTokens": 172,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 277,
+      "tokens": 1365,
+      "promptTokens": 1266,
+      "completionTokens": 99,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 278,
+      "tokens": 1461,
+      "promptTokens": 1286,
+      "completionTokens": 175,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 279,
+      "tokens": 1298,
+      "promptTokens": 1214,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 280,
+      "tokens": 1305,
+      "promptTokens": 1219,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 281,
+      "tokens": 1324,
+      "promptTokens": 1223,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 282,
+      "tokens": 1313,
+      "promptTokens": 1228,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 283,
+      "tokens": 1319,
+      "promptTokens": 1233,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 284,
+      "tokens": 1564,
+      "promptTokens": 1358,
+      "completionTokens": 206,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 285,
+      "tokens": 1560,
+      "promptTokens": 1348,
+      "completionTokens": 212,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 286,
+      "tokens": 1365,
+      "promptTokens": 1266,
+      "completionTokens": 99,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 287,
+      "tokens": 1351,
+      "promptTokens": 1260,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 288,
+      "tokens": 1274,
+      "promptTokens": 1192,
+      "completionTokens": 82,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 289,
+      "tokens": 1385,
+      "promptTokens": 1264,
+      "completionTokens": 121,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 290,
+      "tokens": 1631,
+      "promptTokens": 1402,
+      "completionTokens": 229,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 291,
+      "tokens": 1442,
+      "promptTokens": 1269,
+      "completionTokens": 173,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 292,
+      "tokens": 1321,
+      "promptTokens": 1236,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 293,
+      "tokens": 1324,
+      "promptTokens": 1239,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 294,
+      "tokens": 1521,
+      "promptTokens": 1338,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 295,
+      "tokens": 1399,
+      "promptTokens": 1296,
+      "completionTokens": 103,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 296,
+      "tokens": 1352,
+      "promptTokens": 1250,
+      "completionTokens": 102,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 297,
+      "tokens": 1506,
+      "promptTokens": 1323,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 298,
+      "tokens": 1408,
+      "promptTokens": 1290,
+      "completionTokens": 118,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 299,
+      "tokens": 1491,
+      "promptTokens": 1313,
+      "completionTokens": 178,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 300,
+      "tokens": 1339,
+      "promptTokens": 1256,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 301,
+      "tokens": 1500,
+      "promptTokens": 1317,
+      "completionTokens": 183,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 302,
+      "tokens": 1500,
+      "promptTokens": 1297,
+      "completionTokens": 203,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 303,
+      "tokens": 1315,
+      "promptTokens": 1225,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 304,
+      "tokens": 1371,
+      "promptTokens": 1270,
+      "completionTokens": 101,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 305,
+      "tokens": 1337,
+      "promptTokens": 1246,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 306,
+      "tokens": 1324,
+      "promptTokens": 1236,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 307,
+      "tokens": 1306,
+      "promptTokens": 1220,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 308,
+      "tokens": 1328,
+      "promptTokens": 1245,
+      "completionTokens": 83,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 309,
+      "tokens": 1352,
+      "promptTokens": 1247,
+      "completionTokens": 105,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 310,
+      "tokens": 1354,
+      "promptTokens": 1270,
+      "completionTokens": 84,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 311,
+      "tokens": 1531,
+      "promptTokens": 1335,
+      "completionTokens": 196,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 312,
+      "tokens": 1410,
+      "promptTokens": 1308,
+      "completionTokens": 102,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 313,
+      "tokens": 1379,
+      "promptTokens": 1276,
+      "completionTokens": 103,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 314,
+      "tokens": 1304,
+      "promptTokens": 1225,
+      "completionTokens": 79,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 315,
+      "tokens": 1526,
+      "promptTokens": 1335,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 316,
+      "tokens": 1562,
+      "promptTokens": 1357,
+      "completionTokens": 205,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 317,
+      "tokens": 1404,
+      "promptTokens": 1280,
+      "completionTokens": 124,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 318,
+      "tokens": 1404,
+      "promptTokens": 1272,
+      "completionTokens": 132,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 319,
+      "tokens": 1322,
+      "promptTokens": 1234,
+      "completionTokens": 88,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 320,
+      "tokens": 1536,
+      "promptTokens": 1346,
+      "completionTokens": 190,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 321,
+      "tokens": 1306,
+      "promptTokens": 1219,
+      "completionTokens": 87,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 322,
+      "tokens": 1326,
+      "promptTokens": 1236,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 323,
+      "tokens": 1331,
+      "promptTokens": 1241,
+      "completionTokens": 90,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 324,
+      "tokens": 1270,
+      "promptTokens": 1211,
+      "completionTokens": 59,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 325,
+      "tokens": 1373,
+      "promptTokens": 1282,
+      "completionTokens": 91,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 326,
+      "tokens": 1551,
+      "promptTokens": 1360,
+      "completionTokens": 191,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 327,
+      "tokens": 1459,
+      "promptTokens": 1284,
+      "completionTokens": 175,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 328,
+      "tokens": 1317,
+      "promptTokens": 1232,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 329,
+      "tokens": 1290,
+      "promptTokens": 1205,
+      "completionTokens": 85,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 330,
+      "tokens": 1583,
+      "promptTokens": 1358,
+      "completionTokens": 225,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 331,
+      "tokens": 1593,
+      "promptTokens": 1364,
+      "completionTokens": 229,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 332,
+      "tokens": 1612,
+      "promptTokens": 1379,
+      "completionTokens": 233,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": true,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 333,
+      "tokens": 1303,
+      "promptTokens": 1217,
+      "completionTokens": 86,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 334,
+      "tokens": 1485,
+      "promptTokens": 1312,
+      "completionTokens": 173,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    },
+    {
+      "index": 335,
+      "tokens": 1348,
+      "promptTokens": 1246,
+      "completionTokens": 102,
+      "tokenPrefixMatches": true,
+      "wouldTruncate1536": false,
+      "wouldTruncateSelectedLimit": false
+    }
+  ]
+}

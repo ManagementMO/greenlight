@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-v5-final",
+  "purpose": "final-evaluation",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "promptProfile": "reference-contract-v5",
+  "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+  "evaluationCount": 48,
+  "statusCounts": {
+    "PROPOSED": 32,
+    "AMBIGUOUS": 8,
+    "UNSUPPORTED": 8
+  },
+  "strata": {
+    "atomic": 8,
+    "nested": 24,
+    "uncertainty": 16
+  },
+  "frozen": true,
+  "reviewStatus": "independently-audited-before-query",
+  "gate": {
+    "version": "extractor-gates-v3-useful-coverage",
+    "minimumSupportedCoverage": 0.8,
+    "minimumValidity": 0.9,
+    "minimumUncertaintyStatusAccuracy": 0.8,
+    "maximumIncorrectValidatedProposals": 0
+  },
+  "hashes": {
+    "evaluation.frozen.jsonl": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c"
+  },
+  "boundary": "Fresh separately authored prose and identities, with overlapping abstract logic families. Not a new-logic-family or customer-contract benchmark.",
+  "independentAudit": {
+    "auditor": "independent coding-agent review /root/v5_ml_review",
+    "checkedAt": "2026-10-18T03:05:30.076614+00:00",
+    "evaluationSha256": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c",
+    "scope": "All48 clause-label mappings, Boolean grouping, source and invoice identity, clock anchors and split nonoverlap. Developer-reviewed synthetic expectations, not customer adjudication."
+  }
+}

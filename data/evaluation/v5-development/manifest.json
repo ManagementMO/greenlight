@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-v5-development",
+  "promptProfile": "reference-contract-v5",
+  "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "purpose": "development-only",
+  "evaluationCount": 24,
+  "frozen": true,
+  "reviewStatus": "independently-audited-before-query",
+  "hashes": {
+    "evaluation.frozen.jsonl": "028190f3fc7910b9960b135671a7a7dc6d07b1b0109bb63b4e6ffa1747aff916"
+  },
+  "independentAudit": {
+    "auditor": "independent coding-agent review /root/v5_ml_review",
+    "checkedAt": "2026-10-18T02:59:03.152070+00:00",
+    "evaluationSha256": "028190f3fc7910b9960b135671a7a7dc6d07b1b0109bb63b4e6ffa1747aff916",
+    "scope": "All24 prose-label mappings, supplied IDs, clocks, status and train/dev nonoverlap; developer-reviewed synthetic data, not customer adjudication."
+  }
+}

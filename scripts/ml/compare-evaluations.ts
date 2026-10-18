@@ -166,6 +166,8 @@ async function main() {
         "utf8",
       ),
     );
+  if (base.promptProfile === "reference-contract-v5" || tuned.promptProfile === "reference-contract-v5")
+    throw new Error("Use compare-v5-evaluations.ts for V5; its absolute usefulness gate is mandatory.");
   const result = compareEvaluations(base, tuned);
   await saveJson(resolve("work/ml/base-tuned-comparison.json"), result);
   console.log(JSON.stringify(result, null, 2));
