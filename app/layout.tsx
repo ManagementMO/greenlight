@@ -3,7 +3,7 @@ import { Manrope, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
 const display = Manrope({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
-const body = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-body', display: 'swap' });
+const body = IBM_Plex_Sans({ subsets: ['latin'], weight: 'variable', variable: '--font-body', display: 'swap' });
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });
 
 export const metadata: Metadata = {
