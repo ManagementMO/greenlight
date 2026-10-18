@@ -4080,6 +4080,81 @@ pre {
     font-size: 11px;
   }
 }
+/* Reading text is larger than metadata; headlines keep the existing visual scale. */
+.greenlight-app .workspace-explainer {
+  max-width: 76ch;
+  margin: -4px 0 22px;
+  color: #526b76;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.greenlight-app .view-intro,
+.greenlight-app .decision-signal p,
+.greenlight-app .scenario-description,
+.greenlight-app .next-move p,
+.greenlight-app .question-panel > p,
+.greenlight-app .lab-principle p,
+.greenlight-app .section-description,
+.greenlight-app .comparison-intro,
+.greenlight-app .extraction-panel-detail {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.greenlight-app .view-intro { max-width: 70ch; }
+.greenlight-app .cash-metrics > div > span,
+.greenlight-app .cash-metrics small,
+.greenlight-app .control-footnote,
+.greenlight-app .chart-policy,
+.greenlight-app .chart-legend,
+.greenlight-app .proposal-disclaimer,
+.greenlight-app .comparison-boundary,
+.greenlight-app .learning-flow p,
+.greenlight-app .provider-run p,
+.greenlight-app .training-stages p,
+.greenlight-app .evaluation-run > p,
+.greenlight-app .experiment-row p,
+.greenlight-app .replay-boundary,
+.greenlight-app .extraction-boundary,
+.greenlight-app .extraction-check,
+.greenlight-app .judgment-boundary {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.greenlight-app .option-pills button,
+.greenlight-app .custom-terms > p,
+.greenlight-app .assumptions-body,
+.greenlight-app .comparison-table,
+.greenlight-app .cash-calendar table {
+  font-size: 13px;
+  line-height: 1.55;
+}
+.greenlight-app .source-tag { white-space: normal; }
+.greenlight-app .decision-signal .signal-topline strong { line-height: 1.4; }
+.greenlight-app .decision-heading h1 { text-wrap: balance; }
+.greenlight-app .view-intro,
+.greenlight-app .section-description,
+.greenlight-app .scenario-description,
+.greenlight-app .learning-flow p,
+.greenlight-app .comparison-intro,
+.greenlight-app .extraction-panel-detail { color: #526b76; }
+.greenlight-app .lab-technical-records {
+  margin-block: 20px;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.greenlight-app .lab-technical-records > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #355463;
+  cursor: pointer;
+}
+.greenlight-app .lab-technical-records[open] > summary { margin-bottom: 22px; }
+.greenlight-app .lab-technical-records[open] > summary svg { transform: rotate(180deg); }
+.greenlight-app .lab-technical-records .lab-columns { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -200,9 +200,9 @@ function ExtractionComparisonPanel({ value }: { value: ExtractionComparison }) {
     label: string;
     lowerIsBetter?: boolean;
   }[] = [
-    { key: "materialExact", label: "Material fields match" },
-    { key: "valid", label: "Fully validated outputs" },
-    { key: "correctSupportedProposals", label: "Correct supported proposals" },
+    { key: "materialExact", label: "Payment rules match the expected answer" },
+    { key: "valid", label: "Responses passing automatic checks" },
+    { key: "correctSupportedProposals", label: "Correct proposals for supported clauses" },
     { key: "unsafeProposed", label: "Unsafe proposals", lowerIsBetter: true },
   ];
   return (
@@ -403,11 +403,12 @@ export function ImprovementLab() {
     <section className="lab-view" aria-label="Improvement lab">
       <div className="view-title-row">
         <div>
-          <span className="eyebrow">The work behind the decision</span>
-          <h1>Better with evidence.</h1>
+          <span className="eyebrow">The experiments behind Headroom</span>
+          <h1>What improved. What still needs work.</h1>
           <p className="view-intro">
-            A measured loop for teaching the repeatable work—and keeping the
-            hard decisions accountable.
+            We tested two improvements: fewer repeated AI checks, and a contract
+            reader trained on examples. These are the recorded results, including
+            the mistakes that kept the reader from automatic use.
           </p>
         </div>
         <button
@@ -423,9 +424,9 @@ export function ImprovementLab() {
       <div className="lab-principle">
         <Icon name="shield" size={20} />
         <p>
-          <strong>The cash engine stays fixed.</strong> The harness can improve
-          extraction, context, and evidence questions. Every candidate must pass
-          the same independent checks.
+          <strong>AI reads and checks; code calculates the cash.</strong> We can
+          change how the AI works, but it cannot change the arithmetic or its own
+          test answers. A “gate” means quality checks set before an experiment.
         </p>
         <span className="mono">EVALUATE → REVIEW → RELEASE</span>
       </div>
@@ -452,30 +453,30 @@ export function ImprovementLab() {
         <>
           <div className="lab-overview">
             <div className="lab-overview-primary">
-              <span className="eyebrow">Specialization pipeline</span>
+              <span className="eyebrow">Where fine-tuning fits</span>
               <div className="learning-flow">
                 <div>
                   <span className="flow-symbol">
                     <Icon name="document" size={20} />
                   </span>
-                  <strong>Reviewed examples</strong>
-                  <p>Source-grounded terms and reviewed corrections.</p>
+                  <strong>Show the right answer</strong>
+                  <p>Pair a sample contract clause with its correct payment rules.</p>
                 </div>
                 <span className="flow-connector">→</span>
                 <div>
                   <span className="flow-symbol">
                     <Icon name="spark" size={20} />
                   </span>
-                  <strong>Fine-tuned extractor</strong>
-                  <p>Veri training, merged weights, versioned model export.</p>
+                  <strong>Train Qwen to read it</strong>
+                  <p>Veri runs the training. The model learns to propose amounts and conditions.</p>
                 </div>
                 <span className="flow-connector">→</span>
                 <div>
                   <span className="flow-symbol">
                     <Icon name="shield" size={20} />
                   </span>
-                  <strong>Jev + fixed code</strong>
-                  <p>Atomic evidence judgments and exact cash calculations.</p>
+                  <strong>Test before using it</strong>
+                  <p>Compare answers on unseen clauses. A person still reviews every proposal.</p>
                 </div>
               </div>
             </div>
@@ -509,12 +510,14 @@ export function ImprovementLab() {
               </span>
             </div>
           </div>
+          <details className="lab-technical-records">
+            <summary>Training details and service records <Icon name="chevron-down" size={14} /></summary>
           <div className="lab-columns">
             <section className="lab-section">
               <div className="section-heading">
                 <div>
-                  <span className="eyebrow">01 · Artifact identity</span>
-                  <h2>Training & serving</h2>
+                  <span className="eyebrow">01 · The contract reader</span>
+                  <h2>How the model was trained and tested</h2>
                 </div>
                 <span className={`state-badge state-${data.training.status}`}>
                   {humanize(data.training.status)}
@@ -524,10 +527,10 @@ export function ImprovementLab() {
                 <p className="section-description">{data.training.detail}</p>
               )}
               <p className="section-description">
-                Training, evaluation and serving are separate steps. Public decisions
-                use fixed code and saved evidence, with no live extractor calls.
-                A model passing its evaluation gate does not deploy it or approve
-                a contract; every proposed term still needs owner review.
+                Training changes the model; evaluation tests its answers. A better
+                test score alone does not put it in charge of a contract. This demo
+                uses reviewed inputs and code for the cash calculation, without
+                calling the contract reader live.
               </p>
               {data.training.baseModel && (
                 <div className="identity-row">
@@ -597,8 +600,8 @@ export function ImprovementLab() {
             <section className="lab-section">
               <div className="section-heading">
                 <div>
-                  <span className="eyebrow">02 · Actual connections</span>
-                  <h2>Provider runs</h2>
+                  <span className="eyebrow">02 · Services we used</span>
+                  <h2>Recorded API calls</h2>
                 </div>
                 <span className="count-label mono">
                   {data.providers.length} records
@@ -647,6 +650,7 @@ export function ImprovementLab() {
               )}
             </section>
           </div>
+          </details>
           {data.observability && (
             <section
               className="observability-proof"
@@ -657,12 +661,12 @@ export function ImprovementLab() {
               </span>
               <div className="observability-content">
                 <span className="eyebrow">
-                  Sentry · recorded operational evidence
+                  Sentry · finding and fixing bugs
                 </span>
                 <h2>From an issue to its cause.</h2>
                 <p>
-                  A captured application defect, its first-party stack frame,
-                  and the trace with related logs.
+                  Sentry captured a real application error and pointed to the code
+                  that caused it. The saved trace shows what happened around the failure.
                 </p>
                 <div className="observability-frame">
                   <code>{data.observability.firstPartyFrame}</code>
@@ -740,6 +744,8 @@ export function ImprovementLab() {
             {validPublicV5Evaluation(data.extractionV5Final, "final-evaluation") && (
               <ExtractionV5ComparisonPanel value={data.extractionV5Final} />
             )}
+            <details className="lab-technical-records">
+              <summary>Earlier tests and detailed run records <Icon name="chevron-down" size={14} /></summary>
             {validPublicV5Evaluation(data.extractionV5Development, "development-only") && (
               <ExtractionV5ComparisonPanel value={data.extractionV5Development} />
             )}
@@ -792,12 +798,13 @@ export function ImprovementLab() {
                 </div>
               </div>
             )}
+            </details>
           </section>
           <section className="lab-section lab-wide-section">
             <div className="section-heading">
               <div>
-                <span className="eyebrow">04 · The MetaHarness loop</span>
-                <h2>Candidate experiments</h2>
+                <span className="eyebrow">04 · The AI improvement loop (meta-harness)</span>
+                <h2>Can the same checks take less AI work?</h2>
               </div>
               <button
                 type="button"
@@ -810,9 +817,16 @@ export function ImprovementLab() {
                   size={14}
                   className={replaying ? "spin" : ""}
                 />
-                {replaying ? "Replaying saved run" : "Replay experiment"}
+                {replaying ? "Checking saved results" : "Recheck the saved experiment"}
               </button>
             </div>
+            <p className="section-description">
+              Anthropic suggests changes to how Jev checks documents: send only
+              relevant text, ask related questions together, and reuse answers
+              whose sources haven’t changed. We compare the old and new workflow
+              on the same examples. This button checks the saved results again;
+              it does not train a model or make new paid AI calls.
+            </p>
             {data.experiments.length ? (
               data.experiments.map((experiment) => (
                 <article className="experiment-row" key={experiment.id}>
@@ -882,8 +896,8 @@ export function ImprovementLab() {
                     className={`state-badge state-${replay.gate.promoted ? "promoted" : "rejected"}`}
                   >
                     {replay.gate.promoted
-                      ? "Release gate passed"
-                      : "Release gate rejected"}
+                      ? "Preset quality checks passed"
+                      : "Preset quality checks failed"}
                   </span>
                   <span className="mono">
                     Replayed {time(replay.replayedAt)}
@@ -900,8 +914,8 @@ export function ImprovementLab() {
                     <thead>
                       <tr>
                         <th>Measured on this workload</th>
-                        <th>Baseline</th>
-                        <th>Candidate</th>
+                        <th>Original workflow</th>
+                        <th>Proposed workflow</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -941,9 +955,9 @@ export function ImprovementLab() {
                   </ul>
                 )}
                 <span className="replay-boundary">
-                  A fixed, synthetic localized-update workload. This rechecks
-                  saved genuine provider results; it invokes no new inference or
-                  training. No general production speedup is established.
+                  These are saved results from real API calls on simulated document
+                  updates. Rechecking them makes no new model calls. Savings on
+                  this test do not establish faster performance for every business.
                 </span>
               </div>
             )}

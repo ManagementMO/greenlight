@@ -18,10 +18,10 @@ const SOURCE = "https://github.com/ManagementMO/headroom";
 
 // Actual source IDs in the reviewed demo fixture; future plans stay labeled as plans.
 const SOURCES = [
-  { value: "$30,000", what: "phase payment", from: "C-120:s8 · contract" },
-  { value: "Oct 20", what: "inspection expected", from: "inspection-plan" },
-  { value: "$18,000", what: "planned business payroll", from: "forward-calendar" },
-  { value: "Nov 3", what: "due if issued Oct 20", from: "C-120:s8 · 14 days" },
+  { value: "$30,000", what: "payment after the first stage", from: "Demo contract · section 8" },
+  { value: "Oct 20", what: "planned inspection date", from: "Demo inspection plan" },
+  { value: "$18,000", what: "upcoming employee wages", from: "Demo payment calendar" },
+  { value: "Nov 3", what: "bill due if sent Oct 20", from: "Demo contract · 14-day rule" },
 ];
 
 function Chars({ text, attr = "data-char" }: { text: string; attr?: string }) {
@@ -77,9 +77,9 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
   const root = useRef<HTMLElement>(null);
   const reduced = useRef(false);
   const proof = [
-    { value: `${Math.round((1 - evidence.candidate.requests / evidence.baseline.requests) * 100)}% fewer calls`, label: "recorded evidence workflow" },
-    { value: `${Math.round((1 - evidence.candidate.inputTokens / evidence.baseline.inputTokens) * 100)}% fewer tokens`, label: "input tokens on the same workload" },
-    { value: `${evidence.candidate.correct}/${evidence.candidate.total} correct`, label: "unchanged measured correctness" },
+    { value: `${Math.round((1 - evidence.candidate.requests / evidence.baseline.requests) * 100)}% fewer calls`, label: "requests sent to the AI checker" },
+    { value: `${Math.round((1 - evidence.candidate.inputTokens / evidence.baseline.inputTokens) * 100)}% less input`, label: "text sent to AI, measured in tokens" },
+    { value: `${evidence.candidate.correct}/${evidence.candidate.total} correct`, label: "same score before and after" },
   ];
 
   // Page-wide motion. Scroll-synced animations render their first frame on creation.
@@ -182,11 +182,11 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
         <Gradient colors={["#5866a8", "#356e78", "#171a2c"]} />
         <div className="lp-hero-inner">
           <div className="lp-hero-copy">
-            <p className="lp-eyebrow" data-hero-fade>Headroom · cash decisions for small businesses</p>
-            <h1 aria-label="Stop paying an AI to do arithmetic.">
-              <Chars text="Stop paying an AI to do arithmetic." attr="data-hero-char" />
+            <p className="lp-eyebrow" data-hero-fade>Headroom · plan the cash before taking the job</p>
+            <h1 aria-label="Can a business afford its next big job?">
+              <Chars text="Can a business afford its next big job?" attr="data-hero-char" />
             </h1>
-            <p className="lp-hero-description" data-hero-fade>Can you take a $120,000 job and still make payroll? Headroom connects your books, commitments, and contract terms to show the cash gap—and a payment change you can review.</p>
+            <p className="lp-hero-description" data-hero-fade>A $120,000 job sounds great—until wages and materials are due before the customer pays. Headroom shows the cash shortfall and tests a better payment schedule.</p>
             <div data-hero-fade><Dock /></div>
           </div>
           <HeroRace evidence={evidence} />
@@ -197,7 +197,7 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
               <div key={p.label}><dt>{p.label}</dt><dd>{p.value}</dd></div>
             ))}
           </dl>
-          <p>Recorded Jev test: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments; one error remains. Demo cash calculations run live on reviewed inputs; model results are recorded.</p>
+          <p>Results from a recorded Jev test with {evidence.updates} simulated document updates and {evidence.candidate.total} checks; one error remains. The demo recalculates cash live using reviewed sample data.</p>
         </div>
       </section>
 
@@ -205,12 +205,12 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
       <section className="lp-feature lp-demo" id="decision">
         <p className="lp-eyebrow">01 · The decision</p>
         <h2 aria-label="See the gap before you sign"><Chars text="See the gap before you sign" /></h2>
-        <p className="lp-section-lede">A profitable job can still leave payroll unfunded. Test the timing before you commit.</p>
+        <p className="lp-section-lede">Earning more than a job costs is only half the story. The money has to arrive in time to pay people and bills.</p>
         {cashStory ? <CashStory story={cashStory} /> : <p className="lp-section-note">The comparison needs complete reviewed inputs. Open the workspace to inspect the decision.</p>}
         <a className="lp-workspace-peek" href={DEMO}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/landing/decision-workspace.png" width={1440} height={1000} loading="lazy" alt="Headroom decision workspace" />
-          <span><strong>Explore it in the actual workspace</strong><small>Compare terms, inspect sources, and test the assumptions.</small></span>
+          <span><strong>Follow the $120,000 example</strong><small>See the documents, the cash shortfall, and the proposed fix.</small></span>
           <Icon name="arrow-right" size={20} />
         </a>
       </section>
@@ -233,7 +233,7 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
             </div>
           ))}
         </div>
-        <p className="lp-section-note">These are disclosed demo plans. An expected inspection is not a passed inspection; an invoice due date is not money in the bank.</p>
+        <p className="lp-section-note">These dates and amounts come from the sample documents. A planned inspection still needs to happen. A bill’s due date still needs to become an actual payment.</p>
         <a className="lp-sources-link" href="/#evidence" data-fade>Inspect the evidence →</a>
       </section>
 
@@ -242,8 +242,8 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
       <section className="lp-finale">
         <Gradient colors={["#4f6098", "#a27e60", "#203944"]} wave />
         <div className="lp-finale-inner">
-          <h2 aria-label="Take the next job"><Chars text="Take the next job" /></h2>
-          <p>Keep room for payday.</p>
+          <h2 aria-label="See what makes the job work"><Chars text="See what makes the job work" /></h2>
+          <p>Same job. Same price. A better payment schedule.</p>
           <Dock label="Try the demo" />
         </div>
       </section>
@@ -257,7 +257,7 @@ export default function Landing({ evidence, cashStory }: { evidence: LandingEvid
         </div>
         <div>
           <h3>What you’re trying</h3>
-          <p>Intuit’s synthetic books plus disclosed demo jobs, commitments, and documents. Cash calculations run live; model results are recorded. No live QuickBooks connection, automatic payments, or agreements.</p>
+          <p>The company and bank balance come from Intuit’s synthetic dataset. We added the sample job, bills, and documents. Cash calculations run live; AI results come from recorded experiments. This demo is not connected to a live QuickBooks account and does not move money.</p>
         </div>
       </footer>
     </main>

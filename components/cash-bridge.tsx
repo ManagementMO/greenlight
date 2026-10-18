@@ -65,7 +65,7 @@ export function CashBridge({
     return (
       <div className="chart-empty">
         <span className="eyebrow">Cash timeline unavailable</span>
-        <p>Complete the dated cash calendar to draw a reliable funding path.</p>
+        <p>Add the missing payment amounts and dates to calculate the cash balance.</p>
       </div>
     );
   }
@@ -135,7 +135,7 @@ export function CashBridge({
           className="cash-chart-svg"
           viewBox={`0 0 ${width} ${height}`}
           role="img"
-          aria-label={`${current.label}. Lowest modeled cash ${money(minimum.balanceCents)} on ${shortDate(minimum.date)}. Reserve ${money(reserveCents)}. Values in ${currency}.`}
+          aria-label={`${current.label}. Lowest forecast cash ${money(minimum.balanceCents)} on ${shortDate(minimum.date)}. Cash buffer ${money(reserveCents)}. Values in ${currency}.`}
         >
           <defs>
             <linearGradient
@@ -243,7 +243,7 @@ export function CashBridge({
             fillOpacity=".93"
           />
           <text x={left + 14} y={reserveY - 7} className="chart-reserve-label">
-            {money(reserveCents)} reserve
+            {money(reserveCents)} cash buffer
           </text>
           <line
             x1={x(displayPoint.date)}
@@ -310,8 +310,8 @@ export function CashBridge({
         {!activePoint && (
           <span className="chart-readout-caption">
             {minimumIsBelow
-              ? "Lowest point · below reserve"
-              : "Lowest point · reserve protected"}
+              ? "Lowest point · below cash buffer"
+              : "Lowest point · cash buffer kept"}
           </span>
         )}
       </div>

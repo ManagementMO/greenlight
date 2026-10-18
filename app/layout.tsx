@@ -9,11 +9,11 @@ const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], 
 export const metadata: Metadata = {
   metadataBase: new URL('https://headroom-lahacks.vercel.app'),
   title: 'Headroom — Take the next job. Keep room for payday.',
-  description: 'Can you take the next big job without borrowing or missing payroll? Headroom connects cash, contract evidence, and payment terms to show a supported path forward.',
+  description: 'Can a business afford its next big job? Headroom checks when money arrives and bills are due, then tests a better payment schedule.',
   applicationName: 'Headroom',
   openGraph: {
     title: 'Headroom — Take the next job. Keep room for payday.',
-    description: 'Evidence-backed decisions for small business.',
+    description: 'See the cash shortfall before taking the job. Test whether getting paid earlier would fix it.',
     type: 'website',
     images: [{ url: '/brand/headroom-banner.png', width: 1672, height: 941, alt: 'Headroom: a mint cash path clears the payroll threshold and opens room to grow.' }],
   },

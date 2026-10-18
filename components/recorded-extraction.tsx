@@ -88,7 +88,7 @@ function InvoiceClock({ value }: { value: unknown }) {
   )
     return (
       <>
-        <strong>{due.days} calendar days after invoice issuance</strong>
+        <strong>{due.days} calendar days after the bill is sent</strong>
         <span className="extraction-clock-subject">
           Invoice subject <code>{due.invoiceSubject}</code>
         </span>
@@ -158,15 +158,15 @@ function InvoiceClockTest({ rule }: { rule: InvoiceIssuedRule }) {
   return (
     <details className="invoice-clock-test">
       <summary>
-        Test the invoice clock <Icon name="chevron-down" size={13} />
+        Try the payment due-date rule <Icon name="chevron-down" size={13} />
       </summary>
       <p>
-        Hypothetical dates using this recorded {rule.days}-calendar-day invoice
-        rule. The cash forecast stays unchanged.
+        Change these example dates to see when the {rule.days}-day payment
+        countdown starts. This small test does not change the cash forecast.
       </p>
       <div className="invoice-clock-fields">
         <label>
-          Eligibility met · hypothetical
+          Conditions met · example date
           <input
             type="date"
             value={eligibilityDate}
@@ -174,7 +174,7 @@ function InvoiceClockTest({ rule }: { rule: InvoiceIssuedRule }) {
           />
         </label>
         <label>
-          Invoice issued · hypothetical
+          Bill sent · example date
           <input
             type="date"
             value={invoiceIssuedDate}
@@ -190,7 +190,7 @@ function InvoiceClockTest({ rule }: { rule: InvoiceIssuedRule }) {
       </div>
       {clock.anchorDate && (
         <div className="invoice-clock-anchor">
-          <span>Anchor · invoice issuance</span>
+          <span>Countdown starts · bill sent</span>
           <span className="mono">{clock.anchorDate}</span>
         </div>
       )}
@@ -207,8 +207,8 @@ function InvoiceClockTest({ rule }: { rule: InvoiceIssuedRule }) {
       <div className="invoice-clock-boundary">
         <Icon name="shield" size={12} />
         <span>
-          A due date is not a bank receipt. This reuses a typed rule in fixed
-          code and invokes no model.
+          The due date says when payment is owed, not when it actually arrives.
+          Code calculates this date; no AI call is needed.
         </span>
       </div>
     </details>
@@ -278,8 +278,8 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
           {demo.promptProfile === "reference-contract-v5" && (
             <span className="eyebrow">V5 final gate · {demo.selectedByGate === "tuned" ? "tuned candidate selected" : "base model retained"}</span>
           )}
-          <span className="eyebrow">Recorded specialist output</span>
-          <h3>What the extractor found.</h3>
+          <span className="eyebrow">Saved result from the contract reader</span>
+          <h3>The payment rules the AI found</h3>
         </div>
         <span className="state-badge state-blocked">Owner review required</span>
       </div>
@@ -295,11 +295,11 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
             </code>
           </div>
           <div className="extracted-term">
-            <span>Invoice eligibility</span>
+            <span>What must happen before sending a bill</span>
             <TriggerTree value={candidate.trigger} />
           </div>
           <div className="extracted-term">
-            <span>Payment clock</span>
+            <span>When payment becomes due</span>
             <div className="extraction-clock">
               <InvoiceClock value={candidate.due} />
             </div>
@@ -320,9 +320,9 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
         <div className="recorded-judgments">
           <span className="eyebrow">Recorded Jev suggestions</span>
           <p className="judgment-boundary">
-            No factual condition or bank receipt is activated by these outputs.
-            These suggestions need owner review; confidence is model-reported,
-            not measured accuracy.
+            Jev checks what the documents prove. These saved suggestions do not
+            change the cash plan without review. “Confidence” is the model’s own
+            estimate, not its measured accuracy.
           </p>
           {demo.judgments.map((judgment, index) => (
             <div key={index}>
@@ -341,17 +341,17 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
         <Icon name={demo.materialExact ? "check" : "warning"} size={13} />
         <span>
           {demo.materialExact
-            ? "Material fields match the fixed case check."
-            : "Material fields did not match the fixed case check."}{" "}
-          A passing check still requires owner review.
+            ? "The payment rules match the expected answer for this example."
+            : "The payment rules do not match the expected answer for this example."}{" "}
+          A person must still review the result before use.
         </span>
       </div>
       <div className="extraction-boundary">
         <Icon name="shield" size={14} />
         <span>
-          These are proposed terms. Invoice eligibility and due dates do not
-          establish when cash will reach the bank; collection remains a separate
-          forecast.
+          These are the reader’s proposed payment rules. Permission to send a
+          bill and its due date do not prove that the customer has paid. The cash
+          forecast needs a separate expected arrival date.
         </span>
       </div>
       <details className="extraction-raw">

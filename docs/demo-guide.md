@@ -1,5 +1,7 @@
 # Headroom demonstration guide
 
+For the simplest explanation and a short script mapped to the guided presentation, start with the [plain-English pitch cheat sheet](pitch-cheatsheet.md).
+
 This is a short operator run-of-show for the implemented application. Open [Headroom](https://headroom-lahacks.vercel.app), or run the local app at [http://localhost:3000](http://localhost:3000). Begin with the first scenario selected and no what-if edits active. Provider keys and paid jobs are not required for the public demonstration.
 
 ## Before presenting

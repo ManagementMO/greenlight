@@ -4,43 +4,43 @@ import { Icon } from "./icons";
 export function ExtractionV5ComparisonPanel({ value }: { value: PublicV5Evaluation }) {
   const final = value.purpose === "final-evaluation";
   const rows = [
-    { label: "Material fields match", values: [value.base, value.tuned].map(({summary: s}) => `${s.materialExact} / ${s.count}`) },
-    { label: "Fully validated outputs", values: [value.base, value.tuned].map(({summary: s}) => `${s.valid} / ${s.count}`) },
-    { label: "Correct supported proposals", values: [value.base, value.tuned].map(({summary: s}) => `${s.correctSupportedProposals} / ${s.expectedProposed}`) },
-    { label: "Incorrect validated proposals", lowerIsBetter: true, values: [value.base, value.tuned].map(({summary: s}) => String(s.unsafeProposed)) },
+    { label: "Payment rules match the expected answer", values: [value.base, value.tuned].map(({summary: s}) => `${s.materialExact} / ${s.count}`) },
+    { label: "Responses passing automatic checks", values: [value.base, value.tuned].map(({summary: s}) => `${s.valid} / ${s.count}`) },
+    { label: "Correct proposals for supported clauses", values: [value.base, value.tuned].map(({summary: s}) => `${s.correctSupportedProposals} / ${s.expectedProposed}`) },
+    { label: "Wrong proposals that passed automatic checks", lowerIsBetter: true, values: [value.base, value.tuned].map(({summary: s}) => String(s.unsafeProposed)) },
     ...(["AMBIGUOUS", "UNSUPPORTED"] as const).map((status) => ({
-      label: status === "AMBIGUOUS" ? "Ambiguous cases identified" : "Unsupported cases identified",
+      label: status === "AMBIGUOUS" ? "Unclear clauses correctly flagged" : "Unsupported clauses correctly flagged",
       values: [value.base, value.tuned].map(({summary: s}) => `${s.byExpectedStatus[status].statusCorrect} / ${s.byExpectedStatus[status].count}`),
     })),
   ];
-  const verdict = !final ? "Development only · no promotion" :
-    value.comparison.promoted ? "Final gate passed" : "V5 candidate not promoted";
+  const verdict = !final ? "Development test only" :
+    value.comparison.promoted ? "Release checks passed" : "V5 not approved for automatic use";
   const artifactFile = final ? "extraction-v5-evaluation.json" : "extraction-v5-development.json";
   return (
     <section className="extraction-comparison" aria-label={`V5 ${final ? "final" : "development"} extraction comparison`}>
       <div className="section-heading">
         <div>
-          <span className="eyebrow">V5 · recorded inference · synthetic clauses</span>
-          <h2>{final ? "Final evaluation" : "Development comparison"}</h2>
+          <span className="eyebrow">V5 contract reader · recorded test on sample clauses</span>
+          <h2>{final ? "Final test on unseen examples" : "Earlier development test"}</h2>
         </div>
         <span className={`state-badge state-${final ? value.comparison.promoted ? "promoted" : "blocked" : "pending"}`}>
           {verdict}
         </span>
       </div>
       <p className="comparison-intro">
-        {value.caseCount} frozen cases. {final
-          ? "The final comparison applies the predeclared usefulness and safety gate."
-          : "Development results guide candidate selection. They do not establish held-out quality or authorize promotion."}
+        {value.caseCount} fixed examples. {final
+          ? "Both models answer the same clauses. We check amounts, conditions, recipients, and when the payment countdown starts. The pass criteria were set in advance."
+          : "These examples helped us choose what to change. Only the separate final test measures performance on unseen examples."}
       </p>
       {final && value.comparison.qualityImprovementMeasured && !value.comparison.promoted && (
         <p className="comparison-intro">
-          Improvement over the base was measured, but the candidate did not pass
-          the full release gate. Relative improvement alone is not enough for promotion.
+          The trained model got more answers right, but it still failed the preset
+          quality checks. It was not approved for automatic use.
         </p>
       )}
       <div className="comparison-table-scroll">
         <table className="comparison-table">
-          <thead><tr><th>Measured outcome</th><th>Base model</th><th>V5 tuned candidate</th></tr></thead>
+          <thead><tr><th>What we measured</th><th>Before training</th><th>After training (V5)</th></tr></thead>
           <tbody>{rows.map((row) => (
             <tr key={row.label}>
               <td>{row.label}{"lowerIsBetter" in row && row.lowerIsBetter && <small>lower is better</small>}</td>
@@ -50,7 +50,7 @@ export function ExtractionV5ComparisonPanel({ value }: { value: PublicV5Evaluati
         </table>
       </div>
       <details className="comparison-provenance">
-        <summary>Verdict & provenance <Icon name="chevron-down" size={13} /></summary>
+        <summary>Test rules, model versions & original results <Icon name="chevron-down" size={13} /></summary>
         <div><span>Recorded verdict</span><code>{value.comparison.status}</code></div>
         {value.comparison.gateVersion && <div><span>Fixed gate version</span><code>{value.comparison.gateVersion}</code></div>}
         <p>{value.comparison.gate ?? value.comparison.detail}</p>
@@ -72,7 +72,7 @@ export function ExtractionV5ComparisonPanel({ value }: { value: PublicV5Evaluati
       </details>
       <div className="comparison-boundary">
         <Icon name="shield" size={14} />
-        <span>Recorded evaluation, not a live extractor deployment. Public decisions use fixed code and saved evidence. Every proposed term still requires owner review.</span>
+        <span>These results are from a recorded test. The public demo calculates cash from reviewed inputs; every AI-proposed contract rule still needs a person to check it.</span>
       </div>
     </section>
   );

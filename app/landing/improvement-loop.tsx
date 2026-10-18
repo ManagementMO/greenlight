@@ -9,9 +9,9 @@ import type { LandingEvidence } from "@/lib/landing-evidence";
 export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
   const root = useRef<HTMLElement>(null);
   const rows = [
-    { key: "checks", label: "Provider requests", before: evidence.baseline.requests, after: evidence.candidate.requests, fmt: (v: number) => String(Math.round(v)) },
-    { key: "tokens", label: "Input tokens", before: evidence.baseline.inputTokens, after: evidence.candidate.inputTokens, fmt: (v: number) => Math.round(v).toLocaleString('en-US') },
-    { key: "right", label: "Correct judgments", before: evidence.baseline.correct, after: evidence.candidate.correct, fmt: (v: number) => `${Math.round(v)} / ${evidence.candidate.total}` },
+    { key: "checks", label: "AI requests", before: evidence.baseline.requests, after: evidence.candidate.requests, fmt: (v: number) => String(Math.round(v)) },
+    { key: "tokens", label: "Text sent to AI (tokens)", before: evidence.baseline.inputTokens, after: evidence.candidate.inputTokens, fmt: (v: number) => Math.round(v).toLocaleString('en-US') },
+    { key: "right", label: "Correct checks", before: evidence.baseline.correct, after: evidence.candidate.correct, fmt: (v: number) => `${Math.round(v)} / ${evidence.candidate.total}` },
   ];
   const dots = Array.from({ length: evidence.baseline.requests }, (_, i) => i >= evidence.candidate.requests);
 
@@ -45,22 +45,24 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
     <section className="lp-save" ref={root} id="results">
       <div className="lp-save-copy">
         <p className="lp-eyebrow">03 · Learn, test, improve</p>
-        <h2>Improve the workflow. Prove the difference.</h2>
+        <h2>New document. Fewer repeated checks.</h2>
         <p>
-          The MetaHarness improves how evidence is checked: read only what changed,
-          batch related questions, and reuse unaffected answers.
+          When a new insurance email arrives, the inspection report hasn’t changed.
+          Headroom can recheck the email and reuse the inspection result. Our
+          meta-harness is an AI improvement loop that tests better ways to group
+          these checks and reuse answers.
         </p>
         <ol className="lp-learning-flow" aria-label="The workflow improvement process">
-          <li><i>1</i><b>Propose</b><span>A bounded change</span></li>
-          <li><i>2</i><b>Replay</b><span>The same cases</span></li>
-          <li><i>3</i><b>Evaluate</b><span>Fixed quality gates</span></li>
-          <li><i>4</i><b>Keep</b><span>Only if it passes</span></li>
+          <li><i>1</i><b>Suggest</b><span>Change which checks run</span></li>
+          <li><i>2</i><b>Test</b><span>Use the same examples</span></li>
+          <li><i>3</i><b>Compare</b><span>Check answers and effort</span></li>
+          <li><i>4</i><b>Keep</b><span>Only if the tests pass</span></li>
         </ol>
-        <p className="lp-gate-verdict" data-passed={evidence.workflowPromoted}><i />{evidence.workflowPromoted ? "This workflow passed its fixed gate." : "This workflow remains held for review."}</p>
+        <p className="lp-gate-verdict" data-passed={evidence.workflowPromoted}><i />{evidence.workflowPromoted ? "This workflow passed the quality checks set before the test." : "This workflow still needs review before use."}</p>
         <div className="lp-tuning-result">
-          <h3>Fine-tuning the contract reader.</h3>
-          <p>We trained a model to turn clauses into payment terms: <strong>{evidence.v5.baseExact}/{evidence.v5.count} → {evidence.v5.tunedExact}/{evidence.v5.count}</strong> outputs with every material field correct on a separate synthetic test.</p>
-          <p>V5 still made {evidence.v5.incorrectProposals} incorrect validated proposals: <b>{evidence.v5.promoted ? 'promoted under the published gate' : 'not promoted'}</b>. The demo keeps reviewed inputs.</p>
+          <h3>A separate improvement: teach the reader.</h3>
+          <p>Fine-tuning means training Qwen on examples of contract clauses and their correct payment rules. On {evidence.v5.count} unseen synthetic examples, results with every key payment field correct rose from <strong>{evidence.v5.baseExact} to {evidence.v5.tunedExact}</strong>.</p>
+          <p>But {evidence.v5.incorrectProposals} wrong proposals still passed the automatic checks. <b>{evidence.v5.promoted ? 'It passed the published release test.' : 'It wasn’t approved for automatic use.'}</b> The demo uses inputs reviewed by a person.</p>
           <a href="https://github.com/ManagementMO/headroom/blob/main/docs/extractor-v5-results.md">Read the fine-tuning results ↗</a>
         </div>
       </div>
@@ -83,7 +85,7 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
             ))}
           </tbody>
         </table>
-        <p className="lp-save-note">Recorded Jev test: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments. No false “met” judgments; one conflicting-evidence error remains. Results apply to this workload. <a href="/#lab">Inspect the experiment →</a></p>
+        <p className="lp-save-note">Recorded Jev test: {evidence.updates} simulated updates, {evidence.candidate.total} checks. One conflicting-document case was still misread. These are request and token savings on this test, not measured dollar or speed savings. <a href="/#lab">Inspect the experiment →</a></p>
       </div>
     </section>
   );

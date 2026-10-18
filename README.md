@@ -6,7 +6,7 @@
 
 **Evidence-backed decisions for the small business owner's next big opportunity.**
 
-[Launch page](https://headroom-lahacks.vercel.app/landing) · [Live demo](https://headroom-lahacks.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
+[Launch page](https://headroom-lahacks.vercel.app/landing) · [Live demo](https://headroom-lahacks.vercel.app) · [Pitch cheat sheet](docs/pitch-cheatsheet.md) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
 
 [![CI](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml/badge.svg)](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml)
 ![Built for LA Hacks](https://img.shields.io/badge/Built_for-LA_Hacks-176644)
@@ -14,7 +14,7 @@
 
 </div>
 
-![Headroom. Take the next job. Keep room for payday. A mint cash path clears a coral threshold and passes into an open green doorway.](public/brand/headroom-banner.png)
+![Headroom. Take the next job. Keep room for payday. A $120,000 job connects to payroll through a mint cash bridge labeled $23K earlier. Conceptual artwork for the reference case.](public/brand/headroom-thumbnail-v2.png)
 
 ## A profitable job can still miss payroll
 

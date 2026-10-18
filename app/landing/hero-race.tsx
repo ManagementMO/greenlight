@@ -53,24 +53,24 @@ export function HeroRace({ evidence }: { evidence: LandingEvidence }) {
   return (
     <div className="lp-race" ref={root} data-hero-fade>
       <div className="lp-race-head">
-        <span>Measured AI workflow · recorded run</span>
+        <span>Less repeated AI work · recorded test</span>
         <button type="button" onClick={() => tl.current?.restart()}>Replay</button>
       </div>
 
       <div className="lp-race-lane is-direct">
-        <div className="lp-race-top"><b>Recheck the whole job</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
+        <div className="lp-race-top"><b>Before: recheck each update</b><span className="lp-race-time">{requests(evidence.baseline.requests)}</span><span className="lp-race-cost">{tokens(evidence.baseline.inputTokens)} tokens</span></div>
         <div className="lp-race-track" aria-hidden="true"><i className="lp-race-fill" /></div>
-        <div className="lp-race-result">Correct judgments <b>{evidence.baseline.correct}/{evidence.baseline.total}</b></div>
+        <div className="lp-race-result">Correct checks <b>{evidence.baseline.correct}/{evidence.baseline.total}</b></div>
       </div>
 
       <div className="lp-race-lane is-routed">
-        <div className="lp-race-top"><b>Check only what changed, together</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
+        <div className="lp-race-top"><b>After: reuse unchanged answers</b><span className="lp-race-time">{requests(evidence.candidate.requests)}</span><span className="lp-race-cost">{tokens(evidence.candidate.inputTokens)} tokens</span></div>
         <div className="lp-race-track" aria-hidden="true">
           <i className="lp-race-read" style={{ transform: `scaleX(${evidence.candidate.requests / evidence.baseline.requests})` }} />
         </div>
-        <div className="lp-race-result">Correct judgments <b>{evidence.candidate.correct}/{evidence.candidate.total}</b></div>
+        <div className="lp-race-result">Correct checks <b>{evidence.candidate.correct}/{evidence.candidate.total}</b></div>
       </div>
-      <p className="lp-race-note">Illustrated replay, not a live timer. <a href="/#lab">Inspect the recorded run →</a></p>
+      <p className="lp-race-note">Jev checks facts in documents. Tokens measure text sent to it. Bar length shows request count, not speed. <a href="/#lab">See the test →</a></p>
     </div>
   );
 }
