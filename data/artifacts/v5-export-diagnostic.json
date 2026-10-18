@@ -593,6 +593,335 @@
       }
     ]
   },
+  "repairedProvider": {
+    "artifact": {
+      "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+      "revision": "51fcc48bf3ae0753d9633ea6566575585c347271"
+    },
+    "runtime": "Veri / vLLM",
+    "summary": {
+      "count": 6,
+      "valid": 6,
+      "materialExact": 6
+    },
+    "rows": [
+      {
+        "id": "v5-train-p-84",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_a349285\",\"trigger\":{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"work_48e45614\"},\"due\":{\"kind\":\"ON_DATE\",\"date\":\"2027-01-22\"},\"sourceIds\":[\"doc_27775efdf3b8\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+        "outputSha256": "15531555cb1a023864844aeef63f7a8598936f8852f53621e7601f8247b8fd3e",
+        "score": {
+          "expectedStatus": "PROPOSED",
+          "valid": true,
+          "materialExact": true,
+          "proposed": true,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_a349285",
+            "trigger": {
+              "op": "ATOM",
+              "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+              "subject": "work_48e45614"
+            },
+            "due": {
+              "kind": "ON_DATE",
+              "date": "2027-01-22"
+            },
+            "sourceIds": [
+              "doc_27775efdf3b8"
+            ],
+            "status": "PROPOSED",
+            "issues": []
+          }
+        }
+      },
+      {
+        "id": "v5-train-p-155",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_6fd157d\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ANY\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"AGREEMENT_SIGNED\",\"subject\":\"work_a370fd64\"},{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"work_a370fd64\"}]},{\"op\":\"ANY\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"PHASE_ACCEPTED\",\"subject\":\"stage_a370fd64\"},{\"op\":\"ATOM\",\"condition\":\"INVOICE_ACCEPTED\",\"subject\":\"stage_a370fd64\"}]},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"work_a370fd64\"}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":21,\"invoiceSubject\":\"bill_a370fd64\"},\"sourceIds\":[\"doc_9d689e3de42a\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+        "outputSha256": "de17e654a3768168f11a0f2d0539c736278cbdc87cb6a945af472511806e70dd",
+        "score": {
+          "expectedStatus": "PROPOSED",
+          "valid": true,
+          "materialExact": true,
+          "proposed": true,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_6fd157d",
+            "trigger": {
+              "op": "ALL",
+              "children": [
+                {
+                  "op": "ANY",
+                  "children": [
+                    {
+                      "op": "ATOM",
+                      "condition": "AGREEMENT_SIGNED",
+                      "subject": "work_a370fd64"
+                    },
+                    {
+                      "op": "ATOM",
+                      "condition": "INSPECTION_PASSED",
+                      "subject": "work_a370fd64"
+                    }
+                  ]
+                },
+                {
+                  "op": "ANY",
+                  "children": [
+                    {
+                      "op": "ATOM",
+                      "condition": "PHASE_ACCEPTED",
+                      "subject": "stage_a370fd64"
+                    },
+                    {
+                      "op": "ATOM",
+                      "condition": "INVOICE_ACCEPTED",
+                      "subject": "stage_a370fd64"
+                    }
+                  ]
+                },
+                {
+                  "op": "ATOM",
+                  "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+                  "subject": "work_a370fd64"
+                }
+              ]
+            },
+            "due": {
+              "kind": "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+              "days": 21,
+              "invoiceSubject": "bill_a370fd64"
+            },
+            "sourceIds": [
+              "doc_9d689e3de42a"
+            ],
+            "status": "PROPOSED",
+            "issues": []
+          }
+        }
+      },
+      {
+        "id": "v5-train-p-71",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_21cf14f\",\"trigger\":{\"op\":\"ANY\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"stage_d90f28cb\"},{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"AGREEMENT_SIGNED\",\"subject\":\"work_d90f28cb\"},{\"op\":\"ATOM\",\"condition\":\"DELIVERY_CONFIRMED\",\"subject\":\"work_d90f28cb\"},{\"op\":\"ATOM\",\"condition\":\"INVOICE_ACCEPTED\",\"subject\":\"work_d90f28cb\"}]}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"bill_d90f28cb\"},\"sourceIds\":[\"doc_0dcbd1c66485\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+        "outputSha256": "d1b6c2ae599d88466c71f5020b17197020f8fc64b2d72cf3f1eae58cfaf5c971",
+        "score": {
+          "expectedStatus": "PROPOSED",
+          "valid": true,
+          "materialExact": true,
+          "proposed": true,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_21cf14f",
+            "trigger": {
+              "op": "ANY",
+              "children": [
+                {
+                  "op": "ATOM",
+                  "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+                  "subject": "stage_d90f28cb"
+                },
+                {
+                  "op": "ALL",
+                  "children": [
+                    {
+                      "op": "ATOM",
+                      "condition": "AGREEMENT_SIGNED",
+                      "subject": "work_d90f28cb"
+                    },
+                    {
+                      "op": "ATOM",
+                      "condition": "DELIVERY_CONFIRMED",
+                      "subject": "work_d90f28cb"
+                    },
+                    {
+                      "op": "ATOM",
+                      "condition": "INVOICE_ACCEPTED",
+                      "subject": "work_d90f28cb"
+                    }
+                  ]
+                }
+              ]
+            },
+            "due": {
+              "kind": "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+              "days": 14,
+              "invoiceSubject": "bill_d90f28cb"
+            },
+            "sourceIds": [
+              "doc_0dcbd1c66485"
+            ],
+            "status": "PROPOSED",
+            "issues": []
+          }
+        }
+      },
+      {
+        "id": "v5-train-n-61",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_6bf3ff3\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"PHASE_ACCEPTED\",\"subject\":\"work_a5da5bdd\"},{\"op\":\"ANY\",\"children\":[{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"AGREEMENT_SIGNED\",\"subject\":\"stage_a5da5bdd\"},{\"op\":\"ATOM\",\"condition\":\"DELIVERY_CONFIRMED\",\"subject\":\"stage_a5da5bdd\"}]},{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"work_a5da5bdd\"},{\"op\":\"ATOM\",\"condition\":\"INVOICE_ACCEPTED\",\"subject\":\"work_a5da5bdd\"}]}]}]},\"due\":null,\"sourceIds\":[\"doc_f06ea1798925\"],\"status\":\"AMBIGUOUS\",\"issues\":[\"Payment timing is not specified.\"]}",
+        "outputSha256": "8b668c2a6a303d042ada64a32807c9b4a28e59b6e83d87d1d6d29626068a4f78",
+        "score": {
+          "expectedStatus": "AMBIGUOUS",
+          "valid": true,
+          "materialExact": true,
+          "proposed": false,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_6bf3ff3",
+            "trigger": {
+              "op": "ALL",
+              "children": [
+                {
+                  "op": "ATOM",
+                  "condition": "PHASE_ACCEPTED",
+                  "subject": "work_a5da5bdd"
+                },
+                {
+                  "op": "ANY",
+                  "children": [
+                    {
+                      "op": "ALL",
+                      "children": [
+                        {
+                          "op": "ATOM",
+                          "condition": "AGREEMENT_SIGNED",
+                          "subject": "stage_a5da5bdd"
+                        },
+                        {
+                          "op": "ATOM",
+                          "condition": "DELIVERY_CONFIRMED",
+                          "subject": "stage_a5da5bdd"
+                        }
+                      ]
+                    },
+                    {
+                      "op": "ALL",
+                      "children": [
+                        {
+                          "op": "ATOM",
+                          "condition": "INSPECTION_PASSED",
+                          "subject": "work_a5da5bdd"
+                        },
+                        {
+                          "op": "ATOM",
+                          "condition": "INVOICE_ACCEPTED",
+                          "subject": "work_a5da5bdd"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "due": null,
+            "sourceIds": [
+              "doc_f06ea1798925"
+            ],
+            "status": "AMBIGUOUS",
+            "issues": [
+              "Payment timing is not specified."
+            ]
+          }
+        }
+      },
+      {
+        "id": "v5-train-n-42",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_0e82e1f\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"AGREEMENT_SIGNED\",\"subject\":\"work_391ec3f7\"},{\"op\":\"ANY\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"PHASE_ACCEPTED\",\"subject\":\"work_391ec3f7\"},{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"stage_391ec3f7\"},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"stage_391ec3f7\"}]}]}]},\"due\":null,\"sourceIds\":[\"doc_4ddf1f5eafba\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"Business-day calendars are unsupported.\"]}",
+        "outputSha256": "7d8124fe8654aa8129b38bae8fdf470fc7d61e452db3f09b48850d876dcfdac6",
+        "score": {
+          "expectedStatus": "UNSUPPORTED",
+          "valid": true,
+          "materialExact": true,
+          "proposed": false,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_0e82e1f",
+            "trigger": {
+              "op": "ALL",
+              "children": [
+                {
+                  "op": "ATOM",
+                  "condition": "AGREEMENT_SIGNED",
+                  "subject": "work_391ec3f7"
+                },
+                {
+                  "op": "ANY",
+                  "children": [
+                    {
+                      "op": "ATOM",
+                      "condition": "PHASE_ACCEPTED",
+                      "subject": "work_391ec3f7"
+                    },
+                    {
+                      "op": "ALL",
+                      "children": [
+                        {
+                          "op": "ATOM",
+                          "condition": "INSPECTION_PASSED",
+                          "subject": "stage_391ec3f7"
+                        },
+                        {
+                          "op": "ATOM",
+                          "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+                          "subject": "stage_391ec3f7"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "due": null,
+            "sourceIds": [
+              "doc_4ddf1f5eafba"
+            ],
+            "status": "UNSUPPORTED",
+            "issues": [
+              "Business-day calendars are unsupported."
+            ]
+          }
+        }
+      },
+      {
+        "id": "v5-train-n-93",
+        "output": "{\"schemaVersion\":1,\"amountRef\":\"sum_b51064e\",\"trigger\":null,\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"bill_26562f13\"},\"sourceIds\":[\"doc_ee4ac5589706\"],\"status\":\"UNSUPPORTED\",\"issues\":[\"Supplier receipt is outside the supported predicate.\"]}",
+        "outputSha256": "8242f53c8361c974449ed1077afdf231fc8765a6c0d521fa7ac0652295420ba7",
+        "score": {
+          "expectedStatus": "UNSUPPORTED",
+          "valid": true,
+          "materialExact": true,
+          "proposed": false,
+          "unsafeProposed": false,
+          "statusCorrect": true,
+          "parsed": {
+            "schemaVersion": 1,
+            "amountRef": "sum_b51064e",
+            "trigger": null,
+            "due": {
+              "kind": "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+              "days": 14,
+              "invoiceSubject": "bill_26562f13"
+            },
+            "sourceIds": [
+              "doc_ee4ac5589706"
+            ],
+            "status": "UNSUPPORTED",
+            "issues": [
+              "Supplier receipt is outside the supported predicate."
+            ]
+          }
+        }
+      }
+    ]
+  },
   "tokenizerParity": {
     "promptCount": 6,
     "promptIds": [

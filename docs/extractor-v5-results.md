@@ -1,6 +1,6 @@
 # Headroom extractor V5: training and evaluation
 
-**Status: training and the initial matched development comparison are complete. The initial export regressed; final evaluation is pending. V5 has not earned promotion.** A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
+**Status: the repaired V5 export improves the completed matched development comparison. The candidate is frozen and final evaluation is running; V5 has not earned promotion.** On 24 development cases, material-exact outputs rose from 9 to 15 and fully valid outputs from 22 to 24. Eight incorrect validated proposals remain. A completed training job and low training loss establish that training ran; they do not establish that new contract clauses are interpreted correctly.
 
 ## What the model learns
 
@@ -13,8 +13,9 @@ The model does not calculate cash balances, execute payments, approve terms, or 
 | Item | Recorded evidence |
 | --- | --- |
 | Base model | `Qwen/Qwen3-4B-Instruct-2507` |
-| Candidate | [`machinelearningmo/greenlight-extractor-sft-v5-ed827924-74462f5d-33d`](https://huggingface.co/machinelearningmo/greenlight-extractor-sft-v5-ed827924-74462f5d-33d) |
-| Candidate revision observed after publication | `f774455e2c98b46ccfe261bd71718587bf17653e` |
+| Candidate | [`machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f`](https://huggingface.co/machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f) |
+| Candidate revision observed after publication | `51fcc48bf3ae0753d9633ea6566575585c347271` |
+| Original export, preserved | [`machinelearningmo/greenlight-extractor-sft-v5-ed827924-74462f5d-33d`](https://huggingface.co/machinelearningmo/greenlight-extractor-sft-v5-ed827924-74462f5d-33d/tree/f774455e2c98b46ccfe261bd71718587bf17653e) |
 | Provider / method | Veri; supervised fine-tuning with a 4-bit base and LoRA adapters, followed by a standalone export |
 | Dataset | 336 public synthetic prompt/completion pairs: 240 proposed, 48 ambiguous, 48 unsupported |
 | Coverage | 20 composition families and 12 uncertainty families; opaque references, shuffled reference tables, distractors, and distinct eligibility and invoice clocks |
@@ -42,6 +43,12 @@ The labels are developer-reviewed synthetic examples, not customer-adjudicated c
 | Initial development fully valid outputs / 24 | 22 | 18 |
 | Initial development correct supported proposals / 16 | 4 | 2 |
 | Initial development incorrect fully validated proposals | 10 | 10 |
+| Repaired development material-exact outputs / 24 | 9 | 15 |
+| Repaired development fully valid outputs / 24 | 22 | 24 |
+| Repaired development correct supported proposals / 16 | 4 | 8 |
+| Repaired development correct ambiguous status / 4 | 4 | 4 |
+| Repaired development correct unsupported status / 4 | 3 | 3 |
+| Repaired development incorrect fully validated proposals | 10 | 8 |
 | Final material-exact outputs / 48 | Pending | Pending |
 | Final fully valid outputs / 48 | Pending | Pending |
 | Final correct supported proposals / 32 | Pending | Pending |
@@ -49,13 +56,15 @@ The labels are developer-reviewed synthetic examples, not customer-adjudicated c
 | Final correct unsupported status / 8 | Pending | Pending |
 | Final incorrect fully validated proposals | Pending | Pending |
 
-**Initial development verdict: regression, not a measured improvement. Final verdict pending; not promoted.** [All 48 actual development responses](../data/artifacts/extraction-v5-development.json) are published. Both deployments were permanently stopped and charges settled. Training loss is not a substitute for any result in this table.
+**Development verdict: the original export regressed; the repaired export improved relative to the same base. Final verdict pending; not promoted.** The [initial 48 responses](../data/artifacts/extraction-v5-initial-development.json) and [repaired matched 48 responses](../data/artifacts/extraction-v5-development.json) remain public. The base run is reused because its prompt, model identity and settings are unchanged. All completed development deployments were permanently stopped and charges settled. Training loss is not a substitute for any result in this table.
 
 ### Export diagnostic prompted by development
 
 Each model matched three of six V5 training canaries. These are diagnostic examples already present in training, excluded from development and final scores. The tuned export also produced malformed nested JSON and treated a business-day rule as a supported calendar-day rule. The saved adapter contains nonzero learned LoRA weights, while the worker log warns that merging into 4-bit linear layers can alter generations through rounding. These observations justify checking materialization before purchasing another training run; they do not prove that rounding caused every error.
 
-A local higher-precision merge diagnostic reuses the exact saved adapter and pinned base revision. It changes no training labels, prompt, scorer or gate. Any improved export must receive a distinct identity and a matched development evaluation before final candidate selection. Final cases remain untouched during this diagnostic.
+A BF16 materialization reuses the exact saved adapter and pinned base revision, using PEFT's safe merge. It changes no training labels, prompt, scorer or gate and purchases no new training run. The six training canaries rose from 3/6 exact to 6/6 exact locally and in the repaired Veri run; they remain excluded from held-out metrics. The repaired provider development run produced the 15/24 result above. This is an exported-pipeline comparison, not proof that rounding caused every earlier error. [Adapter and export lineage](../data/artifacts/v5-export-lineage.json) and [actual canary outputs](../data/artifacts/v5-export-diagnostic.json) are public.
+
+The [candidate selection](../data/artifacts/v5-final-selection.json) was written at `2026-10-18T04:47:16.336Z`, before final model queries. It binds the base and repaired export revisions, prompt, decoding, development evidence and final corpus hash. No new candidate will be selected from final results.
 
 ## What earns promotion
 

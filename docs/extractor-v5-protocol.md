@@ -33,6 +33,8 @@ The independently reviewed **48-case final** is frozen before inference: 32 supp
 
 **Development-stage export diagnostic, October 17:** the initial merged export regressed on the completed 24-case comparison and matched only three of six training canaries. The worker explicitly warned about rounding in a 4-bit merge; saved adapter weights are nonzero. Before opening the final set, a higher-precision materialization may be tested using that exact adapter and the pinned base. It must have a distinct artifact identity, preserve the initial development evidence, and complete matched development evaluation before candidate selection. This is an export-pipeline change, not new training or an isolated causal test of fine-tuning. The final gate and labels remain unchanged.
 
+**Selection recorded before final queries:** the [immutable selection](../data/artifacts/v5-final-selection.json) at `2026-10-18T04:47:16.336Z` selects the BF16 materialization of the same saved adapter after its completed matched development comparison: 15/24 material-exact versus 9/24 for the base. The [results report](extractor-v5-results.md) preserves both the initial regression and repaired comparison. Final feedback cannot change this selection.
+
 ## Release gate declared before final predictions
 
 `extractor-gates-v3-useful-coverage` retains V2's matched-run checks and nonregression requirements, then adds an absolute usefulness floor:

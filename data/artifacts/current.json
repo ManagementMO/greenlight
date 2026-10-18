@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T02:24:25.729Z",
+  "generatedAt": "2026-10-18T04:48:33.235Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -22,15 +22,17 @@
       "provider": "Veri",
       "status": "verified",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:43:20.498Z",
-      "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
+      "checkedAt": "2026-10-18T03:27:28.112Z",
+      "detail": "Completed 300-step V5 SFT and saved adapter. Export materialization, actual serving, and quality have separate evidence below.",
+      "model": "Qwen/Qwen3-4B-Instruct-2507"
     },
     {
       "provider": "Hugging Face",
       "status": "verified",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:43:20.498Z",
-      "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
+      "checkedAt": "2026-10-18T04:35:06.184Z",
+      "detail": "Verified public export at observed revision 51fcc48bf3ae0753d9633ea6566575585c347271. BF16 materialization and original adapter have recorded hashes. Repository identity does not attest the provider's loaded weight bytes.",
+      "model": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f"
     },
     {
       "provider": "Sentry",
@@ -43,30 +45,40 @@
   "training": {
     "status": "completed",
     "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
-    "jobId": "b808db134828",
-    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
-    "modelRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
-    "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
+    "jobId": "42d582a35d2f",
+    "modelRepo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+    "modelRevision": "51fcc48bf3ae0753d9633ea6566575585c347271",
+    "detail": "336 examples, 300 optimizer steps. Same saved adapter rematerialized on the pinned BF16 base; no retraining. V5 reference-contract extraction; training completion is separate from evaluation and deployment.",
     "stages": [
       {
-        "name": "Dataset",
+        "name": "V5 dataset",
         "status": "verified",
-        "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
+        "detail": "336 synthetic examples; SHA-256 ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051. Developer-reviewed labels, not customer adjudication."
       },
       {
-        "name": "Fine-tuning",
+        "name": "V5 fine-tuning",
         "status": "completed",
-        "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "detail": "300 of 300 steps verified in the provider worker checkpoint log. Completion-only loss is intended; the remote effective loss mask is not attested."
       },
       {
-        "name": "Merged export",
+        "name": "V5 merged export",
         "status": "verified",
-        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        "detail": "Saved trained adapter safely rematerialized on the pinned BF16 base. Public Hugging Face configuration verified. Observed repository revision identifies the export, not the provider's effective loaded weights."
       },
       {
-        "name": "Serving canary",
+        "name": "V5 serving inference",
         "status": "verified",
-        "detail": "Real inference returned; GPU stop verified. Training canary matched."
+        "detail": "Recorded model responses returned; serving resources stopped and final costs settled. This is evaluation serving, not a public live endpoint."
+      },
+      {
+        "name": "V5 development",
+        "status": "completed",
+        "detail": "24 frozen development cases compared. Development cannot authorize promotion."
+      },
+      {
+        "name": "V5 final gate",
+        "status": "pending",
+        "detail": "Final evaluation and gate result are not yet published."
       }
     ]
   },
@@ -199,9 +211,9 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 2.79,
-    "reservedUsd": 0,
-    "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
+    "spentUsd": 4.63,
+    "reservedUsd": 2,
+    "detail": "Budget ledger snapshot; reconciled charges are conservatively rounded per call. Reservations stay held while final charges are uncertain."
   },
   "provenance": [
     {
@@ -461,5 +473,164 @@
         "confidence": 0.93
       }
     ]
+  },
+  "trainingHistory": [
+    {
+      "status": "completed",
+      "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+      "jobId": "b808db134828",
+      "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+      "modelRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
+      "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
+      "stages": [
+        {
+          "name": "Dataset",
+          "status": "verified",
+          "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
+        },
+        {
+          "name": "Fine-tuning",
+          "status": "completed",
+          "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
+        },
+        {
+          "name": "Merged export",
+          "status": "verified",
+          "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        },
+        {
+          "name": "Serving canary",
+          "status": "verified",
+          "detail": "Real inference returned; GPU stop verified. Training canary matched."
+        }
+      ]
+    }
+  ],
+  "extractionV5Development": {
+    "schemaVersion": 1,
+    "origin": "recorded",
+    "dataClassification": "PUBLIC_SYNTHETIC",
+    "purpose": "development-only",
+    "caseCount": 24,
+    "evaluationSha256": "028190f3fc7910b9960b135671a7a7dc6d07b1b0109bb63b4e6ffa1747aff916",
+    "promptProfile": "reference-contract-v5",
+    "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+    "base": {
+      "artifact": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      },
+      "completedAt": "2026-10-18T03:59:06.137Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 24,
+        "valid": 22,
+        "materialExact": 9,
+        "statusCorrect": 21,
+        "proposed": 14,
+        "unsafeProposed": 10,
+        "expectedProposed": 16,
+        "correctSupportedProposals": 4,
+        "validityRate": 0.9166666666666666,
+        "materialExactRate": 0.375,
+        "rawProposalRate": 0.5833333333333334,
+        "correctSupportedProposalRate": 0.25,
+        "proposedPrecision": 0.2857142857142857,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 16,
+            "valid": 14,
+            "statusCorrect": 14,
+            "materialExact": 4,
+            "proposed": 14,
+            "unsafeProposed": 10,
+            "statusAccuracy": 0.875,
+            "materialExactRate": 0.25
+          },
+          "AMBIGUOUS": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 4,
+            "materialExact": 2,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 1,
+            "materialExactRate": 0.5
+          },
+          "UNSUPPORTED": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 3,
+            "materialExact": 3,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.75,
+            "materialExactRate": 0.75
+          }
+        }
+      }
+    },
+    "tuned": {
+      "artifact": {
+        "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+        "revision": "51fcc48bf3ae0753d9633ea6566575585c347271"
+      },
+      "completedAt": "2026-10-18T04:45:09.577Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 24,
+        "valid": 24,
+        "materialExact": 15,
+        "statusCorrect": 23,
+        "proposed": 16,
+        "unsafeProposed": 8,
+        "expectedProposed": 16,
+        "correctSupportedProposals": 8,
+        "validityRate": 1,
+        "materialExactRate": 0.625,
+        "rawProposalRate": 0.6666666666666666,
+        "correctSupportedProposalRate": 0.5,
+        "proposedPrecision": 0.5,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 16,
+            "valid": 16,
+            "statusCorrect": 16,
+            "materialExact": 8,
+            "proposed": 16,
+            "unsafeProposed": 8,
+            "statusAccuracy": 1,
+            "materialExactRate": 0.5
+          },
+          "AMBIGUOUS": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 4,
+            "materialExact": 4,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 1,
+            "materialExactRate": 1
+          },
+          "UNSUPPORTED": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 3,
+            "materialExact": 3,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.75,
+            "materialExactRate": 0.75
+          }
+        }
+      }
+    },
+    "comparison": {
+      "status": "development-only",
+      "promoted": false,
+      "detail": "Development guides candidate selection; it cannot authorize promotion."
+    }
   }
 }
