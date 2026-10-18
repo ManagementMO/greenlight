@@ -1,8 +1,16 @@
 import { describe, expect, it } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { CashStory } from "@/app/landing/cash-story";
 import { applyProposal, evaluateDecision, getScenario } from "@/lib/domain";
 import { buildLandingCashStory, getLandingCashStory } from "@/lib/landing-cash-story";
 
 describe("landing cash story", () => {
+  it("includes the chart's accessible title in the server HTML before hydration", () => {
+    const html = renderToStaticMarkup(createElement(CashStory, { story: getLandingCashStory()! }));
+    expect(html).toMatch(/<title id="[^"]+">Current cash path<\/title>/);
+  });
+
   it("shows the workspace engine's exact worst paths, including ordered same-day events", () => {
     const input = getScenario("ductline-phase-delay")!;
     const before = evaluateDecision(input);

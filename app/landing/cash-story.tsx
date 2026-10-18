@@ -63,7 +63,7 @@ export function CashStory({ story }: { story: LandingCashStory }) {
           <div className="lp-story-legend"><span><i />{proposed ? "Proposed terms" : "Current terms"}</span><span>Worst declared collection path</span></div>
           <div className="lp-story-chart" ref={chart}>
             <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`}>
-              <title id={`${id}-title`}>{proposed ? "Proposed" : "Current"} cash path</title>
+              <title id={`${id}-title`}>{`${proposed ? "Proposed" : "Current"} cash path`}</title>
               <desc id={`${id}-desc`}>Lowest modeled cash {money(selected.minimumCents)} on {dateLabel(selected.minimumDate)}. Reserve {money(story.reserveCents)}. The chart covers {dateLabel(first.date)} to {dateLabel(last.date)}. {proposed ? "The faint dashed line shows the current terms for comparison." : "Select proposed terms to compare the deposit advance."}</desc>
               <defs>
                 <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
