@@ -289,7 +289,21 @@ export default function Headroom() {
   const [input, setInput] = useState<DecisionInput>(() =>
     decisionSnapshot(initialFixture),
   );
-  const [view, setView] = useState<View>("decision");
+  const [view, setCurrentView] = useState<View>("decision");
+  const setView = (nextView: View) => {
+    setCurrentView(nextView);
+    window.history.replaceState(window.history.state, "", `#${nextView}`);
+  };
+  useEffect(() => {
+    const readView = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash === "evidence" || hash === "lab" || hash === "decision") setCurrentView(hash);
+      else if (!hash) setCurrentView("decision");
+    };
+    readView();
+    window.addEventListener("hashchange", readView);
+    return () => window.removeEventListener("hashchange", readView);
+  }, []);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [view]);
@@ -1318,6 +1332,7 @@ export default function Headroom() {
             <span>
               Synthetic accounting data + disclosed scenario extensions.
             </span>
+            <a href="/landing">About Headroom <Icon name="arrow-up-right" size={12} /></a>
             <a
               href="https://github.com/ManagementMO/headroom"
               target="_blank"

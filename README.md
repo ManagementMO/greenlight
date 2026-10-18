@@ -6,7 +6,7 @@
 
 **Evidence-backed decisions for the small business owner's next big opportunity.**
 
-[Live demo](https://headroom-lahacks.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
+[Launch page](https://headroom-lahacks.vercel.app/landing) · [Live demo](https://headroom-lahacks.vercel.app) · [3-minute presentation](docs/demo-guide.md) · [Architecture & evidence](#how-it-works) · [Run locally](#run-locally)
 
 [![CI](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml/badge.svg)](https://github.com/ManagementMO/headroom/actions/workflows/ci.yml)
 ![Built for LA Hacks](https://img.shields.io/badge/Built_for-LA_Hacks-176644)

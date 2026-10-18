@@ -4,36 +4,29 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { animate, createScope, onScroll, scrambleText, stagger } from "animejs";
 import { Icon } from "@/components/icons";
-import { DIRECT, HeroRace, ROUTED } from "./hero-race";
+import { HeroRace } from "./hero-race";
+import type { LandingEvidence } from "@/lib/landing-evidence";
 import { RouteSection, routeTimeline } from "./route-section";
 import { ImprovementLoop } from "./improvement-loop";
 
 const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 
-const DEMO = "https://greenlight-two-psi.vercel.app";
-const SOURCE = "https://github.com/ManagementMO/greenlight";
+const DEMO = "/";
+const SOURCE = "https://github.com/ManagementMO/headroom";
 
-// Hero proof row, derived from the same benchmark numbers as the race.
-// The race already shows exact-figure accuracy, so it is not repeated here.
-const PROOF = [
-  { value: `${(DIRECT.secs / ROUTED.secs).toFixed(1)}× faster`, label: "per decision" },
-  { value: `${Math.round((1 - ROUTED.cost / DIRECT.cost) * 100)}% cheaper`, label: "model cost per decision" },
-  { value: "215× cheaper", label: "a Jev yes/no check vs one Claude call" },
-];
-
-// Feature 2: each figure the engine uses, and the line it was read from.
+// Actual source IDs in the reviewed demo fixture; future plans stay labeled as plans.
 const SOURCES = [
-  { value: "$30,000", what: "phase payment", from: "contract.pdf · §4.2" },
-  { value: "Oct 20", what: "inspection date", from: "email · Oct 3" },
-  { value: "$18,400", what: "payroll run", from: "ledger.csv · row 88" },
-  { value: "Nov 20", what: "invoice due", from: "invoice.pdf · net 30" },
+  { value: "$30,000", what: "phase payment", from: "C-120:s8 · contract" },
+  { value: "Oct 20", what: "inspection expected", from: "inspection-plan" },
+  { value: "$18,000", what: "planned business payroll", from: "forward-calendar" },
+  { value: "Nov 3", what: "due if issued Oct 20", from: "C-120:s8 · 14 days" },
 ];
 
 // Feature 1: pins on the product screenshot, as % of the 1440×1000 image.
 const PINS = [
   { x: 18.6, y: 49.8, label: "Lowest cash, to the day", flip: true },
   { x: 51.9, y: 72.3, label: "Where the reserve breaks" },
-  { x: 88.6, y: 61.2, label: "The smallest fix that works" },
+  { x: 88.6, y: 61.2, label: "A proposed payment change" },
 ];
 
 
@@ -42,7 +35,7 @@ function Chars({ text, attr = "data-char" }: { text: string; attr?: string }) {
   return (
     <>
       {text.split(" ").map((word, w) => (
-        <span key={w} className="lp-word">
+        <span key={w} className="lp-word" aria-hidden="true">
           {[...word].map((c, i) => (
             <span key={i} className="lp-char" {...{ [attr]: "" }}>
               {c}
@@ -58,24 +51,29 @@ function Dock({ label = "Open live demo" }: { label?: string }) {
   return (
     <div className="lp-dock">
       <a href={DEMO} aria-label="Decision workspace"><Icon name="timeline" size={18} /></a>
-      <a href={DEMO} aria-label="Evidence"><Icon name="evidence" size={18} /></a>
-      <a href={DEMO} aria-label="Improvement lab"><Icon name="flask" size={18} /></a>
+      <a href="/#evidence" aria-label="Evidence"><Icon name="evidence" size={18} /></a>
+      <a href="/#lab" aria-label="Improvement lab"><Icon name="flask" size={18} /></a>
       <a className="lp-dock-cta" href={DEMO}>{label} <Icon name="arrow-right" size={16} /></a>
     </div>
   );
 }
 
-export default function Landing() {
+export default function Landing({ evidence }: { evidence: LandingEvidence }) {
   const root = useRef<HTMLElement>(null);
   const reduced = useRef(false);
+  const proof = [
+    { value: `${Math.round((1 - evidence.candidate.requests / evidence.baseline.requests) * 100)}% fewer calls`, label: "recorded evidence workflow" },
+    { value: `${Math.round((1 - evidence.candidate.inputTokens / evidence.baseline.inputTokens) * 100)}% fewer tokens`, label: "input tokens on the same workload" },
+    { value: `${evidence.candidate.correct}/${evidence.candidate.total} correct`, label: "unchanged measured correctness" },
+  ];
 
   // Page-wide motion. Scroll-synced animations render their first frame on creation.
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.classList.add("lp-ready");
+    reduced.current = window.matchMedia("(prefers-reduced-motion: reduce), (max-width: 900px)").matches;
     if (reduced.current) return;
+    el.classList.add("lp-ready");
 
     let stopRoute = () => {};
     const scope = createScope({ root: el }).add(() => {
@@ -154,7 +152,7 @@ export default function Landing() {
       });
     });
 
-    return () => { scope.revert(); stopRoute(); };
+    return () => { scope.revert(); stopRoute(); el.classList.remove("lp-ready"); };
   }, []);
 
   // Hero title: letters flip in in 3D from a blur.
@@ -177,7 +175,7 @@ export default function Landing() {
 
   return (
     <main className="lp" ref={root}>
-      <div className="lp-topnav"><a href="#top">Greenlight</a></div>
+      <nav className="lp-topnav" aria-label="Landing navigation"><a href="#top">Headroom</a><a href={DEMO}>Open demo ↗</a></nav>
       <div className="lp-progress" aria-hidden="true"><i /></div>
 
       {/* Hero */}
@@ -185,19 +183,22 @@ export default function Landing() {
         <Gradient colors={["#0b8a63", "#5b48c9", "#101412"]} />
         <div className="lp-hero-inner">
           <div className="lp-hero-copy">
+            <p className="lp-eyebrow" data-hero-fade>Headroom · room for the next job</p>
             <h1 aria-label="Stop paying an AI to do arithmetic.">
               <Chars text="Stop paying an AI to do arithmetic." attr="data-hero-char" />
             </h1>
+            <p className="lp-hero-description" data-hero-fade>Can you take a $120,000 job without missing payroll? Headroom connects evidence to a fixed cash engine, then tests a payment plan you can review.</p>
+            <div data-hero-fade><Dock /></div>
           </div>
-          <HeroRace />
+          <HeroRace evidence={evidence} />
         </div>
         <div className="lp-proof" data-hero-fade>
           <dl>
-            {PROOF.map((p) => (
+            {proof.map((p) => (
               <div key={p.label}><dt>{p.label}</dt><dd>{p.value}</dd></div>
             ))}
           </dl>
-          <p>90 constructed cases, independent oracle. Jev answers narrow yes/no checks only.</p>
+          <p>One recorded Jev experiment: {evidence.updates} synthetic updates, {evidence.candidate.total} judgments. One error remains. Public demo clicks use reviewed inputs and recorded model results.</p>
         </div>
       </section>
 
@@ -206,27 +207,28 @@ export default function Landing() {
 
       {/* Feature 1: the product, annotated */}
       <section className="lp-feature lp-demo">
-        <h2><Chars text="See the gap before you sign" /></h2>
+        <h2 aria-label="See the gap before you sign"><Chars text="See the gap before you sign" /></h2>
         <div className="lp-demo-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/landing/decision-workspace.png" alt="Greenlight decision workspace: lowest cash −$13,000 on Nov 4, and a proposed $65,000 deposit" />
+          <img src="/landing/decision-workspace.png" width={1440} height={1000} loading="lazy" alt="Headroom decision workspace: lowest modeled cash −$13,000 on Nov 4 and a proposed $65,000 deposit" />
           {PINS.map((p) => (
             <div key={p.label} className={`lp-pin${p.flip ? " is-flip" : ""}`} style={{ left: `${p.x}%`, top: `${p.y}%` }}>
               <i /><span>{p.label}</span>
             </div>
           ))}
         </div>
+        <p className="lp-section-note">Actual Headroom workspace. Proposed terms require agreement and modeled collection; total contract revenue stays $120,000.</p>
         <div className="lp-btns" data-fade>
           <a className="lp-btn lp-btn-solid" href={DEMO}>Open live demo →</a>
           <a className="lp-btn lp-btn-light" href={SOURCE}>Source</a>
         </div>
       </section>
 
-      <ImprovementLoop />
+      <ImprovementLoop evidence={evidence} />
 
       {/* Feature 2: figures tied to their sources */}
       <section className="lp-feature lp-sources">
-        <h2><Chars text="Every number has a source" /></h2>
+        <h2 aria-label="Every number has a source"><Chars text="Every number has a source" /></h2>
         <div className="lp-sources-row">
           {SOURCES.map((x) => (
             <div key={x.what} className="lp-source">
@@ -237,7 +239,8 @@ export default function Landing() {
             </div>
           ))}
         </div>
-        <a className="lp-sources-link" href={DEMO} data-fade>Inspect the evidence →</a>
+        <p className="lp-section-note">Constructed forward-plan evidence. Invoice eligibility, issuance, due date, and bank settlement are separate. The inspection is expected, not observed.</p>
+        <a className="lp-sources-link" href="/#evidence" data-fade>Inspect the evidence →</a>
       </section>
 
 
@@ -245,7 +248,8 @@ export default function Landing() {
       <section className="lp-finale">
         <Gradient colors={["#0b8a63", "#f6c57a", "#b9a7ff"]} wave />
         <div className="lp-finale-inner">
-          <h2 aria-label="Take the job"><Chars text="Take the job" /></h2>
+          <h2 aria-label="Take the next job"><Chars text="Take the next job" /></h2>
+          <p>Keep room for payday.</p>
           <Dock label="Try the demo" />
         </div>
       </section>
@@ -258,7 +262,7 @@ export default function Landing() {
         </div>
         <div>
           <h3>Read this first</h3>
-          <p>Demonstration scenarios use synthetic data. Greenlight does not send messages, execute agreements, or move funds.</p>
+          <p>Intuit synthetic books anchor the demo; future jobs, commitments, and documents are disclosed additions. Headroom does not connect to live QuickBooks, send messages, execute agreements, or move funds.</p>
         </div>
       </footer>
     </main>
