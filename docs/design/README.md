@@ -16,7 +16,7 @@ The idea is a **signal on a ledger**. Exact stepped cash paths explain the probl
 
 The cash paths come directly from the engine, not smoothed illustration. The $23,000 transfer changes $42k/$30k/$48k into $65k/$30k/$25k, preserving the $120k total. The proposed minimum is $10k in both declared cases, within the documented assumptions and agreement/collection requirements. [Numerical export](verified-cash-states.json)
 
-The [evidence board](03-evidence-learning.png) and [mobile board](04-mobile-decision.png) preserve unknown, proposed and owner-review states. The clock illustration uses separate hypothetical October20 eligibility/October22 issuance/November5 due-date inputs; it must not overwrite the default fixture's actual illustrative dates or imply bank settlement.
+The [evidence board](03-evidence-learning.png) and [mobile board](04-mobile-decision.png) preserve unknown, proposed and owner-review states. The clock illustration uses separate hypothetical October 20 eligibility / October 22 issuance / November 5 due-date inputs; it must not overwrite the default fixture's actual illustrative dates or imply bank settlement.
 
 ## Launch story
 
@@ -29,6 +29,6 @@ The [evidence board](03-evidence-learning.png) and [mobile board](04-mobile-deci
 | 24–30 | [Learn behind fixed gates](film-05-learning-gates.png) |
 | 30–36 | [A path to yes](film-06-path-to-yes.png) |
 
-The learning frame uses the actual18→6-request experiment with unchanged20/21 correctness,15/21 decisive judgments and zero falseMET. It keeps the one-synthetic-workload limit visible. The v4 fine-tuning comparison was pending at design freeze; no quality gain is invented in these frames.
+The learning frame uses the actual 18→6-request experiment with unchanged 20/21 correctness, 15/21 decisive judgments and zero false `MET`. It keeps the one-synthetic-workload limit visible. The v4 fine-tuning comparison was pending at design freeze; no quality gain is invented in these frames.
 
 Use [HANDOFF.md](HANDOFF.md) for spoken lines, scene timing, easing, reduced motion, typography, spacing, implementation priorities and the evidence boundaries. The [JSX exports](jsx/) are design references; preserve the application's state, accessibility, hydration and financial logic when translating them.

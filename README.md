@@ -8,11 +8,11 @@ The application includes an interactive cash bridge, source evidence, bounded wh
 
 [Open Greenlight](https://greenlight-two-psi.vercel.app) · [Demo guide](docs/demo-guide.md) · [Domain and data provenance](data/scenarios/README.md) · [Provider/ML runbook](scripts/ml/README.md) · [Technical plan](docs/Greenlight-revised-plan.md)
 
-**Team P0 checkpoint:** start with the [team handoff](docs/TEAM-HANDOFF.md). The application runs without model-provider keys; corrected v4 final evaluation continues on a separate workstream after completed training.
+**Team checkpoint:** start with the [team handoff](docs/TEAM-HANDOFF.md). The application runs without model-provider keys. The real v4 training and matched evaluation are complete; the tuned extractor was rejected by the frozen gate. [Actual results and next ML work](docs/extractor-v4-results.md).
 
 **RAG preparation:** the [California small-business source pack](research/california/README.md) contains 33 official-source records and a [dataset-backed task map](research/california/backlog.md). It is a reviewed research handoff for the next feature; retrieval is not integrated into the app yet. The selected sponsor company is in New York, so California applicability must be established for a future job/business context.
 
-**Design handoff:** [11 authored Paper artboards and a launch storyboard](docs/design/README.md) give the frontend team a complete visual direction without changing their working code. The [editable file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) includes desktop/mobile directions, six36-second-film frames, tokens and motion notes.
+**Design handoff:** [11 authored Paper artboards and a launch storyboard](docs/design/README.md) give the frontend team a complete visual direction without changing their working code. The [editable file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) includes desktop/mobile directions, six frames for a 36-second film, tokens and motion notes.
 
 ![Greenlight decision workspace showing the $120,000 HVAC opportunity, cash bridge and $10,000 reserve, a $23,000 liquidity gap, and the conserved $65,000 deposit proposal.](docs/assets/decision-workspace.png)
 
@@ -113,21 +113,32 @@ The reviewable result, manifests, frozen workload hash and per-question predicti
 
 A genuine **four-step SFT/LoRA proof on 16 examples** completed on `Qwen/Qwen3-4B-Instruct-2507` through Veri, exported [public synthetic merged weights](https://huggingface.co/machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp), and served a real canary. The canary failed schema validation: a single condition enum was returned as an array. This is technical train → export → serve evidence, with **no quality improvement claim**. No frozen final cases were queried in that proof.
 
-The original **v3** substantive run completed **138 optimizer steps on 276 examples** and exported merged weights. Its subsequent base-model test exposed an ambiguous format example in the shared prompt: enum choices looked like an answer array. All 40 base answers failed validation. That diagnostic is [preserved](data/artifacts/legacy-v3-baseline.json); it is excluded from quality-improvement claims.
+The original **v3** substantive run completed **138 optimizer steps on 276 examples** and exported merged weights. Its subsequent base-model test returned 40 invalid answers under a shared prompt whose compact format example could be mistaken for an answer array. That prompt ambiguity prevents a clean quality claim; it does not establish the cause of every error. The diagnostic is [preserved](data/artifacts/legacy-v3-baseline.json) and excluded from the v4 comparison.
 
-The **v4** experiment gives both models the validator's actual JSON Schema. It keeps the same 276 training contexts and labels, changes only the shared prompt contract, and uses a fresh independently authored 40-case final set. The actual Qwen tokenizer verifies every supervised row: **1,330 maximum total tokens**, at least **54 completion tokens**, exact prompt boundaries, and **zero truncation at 1,536**. A hash-bound token audit must pass before the training CLI can upload v4 data or allocate a GPU. Training completed all **138 steps**, with a committed checkpoint and [public merged model](https://huggingface.co/machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770). Its separate matched evaluation is underway; no v4 quality result is claimed at this checkpoint.
+The **v4** experiment gives both models the validator's actual JSON Schema. It keeps the same 276 training contexts and labels, changes only the shared prompt contract, and uses a fresh independently authored 40-case final set. The actual Qwen tokenizer verifies every supervised row: **1,330 maximum total tokens**, at least **54 completion tokens**, exact prompt boundaries, and **zero truncation at 1,536**. A hash-bound token audit must pass before the training CLI can upload v4 data or allocate a GPU. Training completed all **138 steps**, with a committed checkpoint and [public merged model](https://huggingface.co/machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770). Exported tokenizer JSON and chat-template bytes match the pinned base files. Both real inference runs completed and their GPUs were permanently stopped.
 
 | Evidence | Current reporting boundary |
 | --- | --- |
 | Historical four-step, 16-row technical proof | Trained, exported publicly, and served; canary schema-invalid. No final cases queried and no quality claim. |
 | Substantive v3 extraction training | 276 rows, committed checkpoint at step 138; historical merged artifact preserved. |
 | Legacy v3 baseline diagnostic | 0/40 valid answers under an ambiguous compact format example. Not used to claim an SFT gain. |
-| Corrected v4 training | Same 276 labels, proper JSON Schema prompt, hash-bound tokenizer audit, committed checkpoint138/138. [Recorded training proof](data/artifacts/training-v4.json). |
-| Fresh matched 40-case v4 comparison | Pending and not yet queried. Publish actual outputs, exact errors, supported coverage, unsafe proposals and latency; retain the base on a tie or regression. |
+| Corrected v4 training | Same 276 labels, proper JSON Schema prompt, hash-bound tokenizer audit, committed checkpoint 138/138. [Recorded training proof](data/artifacts/training-v4.json). |
+| Fresh matched 40-case v4 comparison | Completed and **rejected-regression**. The base is retained; no extraction quality gain is promoted. [All 80 actual outputs and scores](data/artifacts/extraction-evaluation.json). |
+
+| V4 measurement | Base | Tuned |
+| --- | ---: | ---: |
+| Parseable JSON | 20 / 40 | 40 / 40 |
+| Structural JSON Schema passes | 20 / 40 | 39 / 40 |
+| Full validation: schema, references and completeness | 2 / 40 | 4 / 40 |
+| Exact material interpretations | 0 / 40 | 1 / 40 |
+| Correct supported proposals | 0 / 24 | 0 / 24 |
+| Incorrect fully validated proposals | 0 | 3 |
+
+The tuned pipeline improved formatting, but its one exact result was an unsupported clause; it produced no correct supported proposal and introduced three materially wrong trigger trees. The fixed gate rejected it. Neither extractor is ready for unattended contract interpretation. The public cash workspace continues to use reviewed structured fixtures. The source-bound C120 extraction also failed validation, so its invoice-clock preview is withheld. [Failure analysis](docs/extractor-v4-results.md) distinguishes syntax, structure, references and business checks rather than calling all failures malformed JSON.
 
 The checked-in [v4 training manifest](data/training/v4-schema-contract/manifest.json) binds the supervised rows to the unchanged [v3 labels](data/training/manifest.json), publication policy, schema profile and hashes. The v4 final set is authored separately under `data/evaluation/v4-schema-contract/`. Labels derive from typed synthetic scenarios and developer review, not independent customer adjudication. Earlier versions remain archived as historical evidence. Only fictional clauses classified `PUBLIC_SYNTHETIC` may be uploaded or exported publicly; customer books, private documents, credentials and production traces are excluded.
 
-The required extraction release gate is **`extractor-gates-v2`**. Coverage means **correct supported proposals divided by supported expected cases**. Raw `PROPOSED` volume measures review burden; it is neither accuracy nor automatic activation. A release must improve material accuracy without weakening schema validity, safe handling, or correct supported-proposal coverage. Final results and the release SHA remain pending until that reviewed comparison completes. See the [ML runbook](scripts/ml/README.md) for the exact evidence boundaries.
+The required extraction release gate is **`extractor-gates-v2`**. Coverage means **correct supported proposals divided by supported expected cases**. The recorded `proposed` and `unsafeProposed` counts apply only after full validation; the [diagnostic](data/artifacts/extraction-diagnostics.json) separately reports declared statuses from other parseable outputs. Promotion requires better material accuracy without weakening full validation, safe handling or correct supported coverage. Supported coverage is a relative safeguard, with no absolute usefulness floor when the base count is zero. The real result is **not promoted**. The complete artifact-pipeline comparison includes quantization/runtime differences and does not isolate LoRA's causal effect. See the [ML runbook](scripts/ml/README.md) and [frozen policy](docs/evaluation-policy.md).
 
 ## Owner CLI and spending boundary
 
@@ -172,7 +183,7 @@ Sentry captured a real **oversized public-response defect**, with a readable fir
 
 Review the [captured issue](https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2), [defect trace](https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697), [production decision trace](https://greenlight-full.sentry.io/explore/traces/trace/cce2ff36a49a4f0ab0e87750fdf31dcd), [AI evidence trace](https://greenlight-full.sentry.io/explore/traces/trace/3d6174d05a49436c8534598d38fae12b), and [verified 51-second masked Session Replay](https://greenlight-full.sentry.io/explore/replays/2938f6342b1742e48e437e0cf48add8c/) with project access. Identifiers and measured regression sizes are also published in the artifact manifest. Source maps upload with each production build. The health flag reports DSN configuration only; the linked ingested records provide separate runtime proof.
 
-The interface began on a fresh [Paper canvas](https://app.paper.design/file/01M5653KWM6RPTEPWYPP37FKZX); the responsive application is implemented in Next.js/React. Further Paper MCP work encountered the account's weekly quota.
+The responsive application is implemented in Next.js/React. A separate [completed Paper design file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) now provides 11 product, launch-storyboard and handoff artboards, with [PNG/JSX exports and implementation notes](docs/design/README.md). These are design references for the frontend team; the six-frame launch storyboard is not a rendered video. The earlier partial Paper canvas remains intact.
 
 | Location | Responsibility |
 | --- | --- |

@@ -46,6 +46,9 @@
     "matchesBaseTemplate": true,
     "eosMatchesBase": true,
     "tokenizerClass": "Qwen2Tokenizer",
-    "verifiedAt": "2026-10-18T01:48:45.325Z"
+    "verifiedAt": "2026-10-18T01:48:45.325Z",
+    "tokenizerJsonSha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "matchesBaseTokenizerJson": true,
+    "tokenizerJsonVerifiedAt": "2026-10-18T02:17:11.796576+00:00"
   }
 }

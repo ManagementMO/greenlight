@@ -35,6 +35,8 @@ async function main() {
       actual.sourceText !== source.sourceText || !isDeepStrictEqual(actual.context, source.context) ||
       actual.modelRevision !== run.artifact.revision || actual.includedInEvaluationMetrics !== false)
     throw new Error("The recorded model illustration is not bound to the exact current source excerpt.");
+  if (typeof actual.modelOutput !== "string" || actual.modelOutput.length > 32768)
+    throw new Error("The recorded illustration output must be a bounded string.");
   const score = scoreExtraction(actual.modelOutput, source.context, source.expected);
   if (!isDeepStrictEqual(score, actual.score))
     throw new Error("The recorded illustration disagrees with a fresh material-field check.");
@@ -61,6 +63,8 @@ async function main() {
     gateVersion: comparison.gateVersion,
     candidate: score.parsed ?? null,
     materialExact: score.materialExact,
+    rawOutput: actual.modelOutput,
+    validationError: score.error ?? null,
     outputSha256: createHash("sha256").update(actual.modelOutput).digest("hex"),
     includedInEvaluationMetrics: false,
     detail: `Actual recorded output from the gate-selected ${label} artifact on this exact phase-clause excerpt. The C120 illustration is excluded from the protected 40-case metrics.`,

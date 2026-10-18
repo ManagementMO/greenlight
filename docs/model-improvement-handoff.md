@@ -1,12 +1,12 @@
 # Improving the extractor after the v4 experiment
 
-The current v4 data, prompt and gates are frozen. This note is for a later model version; it does not change the running experiment or claim an unmeasured gain.
+The v4 experiment is complete and its data, prompt and gates remain frozen. The tuned model was rejected: 4/40 fully validated outputs, 1/40 material match, 0/24 correct supported proposals and three incorrect validated proposals. [The result and diagnostic](extractor-v4-results.md) identify the actual failures. This note is for a later model version; it does not change those scores or claim an unmeasured gain.
 
 ## What is being trained
 
 Qwen learns a narrow conversion: source clause plus visible IDs → a proposed typed payment rule or an explicit ambiguous/unsupported result. Its examples are fictional clauses with reviewed targets, not historical bank balances. Jev remains a separately pinned evidence classifier. Cash arithmetic and invoice-date resolution remain deterministic TypeScript.
 
-V4 uses 276 unchanged training labels across 23 families, one configured pass expressed as138 optimizer steps with micro-batch1/gradient-accumulation2, rank8 QLoRA, learning rate0.0001 and sequence limit1536. Its actual token audit proves no supervised row is truncated. The completed export is a standalone quantized merged model; training completion and training loss do not establish task accuracy.
+V4 uses 276 unchanged training labels across 23 families, one configured pass expressed as 138 optimizer steps with micro-batch 1 / gradient accumulation 2, rank-8 QLoRA, learning rate 0.0001 and sequence limit 1,536. Its actual token audit proves no supervised row is truncated. The completed export is a standalone quantized merged model; training completion and training loss do not establish task accuracy.
 
 ## Highest-value next work
 
@@ -20,7 +20,7 @@ V4 uses 276 unchanged training labels across 23 families, one configured pass ex
 
 5. **Separate fine-tuning from export effects when that is the research question.** The current comparison is original base versus the trained/merged artifact pipeline. Weight quantization and possibly runtime dtype differ. A later controlled ablation should compare matched quantization/runtime/template/tokenizer settings and document actual loaded precision when observable. Keep the useful end-to-end artifact comparison too, but name its scope correctly.
 
-6. **Evaluate useful work and remaining errors.** Preserve validity, exact material matches, correct supported proposals, unsafe proposals and performance by expected class. Raw `PROPOSED` volume is review burden, not useful coverage. A candidate cannot win by refusing every supported clause. A tie or a regression retains the base. Keep owner review separate from model selection.
+6. **Evaluate useful work and remaining errors.** Preserve validity, exact material matches, correct supported proposals, unsafe proposals and performance by expected class. Raw `PROPOSED` volume is review burden, not useful coverage. The current frozen gate preserves supported coverage relative to the base; it has no absolute usefulness floor when base coverage is zero. A passing comparison alone therefore cannot establish a useful supported-case extractor. A tie or a regression retains the base. For a future gate, predeclare an absolute supported-coverage requirement using development evidence before exposing a new final set. Keep owner review separate from model selection.
 
 ## Precision of the current material metric
 
@@ -32,4 +32,4 @@ For a later evaluator version, independently test exact Boolean equivalence over
 
 Create a new reviewed development corpus of recipient/clock/Boolean failures, choose candidate prompts and a modest SFT schedule using that development set, then freeze one candidate. Author and audit a fresh final set with new companies and renderer families. Run matched base/candidate artifacts once, publish actual per-case predictions and the fixed gate, and retain the baseline if the useful-work tradeoff does not improve.
 
-The existing owner tools handle budget reservations, exactly-once resource creation, recovery guards and permanent GPU stopping. Coordinate before paid work; the authorized total remains$20 and no concurrent owner GPU runs are permitted during the current sequence. Frontend and research work need no provider keys.
+The existing owner tools handle budget reservations, one create attempt followed by discovery on an unknown outcome, recovery guards and permanent GPU stopping. Coordinate before paid work; the authorized total remains $20 and no concurrent owner GPU runs are permitted during the current sequence. Frontend and research work need no provider keys.

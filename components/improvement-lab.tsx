@@ -197,7 +197,7 @@ function ExtractionComparisonPanel({ value }: { value: ExtractionComparison }) {
     lowerIsBetter?: boolean;
   }[] = [
     { key: "materialExact", label: "Material fields match" },
-    { key: "valid", label: "Schema-valid outputs" },
+    { key: "valid", label: "Fully validated outputs" },
     { key: "correctSupportedProposals", label: "Correct supported proposals" },
     { key: "unsafeProposed", label: "Unsafe proposals", lowerIsBetter: true },
   ];

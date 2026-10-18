@@ -16,7 +16,7 @@ Use learning for repeated interpretation and fixed code for financial authority.
 
 The MetaHarness uses Anthropic to propose a bounded workflow configuration, then tests it against a separate frozen workload. It can improve evidence scoping, batching and dependency-aware caching. It cannot change the evaluator, financial arithmetic, source documents or contract total. In the recorded genuine Jev experiment, requests fell from 18 to 6 with the same 20/21 correct judgments, 15 decisive judgments and zero false `MET` judgments. These measurements describe this synthetic localized-update workload.
 
-The extractor has its own frozen base/tuned evaluation and versioned gate. Useful coverage means correct supported proposals; wrong proposals do not count as coverage. The base remains selected on a tie or regression. Material terms always require owner review.
+The extractor has its own completed frozen base/tuned evaluation and versioned gate. Genuine v4 training completed 138 steps on 276 pairs. Tuned JSON syntax improved from 20/40 to 40/40, but full validation was only 4/40, correct supported proposals stayed 0/24, and three validated outputs changed trigger logic incorrectly. The gate rejected it and retained the base. [All actual predictions and failure analysis](extractor-v4-results.md) are public. This is verified training/serving and a working rejection boundary, without a claim of useful extraction quality. Material terms always require owner review.
 
 ## Sponsor demonstrations
 
@@ -25,7 +25,7 @@ The extractor has its own frozen base/tuned evaluation and versioned gate. Usefu
 | Intuit | Original company-047 synthetic books reconstruct 2,419 ledger rows to $74,882.38. Show the source trail, the disclosed future calendar, the joint-risk case, and the conserved payment proposal. This is a decision workflow built around the supplied data, with additions clearly identified. |
 | Veri | Genuine QLoRA/SFT, merged standalone Hugging Face exports, actual Veri inference, and a matched frozen extraction experiment. Show the completed training and serving artifacts and the measured gate result in the Improvement lab; do not equate training completion with better quality. |
 | Sentry | Real errors, readable source-mapped frames, tracing, logs and AI spans. Show the oversized-response defect, its related trace/log and the capacity regression that followed. Separate production decision and Jev traces are linked in the lab. Session Replay ingestion is verified separately from configuration. |
-| Paper | A fresh Greenlight canvas established the design direction. The shipped interface has a responsive cash bridge, source navigation, explicit uncertainty and payment comparisons. Further Paper MCP editing hit the account's weekly quota; the canvas is partial. |
+| Paper | A separate [completed design file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) contains 11 artboards: four product directions, six launch-storyboard frames and a motion/design handoff. [PNG/JSX exports, tokens and exact engine-derived chart points](design/README.md) support the frontend team's next iteration. These are design references; the launch film has not been rendered. |
 
 ## A strong demonstration sequence
 

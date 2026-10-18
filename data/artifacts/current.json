@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T01:45:48.296Z",
+  "generatedAt": "2026-10-18T02:24:25.729Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -41,10 +41,11 @@
     }
   ],
   "training": {
-    "status": "running",
+    "status": "completed",
     "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
     "jobId": "b808db134828",
     "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+    "modelRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
     "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
     "stages": [
       {
@@ -64,8 +65,8 @@
       },
       {
         "name": "Serving canary",
-        "status": "pending",
-        "detail": "Awaiting real deployment inference and permanent stop verification."
+        "status": "verified",
+        "detail": "Real inference returned; GPU stop verified. Training canary matched."
       }
     ]
   },
@@ -103,6 +104,51 @@
         "correctSupportedProposalRate": 0
       },
       "detail": "completed. GPU permanently stopped and read back. Ambiguous legacy format example produced schema-copying errors. Preserved for provenance and excluded from the v4 quality comparison."
+    },
+    {
+      "id": "veri-serving-base-44dd3b9f-b251-4e43-9df6-001ff3e96b54",
+      "name": "base · frozen extraction evaluation",
+      "origin": "recorded",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "sampleCount": 40,
+      "metrics": {
+        "count": 40,
+        "valid": 2,
+        "materialExact": 0,
+        "statusCorrect": 2,
+        "proposed": 0,
+        "unsafeProposed": 0,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0.05,
+        "materialExactRate": 0,
+        "rawProposalRate": 0,
+        "correctSupportedProposalRate": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. Same immutable evaluation examples, per-case prompt hashes and decoding are required for a promotion comparison."
+    },
+    {
+      "id": "veri-serving-tuned-6145ae15-d05f-4548-b5f8-53a89881b9e7",
+      "name": "tuned · frozen extraction evaluation",
+      "origin": "recorded",
+      "model": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+      "sampleCount": 40,
+      "metrics": {
+        "count": 40,
+        "valid": 4,
+        "materialExact": 1,
+        "statusCorrect": 4,
+        "proposed": 3,
+        "unsafeProposed": 3,
+        "expectedProposed": 24,
+        "correctSupportedProposals": 0,
+        "validityRate": 0.1,
+        "materialExactRate": 0.025,
+        "rawProposalRate": 0.075,
+        "correctSupportedProposalRate": 0,
+        "proposedPrecision": 0
+      },
+      "detail": "completed. GPU permanently stopped and read back. Same immutable evaluation examples, per-case prompt hashes and decoding are required for a promotion comparison."
     }
   ],
   "experiments": [
@@ -153,8 +199,8 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 2.23,
-    "reservedUsd": 2,
+    "spentUsd": 2.79,
+    "reservedUsd": 0,
     "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
   },
   "provenance": [
@@ -188,5 +234,232 @@
       "http": 200,
       "verifiedAt": "2026-10-18T01:16:19.776Z"
     }
+  },
+  "extractionComparison": {
+    "status": "rejected-regression",
+    "promoted": false,
+    "caseCount": 40,
+    "gateVersion": "extractor-gates-v2",
+    "base": {
+      "count": 40,
+      "valid": 2,
+      "materialExact": 0,
+      "statusCorrect": 2,
+      "proposed": 0,
+      "unsafeProposed": 0,
+      "expectedProposed": 24,
+      "correctSupportedProposals": 0,
+      "validityRate": 0.05,
+      "materialExactRate": 0,
+      "rawProposalRate": 0,
+      "correctSupportedProposalRate": 0,
+      "proposedPrecision": null,
+      "byExpectedStatus": {
+        "PROPOSED": {
+          "count": 24,
+          "valid": 0,
+          "statusCorrect": 0,
+          "materialExact": 0,
+          "proposed": 0,
+          "unsafeProposed": 0,
+          "statusAccuracy": 0,
+          "materialExactRate": 0
+        },
+        "AMBIGUOUS": {
+          "count": 8,
+          "valid": 1,
+          "statusCorrect": 1,
+          "materialExact": 0,
+          "proposed": 0,
+          "unsafeProposed": 0,
+          "statusAccuracy": 0.125,
+          "materialExactRate": 0
+        },
+        "UNSUPPORTED": {
+          "count": 8,
+          "valid": 1,
+          "statusCorrect": 1,
+          "materialExact": 0,
+          "proposed": 0,
+          "unsafeProposed": 0,
+          "statusAccuracy": 0.125,
+          "materialExactRate": 0
+        }
+      }
+    },
+    "tuned": {
+      "count": 40,
+      "valid": 4,
+      "materialExact": 1,
+      "statusCorrect": 4,
+      "proposed": 3,
+      "unsafeProposed": 3,
+      "expectedProposed": 24,
+      "correctSupportedProposals": 0,
+      "validityRate": 0.1,
+      "materialExactRate": 0.025,
+      "rawProposalRate": 0.075,
+      "correctSupportedProposalRate": 0,
+      "proposedPrecision": 0,
+      "byExpectedStatus": {
+        "PROPOSED": {
+          "count": 24,
+          "valid": 3,
+          "statusCorrect": 3,
+          "materialExact": 0,
+          "proposed": 3,
+          "unsafeProposed": 3,
+          "statusAccuracy": 0.125,
+          "materialExactRate": 0
+        },
+        "AMBIGUOUS": {
+          "count": 8,
+          "valid": 0,
+          "statusCorrect": 0,
+          "materialExact": 0,
+          "proposed": 0,
+          "unsafeProposed": 0,
+          "statusAccuracy": 0,
+          "materialExactRate": 0
+        },
+        "UNSUPPORTED": {
+          "count": 8,
+          "valid": 1,
+          "statusCorrect": 1,
+          "materialExact": 1,
+          "proposed": 0,
+          "unsafeProposed": 0,
+          "statusAccuracy": 0.125,
+          "materialExactRate": 0.125
+        }
+      }
+    },
+    "deltas": {
+      "materialExact": 1,
+      "valid": 2,
+      "proposed": 3,
+      "unsafeProposed": 3,
+      "correctSupportedProposals": 0
+    },
+    "gate": "Improve material accuracy with no regression in schema validity, unsafe proposals, or correctly supported proposals; exact same full frozen cases, expected classes and decoding. Summaries are recomputed and checked against per-case scores. Raw proposal rate and class-specific accuracy are reported separately. All material proposals require owner review. A tie retains the base extractor.",
+    "verifiedAt": "2026-10-18T02:18:11.992Z",
+    "origin": "recorded",
+    "methodology": "Matched frozen cases, prompts, schema and decoding compare the original base artifact pipeline with the trained/merged export pipeline. Weight quantization and possibly runtime dtype differ; the result does not isolate LoRA's causal effect. Repository configuration is observed, effective loaded precision is not attested.",
+    "baseArtifact": {
+      "repo": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "private": false,
+      "files": [
+        ".gitattributes",
+        "LICENSE",
+        "README.md",
+        "config.json",
+        "generation_config.json",
+        "merges.txt",
+        "model-00001-of-00003.safetensors",
+        "model-00002-of-00003.safetensors",
+        "model-00003-of-00003.safetensors",
+        "model.safetensors.index.json",
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "vocab.json"
+      ],
+      "configuration": {
+        "configSha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+        "modelType": "qwen3",
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "declaredDtype": "bfloat16",
+        "quantization": {},
+        "runtimeDtype": "Not directly attested; model config is repository evidence only."
+      }
+    },
+    "tunedArtifact": {
+      "repo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+      "revision": "3a022584c5d287a5d5c70ba64f65394765c01260",
+      "private": false,
+      "files": [
+        ".gitattributes",
+        "LICENSE",
+        "README.md",
+        "added_tokens.json",
+        "chat_template.jinja",
+        "config.json",
+        "generation_config.json",
+        "merges.txt",
+        "model.safetensors",
+        "special_tokens_map.json",
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "vocab.json"
+      ],
+      "configuration": {
+        "configSha256": "262649a425205ae820e8d1f7a3f8babe14dcd6d30135768dfba6c32dda2db613",
+        "modelType": "qwen3",
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "declaredDtype": "float32",
+        "quantization": {
+          "quant_method": "bitsandbytes",
+          "load_in_4bit": true,
+          "load_in_8bit": false,
+          "bnb_4bit_quant_type": "nf4",
+          "bnb_4bit_use_double_quant": true,
+          "bnb_4bit_compute_dtype": "bfloat16"
+        },
+        "runtimeDtype": "Not directly attested; model config is repository evidence only."
+      }
+    },
+    "latency": {
+      "baseWarmMedianMs": 5163.5,
+      "tunedWarmMedianMs": 4266.5,
+      "baseProvisioningMs": 800026,
+      "tunedProvisioningMs": 803803,
+      "limit": "Sequential 40-case descriptive timings, not a controlled significance test. Provisioning reported separately."
+    },
+    "detail": "Genuine sequential inference on the same frozen synthetic clauses compares the original base and trained/exported artifact pipelines. Quantization and possibly serving precision differ, so the comparison does not isolate fine-tuning alone. Proposals require owner review and do not activate financial terms.",
+    "evaluationSha256": "a9311adc810cf45729b3d091445ff0e141490a4e66295b1d74d54630b928e13a"
+  },
+  "extractionDemo": {
+    "schemaVersion": 1,
+    "origin": "recorded",
+    "sourceId": "signed-contract",
+    "sourceSha256": "e8a98c2e5d45fda1d2eb680ed7731bc7964f1220803a97b7af21c1f0e6ffbf68",
+    "excerptSha256": "c49f755695b274b82e351350ef1c7d4aa2b051abf8e025180727fc789e84f714",
+    "modelRepo": "Qwen/Qwen3-4B-Instruct-2507",
+    "modelRevision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "generatedAt": "2026-10-18T02:01:20.666Z",
+    "selectedByGate": "base",
+    "gateVersion": "extractor-gates-v2",
+    "candidate": null,
+    "materialExact": false,
+    "rawOutput": "{\"schemaVersion\":1,\"amountRef\":\"phase_receipt\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"phase_one\"},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"insurance_certificate\"}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"invoice\"},\"sourceIds\":[\"signed-contract\"],\"status\":\"PROPOSED\",\"issues\":[\"unidentified recipient in certificate receipt\"]}",
+    "validationError": "Unknown subject reference",
+    "outputSha256": "bfedc41c6873773325e2ced34b69ec08270819c4ac4c0a0a1418237b6e91c4cf",
+    "includedInEvaluationMetrics": false,
+    "detail": "Actual recorded output from the gate-selected base artifact on this exact phase-clause excerpt. The C120 illustration is excluded from the protected 40-case metrics.",
+    "judgmentModel": "jev-1.14.0",
+    "judgmentRunId": "jev-c120-c0d4e07b-8f06-45fd-b792-f385816225a0",
+    "judgmentEvidenceSha256": "9f17fda05791dc19e8e9505bec91779b00c90267bc6707fceddf086d50905fa6",
+    "judgmentBoundary": "Model suggestions requiring owner review; not adjudicated factual truth or measured accuracy. They never activate a financial condition or receipt.",
+    "judgments": [
+      {
+        "predicate": "As of 2026-10-06, the phase-one inspection has actually passed; a future plan alone does not establish this.",
+        "verdict": "NOT_MET",
+        "confidence": 0.89
+      },
+      {
+        "predicate": "As of 2026-10-06, the customer or its explicitly authorized project manager has actually received the phase-one insurance certificate. A future expected receipt is not observed receipt.",
+        "verdict": "UNKNOWN",
+        "confidence": 0.56
+      },
+      {
+        "predicate": "As of 2026-10-06, the USD30,000 phase payment has actually reached settled bank funds. Invoice eligibility, a due date and forecast collection windows do not establish settlement.",
+        "verdict": "NOT_MET",
+        "confidence": 0.93
+      }
+    ]
   }
 }

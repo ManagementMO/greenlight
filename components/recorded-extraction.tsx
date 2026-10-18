@@ -14,6 +14,8 @@ type ExtractionDemo = {
   origin: "recorded";
   candidate: Record<string, unknown> | null;
   materialExact: boolean;
+  rawOutput?: string;
+  validationError?: string | null;
   detail: string;
   judgments?: { predicate: string; verdict: string; confidence?: number }[];
 };
@@ -302,6 +304,11 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
           original source remains available above.
         </p>
       )}
+      {typeof demo.validationError === "string" && (
+        <p className="extraction-unknown">
+          Validation: {demo.validationError.slice(0, 2000)}
+        </p>
+      )}
       {demo.judgments?.length ? (
         <div className="recorded-judgments">
           <span className="eyebrow">Recorded Jev suggestions</span>
@@ -353,7 +360,11 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
             first.
           </p>
         )}
-        <pre>{JSON.stringify(demo.candidate, null, 2)}</pre>
+        <pre>
+          {typeof demo.rawOutput === "string" && demo.rawOutput.length <= 32768
+            ? demo.rawOutput
+            : JSON.stringify(demo.candidate, null, 2)}
+        </pre>
         <div>
           <span>Served model</span>
           <a
