@@ -1,0 +1,1532 @@
+{
+  "before": {
+    "inputId": "ductline-phase-delay",
+    "inputVersion": 1,
+    "inputHash": "snapshot-95382de9",
+    "status": "CONDITIONAL",
+    "statusLabel": "Conditional",
+    "reasons": [
+      {
+        "code": "MIXED_SCENARIOS",
+        "message": "Some declared scenarios preserve the reserve and others breach it. Confirm the deciding evidence or negotiate the separate proposal.",
+        "sourceIds": []
+      }
+    ],
+    "baseline": {
+      "timeline": [
+        {
+          "eventId": "snapshot",
+          "date": "2026-10-06",
+          "label": "Available cash at snapshot",
+          "deltaCents": 0,
+          "cashCents": 7488238,
+          "scope": "snapshot",
+          "sourceIds": [
+            "intuit-bank"
+          ],
+          "assumed": false
+        },
+        {
+          "eventId": "existing-rent",
+          "date": "2026-10-07",
+          "label": "Existing shop rent and overhead",
+          "deltaCents": -800000,
+          "cashCents": 6688238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "existing-payroll",
+          "date": "2026-10-09",
+          "label": "Existing business payroll",
+          "deltaCents": -1800000,
+          "cashCents": 4888238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "legacy-supplier",
+          "date": "2026-10-10",
+          "label": "Previously committed supplier settlement",
+          "deltaCents": -2388238,
+          "cashCents": 2500000,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "horizon",
+          "date": "2026-11-25",
+          "label": "End of declared forecast coverage",
+          "deltaCents": 0,
+          "cashCents": 2500000,
+          "scope": "baseline",
+          "sourceIds": [],
+          "assumed": true
+        }
+      ],
+      "minimumCents": 2500000,
+      "minimumDate": "2026-10-10",
+      "endingCashCents": 2500000,
+      "reserveGapCents": 0
+    },
+    "withJob": {
+      "timeline": [
+        {
+          "eventId": "snapshot",
+          "date": "2026-10-06",
+          "label": "Available cash at snapshot",
+          "deltaCents": 0,
+          "cashCents": 7488238,
+          "scope": "snapshot",
+          "sourceIds": [
+            "intuit-bank"
+          ],
+          "assumed": false
+        },
+        {
+          "eventId": "existing-rent",
+          "date": "2026-10-07",
+          "label": "Existing shop rent and overhead",
+          "deltaCents": -800000,
+          "cashCents": 6688238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-deposit",
+          "date": "2026-10-07",
+          "label": "35% deposit collected",
+          "deltaCents": 4200000,
+          "cashCents": 10888238,
+          "scope": "job",
+          "sourceIds": [
+            "signed-contract"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "existing-payroll",
+          "date": "2026-10-09",
+          "label": "Existing business payroll",
+          "deltaCents": -1800000,
+          "cashCents": 9088238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "legacy-supplier",
+          "date": "2026-10-10",
+          "label": "Previously committed supplier settlement",
+          "deltaCents": -2388238,
+          "cashCents": 6700000,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "materials-one",
+          "date": "2026-10-12",
+          "label": "Air handlers · first delivery",
+          "deltaCents": -2500000,
+          "cashCents": 4200000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-labor-one",
+          "date": "2026-10-17",
+          "label": "Installation crew · first payroll",
+          "deltaCents": -1500000,
+          "cashCents": 2700000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-labor-two",
+          "date": "2026-10-31",
+          "label": "Commissioning crew · second payroll",
+          "deltaCents": -1500000,
+          "cashCents": 1200000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "materials-two",
+          "date": "2026-11-04",
+          "label": "Controls and ductwork · final delivery",
+          "deltaCents": -2500000,
+          "cashCents": -1300000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "final-receipt",
+          "date": "2026-11-20",
+          "label": "Final contract payment collected",
+          "deltaCents": 4800000,
+          "cashCents": 3500000,
+          "scope": "job",
+          "sourceIds": [
+            "signed-contract"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "phase-receipt",
+          "date": "2026-11-20",
+          "label": "Phase-one payment collected",
+          "deltaCents": 3000000,
+          "cashCents": 6500000,
+          "scope": "job",
+          "sourceIds": [
+            "customer-email"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "horizon",
+          "date": "2026-11-25",
+          "label": "End of declared forecast coverage",
+          "deltaCents": 0,
+          "cashCents": 6500000,
+          "scope": "baseline",
+          "sourceIds": [],
+          "assumed": true
+        }
+      ],
+      "minimumCents": -1300000,
+      "minimumDate": "2026-11-04",
+      "endingCashCents": 6500000,
+      "reserveGapCents": 2300000
+    },
+    "scenarioCount": 2,
+    "possibleScenarioCount": 2,
+    "passingScenarioCount": 1,
+    "coverageComplete": true,
+    "scenarioLimit": 256,
+    "outcomes": [
+      {
+        "id": "scenario-1",
+        "answers": {
+          "phase-collection": "expedited"
+        },
+        "labels": [
+          "October 24 · expedited"
+        ],
+        "baseline": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 4888238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 2500000,
+          "minimumDate": "2026-10-10",
+          "endingCashCents": 2500000,
+          "reserveGapCents": 0
+        },
+        "withJob": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-deposit",
+              "date": "2026-10-07",
+              "label": "35% deposit collected",
+              "deltaCents": 4200000,
+              "cashCents": 10888238,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 9088238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 6700000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-one",
+              "date": "2026-10-12",
+              "label": "Air handlers · first delivery",
+              "deltaCents": -2500000,
+              "cashCents": 4200000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-one",
+              "date": "2026-10-17",
+              "label": "Installation crew · first payroll",
+              "deltaCents": -1500000,
+              "cashCents": 2700000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "phase-receipt",
+              "date": "2026-10-24",
+              "label": "Phase-one payment collected",
+              "deltaCents": 3000000,
+              "cashCents": 5700000,
+              "scope": "job",
+              "sourceIds": [
+                "customer-email"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-two",
+              "date": "2026-10-31",
+              "label": "Commissioning crew · second payroll",
+              "deltaCents": -1500000,
+              "cashCents": 4200000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-two",
+              "date": "2026-11-04",
+              "label": "Controls and ductwork · final delivery",
+              "deltaCents": -2500000,
+              "cashCents": 1700000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "final-receipt",
+              "date": "2026-11-20",
+              "label": "Final contract payment collected",
+              "deltaCents": 4800000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 6500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 1700000,
+          "minimumDate": "2026-11-04",
+          "endingCashCents": 6500000,
+          "reserveGapCents": 0
+        },
+        "passes": true
+      },
+      {
+        "id": "scenario-2",
+        "answers": {
+          "phase-collection": "standard"
+        },
+        "labels": [
+          "November 20 · standard"
+        ],
+        "baseline": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 4888238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 2500000,
+          "minimumDate": "2026-10-10",
+          "endingCashCents": 2500000,
+          "reserveGapCents": 0
+        },
+        "withJob": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-deposit",
+              "date": "2026-10-07",
+              "label": "35% deposit collected",
+              "deltaCents": 4200000,
+              "cashCents": 10888238,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 9088238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 6700000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-one",
+              "date": "2026-10-12",
+              "label": "Air handlers · first delivery",
+              "deltaCents": -2500000,
+              "cashCents": 4200000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-one",
+              "date": "2026-10-17",
+              "label": "Installation crew · first payroll",
+              "deltaCents": -1500000,
+              "cashCents": 2700000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-two",
+              "date": "2026-10-31",
+              "label": "Commissioning crew · second payroll",
+              "deltaCents": -1500000,
+              "cashCents": 1200000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-two",
+              "date": "2026-11-04",
+              "label": "Controls and ductwork · final delivery",
+              "deltaCents": -2500000,
+              "cashCents": -1300000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "final-receipt",
+              "date": "2026-11-20",
+              "label": "Final contract payment collected",
+              "deltaCents": 4800000,
+              "cashCents": 3500000,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "phase-receipt",
+              "date": "2026-11-20",
+              "label": "Phase-one payment collected",
+              "deltaCents": 3000000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "customer-email"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 6500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": -1300000,
+          "minimumDate": "2026-11-04",
+          "endingCashCents": 6500000,
+          "reserveGapCents": 2300000
+        },
+        "passes": false
+      }
+    ],
+    "minimumCashRange": {
+      "worstCents": -1300000,
+      "bestCents": 1700000
+    },
+    "reserveGapCents": 2300000,
+    "incrementalReserveGapCents": 2300000,
+    "proposal": {
+      "kind": "deposit_advance",
+      "status": "AVAILABLE",
+      "label": "Smallest supported deposit advance",
+      "additionalDepositCents": 2300000,
+      "originalDepositCents": 4200000,
+      "proposedDepositCents": 6500000,
+      "originalFinalReceiptCents": 4800000,
+      "proposedFinalReceiptCents": 2500000,
+      "originalCollectionDate": "2026-10-07",
+      "proposedCollectionDate": "2026-10-07",
+      "totalRevenueCents": 12000000,
+      "minimumCashCents": 1000000,
+      "reserveGapCents": 0,
+      "requiredAgreements": [
+        "Customer signs a revised deposit of $65000.00, collected by 2026-10-07.",
+        "Reduce the final receipt by $23000.00; total contract revenue remains $120000.00.",
+        "Confirm the entire business calendar and the modeled future settlement assumptions."
+      ],
+      "sourceIds": [
+        "negotiation-bounds"
+      ],
+      "limitation": "Minimum within this allowed deposit/date proposal family; requires customer agreement and actual collection. Not an executed amendment.",
+      "inputHash": "snapshot-95382de9"
+    },
+    "nextQuestions": [
+      {
+        "id": "phase-collection",
+        "question": "Will the $30,000 phase payment reach the bank October 24 or November 20?",
+        "owner": "Northstar accounts payable",
+        "requiredBy": "2026-10-12",
+        "sourceIds": [
+          "customer-email"
+        ],
+        "distinguishesFeasibility": true,
+        "reserveGapImpactCents": 2300000,
+        "earliestAffectedDate": "2026-10-24",
+        "branches": [
+          {
+            "optionId": "expedited",
+            "label": "October 24 · expedited",
+            "scenarioCount": 1,
+            "passingCount": 1,
+            "worstReserveGapCents": 0,
+            "witnessScenarioId": "scenario-1"
+          },
+          {
+            "optionId": "standard",
+            "label": "November 20 · standard",
+            "scenarioCount": 1,
+            "passingCount": 0,
+            "worstReserveGapCents": 2300000,
+            "witnessScenarioId": "scenario-2"
+          }
+        ]
+      }
+    ],
+    "evidenceIds": [
+      "forward-calendar",
+      "signed-contract",
+      "job-budget",
+      "customer-email"
+    ],
+    "assumptions": [
+      "Dataset clock is October 6, 2026; it is not the current wall-clock date.",
+      "Only bank balance and company identity are source-backed Intuit fields; all forward plans and documents are constructed additions.",
+      "Opening available cash equals the $74,882.38 ledger balance only under the fixture's explicit zero-restricted-funds assumption.",
+      "The supplied forward calendar is treated as complete through November 25 for this demonstration; a real owner must confirm it.",
+      "Phase conditions are expected October 20; the two AP settlement windows form the declared uncertainty family.",
+      "When intraday settlement order is unknown, outflows precede receipts on the same day.",
+      "All-scenarios statements refer only to this finite disclosed scenario family; no probabilities or payment guarantee are inferred."
+    ]
+  },
+  "after": {
+    "inputId": "ductline-phase-delay",
+    "inputVersion": 2,
+    "inputHash": "snapshot-231f7069",
+    "status": "SUPPORTED_IN_TESTED_SCENARIOS",
+    "statusLabel": "Supported in tested scenarios",
+    "reasons": [
+      {
+        "code": "DECLARED_SCENARIOS_PASS",
+        "message": "Every declared admissible scenario preserves the reserve under the disclosed assumptions.",
+        "sourceIds": []
+      }
+    ],
+    "baseline": {
+      "timeline": [
+        {
+          "eventId": "snapshot",
+          "date": "2026-10-06",
+          "label": "Available cash at snapshot",
+          "deltaCents": 0,
+          "cashCents": 7488238,
+          "scope": "snapshot",
+          "sourceIds": [
+            "intuit-bank"
+          ],
+          "assumed": false
+        },
+        {
+          "eventId": "existing-rent",
+          "date": "2026-10-07",
+          "label": "Existing shop rent and overhead",
+          "deltaCents": -800000,
+          "cashCents": 6688238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "existing-payroll",
+          "date": "2026-10-09",
+          "label": "Existing business payroll",
+          "deltaCents": -1800000,
+          "cashCents": 4888238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "legacy-supplier",
+          "date": "2026-10-10",
+          "label": "Previously committed supplier settlement",
+          "deltaCents": -2388238,
+          "cashCents": 2500000,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "horizon",
+          "date": "2026-11-25",
+          "label": "End of declared forecast coverage",
+          "deltaCents": 0,
+          "cashCents": 2500000,
+          "scope": "baseline",
+          "sourceIds": [],
+          "assumed": true
+        }
+      ],
+      "minimumCents": 2500000,
+      "minimumDate": "2026-10-10",
+      "endingCashCents": 2500000,
+      "reserveGapCents": 0
+    },
+    "withJob": {
+      "timeline": [
+        {
+          "eventId": "snapshot",
+          "date": "2026-10-06",
+          "label": "Available cash at snapshot",
+          "deltaCents": 0,
+          "cashCents": 7488238,
+          "scope": "snapshot",
+          "sourceIds": [
+            "intuit-bank"
+          ],
+          "assumed": false
+        },
+        {
+          "eventId": "existing-rent",
+          "date": "2026-10-07",
+          "label": "Existing shop rent and overhead",
+          "deltaCents": -800000,
+          "cashCents": 6688238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-deposit",
+          "date": "2026-10-07",
+          "label": "Job deposit collected",
+          "deltaCents": 6500000,
+          "cashCents": 13188238,
+          "scope": "job",
+          "sourceIds": [
+            "signed-contract"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "existing-payroll",
+          "date": "2026-10-09",
+          "label": "Existing business payroll",
+          "deltaCents": -1800000,
+          "cashCents": 11388238,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "legacy-supplier",
+          "date": "2026-10-10",
+          "label": "Previously committed supplier settlement",
+          "deltaCents": -2388238,
+          "cashCents": 9000000,
+          "scope": "baseline",
+          "sourceIds": [
+            "forward-calendar"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "materials-one",
+          "date": "2026-10-12",
+          "label": "Air handlers · first delivery",
+          "deltaCents": -2500000,
+          "cashCents": 6500000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-labor-one",
+          "date": "2026-10-17",
+          "label": "Installation crew · first payroll",
+          "deltaCents": -1500000,
+          "cashCents": 5000000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "job-labor-two",
+          "date": "2026-10-31",
+          "label": "Commissioning crew · second payroll",
+          "deltaCents": -1500000,
+          "cashCents": 3500000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "materials-two",
+          "date": "2026-11-04",
+          "label": "Controls and ductwork · final delivery",
+          "deltaCents": -2500000,
+          "cashCents": 1000000,
+          "scope": "job",
+          "sourceIds": [
+            "job-budget"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "final-receipt",
+          "date": "2026-11-20",
+          "label": "Final contract payment collected",
+          "deltaCents": 2500000,
+          "cashCents": 3500000,
+          "scope": "job",
+          "sourceIds": [
+            "signed-contract"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "phase-receipt",
+          "date": "2026-11-20",
+          "label": "Phase-one payment collected",
+          "deltaCents": 3000000,
+          "cashCents": 6500000,
+          "scope": "job",
+          "sourceIds": [
+            "customer-email"
+          ],
+          "assumed": true
+        },
+        {
+          "eventId": "horizon",
+          "date": "2026-11-25",
+          "label": "End of declared forecast coverage",
+          "deltaCents": 0,
+          "cashCents": 6500000,
+          "scope": "baseline",
+          "sourceIds": [],
+          "assumed": true
+        }
+      ],
+      "minimumCents": 1000000,
+      "minimumDate": "2026-11-04",
+      "endingCashCents": 6500000,
+      "reserveGapCents": 0
+    },
+    "scenarioCount": 2,
+    "possibleScenarioCount": 2,
+    "passingScenarioCount": 2,
+    "coverageComplete": true,
+    "scenarioLimit": 256,
+    "outcomes": [
+      {
+        "id": "scenario-1",
+        "answers": {
+          "phase-collection": "expedited"
+        },
+        "labels": [
+          "October 24 · expedited"
+        ],
+        "baseline": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 4888238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 2500000,
+          "minimumDate": "2026-10-10",
+          "endingCashCents": 2500000,
+          "reserveGapCents": 0
+        },
+        "withJob": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-deposit",
+              "date": "2026-10-07",
+              "label": "Job deposit collected",
+              "deltaCents": 6500000,
+              "cashCents": 13188238,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 11388238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 9000000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-one",
+              "date": "2026-10-12",
+              "label": "Air handlers · first delivery",
+              "deltaCents": -2500000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-one",
+              "date": "2026-10-17",
+              "label": "Installation crew · first payroll",
+              "deltaCents": -1500000,
+              "cashCents": 5000000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "phase-receipt",
+              "date": "2026-10-24",
+              "label": "Phase-one payment collected",
+              "deltaCents": 3000000,
+              "cashCents": 8000000,
+              "scope": "job",
+              "sourceIds": [
+                "customer-email"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-two",
+              "date": "2026-10-31",
+              "label": "Commissioning crew · second payroll",
+              "deltaCents": -1500000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-two",
+              "date": "2026-11-04",
+              "label": "Controls and ductwork · final delivery",
+              "deltaCents": -2500000,
+              "cashCents": 4000000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "final-receipt",
+              "date": "2026-11-20",
+              "label": "Final contract payment collected",
+              "deltaCents": 2500000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 6500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 4000000,
+          "minimumDate": "2026-11-04",
+          "endingCashCents": 6500000,
+          "reserveGapCents": 0
+        },
+        "passes": true
+      },
+      {
+        "id": "scenario-2",
+        "answers": {
+          "phase-collection": "standard"
+        },
+        "labels": [
+          "November 20 · standard"
+        ],
+        "baseline": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 4888238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 2500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 2500000,
+          "minimumDate": "2026-10-10",
+          "endingCashCents": 2500000,
+          "reserveGapCents": 0
+        },
+        "withJob": {
+          "timeline": [
+            {
+              "eventId": "snapshot",
+              "date": "2026-10-06",
+              "label": "Available cash at snapshot",
+              "deltaCents": 0,
+              "cashCents": 7488238,
+              "scope": "snapshot",
+              "sourceIds": [
+                "intuit-bank"
+              ],
+              "assumed": false
+            },
+            {
+              "eventId": "existing-rent",
+              "date": "2026-10-07",
+              "label": "Existing shop rent and overhead",
+              "deltaCents": -800000,
+              "cashCents": 6688238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-deposit",
+              "date": "2026-10-07",
+              "label": "Job deposit collected",
+              "deltaCents": 6500000,
+              "cashCents": 13188238,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "existing-payroll",
+              "date": "2026-10-09",
+              "label": "Existing business payroll",
+              "deltaCents": -1800000,
+              "cashCents": 11388238,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "legacy-supplier",
+              "date": "2026-10-10",
+              "label": "Previously committed supplier settlement",
+              "deltaCents": -2388238,
+              "cashCents": 9000000,
+              "scope": "baseline",
+              "sourceIds": [
+                "forward-calendar"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-one",
+              "date": "2026-10-12",
+              "label": "Air handlers · first delivery",
+              "deltaCents": -2500000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-one",
+              "date": "2026-10-17",
+              "label": "Installation crew · first payroll",
+              "deltaCents": -1500000,
+              "cashCents": 5000000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "job-labor-two",
+              "date": "2026-10-31",
+              "label": "Commissioning crew · second payroll",
+              "deltaCents": -1500000,
+              "cashCents": 3500000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "materials-two",
+              "date": "2026-11-04",
+              "label": "Controls and ductwork · final delivery",
+              "deltaCents": -2500000,
+              "cashCents": 1000000,
+              "scope": "job",
+              "sourceIds": [
+                "job-budget"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "final-receipt",
+              "date": "2026-11-20",
+              "label": "Final contract payment collected",
+              "deltaCents": 2500000,
+              "cashCents": 3500000,
+              "scope": "job",
+              "sourceIds": [
+                "signed-contract"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "phase-receipt",
+              "date": "2026-11-20",
+              "label": "Phase-one payment collected",
+              "deltaCents": 3000000,
+              "cashCents": 6500000,
+              "scope": "job",
+              "sourceIds": [
+                "customer-email"
+              ],
+              "assumed": true
+            },
+            {
+              "eventId": "horizon",
+              "date": "2026-11-25",
+              "label": "End of declared forecast coverage",
+              "deltaCents": 0,
+              "cashCents": 6500000,
+              "scope": "baseline",
+              "sourceIds": [],
+              "assumed": true
+            }
+          ],
+          "minimumCents": 1000000,
+          "minimumDate": "2026-11-04",
+          "endingCashCents": 6500000,
+          "reserveGapCents": 0
+        },
+        "passes": true
+      }
+    ],
+    "minimumCashRange": {
+      "worstCents": 1000000,
+      "bestCents": 4000000
+    },
+    "reserveGapCents": 0,
+    "incrementalReserveGapCents": 0,
+    "proposal": {
+      "kind": "deposit_advance",
+      "status": "NOT_NEEDED",
+      "label": "Current plan passes the declared scenarios",
+      "additionalDepositCents": 0,
+      "originalDepositCents": 6500000,
+      "proposedDepositCents": 6500000,
+      "originalFinalReceiptCents": 2500000,
+      "proposedFinalReceiptCents": 2500000,
+      "originalCollectionDate": "2026-10-07",
+      "proposedCollectionDate": "2026-10-07",
+      "totalRevenueCents": 12000000,
+      "minimumCashCents": 1000000,
+      "reserveGapCents": 0,
+      "requiredAgreements": [],
+      "sourceIds": [
+        "negotiation-bounds"
+      ],
+      "limitation": "Minimum within this allowed deposit/date proposal family; requires customer agreement and actual collection. Not an executed amendment.",
+      "inputHash": "snapshot-231f7069"
+    },
+    "nextQuestions": [
+      {
+        "id": "phase-collection",
+        "question": "Will the $30,000 phase payment reach the bank October 24 or November 20?",
+        "owner": "Northstar accounts payable",
+        "requiredBy": "2026-10-12",
+        "sourceIds": [
+          "customer-email"
+        ],
+        "distinguishesFeasibility": false,
+        "reserveGapImpactCents": 0,
+        "earliestAffectedDate": "2026-10-24",
+        "branches": [
+          {
+            "optionId": "expedited",
+            "label": "October 24 · expedited",
+            "scenarioCount": 1,
+            "passingCount": 1,
+            "worstReserveGapCents": 0,
+            "witnessScenarioId": "scenario-1"
+          },
+          {
+            "optionId": "standard",
+            "label": "November 20 · standard",
+            "scenarioCount": 1,
+            "passingCount": 1,
+            "worstReserveGapCents": 0,
+            "witnessScenarioId": "scenario-2"
+          }
+        ]
+      }
+    ],
+    "evidenceIds": [
+      "forward-calendar",
+      "signed-contract",
+      "job-budget",
+      "customer-email"
+    ],
+    "assumptions": [
+      "Dataset clock is October 6, 2026; it is not the current wall-clock date.",
+      "Only bank balance and company identity are source-backed Intuit fields; all forward plans and documents are constructed additions.",
+      "Opening available cash equals the $74,882.38 ledger balance only under the fixture's explicit zero-restricted-funds assumption.",
+      "The supplied forward calendar is treated as complete through November 25 for this demonstration; a real owner must confirm it.",
+      "Phase conditions are expected October 20; the two AP settlement windows form the declared uncertainty family.",
+      "When intraday settlement order is unknown, outflows precede receipts on the same day.",
+      "All-scenarios statements refer only to this finite disclosed scenario family; no probabilities or payment guarantee are inferred."
+    ]
+  }
+}

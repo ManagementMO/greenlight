@@ -21,6 +21,8 @@ npm run typecheck
 
 The hosted checkpoint is https://greenlight-two-psi.vercel.app. The demo's clock is October 6, 2026, and its data is synthetic accounting plus explicitly disclosed future scenarios.
 
+The [Paper design and launch-storyboard handoff](design/README.md) is separate from frontend code. It includes11 authored artboards, source-derived chart geometry, mobile direction, tokens and JSX references. Frontend owners can use it without waiting for model evaluation.
+
 ## Suggested parallel ownership
 
 | Workstream | Starting points | Coordination boundary |

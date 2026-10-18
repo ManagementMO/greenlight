@@ -12,6 +12,8 @@ The application includes an interactive cash bridge, source evidence, bounded wh
 
 **RAG preparation:** the [California small-business source pack](research/california/README.md) contains 33 official-source records and a [dataset-backed task map](research/california/backlog.md). It is a reviewed research handoff for the next feature; retrieval is not integrated into the app yet. The selected sponsor company is in New York, so California applicability must be established for a future job/business context.
 
+**Design handoff:** [11 authored Paper artboards and a launch storyboard](docs/design/README.md) give the frontend team a complete visual direction without changing their working code. The [editable file](https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK) includes desktop/mobile directions, six36-second-film frames, tokens and motion notes.
+
 ![Greenlight decision workspace showing the $120,000 HVAC opportunity, cash bridge and $10,000 reserve, a $23,000 liquidity gap, and the conserved $65,000 deposit proposal.](docs/assets/decision-workspace.png)
 
 ## Try the decision

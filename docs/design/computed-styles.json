@@ -1,0 +1,67 @@
+{
+  "R-0": {
+    "fontSize": "84px",
+    "lineHeight": "90px",
+    "letterSpacing": "-0.065em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 700,
+    "color": "var(--color-ink)"
+  },
+  "5V-0": {
+    "fontSize": "60px",
+    "lineHeight": "66px",
+    "letterSpacing": "-0.055em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 600,
+    "color": "#FFFFFF"
+  },
+  "3N-0": {
+    "fontSize": "54px",
+    "lineHeight": "64px",
+    "letterSpacing": "-0.055em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 600,
+    "color": "var(--color-green)"
+  },
+  "6Q-0": {
+    "fontSize": "18px",
+    "letterSpacing": "-0.02em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 600,
+    "lineHeight": "22px",
+    "color": "#FFFFFF"
+  },
+  "7M-0": {
+    "fontSize": "58px",
+    "lineHeight": "66px",
+    "letterSpacing": "-0.06em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 500,
+    "color": "#FFFFFF"
+  },
+  "5A-0": {
+    "display": "flex",
+    "alignItems": "center",
+    "justifyContent": "center",
+    "width": "40px",
+    "height": "40px",
+    "borderRadius": "999px",
+    "flexShrink": "0",
+    "backgroundColor": "var(--color-fog)"
+  },
+  "A2-0": {
+    "fontSize": "202px",
+    "lineHeight": "218px",
+    "letterSpacing": "-0.075em",
+    "fontFamily": "var(--font-sans)",
+    "whiteSpace": "pre-wrap",
+    "fontWeight": 650,
+    "fontVariationSettings": "\"wght\" 650",
+    "color": "var(--color-ink)"
+  }
+}

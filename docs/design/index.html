@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Greenlight — Signal system & launch</title>
+  <style>
+    :root {color-scheme:light;--ink:#10251c;--muted:#4a6053;--fog:#eef3ef;--green:#176644}
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {font-family:Manrope,sans-serif;margin:0;background:#f5f8f5;color:var(--ink)}
+    a {color:var(--green);text-underline-offset:4px}
+    header {max-width:1512px;margin:auto;padding:48px 40px 24px}
+    .eyebrow {font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.05em;color:var(--muted)}
+    h1 {font-size:48px;line-height:1.1;letter-spacing:-.05em;font-weight:650;margin:20px 0}
+    .intro {max-width:800px;font-size:17px;line-height:1.7;color:var(--muted)}
+    nav {display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    nav a {padding:10px 16px;border-radius:999px;text-decoration:none;background:white;font-size:13px}
+    main {max-width:1512px;margin:auto;padding:0 40px 64px}
+    h2 {font-size:30px;letter-spacing:-.04em;margin:48px 0 20px}
+    figure {margin:0 0 32px;padding:8px 8px 0;background:white;border-radius:20px;overflow:hidden}
+    figure img {width:100%;height:auto;display:block;border-radius:14px}
+    figcaption {display:flex;justify-content:space-between;gap:20px;padding:18px 16px 22px;font-size:14px;line-height:1.6}
+    .caption-note {color:var(--muted);font-size:12px}
+    .mobile {display:flex;flex-direction:column;align-items:center;background:var(--fog)}
+    .mobile img {width:390px;max-width:100%}
+    .mobile figcaption {width:100%;max-width:700px}
+    .footer {font-size:13px;line-height:1.7;color:var(--muted);padding:24px 0}
+    @media(max-width:650px){header{padding:28px 16px 16px}main{padding:0 16px 32px}h1{font-size:36px}h2{font-size:25px}figcaption{flex-direction:column;gap:6px;padding:14px 8px 18px}.intro{font-size:15px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">GREENLIGHT / DESIGN HANDOFF</div>
+    <h1>Signal on a ledger.</h1>
+    <p class="intro">Four product directions and six frames for a future 36-second launch film. Authored in Paper with exact cash-engine paths and a measured MetaHarness result. This is a design artifact gallery, separate from the deployed app.</p>
+    <nav aria-label="Design handoff navigation">
+      <a href="https://app.paper.design/file/01M56AKCMG8WN1327280QA4TJK">Open editable Paper file ↗</a>
+      <a href="#product">Product directions</a>
+      <a href="#film">Launch storyboard</a>
+      <a href="#system">Design & motion brief</a>
+      <a href="HANDOFF.md">Read complete handoff</a>
+    </nav>
+  </header>
+  <main>
+    <section id="product" aria-labelledby="product-title">
+      <h2 id="product-title">Product directions</h2>
+      <figure><img src="01-brand-hero.png" alt="Greenlight hero: Take the job. Protect payroll. A twenty-three-thousand-dollar advance restores the modeled cash reserve."><figcaption><span>01 / Brand hero</span><span class="caption-note">1440×900 · same $120k job, conserved payment proposal</span></figcaption></figure>
+      <figure><img src="02-decision-workspace.png" alt="Owner-review workspace with actual stepped current and proposed cash paths and a conserved payment schedule."><figcaption><span>02 / Decision workspace</span><span class="caption-note">1440×900 · exact engine-derived points · customer agreement required</span></figcaption></figure>
+      <figure><img src="03-evidence-learning.png" alt="Verbatim synthetic contract, four distinct invoice clock states, and the recorded eighteen-to-six request result."><figcaption><span>03 / Evidence and learning</span><span class="caption-note">1440×900 · target extraction structure · illustrative clock dates</span></figcaption></figure>
+      <figure class="mobile"><img src="04-mobile-decision.png" alt="Mobile proposal screen showing the ten-thousand-dollar modeled minimum and a sixty-five, thirty, twenty-five-thousand-dollar payment schedule."><figcaption><span>04 / Mobile decision</span><span class="caption-note">390×844 · labeled paths · one primary review action</span></figcaption></figure>
+    </section>
+    <section id="film" aria-labelledby="film-title">
+      <h2 id="film-title">36-second launch storyboard</h2>
+      <figure><img src="film-01-opportunity.png" alt="Launch frame one, a large one-hundred-twenty-thousand-dollar opportunity."><figcaption><span>00–05 / The opportunity</span><span class="caption-note">One great job. Can your cash keep up?</span></figcaption></figure>
+      <figure><img src="film-02-hidden-gap.png" alt="Launch frame two, the original late-payment cash path reaches negative thirteen thousand dollars."><figcaption><span>05–11 / The hidden gap</span><span class="caption-note">Hold the cash minimum and the $23k reserve gap.</span></figcaption></figure>
+      <figure><img src="film-03-evidence-clock.png" alt="Launch frame three distinguishes eligibility, issuance, due date and unknown settlement."><figcaption><span>11–17 / The evidence clock</span><span class="caption-note">Highlight AND, then reveal the four distinct dates.</span></figcaption></figure>
+      <figure><img src="film-04-conserved-change.png" alt="Launch frame four shows twenty-three thousand dollars moving from the final payment to the deposit while total revenue stays the same."><figcaption><span>17–24 / The conserved change</span><span class="caption-note">Transfer one segment. Keep the unchanged $120k total anchored.</span></figcaption></figure>
+      <figure><img src="film-05-learning-gates.png" alt="Launch frame five shows eighteen provider requests reducing to six while the recorded quality metrics remain unchanged."><figcaption><span>24–30 / Learn behind gates</span><span class="caption-note">Actual recorded synthetic workload · no general production speedup claim</span></figcaption></figure>
+      <figure><img src="film-06-path-to-yes.png" alt="Closing Greenlight launch frame: Find your path to yes."><figcaption><span>30–36 / A path to yes</span><span class="caption-note">Resolve the path into the mark. Hold the demo URL.</span></figcaption></figure>
+    </section>
+    <section id="system" aria-labelledby="system-title">
+      <h2 id="system-title">Design and motion specification</h2>
+      <figure><img src="design-motion-handoff.png" alt="Palette, typography, interaction principles and motion notes for all six launch beats."><figcaption><span>Visual system and 36-second motion brief</span><span class="caption-note">25 tokens · exact JSX exports · readable reduced-motion states</span></figcaption></figure>
+    </section>
+    <p class="footer">Synthetic business scenario. Source-bound model proposals require owner review. No customer terms were activated. The model-quality comparison was pending at design freeze and no fine-tuning gain is claimed here. <a href="HANDOFF.md">Read the evidence, implementation priorities and spoken lines.</a></p>
+  </main>
+</body>
+</html>
