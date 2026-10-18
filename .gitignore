@@ -1,0 +1,29 @@
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+auth/
+.env.sentry-build-plugin
+.vercel/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# JavaScript
+node_modules/
+.next/
+dist/
+coverage/
+
+# Local runs and large private artifacts
+work/
+artifacts/
+checkpoints/
+*.sqlite
+*.sqlite3
+*.log
+.DS_Store
