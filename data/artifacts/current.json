@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-18T00:27:40.748Z",
+  "providers": [
+    {
+      "provider": "Anthropic",
+      "status": "verified",
+      "origin": "recorded",
+      "model": "claude-sonnet-4-6",
+      "checkedAt": "2026-10-18T00:12:34.068Z",
+      "detail": "Real inference and bounded MetaHarness configuration author. Experiment results are saved; opening this page makes no paid calls."
+    },
+    {
+      "provider": "TypeSafe / Jev",
+      "status": "verified",
+      "origin": "recorded",
+      "model": "jev-1.14.0",
+      "checkedAt": "2026-10-18T00:12:34.068Z",
+      "detail": "Real atomic evidence judgments and the matched baseline/candidate experiment. Same model, propositions, evidence, accuracy and coverage on the recorded workload."
+    },
+    {
+      "provider": "Veri",
+      "status": "verified",
+      "origin": "recorded",
+      "checkedAt": "2026-10-18T00:20:36.179Z",
+      "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
+    },
+    {
+      "provider": "Hugging Face",
+      "status": "verified",
+      "origin": "recorded",
+      "checkedAt": "2026-10-18T00:20:36.179Z",
+      "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
+    },
+    {
+      "provider": "Sentry",
+      "status": "verified",
+      "origin": "recorded",
+      "checkedAt": "2026-10-18T00:24:00Z",
+      "detail": "Actual oversized-response defect captured with a readable TypeScript frame, trace and log. Regression now bounds public input, calculation and output."
+    }
+  ],
+  "training": {
+    "status": "completed",
+    "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+    "jobId": "3f18d1c5354b",
+    "modelRepo": "machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp",
+    "detail": "16 examples, 4 optimizer steps. Technical path proof only; this tiny run is not evidence of improved extraction quality.",
+    "stages": [
+      {
+        "name": "Dataset",
+        "status": "verified",
+        "detail": "16 examples; SHA-256 931b140b8447cf1a434b64e82fff428831a679fd7eb704803aba91bec2771b8d. Template-reviewed synthetic labels, not independent human adjudication."
+      },
+      {
+        "name": "Fine-tuning",
+        "status": "completed",
+        "detail": "4 of 4 steps recorded. Completion-only training intended; the remote effective loss mask is not directly attested."
+      },
+      {
+        "name": "Merged export",
+        "status": "verified",
+        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+      },
+      {
+        "name": "Serving canary",
+        "status": "pending",
+        "detail": "Awaiting real deployment inference and permanent stop verification."
+      }
+    ]
+  },
+  "evaluations": [],
+  "experiments": [
+    {
+      "id": "metaharness-mvd2oofj",
+      "name": "Dependency-aware evidence updates",
+      "status": "promoted",
+      "origin": "recorded",
+      "sampleCount": 21,
+      "baseline": {
+        "correct": 20,
+        "total": 21,
+        "decisive": 15,
+        "falseSatisfied": 0,
+        "modelCalls": 18,
+        "accuracy": 0.9523809523809523,
+        "coverage": 0.7142857142857143,
+        "inputTokens": 12666,
+        "outputTokens": 891,
+        "costUsd": 0.18,
+        "latencyMs": 2771,
+        "cacheHits": 3
+      },
+      "candidate": {
+        "correct": 20,
+        "total": 21,
+        "decisive": 15,
+        "falseSatisfied": 0,
+        "modelCalls": 6,
+        "accuracy": 0.9523809523809523,
+        "coverage": 0.7142857142857143,
+        "inputTokens": 3998,
+        "outputTokens": 392,
+        "costUsd": 0.06,
+        "latencyMs": 832,
+        "cacheHits": 13
+      },
+      "metrics": {
+        "baselineAccuracy": 0.9523809523809523,
+        "candidateAccuracy": 0.9523809523809523,
+        "baselineCalls": 18,
+        "candidateCalls": 6,
+        "baselineLatencyMs": 2771,
+        "candidateLatencyMs": 832
+      },
+      "detail": "Both workflows cache stable work and use the same pinned Jev model, propositions and available evidence. Synthetic, predeclared localized-update workload; no general production speedup claim. Cost is conservatively rounded up per call, not the exact provider invoice. Gate: passed."
+    }
+  ],
+  "budget": {
+    "capUsd": 20,
+    "spentUsd": 0.66,
+    "reservedUsd": 2,
+    "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
+  },
+  "provenance": [
+    {
+      "label": "Intuit QuickBooks Hackathon 2026",
+      "url": "https://huggingface.co/datasets/CL251215/QuickBooks-Hackathon-2026",
+      "detail": "Synthetic sponsor accounting data; future schedules and job evidence are disclosed extensions."
+    },
+    {
+      "label": "Paper design",
+      "url": "https://app.paper.design/file/01M5653KWM6RPTEPWYPP37FKZX",
+      "detail": "Fresh canvas created; initial layout authored. Further MCP design work limited by the account's weekly quota."
+    }
+  ],
+  "observability": {
+    "issueUrl": "https://greenlight-full.sentry.io/issues/GREENLIGHT-FULL-2",
+    "traceUrl": "https://greenlight-full.sentry.io/explore/traces/trace/36c873d3aa68496fa3648a7aa7575697",
+    "firstPartyFrame": "app/api/decision/route.ts:26",
+    "verifiedAt": "2026-10-18T00:24:00Z",
+    "environment": "development"
+  }
+}

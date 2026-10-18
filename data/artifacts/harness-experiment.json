@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": 1,
+  "id": "metaharness-mvd2oofj",
+  "name": "Dependency-aware evidence updates",
+  "origin": "live",
+  "generatedAt": "2026-10-18T00:13:58.601Z",
+  "author": {
+    "provider": "Anthropic",
+    "model": "claude-sonnet-4-6",
+    "requestId": "msg_011Cg8jhAFVn6vHCfcB5ct8z"
+  },
+  "evaluator": {
+    "version": "fixed-gates-v1",
+    "workloadVersion": "evidence-update-v1",
+    "frozenHash": "6c4bdcbd2869aa0852aa5a8f66cea4e504ec35deb23a4324063e1346308926f5",
+    "sampleCount": 21,
+    "independentOfAuthor": true
+  },
+  "baseline": {
+    "manifest": {
+      "schemaVersion": 1,
+      "name": "Full job recheck",
+      "cacheScope": "snapshot",
+      "batchQuestions": false,
+      "scopedEvidence": false,
+      "confidenceThreshold": 0.8
+    },
+    "metrics": {
+      "correct": 20,
+      "total": 21,
+      "decisive": 15,
+      "falseSatisfied": 0,
+      "modelCalls": 18,
+      "accuracy": 0.9523809523809523,
+      "coverage": 0.7142857142857143,
+      "inputTokens": 12666,
+      "outputTokens": 891,
+      "costUsd": 0.18,
+      "latencyMs": 2771,
+      "cacheHits": 3
+    },
+    "predictions": [
+      {
+        "updateId": "u1",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u1",
+        "questionId": "certificate",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u1",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u2",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u2",
+        "questionId": "certificate",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u2",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u3",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u3",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.97
+      },
+      {
+        "updateId": "u3",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u4",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u4",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u4",
+        "questionId": "settlement",
+        "expected": "NOT_MET",
+        "state": "NOT_MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u5",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u5",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u5",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u6",
+        "questionId": "inspection",
+        "expected": "NOT_MET",
+        "state": "NOT_MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u6",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u6",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u7",
+        "questionId": "inspection",
+        "expected": "CONFLICTING",
+        "state": "UNKNOWN",
+        "confidence": 0.69
+      },
+      {
+        "updateId": "u7",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u7",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      }
+    ],
+    "calls": [
+      {
+        "updateId": "u1",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "4acefac38e6eb737a3c3bf16f271f012e918d7ede699be823d02129e60ae4349",
+        "latencyMs": 259,
+        "usage": {
+          "inputTokens": 579,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u1",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "5ab1563becc3ab6ed740aa02eb2080278e9e8f21690710ce2865b49a44ad3651",
+        "latencyMs": 98,
+        "usage": {
+          "inputTokens": 579,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u1",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "df128d17078a565c2489411c9799b3ac22f8ace8fb5c0a547606aec801dd3247",
+        "latencyMs": 159,
+        "usage": {
+          "inputTokens": 582,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u3",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "a410547ebc8b2efa6f82bcdfa0737650f2cc9178061b7b482deac57cbdb35104",
+        "latencyMs": 108,
+        "usage": {
+          "inputTokens": 646,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u3",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "d8f9dd0ba8998d8ad704a448fdc1c3b75b92525a8c5b3cdc96333cea60025f39",
+        "latencyMs": 98,
+        "usage": {
+          "inputTokens": 646,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u3",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "898d88c106d578f518f8a54a6675237fb5d801f175ebe4babbdca98d03180ff1",
+        "latencyMs": 239,
+        "usage": {
+          "inputTokens": 649,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u4",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "6ed1206b1a188342102ad4a4465669113065f0bd4e502911f0ae7a72304474bf",
+        "latencyMs": 109,
+        "usage": {
+          "inputTokens": 724,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u4",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "cefacfe456b5806673229bc5419c1df20f9d1d2bdf7eac02243a690e3894d769",
+        "latencyMs": 119,
+        "usage": {
+          "inputTokens": 724,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u4",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "34a40b02f3b71a251cd83a29d6e1b5d539c807bebc0e934520fc236dfb32384b",
+        "latencyMs": 103,
+        "usage": {
+          "inputTokens": 727,
+          "outputTokens": 51
+        }
+      },
+      {
+        "updateId": "u5",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "a2f0ae9c062cc5b63a2a325a4a7ab1adb8bbe3604c84221e14a67373778a0046",
+        "latencyMs": 155,
+        "usage": {
+          "inputTokens": 724,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u5",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "5ec75c68a19673d92d874db43516674bcd0e9f40dd4100d5d230fd4feef11599",
+        "latencyMs": 114,
+        "usage": {
+          "inputTokens": 724,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u5",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "e83075aeb1262be66216f64daefdfac79bd3bd2275d461a181e8786ad9647131",
+        "latencyMs": 122,
+        "usage": {
+          "inputTokens": 727,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u6",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "6de3fc623f8ce3b30b06d423b7b699d506948b441e76b68edda1417d8276b298",
+        "latencyMs": 87,
+        "usage": {
+          "inputTokens": 731,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u6",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "8eb2d23f82c7853dda9da15450acb2df446bc048f6c2f185aec5a4d38d0641ae",
+        "latencyMs": 170,
+        "usage": {
+          "inputTokens": 731,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u6",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "41f66dbb0408e7ca56db157e8c16cc4bdaa4dc71dcb71e34053ce32b47d8bd26",
+        "latencyMs": 102,
+        "usage": {
+          "inputTokens": 734,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u7",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "1d11c8fb6eccf67b035a00a81346356d33bd39a13be4529e6f410710aa5cd90a",
+        "latencyMs": 90,
+        "usage": {
+          "inputTokens": 812,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u7",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "33d6fdf21ed62a26f24be4f5b6b9698c45ace76bdad765289783deec3ef02634",
+        "latencyMs": 146,
+        "usage": {
+          "inputTokens": 812,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u7",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "55c10130ad9bbe41ea985e3eb8466688cd908e7cfe22a6d8372b7b722235693d",
+        "latencyMs": 114,
+        "usage": {
+          "inputTokens": 815,
+          "outputTokens": 50
+        }
+      }
+    ]
+  },
+  "candidate": {
+    "manifest": {
+      "schemaVersion": 1,
+      "name": "Full job recheck",
+      "cacheScope": "dependency",
+      "batchQuestions": true,
+      "scopedEvidence": true,
+      "confidenceThreshold": 0.8
+    },
+    "metrics": {
+      "correct": 20,
+      "total": 21,
+      "decisive": 15,
+      "falseSatisfied": 0,
+      "modelCalls": 6,
+      "accuracy": 0.9523809523809523,
+      "coverage": 0.7142857142857143,
+      "inputTokens": 3998,
+      "outputTokens": 392,
+      "costUsd": 0.06,
+      "latencyMs": 832,
+      "cacheHits": 13
+    },
+    "predictions": [
+      {
+        "updateId": "u1",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u1",
+        "questionId": "certificate",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u1",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u2",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u2",
+        "questionId": "certificate",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u2",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u3",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u3",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u3",
+        "questionId": "settlement",
+        "expected": "UNKNOWN",
+        "state": "UNKNOWN",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u4",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u4",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u4",
+        "questionId": "settlement",
+        "expected": "NOT_MET",
+        "state": "NOT_MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u5",
+        "questionId": "inspection",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u5",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u5",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u6",
+        "questionId": "inspection",
+        "expected": "NOT_MET",
+        "state": "NOT_MET",
+        "confidence": 1
+      },
+      {
+        "updateId": "u6",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u6",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u7",
+        "questionId": "inspection",
+        "expected": "CONFLICTING",
+        "state": "UNKNOWN",
+        "confidence": 0.53
+      },
+      {
+        "updateId": "u7",
+        "questionId": "certificate",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      },
+      {
+        "updateId": "u7",
+        "questionId": "settlement",
+        "expected": "MET",
+        "state": "MET",
+        "confidence": 0.99
+      }
+    ],
+    "calls": [
+      {
+        "updateId": "u1",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection",
+          "certificate",
+          "settlement"
+        ],
+        "requestHash": "648da7489f247437651572bb4dd7a905fc8f6e36b82233ba5024df4a759ed565",
+        "latencyMs": 118,
+        "usage": {
+          "inputTokens": 992,
+          "outputTokens": 142
+        }
+      },
+      {
+        "updateId": "u3",
+        "model": "jev-1.14.0",
+        "questions": [
+          "certificate"
+        ],
+        "requestHash": "329d205685f4a3f216f6048e845965f165bdc567008645c20a97c39708e07cee",
+        "latencyMs": 111,
+        "usage": {
+          "inputTokens": 575,
+          "outputTokens": 49
+        }
+      },
+      {
+        "updateId": "u4",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "e512aa4783c2bd186a9c5037faeeb5c444457402d0a1457f99808705b1cebcfa",
+        "latencyMs": 85,
+        "usage": {
+          "inputTokens": 589,
+          "outputTokens": 51
+        }
+      },
+      {
+        "updateId": "u5",
+        "model": "jev-1.14.0",
+        "questions": [
+          "settlement"
+        ],
+        "requestHash": "1ba31ee3b4b0c9b3be9ade679e6fde6b037c8d6419b73b5d3de585bf1b58f8ea",
+        "latencyMs": 117,
+        "usage": {
+          "inputTokens": 589,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u6",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "d39807f957680c62e827595bdfcd4ef4afbb69eae42c15f24b1270efa8c7d7c5",
+        "latencyMs": 109,
+        "usage": {
+          "inputTokens": 586,
+          "outputTokens": 50
+        }
+      },
+      {
+        "updateId": "u7",
+        "model": "jev-1.14.0",
+        "questions": [
+          "inspection"
+        ],
+        "requestHash": "d4fa7767b90627900ce382fc046a185cf16a73deeb6abd562cdfc5720dc3945e",
+        "latencyMs": 163,
+        "usage": {
+          "inputTokens": 667,
+          "outputTokens": 50
+        }
+      }
+    ]
+  },
+  "gate": {
+    "promoted": true,
+    "reasons": []
+  },
+  "detail": "Both workflows cache stable work and use the same pinned Jev model, propositions and available evidence. Synthetic, predeclared localized-update workload; no general production speedup claim. Cost is conservatively rounded up per call, not the exact provider invoice.",
+  "budget": {
+    "schemaVersion": 1,
+    "capCents": 2000,
+    "entries": [
+      {
+        "id": "veri-training-proof-931b140b-mvd2mcyp",
+        "provider": "veri",
+        "purpose": "True SFT LoRA+merged export machinelearningmo/greenlight-extractor-proof-931b140b-mvd2mcyp",
+        "maxCents": 600,
+        "state": "reserved",
+        "createdAt": "2026-10-18T00:12:05.282Z"
+      },
+      {
+        "id": "anthropic-smoke-75f03dce-5fb0-427a-ab8b-28bf20908654",
+        "provider": "anthropic",
+        "purpose": "Synthetic real inference smoke",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:12:34.070Z",
+        "actualCents": 1,
+        "evidence": "Verified API usage msg_011Cg8jbJApXrurJbQvXLFtU",
+        "settledAt": "2026-10-18T00:12:35.756Z",
+        "overrun": false
+      },
+      {
+        "id": "jev-smoke-2f7dcf89-298e-456d-9826-91455dff7df0",
+        "provider": "jev",
+        "purpose": "Atomic semantic proof",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:12:35.769Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev API usage 2626fd5e7c3485fba8372f9502665116ddf21f93b13d0e730a021181c2b04401",
+        "settledAt": "2026-10-18T00:12:35.889Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-author",
+        "provider": "anthropic",
+        "purpose": "Bounded MetaHarness configuration author",
+        "maxCents": 2,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:53.506Z",
+        "actualCents": 1,
+        "evidence": "Verified author token usage msg_011Cg8jhAFVn6vHCfcB5ct8z",
+        "settledAt": "2026-10-18T00:13:54.988Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-1e3828c0-3e3a-4161-8969-ee914e816fb2",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u1",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:54.998Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 4acefac38e6eb737a3c3bf16f271f012e918d7ede699be823d02129e60ae4349",
+        "settledAt": "2026-10-18T00:13:55.266Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-6d912537-234b-454e-9782-8ef6f725a68e",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u1",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:55.276Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 5ab1563becc3ab6ed740aa02eb2080278e9e8f21690710ce2865b49a44ad3651",
+        "settledAt": "2026-10-18T00:13:55.384Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-8f314ad6-5c21-488f-96d8-c01aaf6b4bdc",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u1",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:55.395Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage df128d17078a565c2489411c9799b3ac22f8ace8fb5c0a547606aec801dd3247",
+        "settledAt": "2026-10-18T00:13:55.562Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-42c3bff1-d5c0-428a-a94a-595c197f53a0",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u3",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:55.576Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage a410547ebc8b2efa6f82bcdfa0737650f2cc9178061b7b482deac57cbdb35104",
+        "settledAt": "2026-10-18T00:13:55.696Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-0f5089c1-14e5-4621-a161-a4af2fff16a2",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u3",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:55.708Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage d8f9dd0ba8998d8ad704a448fdc1c3b75b92525a8c5b3cdc96333cea60025f39",
+        "settledAt": "2026-10-18T00:13:55.817Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-f4a0672f-c1c5-4124-b243-d41b9c563585",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u3",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:55.825Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 898d88c106d578f518f8a54a6675237fb5d801f175ebe4babbdca98d03180ff1",
+        "settledAt": "2026-10-18T00:13:56.073Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-e96c8a39-abbc-4470-bebe-a04ce1ad800b",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u4",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.083Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 6ed1206b1a188342102ad4a4465669113065f0bd4e502911f0ae7a72304474bf",
+        "settledAt": "2026-10-18T00:13:56.203Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-36b61ff6-3564-4e8e-a6bc-9dd813946685",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u4",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.214Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage cefacfe456b5806673229bc5419c1df20f9d1d2bdf7eac02243a690e3894d769",
+        "settledAt": "2026-10-18T00:13:56.344Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-d6c549bf-dbcb-4c2f-a473-e1240f0326dd",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u4",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.355Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 34a40b02f3b71a251cd83a29d6e1b5d539c807bebc0e934520fc236dfb32384b",
+        "settledAt": "2026-10-18T00:13:56.472Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-37ae1871-b848-48f0-9af2-8967da9d34ca",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u5",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.484Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage a2f0ae9c062cc5b63a2a325a4a7ab1adb8bbe3604c84221e14a67373778a0046",
+        "settledAt": "2026-10-18T00:13:56.649Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-50fb62a8-e538-4e56-93cc-f5be4e382dc6",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u5",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.660Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 5ec75c68a19673d92d874db43516674bcd0e9f40dd4100d5d230fd4feef11599",
+        "settledAt": "2026-10-18T00:13:56.785Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-2109ec48-dcef-45ac-b3c7-01252e68085c",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u5",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.794Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage e83075aeb1262be66216f64daefdfac79bd3bd2275d461a181e8786ad9647131",
+        "settledAt": "2026-10-18T00:13:56.926Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-2a12948c-9e69-47a3-9e02-d2e87ef1ee8d",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u6",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:56.935Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 6de3fc623f8ce3b30b06d423b7b699d506948b441e76b68edda1417d8276b298",
+        "settledAt": "2026-10-18T00:13:57.030Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-40c3dc7a-0ecc-4731-992d-40c286983ec3",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u6",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.039Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 8eb2d23f82c7853dda9da15450acb2df446bc048f6c2f185aec5a4d38d0641ae",
+        "settledAt": "2026-10-18T00:13:57.218Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-64222bb5-4eea-4381-b4b2-c5a2d4592a78",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u6",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.230Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 41f66dbb0408e7ca56db157e8c16cc4bdaa4dc71dcb71e34053ce32b47d8bd26",
+        "settledAt": "2026-10-18T00:13:57.344Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-bffb7858-ca26-4d36-afe3-1ce216be54bb",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u7",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.355Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 1d11c8fb6eccf67b035a00a81346356d33bd39a13be4529e6f410710aa5cd90a",
+        "settledAt": "2026-10-18T00:13:57.457Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-0d795809-d094-42f8-be63-a44562c8f379",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u7",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.466Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 33d6fdf21ed62a26f24be4f5b6b9698c45ace76bdad765289783deec3ef02634",
+        "settledAt": "2026-10-18T00:13:57.624Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-snapshot-47bbe47b-d9b1-4d47-b5ad-389227d6c009",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u7",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.635Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 55c10130ad9bbe41ea985e3eb8466688cd908e7cfe22a6d8372b7b722235693d",
+        "settledAt": "2026-10-18T00:13:57.759Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-b9416b4e-79e8-44af-8c1f-8b35d02c1040",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u1",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.769Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 648da7489f247437651572bb4dd7a905fc8f6e36b82233ba5024df4a759ed565",
+        "settledAt": "2026-10-18T00:13:57.896Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-e2253352-e345-41f8-9af4-af13dd89aed2",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u3",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:57.908Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 329d205685f4a3f216f6048e845965f165bdc567008645c20a97c39708e07cee",
+        "settledAt": "2026-10-18T00:13:58.030Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-bd58591e-5357-4ccc-b9ee-028f0d2028e1",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u4",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:58.042Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage e512aa4783c2bd186a9c5037faeeb5c444457402d0a1457f99808705b1cebcfa",
+        "settledAt": "2026-10-18T00:13:58.138Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-bfcac2df-9ed9-490a-84c7-be769ba6464c",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u5",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:58.147Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage 1ba31ee3b4b0c9b3be9ade679e6fde6b037c8d6419b73b5d3de585bf1b58f8ea",
+        "settledAt": "2026-10-18T00:13:58.273Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-35421ef4-ed78-4d5f-bc81-3da00f711860",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u6",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:58.286Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage d39807f957680c62e827595bdfcd4ef4afbb69eae42c15f24b1270efa8c7d7c5",
+        "settledAt": "2026-10-18T00:13:58.406Z",
+        "overrun": false
+      },
+      {
+        "id": "metaharness-mvd2oofj-dependency-b7612bd3-6c59-4826-8189-4122ae58f083",
+        "provider": "jev",
+        "purpose": "Frozen workflow replay u7",
+        "maxCents": 1,
+        "state": "settled",
+        "createdAt": "2026-10-18T00:13:58.418Z",
+        "actualCents": 1,
+        "evidence": "Verified Jev token usage d4fa7767b90627900ce382fc046a185cf16a73deeb6abd562cdfc5720dc3945e",
+        "settledAt": "2026-10-18T00:13:58.591Z",
+        "overrun": false
+      }
+    ],
+    "spentCents": 27,
+    "reservedCents": 600,
+    "availableCents": 1373,
+    "capUsd": 20,
+    "spentUsd": 0.27,
+    "reservedUsd": 6
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-clauses-v1",
+  "trainingCount": 192,
+  "proofCount": 16,
+  "evaluationCount": 24,
+  "splitUnit": "semantic renderer family AND company namespace",
+  "trainFamilies": [
+    "signed_deposit",
+    "delivery_balance",
+    "phase_acceptance",
+    "inspection_payment",
+    "certificate_receipt",
+    "invoice_accepted",
+    "inspection_and_certificate",
+    "delivery_or_acceptance",
+    "three_conditions",
+    "specific_date",
+    "missing_amount",
+    "missing_time",
+    "business_day_rule",
+    "pay_if_paid",
+    "negated_early_payment",
+    "contradictory_deadlines"
+  ],
+  "heldoutFamilies": [
+    "nested_alternative_prerequisite",
+    "both_routes_with_certificate",
+    "negation_of_or",
+    "future_negotiation",
+    "statutory_override",
+    "document_instruction_attack"
+  ],
+  "labelAuthority": "Typed scenarios and separately authored holdout clauses. Template review, not independent human adjudication. No model generated ground truth.",
+  "lossMask": "Conversational prompt+completion, vanilla TRL SFT; completion-only default. Verify worker log/tokenization before claiming effective masking.",
+  "hashes": {
+    "train.jsonl": "5c89c56c3eb7a5406b6f2eb42321cd6b2153902bfd83f76abb3826fa01654ef9",
+    "proof.jsonl": "931b140b8447cf1a434b64e82fff428831a679fd7eb704803aba91bec2771b8d",
+    "train-labels.jsonl": "4b2a25a1005b50ffe122e38d32adcefab6184a8ee983b92a67d9db0543e2f105",
+    "evaluation.frozen.jsonl": "16a6b019d37490ae3a352169f6a251288060322fae37884041ef2b7f0869c45e"
+  }
+}

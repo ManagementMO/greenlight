@@ -1,0 +1,19 @@
+{
+  "datasetId": "CL251215/QuickBooks-Hackathon-2026",
+  "datasetRevision": "dc68d478a190c879f26fd94b764298c2c6308fa7",
+  "datasetUrl": "https://huggingface.co/datasets/CL251215/QuickBooks-Hackathon-2026/tree/dc68d478a190c879f26fd94b764298c2c6308fa7",
+  "archiveUrl": "https://huggingface.co/datasets/CL251215/QuickBooks-Hackathon-2026/resolve/dc68d478a190c879f26fd94b764298c2c6308fa7/hackathon-100-participant.tar.gz",
+  "archiveSha256": "6090485212458315c6d58c2793221b79de54fa89191edccaeba2c5c1c5cb1f38",
+  "companyPath": "hackathon-100/company-047/rwm-v4/world-a5dd7673241855be",
+  "companyId": "company-047",
+  "companyName": "Ductline Mechanical & Supply LLC",
+  "companySha256": "e10e74f732c3d753f90acda88604af79ea9840be74389e46737f79ec512fb7f3",
+  "bankTransactionsSha256": "2e55a5085be47d9e0605c807f5862ea0e7b935be8731d14becf63d5b700e37d3",
+  "snapshotDate": "2026-10-06",
+  "bankRowId": "bank-002419",
+  "bankBalanceDecimal": "74882.38",
+  "bankBalanceCents": 7488238,
+  "verifiedOn": "2026-10-17",
+  "sourceIsSynthetic": true,
+  "notice": "Only company identity and the ledger-ending bank balance come from the Intuit synthetic dataset. Availability of the full bank balance, the future calendar, new customer/job, contract, emails, reserve and uncertainty bounds are constructed Greenlight demonstration additions. No live QuickBooks integration is claimed."
+}
