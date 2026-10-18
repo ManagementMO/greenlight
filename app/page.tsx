@@ -292,7 +292,9 @@ export default function Headroom() {
   const [view, setCurrentView] = useState<View>("decision");
   const setView = (nextView: View) => {
     setCurrentView(nextView);
-    window.history.replaceState(window.history.state, "", `#${nextView}`);
+    if (window.location.hash !== `#${nextView}`) {
+      window.history.pushState(window.history.state, "", `#${nextView}`);
+    }
   };
   useEffect(() => {
     const readView = () => {
@@ -302,7 +304,11 @@ export default function Headroom() {
     };
     readView();
     window.addEventListener("hashchange", readView);
-    return () => window.removeEventListener("hashchange", readView);
+    window.addEventListener("popstate", readView);
+    return () => {
+      window.removeEventListener("hashchange", readView);
+      window.removeEventListener("popstate", readView);
+    };
   }, []);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
