@@ -1,16 +1,41 @@
-# Greenlight provider and model pipeline
+# Headroom provider and model pipeline
 
 Run from the repository root. Node 22 and the checked-in npm lock are required. Local credentials are loaded from the ignored `.env`; no command prints credentials. The CLI is the paid execution boundary. The public app performs no paid provider work.
 
 ## Execution checkpoint
 
-The public [Greenlight application](https://greenlight-two-psi.vercel.app) uses deterministic financial inputs and recorded genuine provider results. The historical four-step training proof used 16 v1 rows, exported public synthetic merged weights, and served a real canary. The canary was schema-invalid (a condition enum was emitted as an array); no final evaluation cases were queried. It proves the technical path, not useful extraction quality.
+The public [Headroom application](https://headroom-lahacks.vercel.app) uses deterministic financial inputs and recorded genuine provider results. The historical four-step training proof used 16 v1 rows, exported public synthetic merged weights, and served a real canary. The canary was schema-invalid (a condition enum was emitted as an array); no final evaluation cases were queried. It proves the technical path, not useful extraction quality.
 
 The v3 substantive job completed all 138 optimizer steps and exported its model. Its original base-model final run returned zero valid outputs under a shared compact format example whose enum choices could be mistaken for an answer array. That ambiguity is a comparison limitation, not a proven cause of every error. The [diagnostic is preserved](../../data/artifacts/legacy-v3-baseline.json) and excluded from v4 quality claims.
 
 The completed experiment is **v4, `json-schema-v4`**: the same **276 training contexts/labels and 23 proof selections**, paired with the validator's actual JSON Schema, and a **fresh independently reviewed 40-case final set**. Job `b808db134828` completed all 138 steps at a 1,536-token training limit. Both real inference runs finished, stopped permanently and settled. The frozen gate returned **`rejected-regression`**: base/tuned full validation 2/40 versus 4/40, material match 0/40 versus 1/40, correct supported proposals 0/24 for both, and incorrect validated proposals 0 versus 3. The trained export is not promoted. [Results and failure analysis](../../docs/extractor-v4-results.md) distinguish formatting gains from useful extraction. The [v4 protocol](../../docs/evaluation-policy.md), [training manifest](../../data/training/v4-schema-contract/manifest.json), [final manifest](../../data/evaluation/v4-schema-contract/manifest.json) and [local tokenizer evidence](../../data/artifacts/tokenizer-audit-v4.json) define the experiment.
 
-## Commands
+## V5 evaluation and release
+
+V5 uses 336 training pairs, 300 optimizer steps and a 2,048-token limit. Follow the [V5 protocol](../../docs/extractor-v5-protocol.md) and [results](../../docs/extractor-v5-results.md). The commands below are the recorded workflow, not instructions to rerun an exposed final set for model selection. Replace `TUNED_REPO` and `TRAINING_RECORD` with the actual completed V5 artifact. Each paid command must finish, verify permanent stopping, and settle before the next starts.
+
+```sh
+# Development first; six training canaries are excluded from metrics.
+npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label v5-base-dev --evaluation-dir data/evaluation/v5-development --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute
+npx tsx scripts/ml/serve-evaluate.ts --repo TUNED_REPO --label v5-tuned-dev --evaluation-dir data/evaluation/v5-development --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute
+npx tsx scripts/publish-v5-evaluations.ts --split dev --training-run TRAINING_RECORD
+
+# Review development only, then freeze candidate identity and configuration.
+npx tsx scripts/ml/select-v5-final.ts --rationale 'Explain the candidate decision using the completed development results.'
+
+# Final queries require that immutable selection before opening final cases.
+npx tsx scripts/ml/serve-evaluate.ts --repo Qwen/Qwen3-4B-Instruct-2507 --label v5-base-final --evaluation-dir data/evaluation/v5-final --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute
+npx tsx scripts/ml/serve-evaluate.ts --repo TUNED_REPO --label v5-tuned-final --evaluation-dir data/evaluation/v5-final --prompt-profile reference-contract-v5 --timeout-seconds 2400 --max-cents 200 --execute
+
+# Local publication re-scores every response before publishing model quality.
+npx tsx scripts/publish-v5-evaluations.ts --split final --training-run TRAINING_RECORD
+npx tsx scripts/publish-v5-release.ts --training-run TRAINING_RECORD
+npx tsx scripts/ml/reconcile.ts
+```
+
+The final selection binds exact model revisions, training/development/final hashes, prompts, decoding, serving configuration and completed development evidence. The provider's returned deployment alias is checked against the submitted unique deployment. The observed HF revision is not an attestation of loaded weight bytes. Public V5 summaries are separate from the archived V4 experiment. The historical publisher refuses to mix V5 training with V4 results.
+
+## Historical V4 commands
 
 ```sh
 # No inference/GPU charge: authenticated listings and integration checks.

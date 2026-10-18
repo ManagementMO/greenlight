@@ -10,6 +10,8 @@ import {
 import { extractionPrompt, extractionPromptV4 } from "../../lib/providers/extraction";
 import { extractionPromptV5 } from "../../lib/providers/extraction-v5";
 import { assertReviewedV5Evaluation } from "../../lib/providers/evaluation-v5";
+import { readV5FinalSelection, assertV5FinalRunSelection } from "../../lib/providers/final-selection-v5";
+import { assertVeriResponseModel, veriResponseModelIdentity } from "../../lib/providers/veri-response-identity";
 import {
   scoreExtraction,
   summarizeExtraction,
@@ -166,6 +168,9 @@ async function main() {
   );
   if (isV5 && manifest.purpose === "final-evaluation" && (limit !== manifest.evaluationCount || a["canary-only"]))
     throw new Error("The V5 final must run in full after development; use the development directory for canaries.");
+  // Selection must exist and match completed development before opening any final cases.
+  const finalSelection = isV5 && manifest.purpose === "final-evaluation"
+    ? await readV5FinalSelection() : null;
   const raw = await readFile(
       resolve(evaluationDir, "evaluation.frozen.jsonl"),
       "utf8",
@@ -245,7 +250,10 @@ async function main() {
     estimatedMaximumUsd: estimatedMaximum / 100,
     identityBoundary:
       "Unique HF repository, observed SHA before and after, cache disabled, returned model identity. Provider API does not attest exact loaded commit SHA.",
+    responseModelIdentity: veriResponseModelIdentity(request.name, repo),
+    ...(finalSelection ? { finalSelectionSha256: finalSelection.sha256 } : {}),
   };
+  if (finalSelection) assertV5FinalRunSelection(finalSelection, plan);
   if (!a.execute) {
     console.log(JSON.stringify({ ...plan, execute: false }, null, 2));
     return;
@@ -354,6 +362,7 @@ async function main() {
         canary.expected,
       ),
     };
+    assertVeriResponseModel(canaryResponse.model, request.name);
     recordExtractionScore(id, canary.id, canaryRecord.score);
     const trainingCanaries: unknown[] = [];
     if (isV5) {
@@ -371,8 +380,9 @@ async function main() {
         if (Date.now() + 60000 >= deadline) throw new Error("Canary would exceed remaining GPU lifetime");
         const t = Date.now();
         const response = await traceExtraction(repo,id,"training_canary",()=>client.chat(servingDeploymentId,repo,[{role:"user",content:prompt(example.context)}],768));
+        assertVeriResponseModel(response.model, request.name);
         const score=scoreExtraction(response.text,example.context,example.expected);
-        trainingCanaries.push({id:example.id,text:response.text,expected:example.expected,score,latencyMs:Date.now()-t,includedInEvaluationMetrics:false});
+        trainingCanaries.push({id:example.id,returnedModel:response.model,text:response.text,expected:example.expected,score,latencyMs:Date.now()-t,includedInEvaluationMetrics:false});
       }
     }
     for (const example of examples) {
@@ -387,6 +397,7 @@ async function main() {
             768,
           ),
         );
+      assertVeriResponseModel(response.model, request.name);
       const score = scoreExtraction(
         response.text,
         example.context,
@@ -441,6 +452,7 @@ async function main() {
           768,
         ),
       );
+      assertVeriResponseModel(prediction.model, request.name);
       const score = scoreExtraction(
         prediction.text,
         source.context,

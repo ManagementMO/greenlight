@@ -31,6 +31,9 @@ async function main() {
       ),
     );
   const training = runs[0];
+  if (training?.promptProfile === "reference-contract-v5" ||
+      current.extractionV5Development || current.extractionV5Final)
+    throw new Error("V5 cannot be combined with legacy V4 aliases. Use scripts/publish-v5-release.ts --training-run <explicit completed V5 record>.");
   const trainingEvidence = training?.jobId
     ? await readJson(`work/ml/${training.jobId}.training-evidence.json`)
     : null;
