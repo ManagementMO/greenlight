@@ -48,8 +48,8 @@ export async function train() {
   assertPublicSyntheticTrainingData(dataManifest, basename(datasetFile), data);
   const baseModel = String(a.model ?? DEFAULT_BASE_MODEL);
   let tokenizerAuditSha256: string | undefined;
-  if (dataManifest.promptProfile === "json-schema-v4") {
-    const auditBytes = await readFile(resolve(String(a.audit ?? "work/ml/tokenizer-audit-v4.json")), "utf8");
+  if (["json-schema-v4", "reference-contract-v5"].includes(dataManifest.promptProfile)) {
+    const auditBytes = await readFile(resolve(String(a.audit ?? (dataManifest.promptProfile === "reference-contract-v5" ? "work/ml/tokenizer-audit-v5.json" : "work/ml/tokenizer-audit-v4.json"))), "utf8");
     assertBoundTokenizerAudit(JSON.parse(auditBytes), {
       sha: digest, baseModel, rows: data.trim().split("\n").length, maxSeqLength,
     });

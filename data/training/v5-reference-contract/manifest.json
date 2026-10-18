@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "version": "greenlight-clauses-v5-reference-contract",
+  "promptProfile": "reference-contract-v5",
+  "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "publicationPolicy": "Fictional generated clauses only; no customer, sponsor-record, credential or production-trace data.",
+  "trainingCount": 336,
+  "statusCounts": {
+    "PROPOSED": 240,
+    "AMBIGUOUS": 48,
+    "UNSUPPORTED": 48
+  },
+  "compositionFamilies": 20,
+  "uncertaintyFamilies": 12,
+  "labelAuthority": "Typed synthetic scenarios rendered into reviewed language; developer review, not independent customer adjudication.",
+  "splitPolicy": "Training generator never reads development or final cases. Opaque IDs and shuffled multi-reference tables remove old category/position shortcuts. Separate authored development and final prose is required.",
+  "hashes": {
+    "train.jsonl": "ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051",
+    "train-labels.jsonl": "041d8b3e8950f552a4e2c96683c47c3b1628206cfc0915368a601bf142091fab",
+    "proof.jsonl": "91cc8d260e7c0de3ead880420684416ec51cb5ce34fd1772dbbd13946fc8afef"
+  }
+}

@@ -8,6 +8,8 @@ import {
   DEFAULT_BASE_MODEL,
 } from "../../lib/providers/veri";
 import { extractionPrompt, extractionPromptV4 } from "../../lib/providers/extraction";
+import { extractionPromptV5 } from "../../lib/providers/extraction-v5";
+import { assertReviewedV5Evaluation } from "../../lib/providers/evaluation-v5";
 import {
   scoreExtraction,
   summarizeExtraction,
@@ -119,12 +121,12 @@ async function main() {
     repo = String(a.repo ?? DEFAULT_BASE_MODEL),
     label = String(a.label ?? "base");
   const evaluationDir = resolve(String(a["evaluation-dir"] ?? "data/evaluation/v4-schema-contract"));
-  if (![resolve("data/training"), resolve("data/evaluation/v4-schema-contract")].includes(evaluationDir))
+  if (![resolve("data/training"), resolve("data/evaluation/v4-schema-contract"), resolve("data/evaluation/v5-development"), resolve("data/evaluation/v5-final")].includes(evaluationDir))
     throw new Error("Choose a reviewed frozen evaluation directory.");
   const promptProfile = String(a["prompt-profile"] ?? "json-schema-v4");
-  if (!["legacy-v3", "json-schema-v4"].includes(promptProfile))
+  if (!["legacy-v3", "json-schema-v4", "reference-contract-v5"].includes(promptProfile))
     throw new Error("Unknown extraction prompt contract.");
-  const prompt = promptProfile === "legacy-v3" ? extractionPrompt : extractionPromptV4;
+  const prompt = promptProfile === "legacy-v3" ? extractionPrompt : promptProfile === "reference-contract-v5" ? extractionPromptV5 : extractionPromptV4;
   const promptContractSha256 = createHash("sha256").update(prompt({sourceId:"PROMPT_CONTRACT",text:"",amountRefs:[],subjects:[]})).digest("hex");
   const maxCents = intArg(a, "max-cents", 200, 25, 400),
     timeoutSeconds = intArg(a, "timeout-seconds", 1800, 300, 3600);
@@ -138,6 +140,11 @@ async function main() {
   );
   if (manifest.dataClassification !== "PUBLIC_SYNTHETIC")
     throw new Error("Only reviewed public synthetic evaluation data may reach the model.");
+  const isV5 = evaluationDir === resolve("data/evaluation/v5-development") || evaluationDir === resolve("data/evaluation/v5-final");
+  if (isV5) {
+    if (promptProfile !== "reference-contract-v5") throw new Error("V5 requires its reviewed prompt profile.");
+    assertReviewedV5Evaluation(manifest, evaluationDir === resolve("data/evaluation/v5-final") ? "final-evaluation" : "development-only");
+  } else if (promptProfile === "reference-contract-v5") throw new Error("V5 may not reuse a historical final set.");
   if (evaluationDir === resolve("data/evaluation/v4-schema-contract") &&
       (promptProfile !== "json-schema-v4" || manifest.promptProfile !== promptProfile ||
        manifest.frozen !== true ||
@@ -157,6 +164,8 @@ async function main() {
     1,
     manifest.evaluationCount,
   );
+  if (isV5 && manifest.purpose === "final-evaluation" && (limit !== manifest.evaluationCount || a["canary-only"]))
+    throw new Error("The V5 final must run in full after development; use the development directory for canaries.");
   const raw = await readFile(
       resolve(evaluationDir, "evaluation.frozen.jsonl"),
       "utf8",
@@ -168,6 +177,8 @@ async function main() {
     .trim()
     .split("\n")
     .map((x) => JSON.parse(x) as LabeledExample);
+  if (all.length !== manifest.evaluationCount || new Set(all.map(row => row.id)).size !== all.length || all.some(row => typeof row.id !== "string" || !row.id.trim()))
+    throw new Error("Evaluation manifest count or unique case identities are invalid; allocation refused.");
   // Round-robin semantic families for shortened spot checks, deterministic and identical for base/tuned.
   const examples = a["canary-only"]
     ? []
@@ -210,9 +221,10 @@ async function main() {
     mode: "real-veri-serving",
     purpose: a["canary-only"]
       ? "technical-path-proof-only"
-      : "frozen-heldout-evaluation",
+      : manifest.purpose === "development-only" ? "development-evaluation" : "frozen-heldout-evaluation",
     artifact,
     dataVersion: manifest.version,
+    ...(isV5 ? { corpusPurpose: manifest.purpose } : {}),
     evaluationDir,
     promptProfile,
     promptContractSha256,
@@ -343,6 +355,26 @@ async function main() {
       ),
     };
     recordExtractionScore(id, canary.id, canaryRecord.score);
+    const trainingCanaries: unknown[] = [];
+    if (isV5) {
+      const training = (await readFile(resolve("data/training/v5-reference-contract/train-labels.jsonl"), "utf8")).trim().split("\n").map(line => JSON.parse(line) as LabeledExample);
+      const picks = [
+        training.find(row => row.expected.status === "PROPOSED" && row.expected.trigger?.op === "ATOM"),
+        training.find(row => row.expected.status === "PROPOSED" && row.expected.trigger?.op === "ALL" && row.expected.trigger.children.some(n => n.op !== "ATOM")),
+        training.find(row => row.expected.status === "PROPOSED" && row.expected.trigger?.op === "ANY"),
+        training.find(row => row.expected.status === "AMBIGUOUS" && row.expected.trigger?.op === "ALL"),
+        training.find(row => row.expected.status === "UNSUPPORTED" && row.expected.trigger?.op === "ALL"),
+        training.find(row => row.expected.status === "UNSUPPORTED" && row.expected.trigger === null && row.expected.due !== null),
+      ];
+      for (const example of picks) {
+        if (!example) throw new Error("V5 diagnostic canary coverage is incomplete.");
+        if (Date.now() + 60000 >= deadline) throw new Error("Canary would exceed remaining GPU lifetime");
+        const t = Date.now();
+        const response = await traceExtraction(repo,id,"training_canary",()=>client.chat(servingDeploymentId,repo,[{role:"user",content:prompt(example.context)}],768));
+        const score=scoreExtraction(response.text,example.context,example.expected);
+        trainingCanaries.push({id:example.id,text:response.text,expected:example.expected,score,latencyMs:Date.now()-t,includedInEvaluationMetrics:false});
+      }
+    }
     for (const example of examples) {
       if (Date.now() + 60000 >= deadline)
         throw new Error("Evaluation would exceed remaining GPU lifetime");
@@ -381,6 +413,7 @@ async function main() {
         status: "evaluating",
         provisioningMs,
         canary: canaryRecord,
+        trainingCanaries,
         rows,
         summary: summarizeExtraction(scores),
       });
@@ -394,7 +427,7 @@ async function main() {
         }),
       );
     }
-    if (!a["canary-only"]) {
+    if (!a["canary-only"] && manifest.purpose !== "development-only") {
       if (Date.now() + 60000 >= deadline)
         throw new Error("C120 showcase would exceed remaining GPU lifetime");
       const source = buildC120Showcase(),
@@ -466,6 +499,7 @@ async function main() {
       costSettled: actual > 0,
       provisioningMs,
       canary: canaryRecord,
+      trainingCanaries,
       rows,
       showcase: showcase ?? null,
       summary: scores.length ? summarizeExtraction(scores) : null,
