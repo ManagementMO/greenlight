@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T02:24:25.729Z",
+  "generatedAt": "2026-10-18T05:31:15.862Z",
   "providers": [
     {
       "provider": "Anthropic",
@@ -22,15 +22,17 @@
       "provider": "Veri",
       "status": "verified",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:43:20.498Z",
-      "detail": "Real SFT job, adapter checkpoint and standalone merged Hugging Face export. Serving and quality are separate checks below."
+      "checkedAt": "2026-10-18T03:27:28.112Z",
+      "detail": "Completed 300-step V5 SFT and saved adapter. Export materialization, actual serving, and quality have separate evidence below.",
+      "model": "Qwen/Qwen3-4B-Instruct-2507"
     },
     {
       "provider": "Hugging Face",
       "status": "verified",
       "origin": "recorded",
-      "checkedAt": "2026-10-18T01:43:20.498Z",
-      "detail": "Export is in the owner namespace. Repository revision is recorded when serving is verified; a repository SHA is not a provider attestation of loaded weights."
+      "checkedAt": "2026-10-18T04:35:06.184Z",
+      "detail": "Verified public export at observed revision 51fcc48bf3ae0753d9633ea6566575585c347271. BF16 materialization and original adapter have recorded hashes. Repository identity does not attest the provider's loaded weight bytes.",
+      "model": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f"
     },
     {
       "provider": "Sentry",
@@ -43,30 +45,40 @@
   "training": {
     "status": "completed",
     "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
-    "jobId": "b808db134828",
-    "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
-    "modelRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
-    "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
+    "jobId": "42d582a35d2f",
+    "modelRepo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+    "modelRevision": "51fcc48bf3ae0753d9633ea6566575585c347271",
+    "detail": "336 examples, 300 optimizer steps. Same saved adapter rematerialized on the pinned BF16 base; no retraining. V5 reference-contract extraction; training completion is separate from evaluation and deployment.",
     "stages": [
       {
-        "name": "Dataset",
+        "name": "V5 dataset",
         "status": "verified",
-        "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
+        "detail": "336 synthetic examples; SHA-256 ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051. Developer-reviewed labels, not customer adjudication."
       },
       {
-        "name": "Fine-tuning",
+        "name": "V5 fine-tuning",
         "status": "completed",
-        "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
+        "detail": "300 of 300 steps verified in the provider worker checkpoint log. Completion-only loss is intended; the remote effective loss mask is not attested."
       },
       {
-        "name": "Merged export",
+        "name": "V5 merged export",
         "status": "verified",
-        "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        "detail": "Saved trained adapter safely rematerialized on the pinned BF16 base. Public Hugging Face configuration verified. Observed repository revision identifies the export, not the provider's effective loaded weights."
       },
       {
-        "name": "Serving canary",
+        "name": "V5 serving inference",
         "status": "verified",
-        "detail": "Real inference returned; GPU stop verified. Training canary matched."
+        "detail": "Recorded model responses returned; serving resources stopped and final costs settled. This is evaluation serving, not a public live endpoint."
+      },
+      {
+        "name": "V5 development",
+        "status": "completed",
+        "detail": "24 frozen development cases compared. Development cannot authorize promotion."
+      },
+      {
+        "name": "V5 final gate",
+        "status": "blocked",
+        "detail": "48 frozen final cases. Candidate not promoted. Relative improvement does not override the usefulness and safety gate."
       }
     ]
   },
@@ -199,9 +211,9 @@
   ],
   "budget": {
     "capUsd": 20,
-    "spentUsd": 2.79,
+    "spentUsd": 5.24,
     "reservedUsd": 0,
-    "detail": "Booked model costs are conservatively rounded per call. GPU reservations remain held while final provider charges are uncertain."
+    "detail": "Budget ledger snapshot; reconciled charges are conservatively rounded per call. Reservations stay held while final charges are uncertain."
   },
   "provenance": [
     {
@@ -425,21 +437,53 @@
   "extractionDemo": {
     "schemaVersion": 1,
     "origin": "recorded",
+    "dataClassification": "PUBLIC_SYNTHETIC",
+    "promptProfile": "reference-contract-v5",
     "sourceId": "signed-contract",
     "sourceSha256": "e8a98c2e5d45fda1d2eb680ed7731bc7964f1220803a97b7af21c1f0e6ffbf68",
     "excerptSha256": "c49f755695b274b82e351350ef1c7d4aa2b051abf8e025180727fc789e84f714",
     "modelRepo": "Qwen/Qwen3-4B-Instruct-2507",
     "modelRevision": "cdbee75f17c01a7cc42f958dc650907174af0554",
-    "generatedAt": "2026-10-18T02:01:20.666Z",
+    "generatedAt": "2026-10-18T05:05:26.309Z",
     "selectedByGate": "base",
-    "gateVersion": "extractor-gates-v2",
-    "candidate": null,
-    "materialExact": false,
-    "rawOutput": "{\"schemaVersion\":1,\"amountRef\":\"phase_receipt\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"phase_one\"},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"insurance_certificate\"}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"invoice\"},\"sourceIds\":[\"signed-contract\"],\"status\":\"PROPOSED\",\"issues\":[\"unidentified recipient in certificate receipt\"]}",
-    "validationError": "Unknown subject reference",
-    "outputSha256": "bfedc41c6873773325e2ced34b69ec08270819c4ac4c0a0a1418237b6e91c4cf",
+    "gateVersion": "extractor-gates-v3-useful-coverage",
+    "finalEvaluationSha256": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c",
+    "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+    "candidate": {
+      "schemaVersion": 1,
+      "amountRef": "phase_receipt",
+      "trigger": {
+        "op": "ALL",
+        "children": [
+          {
+            "op": "ATOM",
+            "condition": "INSPECTION_PASSED",
+            "subject": "phase_one"
+          },
+          {
+            "op": "ATOM",
+            "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+            "subject": "phase_one"
+          }
+        ]
+      },
+      "due": {
+        "kind": "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+        "days": 14,
+        "invoiceSubject": "phase_one"
+      },
+      "sourceIds": [
+        "signed-contract"
+      ],
+      "status": "PROPOSED",
+      "issues": []
+    },
+    "materialExact": true,
+    "rawOutput": "{\"schemaVersion\":1,\"amountRef\":\"phase_receipt\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"phase_one\"},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"phase_one\"}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"phase_one\"},\"sourceIds\":[\"signed-contract\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+    "outputSha256": "e8451922a80efb9270bac6f384130e2578ccef7e642d253d538bbb583deaeec1",
+    "validationError": null,
     "includedInEvaluationMetrics": false,
-    "detail": "Actual recorded output from the gate-selected base artifact on this exact phase-clause excerpt. The C120 illustration is excluded from the protected 40-case metrics.",
+    "detail": "Actual V5-prompt output from the final gate-selected base artifact on this exact phase clause. This C120 illustration is excluded from the 48 final cases and cannot override the release gate.",
     "judgmentModel": "jev-1.14.0",
     "judgmentRunId": "jev-c120-c0d4e07b-8f06-45fd-b792-f385816225a0",
     "judgmentEvidenceSha256": "9f17fda05791dc19e8e9505bec91779b00c90267bc6707fceddf086d50905fa6",
@@ -461,5 +505,295 @@
         "confidence": 0.93
       }
     ]
+  },
+  "trainingHistory": [
+    {
+      "status": "completed",
+      "baseModel": "Qwen/Qwen3-4B-Instruct-2507",
+      "jobId": "b808db134828",
+      "modelRepo": "machinelearningmo/greenlight-extractor-sft-v4-2ae2030e-fed7b381-770",
+      "modelRevision": "3a022584c5d287a5d5c70ba64f65394765c01260",
+      "detail": "276 examples, 138 optimizer steps. Supervised payment-clause extraction; quality is assessed by a separate frozen base/tuned comparison.",
+      "stages": [
+        {
+          "name": "Dataset",
+          "status": "verified",
+          "detail": "276 examples; SHA-256 2ae2030efebbd20ab9adbe4ff92f4c187d71c8e1da0480c6652b9010cc187571. Template-reviewed synthetic labels, not independent human adjudication."
+        },
+        {
+          "name": "Fine-tuning",
+          "status": "completed",
+          "detail": "138 of 138 steps recorded in the provider's committed checkpoint log. Completion-only training intended; the remote effective loss mask is not directly attested."
+        },
+        {
+          "name": "Merged export",
+          "status": "verified",
+          "detail": "Standalone merged model exported; serving script checks config, tokenizer and weights."
+        },
+        {
+          "name": "Serving canary",
+          "status": "verified",
+          "detail": "Real inference returned; GPU stop verified. Training canary matched."
+        }
+      ]
+    }
+  ],
+  "extractionV5Development": {
+    "schemaVersion": 1,
+    "origin": "recorded",
+    "dataClassification": "PUBLIC_SYNTHETIC",
+    "purpose": "development-only",
+    "caseCount": 24,
+    "evaluationSha256": "028190f3fc7910b9960b135671a7a7dc6d07b1b0109bb63b4e6ffa1747aff916",
+    "promptProfile": "reference-contract-v5",
+    "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+    "base": {
+      "artifact": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      },
+      "completedAt": "2026-10-18T03:59:06.137Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 24,
+        "valid": 22,
+        "materialExact": 9,
+        "statusCorrect": 21,
+        "proposed": 14,
+        "unsafeProposed": 10,
+        "expectedProposed": 16,
+        "correctSupportedProposals": 4,
+        "validityRate": 0.9166666666666666,
+        "materialExactRate": 0.375,
+        "rawProposalRate": 0.5833333333333334,
+        "correctSupportedProposalRate": 0.25,
+        "proposedPrecision": 0.2857142857142857,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 16,
+            "valid": 14,
+            "statusCorrect": 14,
+            "materialExact": 4,
+            "proposed": 14,
+            "unsafeProposed": 10,
+            "statusAccuracy": 0.875,
+            "materialExactRate": 0.25
+          },
+          "AMBIGUOUS": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 4,
+            "materialExact": 2,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 1,
+            "materialExactRate": 0.5
+          },
+          "UNSUPPORTED": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 3,
+            "materialExact": 3,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.75,
+            "materialExactRate": 0.75
+          }
+        }
+      }
+    },
+    "tuned": {
+      "artifact": {
+        "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+        "revision": "51fcc48bf3ae0753d9633ea6566575585c347271"
+      },
+      "completedAt": "2026-10-18T04:45:09.577Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 24,
+        "valid": 24,
+        "materialExact": 15,
+        "statusCorrect": 23,
+        "proposed": 16,
+        "unsafeProposed": 8,
+        "expectedProposed": 16,
+        "correctSupportedProposals": 8,
+        "validityRate": 1,
+        "materialExactRate": 0.625,
+        "rawProposalRate": 0.6666666666666666,
+        "correctSupportedProposalRate": 0.5,
+        "proposedPrecision": 0.5,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 16,
+            "valid": 16,
+            "statusCorrect": 16,
+            "materialExact": 8,
+            "proposed": 16,
+            "unsafeProposed": 8,
+            "statusAccuracy": 1,
+            "materialExactRate": 0.5
+          },
+          "AMBIGUOUS": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 4,
+            "materialExact": 4,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 1,
+            "materialExactRate": 1
+          },
+          "UNSUPPORTED": {
+            "count": 4,
+            "valid": 4,
+            "statusCorrect": 3,
+            "materialExact": 3,
+            "proposed": 0,
+            "unsafeProposed": 0,
+            "statusAccuracy": 0.75,
+            "materialExactRate": 0.75
+          }
+        }
+      }
+    },
+    "comparison": {
+      "status": "development-only",
+      "promoted": false,
+      "detail": "Development guides candidate selection; it cannot authorize promotion."
+    }
+  },
+  "extractionV5Final": {
+    "schemaVersion": 1,
+    "origin": "recorded",
+    "dataClassification": "PUBLIC_SYNTHETIC",
+    "purpose": "final-evaluation",
+    "caseCount": 48,
+    "evaluationSha256": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c",
+    "promptProfile": "reference-contract-v5",
+    "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+    "base": {
+      "artifact": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      },
+      "completedAt": "2026-10-18T05:05:26.309Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 48,
+        "valid": 41,
+        "materialExact": 13,
+        "statusCorrect": 36,
+        "proposed": 30,
+        "unsafeProposed": 21,
+        "expectedProposed": 32,
+        "correctSupportedProposals": 9,
+        "validityRate": 0.8541666666666666,
+        "materialExactRate": 0.2708333333333333,
+        "rawProposalRate": 0.625,
+        "correctSupportedProposalRate": 0.28125,
+        "proposedPrecision": 0.3,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 32,
+            "valid": 27,
+            "statusCorrect": 27,
+            "materialExact": 9,
+            "proposed": 27,
+            "unsafeProposed": 18,
+            "statusAccuracy": 0.84375,
+            "materialExactRate": 0.28125
+          },
+          "AMBIGUOUS": {
+            "count": 8,
+            "valid": 8,
+            "statusCorrect": 7,
+            "materialExact": 2,
+            "proposed": 1,
+            "unsafeProposed": 1,
+            "statusAccuracy": 0.875,
+            "materialExactRate": 0.25
+          },
+          "UNSUPPORTED": {
+            "count": 8,
+            "valid": 6,
+            "statusCorrect": 2,
+            "materialExact": 2,
+            "proposed": 2,
+            "unsafeProposed": 2,
+            "statusAccuracy": 0.25,
+            "materialExactRate": 0.25
+          }
+        }
+      }
+    },
+    "tuned": {
+      "artifact": {
+        "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+        "revision": "51fcc48bf3ae0753d9633ea6566575585c347271"
+      },
+      "completedAt": "2026-10-18T05:24:04.764Z",
+      "stopVerified": true,
+      "costSettled": true,
+      "summary": {
+        "count": 48,
+        "valid": 45,
+        "materialExact": 28,
+        "statusCorrect": 40,
+        "proposed": 33,
+        "unsafeProposed": 14,
+        "expectedProposed": 32,
+        "correctSupportedProposals": 19,
+        "validityRate": 0.9375,
+        "materialExactRate": 0.5833333333333334,
+        "rawProposalRate": 0.6875,
+        "correctSupportedProposalRate": 0.59375,
+        "proposedPrecision": 0.5757575757575758,
+        "byExpectedStatus": {
+          "PROPOSED": {
+            "count": 32,
+            "valid": 29,
+            "statusCorrect": 29,
+            "materialExact": 19,
+            "proposed": 29,
+            "unsafeProposed": 10,
+            "statusAccuracy": 0.90625,
+            "materialExactRate": 0.59375
+          },
+          "AMBIGUOUS": {
+            "count": 8,
+            "valid": 8,
+            "statusCorrect": 6,
+            "materialExact": 4,
+            "proposed": 2,
+            "unsafeProposed": 2,
+            "statusAccuracy": 0.75,
+            "materialExactRate": 0.5
+          },
+          "UNSUPPORTED": {
+            "count": 8,
+            "valid": 8,
+            "statusCorrect": 5,
+            "materialExact": 5,
+            "proposed": 2,
+            "unsafeProposed": 2,
+            "statusAccuracy": 0.625,
+            "materialExactRate": 0.625
+          }
+        }
+      }
+    },
+    "comparison": {
+      "status": "rejected-usefulness-or-safety",
+      "promoted": false,
+      "gateVersion": "extractor-gates-v3-useful-coverage",
+      "gate": "Strictly improve material accuracy without relative regression; at least 80% correct supported coverage, 90% fully valid outputs, 80% correct status for each uncertainty class, and zero incorrect fully validated proposals. Owner review remains mandatory.",
+      "absoluteGatePassed": false,
+      "qualityImprovementMeasured": true,
+      "methodology": "Matched frozen cases, prompts, schema, decoding and launch configuration compare the base artifact with the trained, materialized export. This measures the exported-model pipeline and does not isolate LoRA from materialization or effective runtime precision. Repository configuration and revisions are observed; loaded weight bytes and runtime precision are not attested."
+    }
   }
 }

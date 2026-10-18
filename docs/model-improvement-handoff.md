@@ -1,5 +1,7 @@
 # Improving the extractor after the v4 experiment
 
+**Historical V4 diagnosis.** The follow-up V5 experiment now has a separately reviewed corpus, token audit, matched development comparison and frozen final selection. Use [V5 results](extractor-v5-results.md) and its [protocol](extractor-v5-protocol.md) for current model status. Preserve this V4 analysis and exposed evaluation as historical evidence.
+
 The v4 experiment is complete and its data, prompt and gates remain frozen. The tuned model was rejected: 4/40 fully validated outputs, 1/40 material match, 0/24 correct supported proposals and three incorrect validated proposals. [The result and diagnostic](extractor-v4-results.md) identify the actual failures. This note is for a later model version; it does not change those scores or claim an unmeasured gain.
 
 ## What is being trained

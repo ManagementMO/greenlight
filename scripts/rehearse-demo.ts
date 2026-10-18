@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { evaluateDecision, listScenarios, getScenario, applyProposal, validateDecisionInput, type DecisionResult } from "../lib/domain";
+import { validPublicV5Evaluation } from "../lib/public-extraction-evaluation";
 
 /** Public deterministic rehearsal: no credentials, model calls or mutation endpoints. */
 async function main(){
@@ -28,6 +30,20 @@ async function main(){
   const replayResponse=await request("/api/experiments/replay",{});assert.equal(replayResponse.status,200);
   const replay=await replayResponse.json();assert.equal(replay.gate.promoted,true);
   console.log("PASS · recorded MetaHarness gate replay");
+  const localArtifacts=JSON.parse(await readFile(new URL("../data/artifacts/current.json",import.meta.url),"utf8"));
+  if(localArtifacts.extractionV5Development||localArtifacts.extractionV5Final){
+    const artifactsResponse=await request("/api/artifacts");assert.equal(artifactsResponse.status,200);
+    const artifacts=await artifactsResponse.json();
+    for(const [key,purpose]of [["extractionV5Development","development-only"],["extractionV5Final","final-evaluation"]]as const){
+      if(!localArtifacts[key])continue;
+      assert.ok(validPublicV5Evaluation(artifacts[key],purpose),"Live V5 artifact is incomplete or contradictory");
+      assert.deepEqual(artifacts[key],localArtifacts[key],"Live V5 scores, models or verdict differ from the published release");
+      console.log(`PASS · V5 ${purpose} · ${artifacts[key].caseCount} cases · ${artifacts[key].comparison.status}`);
+    }
+    assert.deepEqual(artifacts.training,localArtifacts.training,"Live V5 training evidence differs");
+    if(localArtifacts.extractionDemo?.promptProfile==="reference-contract-v5")
+      assert.deepEqual(artifacts.extractionDemo,localArtifacts.extractionDemo,"Live source illustration differs from the evaluated model output");
+  }
   console.log(JSON.stringify({ready:true,sourceRevision:health.sourceRevision,paidCalls:0,checkedAt:new Date().toISOString()}));
 }
 main().catch(error=>{console.error("Demo rehearsal failed: "+error.message);process.exitCode=1;});

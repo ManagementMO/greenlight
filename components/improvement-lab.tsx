@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Icon } from "./icons";
+import { ExtractionV5ComparisonPanel } from "./extraction-v5-comparison";
+import { publicEvaluationRunCount, validPublicV5Evaluation, type PublicV5Evaluation } from "@/lib/public-extraction-evaluation";
 
 type ArtifactOrigin = "live" | "recorded" | "deterministic";
 type ProviderArtifact = {
@@ -88,6 +90,8 @@ type Artifacts = {
   experiments: ExperimentArtifact[];
   budget?: { capUsd: number; spentUsd: number; reservedUsd: number };
   extractionComparison?: ExtractionComparison;
+  extractionV5Development?: PublicV5Evaluation;
+  extractionV5Final?: PublicV5Evaluation;
   observability?: {
     issueUrl: string;
     traceUrl: string;
@@ -208,13 +212,13 @@ function ExtractionComparisonPanel({ value }: { value: ExtractionComparison }) {
     >
       <div className="section-heading">
         <div>
-          <span className="eyebrow">Fixed evaluation · recorded inference</span>
-          <h2>Did fine-tuning earn its place?</h2>
+          <span className="eyebrow">Historical V4 · recorded inference</span>
+          <h2>V4 extraction comparison</h2>
         </div>
         <span
           className={`state-badge state-${value.promoted ? "promoted" : "blocked"}`}
         >
-          {value.promoted ? "Candidate promoted" : "Base extractor retained"}
+          {value.promoted ? "V4 gate passed" : "V4 candidate not promoted"}
         </span>
       </div>
       <p className="comparison-intro">
@@ -519,6 +523,12 @@ export function ImprovementLab() {
               {data.training.detail && (
                 <p className="section-description">{data.training.detail}</p>
               )}
+              <p className="section-description">
+                Training, evaluation and serving are separate steps. Public decisions
+                use fixed code and saved evidence, with no live extractor calls.
+                A model passing its evaluation gate does not deploy it or approve
+                a contract; every proposed term still needs owner review.
+              </p>
               {data.training.baseModel && (
                 <div className="identity-row">
                   <span>Base model</span>
@@ -724,9 +734,15 @@ export function ImprovementLab() {
                 <h2>Evaluation results</h2>
               </div>
               <span className="count-label mono">
-                {data.evaluations.length} runs
+                {publicEvaluationRunCount(data)} runs
               </span>
             </div>
+            {validPublicV5Evaluation(data.extractionV5Final, "final-evaluation") && (
+              <ExtractionV5ComparisonPanel value={data.extractionV5Final} />
+            )}
+            {validPublicV5Evaluation(data.extractionV5Development, "development-only") && (
+              <ExtractionV5ComparisonPanel value={data.extractionV5Development} />
+            )}
             {validComparison(data.extractionComparison) && (
               <ExtractionComparisonPanel value={data.extractionComparison} />
             )}

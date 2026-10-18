@@ -2,6 +2,8 @@
 
 **Brand update:** the public project is now Headroom and the repository is [ManagementMO/headroom](https://github.com/ManagementMO/headroom). The original plan below retains its historical setup identifiers. Use the [current brand pack](brand/README.md) and [team handoff](TEAM-HANDOFF.md).
 
+**Current model evidence:** [V5 results](extractor-v5-results.md) supersede the V4 execution checkpoint below. V5 uses 336 synthetic examples, verified 300-step training and a separately identified BF16 export. The accepted architecture and review boundary remain unchanged; budget figures below describe historical checkpoints.
+
 **Execution settings confirmed:** product name Greenlight, local project `/Users/mo/Downloads/greenlight`, Anthropic for the general model, and one Sentry organization with a project named `greenlight-full`. The public GitHub repository is [ManagementMO/greenlight](https://github.com/ManagementMO/greenlight), and the public application is [greenlight-two-psi.vercel.app](https://greenlight-two-psi.vercel.app). The project has a $20 total authorized spending cap across services. Credentials live in the ignored `.env`; an existing provider balance is not additional authorization. Paid experiments run through the local owner CLI; no hosted sandbox service or key is required. See the [setup checklist](./Greenlight-setup-checklist.md) for the implemented account and runtime boundaries.
 
 Prepared October 17, 2026, with execution evidence updated during the v4 comparison. This retains the accepted design and proof gates rather than redefining the system. Scope is chosen for correctness, customer value and testability.

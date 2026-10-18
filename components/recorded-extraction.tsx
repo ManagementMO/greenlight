@@ -12,6 +12,10 @@ type ExtractionDemo = {
   modelRevision: string;
   generatedAt: string;
   origin: "recorded";
+  promptProfile?: string;
+  selectedByGate?: "base" | "tuned";
+  gateVersion?: string;
+  finalEvaluationSha256?: string;
   candidate: Record<string, unknown> | null;
   materialExact: boolean;
   rawOutput?: string;
@@ -271,6 +275,9 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
           <Icon name="spark" size={17} />
         </span>
         <div>
+          {demo.promptProfile === "reference-contract-v5" && (
+            <span className="eyebrow">V5 final gate · {demo.selectedByGate === "tuned" ? "tuned candidate selected" : "base model retained"}</span>
+          )}
           <span className="eyebrow">Recorded specialist output</span>
           <h3>What the extractor found.</h3>
         </div>
@@ -383,6 +390,14 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
           <span>Source SHA-256</span>
           <code>{demo.sourceSha256}</code>
         </div>
+        {demo.promptProfile === "reference-contract-v5" && demo.finalEvaluationSha256 && (
+          <div>
+            <span>V5 final evaluation</span>
+            <a href="https://github.com/ManagementMO/headroom/blob/main/data/artifacts/extraction-v5-evaluation.json" target="_blank" rel="noreferrer">
+              {demo.gateVersion} <Icon name="arrow-up-right" size={12} />
+            </a>
+          </div>
+        )}
         <div>
           <span>Recorded</span>
           <span>{generated}</span>

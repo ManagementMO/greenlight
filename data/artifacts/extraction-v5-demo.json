@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "origin": "recorded",
+  "dataClassification": "PUBLIC_SYNTHETIC",
+  "promptProfile": "reference-contract-v5",
+  "sourceId": "signed-contract",
+  "sourceSha256": "e8a98c2e5d45fda1d2eb680ed7731bc7964f1220803a97b7af21c1f0e6ffbf68",
+  "excerptSha256": "c49f755695b274b82e351350ef1c7d4aa2b051abf8e025180727fc789e84f714",
+  "modelRepo": "Qwen/Qwen3-4B-Instruct-2507",
+  "modelRevision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "generatedAt": "2026-10-18T05:05:26.309Z",
+  "selectedByGate": "base",
+  "gateVersion": "extractor-gates-v3-useful-coverage",
+  "finalEvaluationSha256": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c",
+  "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+  "candidate": {
+    "schemaVersion": 1,
+    "amountRef": "phase_receipt",
+    "trigger": {
+      "op": "ALL",
+      "children": [
+        {
+          "op": "ATOM",
+          "condition": "INSPECTION_PASSED",
+          "subject": "phase_one"
+        },
+        {
+          "op": "ATOM",
+          "condition": "CUSTOMER_CERTIFICATE_RECEIVED",
+          "subject": "phase_one"
+        }
+      ]
+    },
+    "due": {
+      "kind": "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+      "days": 14,
+      "invoiceSubject": "phase_one"
+    },
+    "sourceIds": [
+      "signed-contract"
+    ],
+    "status": "PROPOSED",
+    "issues": []
+  },
+  "materialExact": true,
+  "rawOutput": "{\"schemaVersion\":1,\"amountRef\":\"phase_receipt\",\"trigger\":{\"op\":\"ALL\",\"children\":[{\"op\":\"ATOM\",\"condition\":\"INSPECTION_PASSED\",\"subject\":\"phase_one\"},{\"op\":\"ATOM\",\"condition\":\"CUSTOMER_CERTIFICATE_RECEIVED\",\"subject\":\"phase_one\"}]},\"due\":{\"kind\":\"CALENDAR_DAYS_AFTER_INVOICE_ISSUED\",\"days\":14,\"invoiceSubject\":\"phase_one\"},\"sourceIds\":[\"signed-contract\"],\"status\":\"PROPOSED\",\"issues\":[]}",
+  "outputSha256": "e8451922a80efb9270bac6f384130e2578ccef7e642d253d538bbb583deaeec1",
+  "validationError": null,
+  "includedInEvaluationMetrics": false,
+  "detail": "Actual V5-prompt output from the final gate-selected base artifact on this exact phase clause. This C120 illustration is excluded from the 48 final cases and cannot override the release gate.",
+  "judgmentModel": "jev-1.14.0",
+  "judgmentRunId": "jev-c120-c0d4e07b-8f06-45fd-b792-f385816225a0",
+  "judgmentEvidenceSha256": "9f17fda05791dc19e8e9505bec91779b00c90267bc6707fceddf086d50905fa6",
+  "judgmentBoundary": "Model suggestions requiring owner review; not adjudicated factual truth or measured accuracy. They never activate a financial condition or receipt.",
+  "judgments": [
+    {
+      "predicate": "As of 2026-10-06, the phase-one inspection has actually passed; a future plan alone does not establish this.",
+      "verdict": "NOT_MET",
+      "confidence": 0.89
+    },
+    {
+      "predicate": "As of 2026-10-06, the customer or its explicitly authorized project manager has actually received the phase-one insurance certificate. A future expected receipt is not observed receipt.",
+      "verdict": "UNKNOWN",
+      "confidence": 0.56
+    },
+    {
+      "predicate": "As of 2026-10-06, the USD30,000 phase payment has actually reached settled bank funds. Invoice eligibility, a due date and forecast collection windows do not establish settlement.",
+      "verdict": "NOT_MET",
+      "confidence": 0.93
+    }
+  ]
+}

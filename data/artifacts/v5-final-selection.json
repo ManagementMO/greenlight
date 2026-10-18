@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "purpose": "candidate-frozen-before-final",
+  "selectedAt": "2026-10-18T04:47:16.336Z",
+  "rationale": "Select the frozen BF16 export of the same V5 adapter from development only: material exact 15/24 versus base 9/24, valid 24/24 versus 22/24, correct supported 8/16 versus 4/16, and incorrect validated proposals 8 versus 10. The initial quantized export regressed and remains archived. This is the only candidate for untouched final verification; no automatic financial activation.",
+  "base": {
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "tuned": {
+    "repo": "machinelearningmo/headroom-extractor-v5-bf16-42d582a35d2f",
+    "revision": "51fcc48bf3ae0753d9633ea6566575585c347271"
+  },
+  "trainingSha256": "ed827924d7ba4118fa15c5ef71fb211c557c3390d87384f21af4eb86ae59d051",
+  "developmentSha256": "028190f3fc7910b9960b135671a7a7dc6d07b1b0109bb63b4e6ffa1747aff916",
+  "finalEvaluationSha256": "a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c",
+  "promptContractSha256": "278f24bbfc5add26e4ff248b0e8dc3112ce36a2223ba5eaaffbc4bd5d4a7c9c9",
+  "developmentArtifactSha256": "fc4dfd274c6e3d41a2cc2ebfff6ce62fa03235524c54e0427084ab6511be0c8b",
+  "developmentRunSha256": {
+    "base": "182c45be42e775a8497ae8268fa0ae34ca014488ab9d095e0ff2317979632ed9",
+    "tuned": "d23adfc2179e4d18c1ce2e45798f19d164510ba72789117b2422c82141c17d14"
+  },
+  "decode": {
+    "temperature": 0,
+    "maxTokens": 768
+  },
+  "launch": {
+    "engine": "vllm",
+    "gpu": {
+      "gpu_type": "L4-24GB",
+      "gpu_count": 1
+    },
+    "vllmExtraArgs": [
+      "--max-model-len",
+      "4096",
+      "--max-num-seqs",
+      "4",
+      "--gpu-memory-utilization",
+      "0.85"
+    ]
+  },
+  "boundary": "Candidate chosen using development only. Final predictions cannot change this selection; owner review remains mandatory."
+}
