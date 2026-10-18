@@ -29,6 +29,8 @@ The separately authored **24-case development set** contains 16 supported clause
 
 Development is for diagnosis and candidate selection. A final claim requires a separately authored, reviewed and frozen final set, no reuse of exposed V4 answers, and identical per-case prompts/decoding for the base and candidate. A failed development candidate must be revised under a new version; it cannot silently rewrite this training artifact.
 
+The independently reviewed **48-case final** is frozen before inference: 32 supported (eight atomic, 24 nested), eight ambiguous and eight unsupported. Its SHA-256 is `a6b487d2dc3ade46232c155831e0101d0301bf7dba7fc74b3acd1a1ca579148c`. All exact source, subject, amount, company and case identities and full source texts are disjoint from training, development and the V4 final. Abstract logic families overlap: this tests fresh prose and identities, not unseen logical-family generalization. Final predictions are not used to choose the candidate.
+
 ## Release gate declared before final predictions
 
 `extractor-gates-v3-useful-coverage` retains V2's matched-run checks and nonregression requirements, then adds an absolute usefulness floor:
