@@ -1,0 +1,33 @@
+RESIDENTIAL REMODEL AGREEMENT
+Agreement No. BCH-2026-141
+
+Contractor: Birchfield Custom Homes LLC, 4417 Brickworks Road, Providence, RI
+Owner: Cedar Court Partners, LLC
+Project: Kitchen and dining remodel, 12 Cedar Court, Providence, RI
+Date: October 9, 2026
+
+1. SCOPE OF WORK
+Full kitchen remodel: demolition, custom cabinetry, appliance package, countertops, lighting and finishes,
+as shown in the drawings dated October 2, 2026.
+
+2. CONTRACT PRICE
+The total contract price is $120,000.00. Work items are referenced below as work_cedar (the whole job)
+and stage_cabinets (cabinet installation).
+
+3. PAYMENT SCHEDULE
+(a) The $8,000.00 deposit for work_cedar is eligible when the agreement for work_cedar is signed.
+    Once eligible, the contractual due date is 2026-10-12; there is no additional offset.
+(b) The $45,000.00 installment for stage_cabinets is eligible when the customer accepts stage_cabinets.
+    Once eligible, the contractual due date is 2026-12-18; there is no additional offset.
+(c) The $67,000.00 final installment for work_cedar is eligible when the customer has accepted the work
+    on work_cedar. Once eligible, the contractual due date is 2027-02-26; there is no additional offset.
+
+4. CONTRACTOR'S COSTS (for Owner's information)
+  - Custom cabinetry and appliance package, Coastline Millwork: $70,000.00, due 2026-10-15
+  - Installation crew, Novak Carpentry: $10,000.00, due 2026-11-20
+
+5. CHANGE ORDERS
+Any change to scope, price, schedule or payment terms requires a written change order signed by both parties.
+
+6. INSURANCE AND WARRANTY
+Contractor maintains general liability insurance and warrants its workmanship for one year.

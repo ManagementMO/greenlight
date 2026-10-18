@@ -1,0 +1,125 @@
+{
+  "generatedAt": "2026-10-18T10:30:04.437Z",
+  "model": "claude-sonnet-4-6",
+  "question": "Can we take the Harbor Lane Dental renovation and still keep $20,000 in the bank?",
+  "files": [
+    "Birchfield_Custom_Homes_Greenlight_Upload.json",
+    "happy-path/1-harbor-lane-renovation.txt",
+    "happy-path/3-harbor-lane-email.eml",
+    "happy-path/4-novotny-email.eml"
+  ],
+  "questions": 18,
+  "inputTokens": 3109,
+  "outputTokens": 1740,
+  "costUsd": 0.035427,
+  "ms": 19524,
+  "agreeWithJev": 18,
+  "rows": [
+    {
+      "id": "cond-2",
+      "jev": "UNKNOWN",
+      "llm": "UNKNOWN"
+    },
+    {
+      "id": "cond-3",
+      "jev": "UNKNOWN",
+      "llm": "UNKNOWN"
+    },
+    {
+      "id": "cond-4",
+      "jev": "UNKNOWN",
+      "llm": "UNKNOWN"
+    },
+    {
+      "id": "pip-1",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "bdays-1",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "pip-2",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "bdays-2",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "pip-3",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "bdays-3",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "late-14",
+      "jev": "MET",
+      "llm": "MET"
+    },
+    {
+      "id": "late-30",
+      "jev": "MET",
+      "llm": "MET"
+    },
+    {
+      "id": "late-45",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "late-60",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "deposit-paid",
+      "jev": "MET",
+      "llm": "MET"
+    },
+    {
+      "id": "ar-promise-minv-00018",
+      "jev": "MET",
+      "llm": "MET"
+    },
+    {
+      "id": "ar-dispute-minv-00018",
+      "jev": "NOT_MET",
+      "llm": "NOT_MET"
+    },
+    {
+      "id": "ar-promise-minv-00019",
+      "jev": "UNKNOWN",
+      "llm": "UNKNOWN"
+    },
+    {
+      "id": "ar-dispute-minv-00019",
+      "jev": "UNKNOWN",
+      "llm": "UNKNOWN"
+    }
+  ],
+  "headroom": {
+    "llm": {
+      "model": "claude-sonnet-4-6",
+      "inputTokens": 2345,
+      "outputTokens": 1412,
+      "costUsd": 0.028215,
+      "ms": 14005
+    },
+    "jev": {
+      "questions": 18,
+      "calls": 2,
+      "costUsd": 0.000300762,
+      "ms": 180
+    }
+  },
+  "note": "One measured run on the happy-path demo files, not a benchmark. Same documents, same questions, same extraction prompt."
+}

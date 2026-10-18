@@ -27,7 +27,7 @@ export interface SourceEvidence {
   text: string;
   observedDate: ISODate;
   effectiveDate: ISODate;
-  provenance: "sponsor_dataset" | "constructed_fixture";
+  provenance: "sponsor_dataset" | "constructed_fixture" | "user_upload";
   url?: string;
   sha256?: string;
   spanId?: string;

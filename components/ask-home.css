@@ -1,0 +1,120 @@
+/* Home: same tokens and type as app/landing/landing.css, scoped under .ah. */
+.ah { --bg: #0f0f0f; --fg: #fff; --accent: #0b8a63; --mint: #9fe3c4; --signal: #32d17b;
+  --serif: var(--font-serif), Georgia, serif; --sans: var(--font-sans), system-ui, sans-serif;
+  --mono: "JetBrains Mono", var(--font-mono), ui-monospace, monospace;
+  position: relative; min-height: 100svh; background: var(--bg); color: var(--fg); font-family: var(--sans);
+  overflow: hidden; font-variant-numeric: tabular-nums; }
+.ah *, .ah *::before, .ah *::after { box-sizing: border-box; }
+.ah button { font: inherit; color: inherit; cursor: pointer; }
+.ah a { color: inherit; }
+.ah-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Initial hidden states only once JS is running, so the page reads without it. */
+.ah-ready:not(.ah-still) [data-ah-char], .ah-ready:not(.ah-still) [data-ah-fade] { opacity: 0; }
+
+/* Background: the Hero gradient, held back by a scrim so the composer stays the focus. */
+.ah-bg { position: absolute; inset: 0; }
+.ah-bg::after { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 42%, rgba(15,15,15,.55), rgba(15,15,15,.92) 75%), linear-gradient(to bottom, transparent 60%, var(--bg)); }
+
+.ah-nav { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 20px clamp(20px, 4vw, 56px); }
+.ah-brand { font: 400 20px/1 var(--serif); letter-spacing: -0.01em; }
+.ah-nav nav { display: flex; gap: 22px; align-items: center; }
+.ah-nav nav > * { background: none; border: 0; padding: 0 0 3px; font-size: 14px; text-decoration: none; opacity: .8; border-bottom: 1px solid transparent; }
+.ah-nav nav > *:hover { opacity: 1; border-bottom-color: currentColor; }
+
+.ah-main { position: relative; z-index: 1; width: min(820px, 100% - 32px); margin: 0 auto; padding: 7vh 0 48px; display: grid; justify-items: center; text-align: center; }
+.ah-eyebrow { font: 500 12px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mint); margin: 0; }
+.ah h1 { margin: 18px 0 0; font: 400 clamp(44px, 5.4vw, 80px)/1.02 var(--serif); letter-spacing: -0.02em; perspective: 900px; }
+.ah-word { display: inline-block; white-space: nowrap; margin-right: .24em; }
+.ah-word:last-child { margin-right: 0; }
+.ah-char { display: inline-block; transform-origin: 50% 50% -20px; }
+.ah-sub { margin: 18px 0 0; max-width: 52ch; font-size: 17px; line-height: 1.5; opacity: .72; }
+
+/* Composer: the Race card surface. */
+.ah-composer { position: relative; width: 100%; margin-top: 40px; padding: 18px 18px 14px; text-align: left;
+  background: rgba(10,12,11,.62); border: 1px solid rgba(255,255,255,.12); border-radius: 18px;
+  backdrop-filter: blur(18px); box-shadow: 0 30px 80px rgba(0,0,0,.35); transition: border-color .2s, box-shadow .2s; }
+.ah-composer:focus-within { border-color: rgba(159,227,196,.45); box-shadow: 0 30px 80px rgba(0,0,0,.35), 0 0 0 4px rgba(11,138,99,.18); }
+.ah-composer textarea { display: block; width: 100%; min-height: 84px; resize: none; background: none; border: 0; outline: 0;
+  color: var(--fg); font: 400 18px/1.45 var(--sans); padding: 4px 6px; }
+.ah-composer textarea::placeholder { color: rgba(255,255,255,.38); }
+
+.ah-files { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ah-files li { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 6px 6px 6px 10px; border-radius: 8px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); font-size: 13px; }
+.ah-files li > svg { color: var(--mint); flex-shrink: 0; }
+.ah-file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
+.ah-file-meta { font: 12px var(--mono); opacity: .55; }
+.ah-files button { display: grid; place-items: center; width: 22px; height: 22px; border: 0; border-radius: 6px; background: none; opacity: .6; }
+.ah-files button:hover { opacity: 1; background: rgba(255,255,255,.08); }
+
+.ah-composer-bar { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); }
+.ah-attach { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 10px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); font-size: 14px; }
+.ah-attach:hover { background: rgba(255,255,255,.09); }
+.ah-kbd { margin-left: auto; font: 12px var(--mono); opacity: .45; }
+.ah-send { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 22px; border: 0; border-radius: 10px;
+  background: var(--accent); color: #fff !important; font-size: 14px; font-weight: 500; transition: filter .15s, opacity .15s; }
+.ah-send:hover:not(:disabled) { filter: brightness(1.12); }
+.ah-send:disabled { opacity: .4; cursor: not-allowed; }
+
+/* Drag anywhere on the page: the composer becomes the drop zone. */
+.ah-drop { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 18px; border: 1.5px dashed var(--mint);
+  background: rgba(11,138,99,.22); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mint);
+  opacity: 0; pointer-events: none; transition: opacity .15s; }
+.ah.is-dragging .ah-drop { opacity: 1; }
+
+.ah-error { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,107,94,.4); background: rgba(255,107,94,.08); color: #ff8f7d; font-size: 14px; text-align: left; width: 100%; }
+.ah-warn { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(246,197,122,.4); background: rgba(246,197,122,.08); color: #f6c57a; font-size: 14px; text-align: left; width: 100%; }
+.ah-suggest { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.ah-suggest button { height: 34px; padding: 0 14px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
+  font-size: 13px; opacity: .8; transition: opacity .15s, background .15s; }
+.ah-suggest button:hover { opacity: 1; background: rgba(255,255,255,.08); }
+
+/* Document slots: the Savings card glass, one tile per kind of paperwork. */
+.ah-slots { width: 100%; margin-top: 56px; text-align: left; }
+.ah-slots-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.ah-slots-head button { background: none; border: 0; padding: 0; font-size: 14px; color: var(--mint); }
+.ah-slots-head button:hover { text-decoration: underline; }
+.ah-slots-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ah-slot { display: grid; gap: 6px; align-content: start; min-height: 128px; padding: 18px; text-align: left; border-radius: 18px;
+  background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.18); transition: background .15s, border-color .15s; }
+.ah-slot:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); }
+.ah-slot b { font: 400 22px/1.1 var(--serif); margin-top: auto; }
+.ah-slot > span:last-child { font-size: 13px; opacity: .6; line-height: 1.35; }
+.ah-slot-state { display: inline-flex; align-items: center; gap: 6px; font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
+.ah-slot.is-filled { border-style: solid; border-color: rgba(50,209,123,.4); background: rgba(11,138,99,.12); }
+.ah-slot.is-filled .ah-slot-state { color: var(--signal); opacity: 1; }
+
+/* Demo cases: one click loads real demo files and the matching question. */
+.ah-cases { width: 100%; margin-top: 40px; text-align: left; }
+.ah-cases .ah-slots-head span { font-size: 13px; opacity: .5; }
+/* Demo cases: one detailed dropdown (name · group · files · expected answer). It sits at the bottom of Home, so it opens upward. */
+.ah-select { position: relative; }
+.ah-select-trigger { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 16px; border-radius: 14px;
+  background: rgba(10,12,11,.62); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(18px); transition: border-color .15s; }
+.ah-select-trigger:hover:not(:disabled), .ah-select.is-open .ah-select-trigger { border-color: rgba(159,227,196,.5); }
+.ah-select-trigger:disabled { opacity: .6; cursor: progress; }
+.ah-select-trigger > svg { margin-left: auto; flex-shrink: 0; opacity: .7; transition: rotate .15s; }
+.ah-select.is-open .ah-select-trigger > svg { rotate: 180deg; }
+.ah-option-body { display: grid; gap: 3px; min-width: 0; }
+.ah-option-body b { font-weight: 500; font-size: 15px; line-height: 1.3; }
+.ah-option-body span { font: 11px var(--mono); opacity: .5; }
+.ah-option-body em { font-style: normal; font-size: 12.5px; line-height: 1.35; color: var(--mint); opacity: .9; }
+.ah-select-panel { position: absolute; z-index: 20; left: 0; right: 0; bottom: calc(100% + 6px); max-height: 380px; overflow: auto; padding: 6px;
+  border-radius: 14px; background: #121413; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+.ah-select-group { margin: 8px 10px 4px; font: 500 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; opacity: .45; }
+.ah-option { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto 16px; gap: 14px; align-items: center; text-align: left;
+  padding: 10px 12px; border-radius: 10px; background: none; border: 0; }
+.ah-option:hover { background: rgba(255,255,255,.06); }
+.ah-option.is-on { background: rgba(11,138,99,.16); }
+.ah-option.is-on > svg { color: var(--mint); }
+.ah-option-files { font: 11px var(--mono); opacity: .55; white-space: nowrap; padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,.12); }
+
+.ah-note { margin: 40px 0 0; font: 12px/1.5 var(--mono); opacity: .45; }
+
+@media (max-width: 760px) {
+  .ah-slots-row { grid-template-columns: repeat(2, 1fr); }
+  .ah-kbd { display: none; }
+}

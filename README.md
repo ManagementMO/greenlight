@@ -117,7 +117,7 @@ cp -n .env.example .env
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000). Keep any existing `.env`; credentials belong only in that ignored file.
+Open [localhost:3000](http://localhost:3000) for the landing page, or [localhost:3000/app](http://localhost:3000/app) to ask about a job. Keep any existing `.env`; credentials belong only in that ignored file.
 
 ```sh
 npm test

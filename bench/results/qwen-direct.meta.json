@@ -1,0 +1,23 @@
+{
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "cases": 90,
+  "splits": [
+    "dev",
+    "test",
+    "heldout"
+  ],
+  "decode": {
+    "temperature": 0,
+    "maxTokens": 1200
+  },
+  "gpuUsdPerHour": 1.05,
+  "worstCaseCostUsd": 1.05,
+  "creditUsd": 17.24,
+  "deploymentId": "8192568d5abc",
+  "completedAt": "2026-10-18T02:53:28.960Z",
+  "stopVerified": true,
+  "provisioningMs": 829606,
+  "totalCostUsd": 0.32,
+  "costPerCaseUsd": 0.0035555555555555557,
+  "note": "per-case cost amortizes provisioning + serving over all cases"
+}

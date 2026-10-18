@@ -37,7 +37,8 @@ export class AnthropicClient {
       "api.anthropic.com",
     );
   }
-  async message(input: { system: string; user: string; maxTokens: number }) {
+  /** `pdfs` are base64 PDF documents sent ahead of the user text; existing callers pass none. */
+  async message(input: { system: string; user: string; maxTokens: number; pdfs?: string[] }) {
     if (
       !Number.isInteger(input.maxTokens) ||
       input.maxTokens < 1 ||
@@ -61,7 +62,20 @@ export class AnthropicClient {
           model: this.config.model,
           max_tokens: input.maxTokens,
           system: input.system,
-          messages: [{ role: "user", content: input.user }],
+          messages: [
+            {
+              role: "user",
+              content: input.pdfs?.length
+                ? [
+                    ...input.pdfs.map((data) => ({
+                      type: "document",
+                      source: { type: "base64", media_type: "application/pdf", data },
+                    })),
+                    { type: "text", text: input.user },
+                  ]
+                : input.user,
+            },
+          ],
         }),
       },
       this.config.fetch,

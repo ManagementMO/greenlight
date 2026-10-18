@@ -1,0 +1,36 @@
+NEW CONSTRUCTION AGREEMENT
+Agreement No. BCH-2026-152
+
+Contractor: Birchfield Custom Homes LLC, 4417 Brickworks Road, Providence, RI
+Owner: Elm Ridge Holdings, LLC
+Project: New custom home, Lot 7 Elm Ridge Road, Providence, RI
+Date: October 28, 2026
+
+1. SCOPE OF WORK
+Foundation, structural steel and framing, mechanical rough-in, drywall and finishes for a two-story
+single-family home, as shown in the drawings dated October 20, 2026.
+
+2. CONTRACT PRICE
+The total contract price is $150,000.00. Work items are referenced below as work_elm (the whole job),
+stage_framing (framing) and stage_drywall (drywall).
+
+3. PAYMENT SCHEDULE
+(a) The $7,500.00 deposit for work_elm is eligible when the agreement for work_elm is signed.
+    Once eligible, the contractual due date is 2026-11-02; there is no additional offset.
+(b) The $40,000.00 installment for stage_framing is eligible when stage_framing passes inspection.
+    Once eligible, the contractual due date is 2027-02-26; there is no additional offset.
+(c) The $50,000.00 installment for stage_drywall is eligible when the customer accepts stage_drywall.
+    Once eligible, the contractual due date is 2027-04-30; there is no additional offset.
+(d) The $52,500.00 final installment for work_elm is eligible when the customer has accepted the work
+    on work_elm. Once eligible, the contractual due date is 2027-06-15; there is no additional offset.
+
+4. CONTRACTOR'S COSTS (for Owner's information)
+  - Structural steel and lumber package, Ironbridge Supply: $60,000.00, due 2026-10-30
+  - Framing crew, Novak Carpentry: $45,000.00, due 2026-11-20
+  - Mechanical rough-in, Delmar Trades: $30,000.00, due 2026-12-15
+
+5. CHANGE ORDERS
+Any change to scope, price, schedule or payment terms requires a written change order signed by both parties.
+
+6. INSURANCE AND WARRANTY
+Contractor maintains general liability insurance and warrants its workmanship for one year.

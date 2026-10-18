@@ -10,7 +10,7 @@ import { ImprovementLoop } from "./improvement-loop";
 
 const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 
-const DEMO = "https://greenlight-two-psi.vercel.app";
+const DEMO = "/app";
 const SOURCE = "https://github.com/ManagementMO/greenlight";
 
 // Hero proof row, derived from the same benchmark numbers as the race.
@@ -30,10 +30,11 @@ const SOURCES = [
 ];
 
 // Feature 1: pins on the product screenshot, as % of the 1440×1000 image.
+// Positions (in % of the screenshot) match public/landing/decision-workspace.png: the Harbor Lane demo case, $40k reserve.
 const PINS = [
-  { x: 18.6, y: 49.8, label: "Lowest cash, to the day", flip: true },
-  { x: 51.9, y: 72.3, label: "Where the reserve breaks" },
-  { x: 88.6, y: 61.2, label: "The smallest fix that works" },
+  { x: 23.3, y: 46.6, label: "Lowest cash, to the day", flip: true },
+  { x: 86.1, y: 36.2, label: "Where the reserve breaks", flip: true },
+  { x: 31.3, y: 74, label: "The one question that decides it" },
 ];
 
 
@@ -188,6 +189,9 @@ export default function Landing() {
             <h1 aria-label="Stop paying an AI to do arithmetic.">
               <Chars text="Stop paying an AI to do arithmetic." attr="data-hero-char" />
             </h1>
+            <div className="lp-btns lp-hero-cta" data-hero-fade>
+              <a className="lp-btn lp-btn-solid" href={DEMO}>Ask about a job →</a>
+            </div>
           </div>
           <HeroRace />
         </div>
@@ -209,7 +213,7 @@ export default function Landing() {
         <h2><Chars text="See the gap before you sign" /></h2>
         <div className="lp-demo-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/landing/decision-workspace.png" alt="Greenlight decision workspace: lowest cash −$13,000 on Nov 4, and a proposed $65,000 deposit" />
+          <img src="/landing/decision-workspace.png" alt="Headroom answer for the Harbor Lane Dental renovation: yes if the timing works out, lowest cash $26,285 on Apr 23, and the one question that decides it" />
           {PINS.map((p) => (
             <div key={p.label} className={`lp-pin${p.flip ? " is-flip" : ""}`} style={{ left: `${p.x}%`, top: `${p.y}%` }}>
               <i /><span>{p.label}</span>

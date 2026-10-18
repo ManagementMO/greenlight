@@ -1,0 +1,46 @@
+{
+  "generatedBy": "bench/generate.ts",
+  "constructed": true,
+  "splits": {
+    "dev": {
+      "count": 40,
+      "sha256": "eb298107a2b0a9c6ec9e0fc78aaf9bf82a48706e6718932d39b0a5fb94ae775c",
+      "statuses": {
+        "SUPPORTED": 10,
+        "CONDITIONAL": 10,
+        "SHORTFALL": 10,
+        "NEEDS_INPUT": 10
+      },
+      "families": [
+        "A",
+        "B"
+      ]
+    },
+    "test": {
+      "count": 30,
+      "sha256": "cf5773979732be1e2614f9d86a2d120d1bb82361908be2890e5a59b3c29f4efa",
+      "statuses": {
+        "SUPPORTED": 8,
+        "CONDITIONAL": 8,
+        "SHORTFALL": 7,
+        "NEEDS_INPUT": 7
+      },
+      "families": [
+        "C"
+      ]
+    },
+    "heldout": {
+      "count": 20,
+      "sha256": "cfca58d7b01bc3106df78644e524b21c41f95518c78ff7362ff68f8065320ae7",
+      "statuses": {
+        "SUPPORTED": 5,
+        "CONDITIONAL": 5,
+        "SHORTFALL": 5,
+        "NEEDS_INPUT": 5
+      },
+      "families": [
+        "D"
+      ]
+    }
+  }
+}

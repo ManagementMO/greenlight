@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_SENTRY_RELEASE: release,
   },
   serverExternalPackages: [],
+  // The demo-case file route reads demo-files/ at runtime; ship them with that function.
+  outputFileTracingIncludes: { "/api/demo-files": ["./demo-files/**/*"] },
 };
 
 export default withSentryConfig(nextConfig, {

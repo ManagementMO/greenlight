@@ -1,0 +1,39 @@
+RESIDENTIAL RENOVATION AGREEMENT
+Agreement No. BCH-2026-129 (Estimate est-00129)
+
+Contractor: Birchfield Custom Homes LLC, 4417 Brickworks Road, Providence, RI
+Owner: Harbor Lane Dental Group, LLC
+Project: Interior renovation of 88 Harbor Lane, Providence, RI
+Date: October 13, 2026
+
+1. SCOPE OF WORK
+Demolition, reframing, relocated plumbing and electrical for three treatment rooms, and new cabinetry,
+flooring and finishes, as shown in the drawings dated September 29, 2026.
+
+2. CONTRACT PRICE
+The total contract price is $97,200.00. Work items are referenced below as work_harbor (the whole job), stage_roughin (rough-in) and stage_finish (finishes).
+
+3. PAYMENT SCHEDULE
+(a) The $14,580.00 deposit for work_harbor is eligible when the agreement for work_harbor is signed.
+    Once eligible, the contractual due date is 2026-10-13; there is no additional offset.
+(b) The $29,160.00 installment for stage_roughin is eligible when all of (stage_roughin passes inspection)
+    AND (the customer receives the certificate for stage_roughin). Once eligible, the contractual due
+    date is 2026-11-30; there is no additional offset.
+(c) The $29,160.00 installment for stage_finish is eligible when the customer accepts stage_finish.
+    Once eligible, the contractual due date is 2027-01-15; there is no additional offset.
+(d) The $24,300.00 installment for work_harbor is eligible when at least one of (the customer accepts
+    the invoice for work_harbor) OR (the customer has accepted the work on work_harbor). Once eligible,
+    the contractual due date is 2027-02-26; there is no additional offset.
+
+4. CONTRACTOR'S COSTS (for Owner's information)
+  - Building permit, City of Providence: $1,000.00, due 2026-10-16
+  - Framing lumber and materials, Ironbridge Supply: $18,500.00, due 2026-10-30
+  - Framing subcontract, Novak Carpentry: $16,200.00, due 2026-11-20
+  - Electrical and plumbing subcontract, Delmar Trades: $14,800.00, due 2026-12-18
+  - Cabinetry and finishes, Coastline Millwork: $12,900.00, due 2027-01-29
+
+5. CHANGE ORDERS
+Any change to scope, price or schedule requires a written change order signed by both parties.
+
+6. INSURANCE AND WARRANTY
+Contractor maintains general liability insurance and warrants its workmanship for one year.

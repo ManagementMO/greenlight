@@ -30,6 +30,12 @@ export function anthropicCostCents(
       1e6,
   );
 }
+/** Exact cost in dollars (not rounded up to a cent), for showing on the page. Budgets use anthropicCostCents. */
+export function anthropicCostUsd(model: string, usage: { inputTokens: number; outputTokens: number }) {
+  const rates = ANTHROPIC_RATES[model];
+  if (!rates) throw new Error("Unverified Anthropic pricing; paid call refused");
+  return (usage.inputTokens * rates.inputPerMillionUsd + usage.outputTokens * rates.outputPerMillionUsd) / 1e6;
+}
 export function anthropicMaximumCents(
   model: string,
   system: string,

@@ -819,11 +819,17 @@ function fundingProposal(
       d <= deposit.date! &&
       d < final.date!,
   )) {
+    // The proposal rewrites the deposit's amount and date and the final receipt's amount. A case that also
+    // touches those fields would conflict with it, so skip. A case that only moves the final receipt's date
+    // (customer pays late) composes with it: the amounts still total the contract price.
     if (
       cases.some((c) =>
         c.options.some((o) =>
           o.patches.some(
-            (p) => p.eventId === deposit.id || p.eventId === final.id,
+            (p) =>
+              p.eventId === deposit.id ||
+              (p.eventId === final.id &&
+                (p.excluded !== undefined || p.amountCents !== undefined)),
           ),
         ),
       )

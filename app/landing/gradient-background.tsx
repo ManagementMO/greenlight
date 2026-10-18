@@ -6,11 +6,13 @@ export type GradientLook = {
   colors: [string, string, string];
   type?: "plane" | "waterPlane" | "sphere";
   wave?: boolean;
+  /** Render a single still frame instead of the moving gradient. */
+  still?: boolean;
 };
 
 // Base settings follow the library's "halo" preset; `wave` tilts the camera
 // down onto a waterPlane for the landscape look used in the closing section.
-export default function GradientBackground({ colors, type = "plane", wave = false }: GradientLook) {
+export default function GradientBackground({ colors, type = "plane", wave = false, still = false }: GradientLook) {
   const camera = wave
     ? { cAzimuthAngle: 180, cPolarAngle: 70, cDistance: 4.4, positionX: 0, rotationY: 0, rotationZ: 0, uStrength: 3, uDensity: 1.6, uFrequency: 0 }
     : { cAzimuthAngle: 180, cPolarAngle: 90, cDistance: 3.6, positionX: -1.4, rotationY: 10, rotationZ: 50, uStrength: 4, uDensity: 1.3, uFrequency: 5.5 };
@@ -25,7 +27,7 @@ export default function GradientBackground({ colors, type = "plane", wave = fals
       <ShaderGradient
         control="props"
         type={wave ? "waterPlane" : type}
-        animate="on"
+        animate={still ? "off" : "on"}
         uTime={0}
         uSpeed={0.3}
         uAmplitude={1}

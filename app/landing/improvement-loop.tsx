@@ -1,6 +1,7 @@
 "use client";
 
-// "It gets cheaper on its own": one before/after card that plays once on entry.
+// "It found a cheaper way to run itself": one before/after card that plays once on entry.
+// A one-time recorded experiment (scripts/harness/experiment.ts), not something live runs do continuously.
 // Numbers: the recorded MetaHarness run in README.md ("What the MetaHarness experiment actually measured").
 
 import { useEffect, useRef } from "react";
@@ -8,12 +9,12 @@ import { createScope, createTimeline, onScroll, stagger } from "animejs";
 
 const TOTAL = 21;
 const ROWS: { key: string; label: string; before: number; after: number; fmt: (v: number) => string }[] = [
-  { key: "checks", label: "AI checks for the same job", before: 18, after: 6, fmt: (v) => String(Math.round(v)) },
+  { key: "checks", label: "Jev requests, same questions", before: 18, after: 6, fmt: (v) => String(Math.round(v)) },
   { key: "time", label: "Time to finish", before: 2_771, after: 832, fmt: (v) => `${(v / 1000).toFixed(1)}s` },
   { key: "right", label: "Answers right", before: 20, after: 20, fmt: (v) => `${Math.round(v)} / ${TOTAL}` },
 ];
 
-// Which dots fade is illustrative; the count (12 of 18 checks dropped) is measured.
+// Which dots fade is illustrative; the count (12 of 18 requests dropped) is measured.
 const DOTS = Array.from({ length: 18 }, (_, i) => i % 3 !== 0);
 
 export function ImprovementLoop() {
@@ -47,11 +48,12 @@ export function ImprovementLoop() {
   return (
     <section className="lp-save" ref={root}>
       <div className="lp-save-copy">
-        <p className="lp-eyebrow">It gets cheaper on its own</p>
-        <h2>Same answers. A third of the AI work.</h2>
+        <p className="lp-eyebrow">It found a cheaper way to run itself</p>
+        <h2>Same answers. A third of the Jev requests.</h2>
         <p>
-          Greenlight keeps looking for a leaner way to run its AI checks, like not re-checking a document that
-          hasn&apos;t changed. It only switches when every answer stays exactly as good.
+          We let the AI redesign how Greenlight runs its Jev checks: only re-check what a new document affects, and
+          ask related questions together. A fixed test it couldn&apos;t edit decided whether to switch: no condition
+          wrongly marked as met, no drop in accuracy, and fewer requests. It passed.
         </p>
       </div>
 
@@ -73,7 +75,7 @@ export function ImprovementLoop() {
             ))}
           </tbody>
         </table>
-        <p className="lp-save-note">Recorded test: 7 sample document updates, 21 questions. Real-world savings will vary.</p>
+        <p className="lp-save-note">Measured once on 7 sample document updates, 21 questions. Live runs don&apos;t use these settings yet.</p>
       </div>
     </section>
   );

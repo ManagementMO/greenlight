@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
+import { Manrope, IBM_Plex_Sans, IBM_Plex_Mono, Inter, Lora } from 'next/font/google';
 import './globals.css';
 
 const display = Manrope({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 const body = IBM_Plex_Sans({ subsets: ['latin'], weight: 'variable', variable: '--font-body', display: 'swap' });
+// Landing design system fonts, used by the home screen (components/ask-home.css).
+const serif = Lora({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });
 
 export const metadata: Metadata = {
@@ -23,5 +26,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#087F5B' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${display.variable} ${body.variable} ${mono.variable}`}>{children}</body></html>;
+  return <html lang="en"><body className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable} ${sans.variable}`}>{children}</body></html>;
 }

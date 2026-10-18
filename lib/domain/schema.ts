@@ -135,7 +135,7 @@ export const decisionInputSchema = z.object({
         text,
         observedDate: date,
         effectiveDate: date,
-        provenance: z.enum(["sponsor_dataset", "constructed_fixture"]),
+        provenance: z.enum(["sponsor_dataset", "constructed_fixture", "user_upload"]),
         url: z.string().url().max(2048).optional(),
         sha256: z
           .string()
