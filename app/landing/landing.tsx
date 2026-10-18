@@ -4,7 +4,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { animate, createScope, onScroll, scrambleText, stagger } from "animejs";
 import { Icon } from "@/components/icons";
-import { DIRECT, HeroRace, ROUTED } from "./hero-race";
+import { HeroRace } from "./hero-race";
+import artifacts from "@/data/artifacts/current.json";
 import { RouteSection, routeTimeline } from "./route-section";
 import { ImprovementLoop } from "./improvement-loop";
 
@@ -15,10 +16,12 @@ const SOURCE = "https://github.com/ManagementMO/greenlight";
 
 // Hero proof row, derived from the same benchmark numbers as the race.
 // The race already shows exact-figure accuracy, so it is not repeated here.
+// Hero stats from the recorded Jev experiment (data/artifacts/current.json, experiments[0]): same workload before and after.
+const EXP = artifacts.experiments[0];
 const PROOF = [
-  { value: `${(DIRECT.secs / ROUTED.secs).toFixed(1)}× faster`, label: "per decision" },
-  { value: `${Math.round((1 - ROUTED.cost / DIRECT.cost) * 100)}% cheaper`, label: "model cost per decision" },
-  { value: "215× cheaper", label: "a Jev yes/no check vs one Claude call" },
+  { value: `${Math.round((1 - EXP.candidate.modelCalls / EXP.baseline.modelCalls) * 100)}% fewer calls`, label: "requests sent to the AI checker", tone: "mint" },
+  { value: `${Math.round((1 - EXP.candidate.inputTokens / EXP.baseline.inputTokens) * 100)}% less input`, label: "text sent to AI, measured in tokens", tone: "violet" },
+  { value: `${EXP.candidate.correct}/${EXP.candidate.total} correct`, label: "same score before and after", tone: "amber" },
 ];
 
 // Feature 2: each figure the engine uses, and the line it was read from.
@@ -198,10 +201,10 @@ export default function Landing() {
         <div className="lp-proof" data-hero-fade>
           <dl>
             {PROOF.map((p) => (
-              <div key={p.label}><dt>{p.label}</dt><dd>{p.value}</dd></div>
+              <div key={p.label} className={`is-${p.tone}`}><dt>{p.label}</dt><dd>{p.value}</dd></div>
             ))}
           </dl>
-          <p>90 constructed cases, independent oracle. Jev answers narrow yes/no checks only.</p>
+          <p>Results from a recorded Jev test with 7 simulated document updates and 21 checks; one error remains. The demo recalculates cash live using reviewed sample data.</p>
         </div>
       </section>
 

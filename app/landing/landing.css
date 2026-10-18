@@ -47,6 +47,9 @@
 .lp-proof div { display: flex; flex-direction: column; gap: 4px; }
 .lp-proof dt { font-size: 12.5px; opacity: .8; }
 .lp-proof > p { margin: 0; font-size: 11.5px; opacity: .75; }
+.lp-proof .is-mint dd { color: #9fe3c4; }
+.lp-proof .is-violet dd { color: #b9a7ff; }
+.lp-proof .is-amber dd { color: #f6c57a; }
 
 /* Dock */
 .lp-dock { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 18px; background: rgba(255,255,255,0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
