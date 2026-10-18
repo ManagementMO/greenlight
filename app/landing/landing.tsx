@@ -8,6 +8,8 @@ import { HeroRace } from "./hero-race";
 import type { LandingEvidence } from "@/lib/landing-evidence";
 import { RouteSection, routeTimeline } from "./route-section";
 import { ImprovementLoop } from "./improvement-loop";
+import { CashStory } from "./cash-story";
+import type { LandingCashStory } from "@/lib/landing-cash-story";
 
 const Gradient = dynamic(() => import("./gradient-background"), { ssr: false });
 
@@ -21,15 +23,6 @@ const SOURCES = [
   { value: "$18,000", what: "planned business payroll", from: "forward-calendar" },
   { value: "Nov 3", what: "due if issued Oct 20", from: "C-120:s8 · 14 days" },
 ];
-
-// Feature 1: pins on the product screenshot, as % of the 1440×1000 image.
-const PINS = [
-  { x: 18.6, y: 49.8, label: "Lowest cash, to the day", flip: true },
-  { x: 51.9, y: 72.3, label: "Where the reserve breaks" },
-  { x: 88.6, y: 61.2, label: "A proposed payment change" },
-];
-
-
 
 function Chars({ text, attr = "data-char" }: { text: string; attr?: string }) {
   return (
@@ -58,7 +51,7 @@ function Dock({ label = "Open live demo" }: { label?: string }) {
   );
 }
 
-export default function Landing({ evidence }: { evidence: LandingEvidence }) {
+export default function Landing({ evidence, cashStory }: { evidence: LandingEvidence; cashStory: LandingCashStory | null }) {
   const root = useRef<HTMLElement>(null);
   const reduced = useRef(false);
   const proof = [
@@ -100,25 +93,6 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
           ease: "outExpo",
           autoplay: onScroll({ target: row, enter: "bottom-=120 top" }),
         });
-      });
-
-      // Feature 1: the screenshot settles into place, then the pins drop in one by one.
-      const frame = el.querySelector(".lp-demo-frame")!;
-      animate(frame, {
-        scale: [0.96, 1],
-        y: [24, 0],
-        opacity: [0, 1],
-        duration: 650,
-        ease: "outCubic",
-        autoplay: onScroll({ target: frame, enter: "bottom-=80 top" }),
-      });
-      animate(".lp-pin", {
-        opacity: [0, 1],
-        y: [-12, 0],
-        duration: 700,
-        delay: stagger(260),
-        ease: "outBack",
-        autoplay: onScroll({ target: frame, enter: "bottom-=320 top" }),
       });
 
       // Each figure connects to a legible source label; never scramble the evidence.
@@ -205,30 +179,18 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
         </div>
       </section>
 
-      {/* Feature 1: the product, annotated */}
+      {/* A reversible comparison uses the same cash engine as the workspace. */}
       <section className="lp-feature lp-demo" id="decision">
         <p className="lp-eyebrow">01 · The decision</p>
         <h2 aria-label="See the gap before you sign"><Chars text="See the gap before you sign" /></h2>
         <p className="lp-section-lede">A profitable job can still leave payroll unfunded. Test the timing before you commit.</p>
-        <dl className="lp-decision-summary">
-          <div><dt>Current terms</dt><dd>−$13,000<span>lowest modeled cash</span></dd></div>
-          <div><dt>Move to the deposit</dt><dd>+$23,000<span>from the final payment</span></dd></div>
-          <div><dt>Proposed terms</dt><dd>$10,000<span>lowest modeled cash</span></dd></div>
-        </dl>
-        <div className="lp-demo-frame">
+        {cashStory ? <CashStory story={cashStory} /> : <p className="lp-section-note">The comparison needs complete reviewed inputs. Open the workspace to inspect the decision.</p>}
+        <a className="lp-workspace-peek" href={DEMO}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/landing/decision-workspace.png" width={1440} height={1000} loading="lazy" alt="Headroom decision workspace: lowest modeled cash −$13,000 on Nov 4 and a proposed $65,000 deposit" />
-          {PINS.map((p) => (
-            <div key={p.label} className={`lp-pin${p.flip ? " is-flip" : ""}`} style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-              <i /><span>{p.label}</span>
-            </div>
-          ))}
-        </div>
-        <p className="lp-section-note">Same $120,000 contract. The proposal requires customer agreement and the modeled collection dates. Explore the actual workspace below.</p>
-        <div className="lp-btns" data-fade>
-          <a className="lp-btn lp-btn-solid" href={DEMO}>Open live demo →</a>
-          <a className="lp-btn lp-btn-light" href="#how-it-works">How it works ↓</a>
-        </div>
+          <img src="/landing/decision-workspace.png" width={1440} height={1000} loading="lazy" alt="Headroom decision workspace" />
+          <span><strong>Explore it in the actual workspace</strong><small>Compare terms, inspect sources, and test the assumptions.</small></span>
+          <Icon name="arrow-right" size={20} />
+        </a>
       </section>
 
       <RouteSection />

@@ -47,10 +47,16 @@ export function ImprovementLoop({ evidence }: { evidence: LandingEvidence }) {
         <p className="lp-eyebrow">03 · Learn, test, improve</p>
         <h2>Improve the workflow. Prove the difference.</h2>
         <p>
-          The MetaHarness proposes a better way to check evidence: read only what changed,
-          batch related questions, and reuse unaffected answers. A separate evaluator tests it
-          on the same fixed cases before it can pass.
+          The MetaHarness improves how evidence is checked: read only what changed,
+          batch related questions, and reuse unaffected answers.
         </p>
+        <ol className="lp-learning-flow" aria-label="The workflow improvement process">
+          <li><i>1</i><b>Propose</b><span>A bounded change</span></li>
+          <li><i>2</i><b>Replay</b><span>The same cases</span></li>
+          <li><i>3</i><b>Evaluate</b><span>Fixed quality gates</span></li>
+          <li><i>4</i><b>Keep</b><span>Only if it passes</span></li>
+        </ol>
+        <p className="lp-gate-verdict" data-passed={evidence.workflowPromoted}><i />{evidence.workflowPromoted ? "This workflow passed its fixed gate." : "This workflow remains held for review."}</p>
         <div className="lp-tuning-result">
           <h3>Fine-tuning the contract reader.</h3>
           <p>We trained a model to turn clauses into payment terms: <strong>{evidence.v5.baseExact}/{evidence.v5.count} → {evidence.v5.tunedExact}/{evidence.v5.count}</strong> outputs with every material field correct on a separate synthetic test.</p>
