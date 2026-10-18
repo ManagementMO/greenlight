@@ -8,6 +8,7 @@ import {
   DEFAULT_BASE_MODEL,
 } from "../../lib/providers/veri";
 import { usdToCentsCeil } from "../../lib/budget/ledger";
+import { assertPublicSyntheticTrainingData } from "../../lib/providers/data-policy";
 import {
   args,
   intArg,
@@ -40,17 +41,10 @@ export async function train() {
   const datasetFile = resolve(String(a.data ?? "data/training/proof.jsonl")),
     data = await readFile(datasetFile, "utf8");
   const digest = createHash("sha256").update(data).digest("hex");
-  if (!["train.jsonl", "proof.jsonl"].includes(basename(datasetFile)))
-    throw new Error(
-      "Only manifest-reviewed train/proof files may be uploaded; final evaluation is protected",
-    );
   const dataManifest = JSON.parse(
     await readFile(resolve(dirname(datasetFile), "manifest.json"), "utf8"),
   );
-  if (dataManifest.hashes[basename(datasetFile)] !== digest)
-    throw new Error(
-      "Supervised dataset hash differs from its reviewed manifest",
-    );
+  assertPublicSyntheticTrainingData(dataManifest, basename(datasetFile), data);
   const [catalog, balance, burn] = await Promise.all([
     client.catalog(),
     client.balance(),

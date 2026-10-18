@@ -31,7 +31,11 @@ export function buildC120Showcase() {
       op: "ALL",
       children: [
         { op: "ATOM", condition: "INSPECTION_PASSED", subject: "phase_one" },
-        { op: "ATOM", condition: "CERTIFICATE_RECEIVED", subject: "phase_one" },
+        {
+          op: "ATOM",
+          condition: "CUSTOMER_CERTIFICATE_RECEIVED",
+          subject: "phase_one",
+        },
       ],
     },
     due: {

@@ -1841,7 +1841,7 @@ pre {
 .extraction-raw summary::-webkit-details-marker {
   display: none;
 }
-.extraction-raw[open] summary svg {
+.extraction-raw[open] > summary svg {
   transform: rotate(180deg);
 }
 .extraction-raw pre {
@@ -1899,6 +1899,98 @@ pre {
   border-radius: 50%;
   background: #a2bdab;
 }
+.invoice-clock-test {
+  border: 1px solid #dce7df;
+  border-radius: 6px;
+  background: #fcfdfc;
+  padding: 11px 12px;
+  margin-top: 12px;
+}
+.invoice-clock-test > summary {
+  font-size: 10px;
+  font-weight: 500;
+  color: #5f846d;
+}
+.invoice-clock-test[open] > summary svg {
+  transform: rotate(180deg);
+}
+.invoice-clock-test > p {
+  color: #8fa696;
+  font-size: 9px;
+  line-height: 1.9;
+  margin-top: 10px;
+}
+.invoice-clock-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.invoice-clock-fields > label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #809c89;
+  font-size: 9px;
+  min-width: 0;
+}
+.invoice-clock-fields input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d6e3db;
+  background: white;
+  color: #6b8b76;
+  border-radius: 5px;
+  padding: 7px 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  min-height: 35px;
+}
+.invoice-clock-answer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #e2eae5;
+  margin-top: 15px;
+  padding-top: 13px;
+}
+.invoice-clock-answer > span {
+  font-size: 9px;
+  color: #91a898;
+}
+.invoice-clock-answer output {
+  font-size: 16px;
+  color: #4e805f;
+  letter-spacing: -0.045em;
+}
+.invoice-clock-answer output.is-missing {
+  color: #a58e68;
+  font-size: 13px;
+}
+.invoice-clock-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: #9db0a2;
+  font-size: 8px;
+}
+.invoice-clock-missing {
+  color: #a08b6a !important;
+}
+.invoice-clock-boundary {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 8px;
+  line-height: 1.9;
+  color: #9aae9f;
+  margin-top: 12px;
+}
+.invoice-clock-boundary > svg {
+  margin-top: 2px;
+}
 .recorded-judgments {
   margin-top: 13px;
   padding-top: 12px;
@@ -1923,6 +2015,12 @@ pre {
   color: #a5b7aa;
   font-size: 8px;
   margin-top: 3px;
+}
+.judgment-boundary {
+  color: #91a697;
+  font-size: 9px;
+  line-height: 1.9;
+  margin-top: 8px;
 }
 .linked-cash-row {
   display: flex;
@@ -3659,6 +3757,9 @@ pre {
   }
   .extraction-raw > div {
     gap: 9px;
+  }
+  .invoice-clock-fields {
+    grid-template-columns: 1fr;
   }
   .source-document h2 {
     font-size: 22px;

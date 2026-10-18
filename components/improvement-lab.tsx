@@ -258,7 +258,7 @@ export function ImprovementLab() {
                     <Icon name="spark" size={20} />
                   </span>
                   <strong>Fine-tuned extractor</strong>
-                  <p>Veri training, merged weights, pinned model export.</p>
+                  <p>Veri training, merged weights, versioned model export.</p>
                 </div>
                 <span className="flow-connector">→</span>
                 <div>
@@ -335,7 +335,7 @@ export function ImprovementLab() {
               )}
               {data.training.modelRevision && (
                 <div className="identity-row">
-                  <span>Pinned revision</span>
+                  <span>Observed repository revision</span>
                   <code>{data.training.modelRevision}</code>
                 </div>
               )}

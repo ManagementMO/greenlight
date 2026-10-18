@@ -13,6 +13,13 @@ import {
   summarizeExtraction,
 } from "../../lib/providers/evaluation";
 import { buildC120Showcase } from "../../lib/providers/showcase";
+import {
+  initOwnerTelemetry,
+  traceExtraction,
+  recordExtractionScore,
+  flushOwnerTelemetry,
+  reportOwnerFailure,
+} from "./telemetry";
 import { providerRequest } from "../../lib/providers/http";
 import { usdToCentsCeil } from "../../lib/budget/ledger";
 import type { LabeledExample } from "./generate-data";
@@ -76,8 +83,7 @@ async function main() {
     repo = String(a.repo ?? DEFAULT_BASE_MODEL),
     label = String(a.label ?? "base");
   const maxCents = intArg(a, "max-cents", 200, 25, 400),
-    timeoutSeconds = intArg(a, "timeout-seconds", 1800, 300, 3600),
-    limit = intArg(a, "limit", 32, 1, 32);
+    timeoutSeconds = intArg(a, "timeout-seconds", 1800, 300, 3600);
   const client = new VeriClient({
       apiKey: env.VERI_API_KEY ?? "",
       timeoutMs: 60000,
@@ -85,6 +91,19 @@ async function main() {
     budget = ledger();
   const manifest = JSON.parse(
     await readFile(resolve("data/training/manifest.json"), "utf8"),
+  );
+  if (
+    !Number.isInteger(manifest.evaluationCount) ||
+    manifest.evaluationCount < 1 ||
+    manifest.evaluationCount > 1000
+  )
+    throw new Error("Frozen manifest evaluation count invalid");
+  const limit = intArg(
+    a,
+    "limit",
+    manifest.evaluationCount,
+    1,
+    manifest.evaluationCount,
   );
   const raw = await readFile(
       resolve("data/training/evaluation.frozen.jsonl"),
@@ -156,6 +175,7 @@ async function main() {
   const id = "veri-serving-" + label + "-" + randomUUID(),
     record = resolve("work/ml", id + ".json"),
     deadline = Date.now() + timeoutSeconds * 1000;
+  initOwnerTelemetry("extractor-evaluation", id);
   const request = boundedDeploymentRequest(
     repo,
     "greenlight-" + label + "-" + randomUUID(),
@@ -229,6 +249,7 @@ async function main() {
       );
     }
     const provisioningMs = Date.now() - start;
+    const servingDeploymentId = dep.id;
     // Canary is a real inference on an already-trained tiny proof example; separate from evaluation metrics.
     const canary = JSON.parse(
       (
@@ -236,11 +257,17 @@ async function main() {
       ).split("\n")[0],
     ) as LabeledExample;
     const canaryStart = Date.now();
-    const canaryResponse = await client.chat(
-      dep.id,
+    const canaryResponse = await traceExtraction(
       repo,
-      [{ role: "user", content: extractionPrompt(canary.context) }],
-      768,
+      id,
+      "training_canary",
+      () =>
+        client.chat(
+          servingDeploymentId,
+          repo,
+          [{ role: "user", content: extractionPrompt(canary.context) }],
+          768,
+        ),
     );
     const canaryRecord = {
       id: canary.id,
@@ -253,15 +280,18 @@ async function main() {
         canary.expected,
       ),
     };
+    recordExtractionScore(id, canary.id, canaryRecord.score);
     for (const example of examples) {
       if (Date.now() + 60000 >= deadline)
         throw new Error("Evaluation would exceed remaining GPU lifetime");
       const t = Date.now(),
-        response = await client.chat(
-          dep.id,
-          repo,
-          [{ role: "user", content: extractionPrompt(example.context) }],
-          768,
+        response = await traceExtraction(repo, id, "frozen_case", () =>
+          client.chat(
+            servingDeploymentId,
+            repo,
+            [{ role: "user", content: extractionPrompt(example.context) }],
+            768,
+          ),
         );
       const score = scoreExtraction(
         response.text,
@@ -269,6 +299,7 @@ async function main() {
         example.expected,
       );
       scores.push(score);
+      recordExtractionScore(id, example.id, score);
       rows.push({
         id: example.id,
         family: example.family,
@@ -306,16 +337,23 @@ async function main() {
       const source = buildC120Showcase(),
         t = Date.now();
       // Only the source excerpt and visible references reach the model. Expected labels stay local.
-      const prediction = await client.chat(
-        dep.id,
-        repo,
-        [{ role: "user", content: extractionPrompt(source.context) }],
-        768,
+      const prediction = await traceExtraction(repo, id, "c120_showcase", () =>
+        client.chat(
+          servingDeploymentId,
+          repo,
+          [{ role: "user", content: extractionPrompt(source.context) }],
+          768,
+        ),
       );
       const score = scoreExtraction(
         prediction.text,
         source.context,
         source.expected,
+      );
+      recordExtractionScore(
+        id,
+        "C120-showcase-excluded-from-test-metrics",
+        score,
       );
       showcase = {
         sourceId: source.sourceId,
@@ -372,6 +410,7 @@ async function main() {
     };
     await saveJson(record, result);
     await saveJson(resolve("work/ml/evaluation-" + label + ".json"), result);
+    await flushOwnerTelemetry();
     console.log(
       JSON.stringify({
         event: "evaluation-completed",
@@ -421,7 +460,8 @@ async function main() {
     }
   }
 }
-main().catch((error) => {
+main().catch(async (error) => {
+  await reportOwnerFailure(error);
   console.error(publicError(error));
   process.exitCode = 1;
 });

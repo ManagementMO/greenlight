@@ -23,18 +23,35 @@ describe("independent extraction evaluator", () => {
       .trim()
       .split("\n")
       .map((x) => JSON.parse(x));
-    expect(train).toHaveLength(240);
-    expect(evaluation).toHaveLength(32);
+    expect(train).toHaveLength(276);
+    expect(evaluation).toHaveLength(40);
     expect(
       train.filter(
         (x) => x.expected.due?.kind === "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
       ),
-    ).toHaveLength(48);
+    ).toHaveLength(84);
     expect(
       evaluation.filter(
         (x) => x.expected.due?.kind === "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
       ),
-    ).toHaveLength(8);
+    ).toHaveLength(16);
+    expect(read("train-labels.jsonl")).not.toContain(
+      '"condition":"CERTIFICATE_RECEIVED"',
+    );
+    expect(read("evaluation.frozen.jsonl")).not.toContain(
+      '"condition":"CERTIFICATE_RECEIVED"',
+    );
+    const recipientNegatives = evaluation.filter(
+      (x) =>
+        x.family.includes("noncustomer_receipt") ||
+        x.family.includes("undisclosed_receipt"),
+    );
+    expect(recipientNegatives).toHaveLength(8);
+    expect(
+      recipientNegatives.every(
+        (x) => x.expected.trigger === null && x.expected.status !== "PROPOSED",
+      ),
+    ).toBe(true);
     const families = new Set(train.map((x) => x.family)),
       companies = new Set(train.map((x) => x.companyId));
     for (const row of evaluation) {

@@ -65,8 +65,8 @@ const families: Record<string, Builder> = {
     due: after(p.days),
   }),
   certificate_receipt: (p) => ({
-    text: `After we receive the insurance certificate for ${p.job}, the ${p.amount} payment is due in ${p.days} calendar days.`,
-    trigger: atom("CERTIFICATE_RECEIVED", p.job),
+    text: `After the customer${p.days % 2 ? "'s expressly authorized project manager" : ""} receives the insurance certificate for ${p.job}, the ${p.amount} payment is due in ${p.days} calendar days.`,
+    trigger: atom("CUSTOMER_CERTIFICATE_RECEIVED", p.job),
     due: after(p.days),
   }),
   invoice_accepted: (p) => ({
@@ -75,10 +75,10 @@ const families: Record<string, Builder> = {
     due: after(p.days),
   }),
   inspection_and_certificate: (p) => ({
-    text: `Payment of ${p.amount} is due ${p.days} calendar days after BOTH ${p.subject} passes inspection AND the insurance certificate for ${p.job} is received. Both conditions are required.`,
+    text: `Payment of ${p.amount} is due ${p.days} calendar days after BOTH ${p.subject} passes inspection AND the customer receives the insurance certificate for ${p.job}. Both conditions are required.`,
     trigger: all(
       atom("INSPECTION_PASSED", p.subject),
-      atom("CERTIFICATE_RECEIVED", p.job),
+      atom("CUSTOMER_CERTIFICATE_RECEIVED", p.job),
     ),
     due: after(p.days),
   }),
@@ -151,7 +151,7 @@ const families: Record<string, Builder> = {
     text: `${p.amount} becomes invoice-eligible after BOTH inspection of ${p.subject} has passed and the customer has received the insurance certificate for ${p.subject}. Payment terms: ${p.days} calendar days after invoice issuance for ${p.subject}. Eligibility does not mean the invoice has been issued or cash collected.`,
     trigger: all(
       atom("INSPECTION_PASSED", p.subject),
-      atom("CERTIFICATE_RECEIVED", p.subject),
+      atom("CUSTOMER_CERTIFICATE_RECEIVED", p.subject),
     ),
     due: afterInvoice(p.days, p.subject),
   }),
@@ -169,9 +169,36 @@ const families: Record<string, Builder> = {
     due: afterInvoice(p.days, p.subject),
   }),
   invoice_clock_after_certificate: (p) => ({
-    text: `Receipt of the insurance certificate for ${p.job} makes the ${p.amount} job invoice eligible. Payment is due ${p.days} calendar days after invoice issuance for ${p.job}. Receipt of a certificate alone does not start the payment clock.`,
-    trigger: atom("CERTIFICATE_RECEIVED", p.job),
+    text: `Receipt by the customer of the insurance certificate for ${p.job} makes the ${p.amount} job invoice eligible. Payment is due ${p.days} calendar days after invoice issuance for ${p.job}. Customer receipt of a certificate alone does not start the payment clock.`,
+    trigger: atom("CUSTOMER_CERTIFICATE_RECEIVED", p.job),
     due: afterInvoice(p.days, p.job),
+  }),
+  contractor_certificate_recipient: (p) => ({
+    text: `We, the contractor, must receive the insurance certificate for ${p.subject} before its ${p.amount} invoice becomes eligible. Receipt by us is the contract's specified condition, not receipt by the customer. Payment is due ${p.days} calendar days after invoice issuance for ${p.subject}.`,
+    trigger: null,
+    due: afterInvoice(p.days, p.subject),
+    status: "UNSUPPORTED",
+    issues: [
+      "The clause requires contractor receipt, outside the supported customer-receipt predicate.",
+    ],
+  }),
+  supplier_certificate_recipient: (p) => ({
+    text: `Only the supplier's receipt of the insurance certificate for ${p.subject} is required to authorize its ${p.amount} invoice. The customer need not receive it under this clause. Payment is due ${p.days} calendar days after invoice issuance for ${p.subject}.`,
+    trigger: null,
+    due: afterInvoice(p.days, p.subject),
+    status: "UNSUPPORTED",
+    issues: [
+      "The clause requires supplier receipt, outside the supported customer-receipt predicate.",
+    ],
+  }),
+  unspecified_certificate_recipient: (p) => ({
+    text: `After we receive the insurance certificate for ${p.subject}, its ${p.amount} invoice becomes eligible. The document does not identify who 'we' refers to. Payment is due ${p.days} calendar days after invoice issuance for ${p.subject}.`,
+    trigger: null,
+    due: afterInvoice(p.days, p.subject),
+    status: "AMBIGUOUS",
+    issues: [
+      "The certificate recipient is unidentified; 'we' is not bound to a party.",
+    ],
   }),
 };
 function make(
@@ -240,9 +267,9 @@ const heldout: Record<string, Builder> = {
     due: after(p.days),
   }),
   both_routes_with_certificate: (p) => ({
-    text: `Receipt of the insurance certificate for ${p.job} is mandatory. In addition, one of these must occur: ${p.subject} passes inspection or its invoice is accepted. Only when the certificate and one alternative exist does the ${p.days}-calendar-day clock for ${p.amount} begin.`,
+    text: `Receipt by the customer's expressly authorized project manager of the insurance certificate for ${p.job} is mandatory. In addition, one of these must occur: ${p.subject} passes inspection or its invoice is accepted. Only when customer certificate receipt and one alternative exist does the ${p.days}-calendar-day clock for ${p.amount} begin.`,
     trigger: all(
-      atom("CERTIFICATE_RECEIVED", p.job),
+      atom("CUSTOMER_CERTIFICATE_RECEIVED", p.job),
       any(
         atom("INSPECTION_PASSED", p.subject),
         atom("INVOICE_ACCEPTED", p.subject),
@@ -278,9 +305,9 @@ const heldout: Record<string, Builder> = {
     due: after(p.days),
   }),
   certificate_and_alternative_eligibility_invoice_clock: (p) => ({
-    text: `For the ${p.amount} invoice covering ${p.subject}, insurance-certificate receipt for ${p.subject} is mandatory, together with either customer acceptance of ${p.subject} or a passed inspection of ${p.subject}. These prerequisites only authorize billing. Allow ${p.days} calendar days from issue of the authorized invoice for payment.`,
+    text: `For the ${p.amount} invoice covering ${p.subject}, receipt by the customer of the insurance certificate for ${p.subject} is mandatory, together with either customer acceptance of ${p.subject} or a passed inspection of ${p.subject}. These prerequisites only authorize billing. Allow ${p.days} calendar days from issue of the authorized invoice for payment.`,
     trigger: all(
-      atom("CERTIFICATE_RECEIVED", p.subject),
+      atom("CUSTOMER_CERTIFICATE_RECEIVED", p.subject),
       any(
         atom("PHASE_ACCEPTED", p.subject),
         atom("INSPECTION_PASSED", p.subject),
@@ -295,6 +322,22 @@ const heldout: Record<string, Builder> = {
       atom("DELIVERY_CONFIRMED", p.subject),
     ),
     due: afterInvoice(p.days, p.subject),
+  }),
+  noncustomer_receipt_billing_condition: (p) => ({
+    text: `This ${p.amount} billing provision for ${p.subject} uses the equipment supplier's receipt of the insurance certificate as its sole prerequisite. That supplier is not acting as the customer's authorized representative, and customer receipt is not required. Payment falls due ${p.days} calendar days from issue of the invoice for ${p.subject}.`,
+    trigger: null,
+    due: afterInvoice(p.days, p.subject),
+    status: "UNSUPPORTED",
+    issues: [
+      "An explicitly noncustomer recipient is the contractual billing prerequisite.",
+    ],
+  }),
+  undisclosed_receipt_party_billing_condition: (p) => ({
+    text: `The ${p.amount} invoice for ${p.subject} may be issued upon receipt of its insurance certificate. This provision leaves the receiving party unspecified; the parties have not clarified whether it means the contractor or customer. Once the invoice for ${p.subject} is issued, payment is due ${p.days} calendar days later.`,
+    trigger: null,
+    due: afterInvoice(p.days, p.subject),
+    status: "AMBIGUOUS",
+    issues: ["The contractual certificate recipient has not been identified."],
   }),
 };
 export async function generateData() {
@@ -320,7 +363,10 @@ export async function generateData() {
   };
   const manifest = {
     schemaVersion: 1,
-    version: "greenlight-clauses-v2",
+    version: "greenlight-clauses-v3",
+    dataClassification: "PUBLIC_SYNTHETIC",
+    publicationPolicy:
+      "Generated fictional clauses only. No private customer data, accounting books, credentials, or production traces. Merged model weights are public for the current serving runtime.",
     trainingCount: train.length,
     proofCount: proof.length,
     evaluationCount: evaluation.length,

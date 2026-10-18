@@ -58,7 +58,7 @@ describe("grounded clause contracts", () => {
   it("keeps invoice eligibility separate from an issuance-anchored payment clock", () => {
     const c = {
       ...context,
-      text: "$30,000 becomes invoice-eligible after inspection passes and a certificate is received. Payment is due14 calendar days after invoice issuance.",
+      text: "$30,000 becomes invoice-eligible after inspection passes and the customer receives its insurance certificate. Payment is due14 calendar days after invoice issuance.",
       subjects: ["phase_1"],
     };
     const clause = {
@@ -67,7 +67,11 @@ describe("grounded clause contracts", () => {
         op: "ALL",
         children: [
           { op: "ATOM", condition: "INSPECTION_PASSED", subject: "phase_1" },
-          { op: "ATOM", condition: "CERTIFICATE_RECEIVED", subject: "phase_1" },
+          {
+            op: "ATOM",
+            condition: "CUSTOMER_CERTIFICATE_RECEIVED",
+            subject: "phase_1",
+          },
         ],
       },
       due: {

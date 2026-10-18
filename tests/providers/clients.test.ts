@@ -124,6 +124,7 @@ describe("provider HTTP contracts", () => {
     });
     expect(train.method).toBe("sft_text");
     expect(train.hf_push.artifact).toBe("merged");
+    expect(train.hf_push.private).toBe(false);
     expect(train.requires_heartbeat).toBe(true);
     const dep = boundedDeploymentRequest("me/greenlight-proof", "proof");
     expect(dep.min_replicas).toBe(0);

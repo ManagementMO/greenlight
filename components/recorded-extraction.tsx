@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { SourceEvidence } from "@/lib/domain";
+import { resolvePaymentClock } from "@/lib/domain";
+import type { PaymentDueRule, SourceEvidence } from "@/lib/domain";
 import { Icon } from "./icons";
 
 type ExtractionDemo = {
@@ -28,7 +29,8 @@ const conditionLabels: Record<string, string> = {
   DELIVERY_CONFIRMED: "Delivery confirmed",
   PHASE_ACCEPTED: "Phase accepted",
   INSPECTION_PASSED: "Inspection passed",
-  CERTIFICATE_RECEIVED: "Insurance certificate received",
+  CERTIFICATE_RECEIVED: "Certificate received · recipient unspecified",
+  CUSTOMER_CERTIFICATE_RECEIVED: "Customer received insurance certificate",
   INVOICE_ACCEPTED: "Invoice accepted",
 };
 
@@ -108,6 +110,105 @@ function InvoiceClock({ value }: { value: unknown }) {
   );
 }
 
+type InvoiceIssuedRule = Extract<
+  PaymentDueRule,
+  { kind: "CALENDAR_DAYS_AFTER_INVOICE_ISSUED" }
+>;
+
+function invoiceRule(value: unknown): InvoiceIssuedRule | null {
+  const rule = record(value);
+  if (
+    rule?.kind !== "CALENDAR_DAYS_AFTER_INVOICE_ISSUED" ||
+    typeof rule.days !== "number" ||
+    !Number.isInteger(rule.days) ||
+    rule.days < 0 ||
+    rule.days > 365 ||
+    typeof rule.invoiceSubject !== "string" ||
+    !rule.invoiceSubject.trim()
+  )
+    return null;
+  return {
+    kind: "CALENDAR_DAYS_AFTER_INVOICE_ISSUED",
+    days: rule.days,
+    invoiceSubject: rule.invoiceSubject,
+  };
+}
+
+function InvoiceClockTest({ rule }: { rule: InvoiceIssuedRule }) {
+  const [eligibilityDate, setEligibilityDate] = useState("2026-10-20");
+  const [invoiceIssuedDate, setInvoiceIssuedDate] = useState("2026-10-22");
+  const clock = resolvePaymentClock(rule, {
+    eligibilityDate: eligibilityDate || undefined,
+    invoiceIssuedDate: invoiceIssuedDate || undefined,
+  });
+  const dueLabel = clock.dueDate
+    ? new Intl.DateTimeFormat("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      }).format(new Date(`${clock.dueDate}T12:00:00Z`))
+    : "Not established";
+  return (
+    <details className="invoice-clock-test">
+      <summary>
+        Test the invoice clock <Icon name="chevron-down" size={13} />
+      </summary>
+      <p>
+        Hypothetical dates using this recorded {rule.days}-calendar-day invoice
+        rule. The cash forecast stays unchanged.
+      </p>
+      <div className="invoice-clock-fields">
+        <label>
+          Eligibility met · hypothetical
+          <input
+            type="date"
+            value={eligibilityDate}
+            onChange={(event) => setEligibilityDate(event.target.value)}
+          />
+        </label>
+        <label>
+          Invoice issued · hypothetical
+          <input
+            type="date"
+            value={invoiceIssuedDate}
+            onChange={(event) => setInvoiceIssuedDate(event.target.value)}
+          />
+        </label>
+      </div>
+      <div className="invoice-clock-answer" aria-live="polite">
+        <span>Calculated due date</span>
+        <output className={`mono ${clock.dueDate ? "" : "is-missing"}`}>
+          {dueLabel}
+        </output>
+      </div>
+      {clock.anchorDate && (
+        <div className="invoice-clock-anchor">
+          <span>Anchor · invoice issuance</span>
+          <span className="mono">{clock.anchorDate}</span>
+        </div>
+      )}
+      {clock.missing.length > 0 && (
+        <p className="invoice-clock-missing">
+          Missing: {clock.missing.join(", ")}
+        </p>
+      )}
+      {clock.diagnostics.map((diagnostic) => (
+        <p className="invoice-clock-missing" key={diagnostic.code}>
+          {diagnostic.message}
+        </p>
+      ))}
+      <div className="invoice-clock-boundary">
+        <Icon name="shield" size={12} />
+        <span>
+          A due date is not a bank receipt. This reuses a typed rule in fixed
+          code and invokes no model.
+        </span>
+      </div>
+    </details>
+  );
+}
+
 export function RecordedExtraction({ source }: { source: SourceEvidence }) {
   const [demo, setDemo] = useState<ExtractionDemo | null>(null);
   useEffect(() => {
@@ -148,6 +249,7 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
 
   if (!demo) return null;
   const candidate = record(demo.candidate);
+  const supportedInvoiceRule = invoiceRule(candidate?.due);
   const generated = Number.isNaN(Date.parse(demo.generatedAt))
     ? demo.generatedAt
     : new Intl.DateTimeFormat("en-US", {
@@ -202,7 +304,12 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
       )}
       {demo.judgments?.length ? (
         <div className="recorded-judgments">
-          <span className="eyebrow">Recorded predicate judgments</span>
+          <span className="eyebrow">Recorded Jev suggestions</span>
+          <p className="judgment-boundary">
+            No factual condition or bank receipt is activated by these outputs.
+            These suggestions need owner review; confidence is model-reported,
+            not measured accuracy.
+          </p>
           {demo.judgments.map((judgment, index) => (
             <div key={index}>
               <span>{judgment.predicate}</span>
@@ -237,6 +344,15 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
         <summary>
           Inspect model output & identity <Icon name="chevron-down" size={13} />
         </summary>
+        {demo.materialExact && supportedInvoiceRule ? (
+          <InvoiceClockTest rule={supportedInvoiceRule} />
+        ) : (
+          <p className="extraction-unknown">
+            The clock test needs a valid invoice-issuance rule that passes the
+            material-field check. Review the source and recorded candidate
+            first.
+          </p>
+        )}
         <pre>{JSON.stringify(demo.candidate, null, 2)}</pre>
         <div>
           <span>Served model</span>
@@ -249,7 +365,7 @@ export function RecordedExtraction({ source }: { source: SourceEvidence }) {
           </a>
         </div>
         <div>
-          <span>Pinned revision</span>
+          <span>Observed revision</span>
           <code>{demo.modelRevision}</code>
         </div>
         <div>

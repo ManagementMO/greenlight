@@ -65,7 +65,9 @@ export function boundedTrainingRequest(input: {
       gradient_accumulation_steps: 2,
     },
     requires_heartbeat: true,
-    hf_push: { repo: input.repo, artifact: "merged" as const, private: true },
+    // Project workflow accepts only manifest-reviewed PUBLIC_SYNTHETIC clauses.
+    // Current serving workers cannot read a private HF export through the training integration.
+    hf_push: { repo: input.repo, artifact: "merged" as const, private: false },
   };
 }
 export function boundedDeploymentRequest(
