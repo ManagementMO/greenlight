@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist, Lora } from "next/font/google";
 import Landing from "./landing";
 import { getLandingEvidence } from "@/lib/landing-evidence";
 import "./landing.css";
 
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" });
+const serif = Lora({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {

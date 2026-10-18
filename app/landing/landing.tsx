@@ -179,7 +179,7 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
       {/* Hero */}
       <section className="lp-hero" id="top">
-        <Gradient colors={["#527c65", "#294c3f", "#101b17"]} />
+        <Gradient colors={["#5866a8", "#356e78", "#171a2c"]} />
         <div className="lp-hero-inner">
           <div className="lp-hero-copy">
             <p className="lp-eyebrow" data-hero-fade>Headroom · room for the next job</p>
@@ -245,7 +245,7 @@ export default function Landing({ evidence }: { evidence: LandingEvidence }) {
 
       {/* Finale */}
       <section className="lp-finale">
-        <Gradient colors={["#527c65", "#8fae96", "#182d24"]} wave />
+        <Gradient colors={["#4f6098", "#a27e60", "#203944"]} wave />
         <div className="lp-finale-inner">
           <h2 aria-label="Take the next job"><Chars text="Take the next job" /></h2>
           <p>Keep room for payday.</p>

@@ -30,8 +30,16 @@ export default function GradientBackground(props: GradientLook) {
     document.addEventListener('visibilitychange', sync);
     return () => { observer.disconnect(); motion.removeEventListener('change', sync); document.removeEventListener('visibilitychange', sync); };
   }, []);
-  return <div ref={root} aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+  return <div ref={root} className={`lp-gradient-background${props.wave ? ' is-wave' : ''}`} data-active={active} aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
     {active && <GradientBoundary><AnimatedGradient {...props} /></GradientBoundary>}
+    <svg className="lp-gradient-orbits" viewBox="0 0 1440 960" preserveAspectRatio="xMidYMid slice" fill="none">
+      <g transform="rotate(-28 1030 420)">
+        <ellipse cx="1030" cy="420" rx="620" ry="300" />
+        <ellipse cx="1030" cy="420" rx="660" ry="330" />
+        <ellipse cx="1030" cy="420" rx="700" ry="360" />
+        <ellipse className="lp-gradient-flow" cx="1030" cy="420" rx="660" ry="330" pathLength="1" />
+      </g>
+    </svg>
   </div>;
 }
 
@@ -52,14 +60,14 @@ function AnimatedGradient({ colors, type = "plane", wave = false }: GradientLook
         type={wave ? "waterPlane" : type}
         animate="on"
         uTime={0}
-        uSpeed={0.2}
+        uSpeed={0.3}
         uAmplitude={1}
         color1={colors[0]}
         color2={colors[1]}
         color3={colors[2]}
         grain="off"
         lightType="3d"
-        brightness={0.85}
+        brightness={0.95}
         reflection={0.1}
         cameraZoom={1}
         positionY={0}
